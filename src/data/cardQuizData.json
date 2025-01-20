@@ -1,0 +1,67 @@
+{
+    "category": [
+        {
+            "id": 1,
+            "name": "Theory",
+            "quizzes" : [
+                {
+                    "id": 101, 
+                    "name": "Find the Music Note", 
+                    "description": "Test your ability to identify notes in different keys and clefs."
+                },
+                {
+                    "id": 102, 
+                    "name": "Historical Harmonies", 
+                    "description": "Dive into music history and discover its great composers."
+                },
+                {
+                    "id": 103, 
+                    "name": "Key Signature Challenge", 
+                    "description": "Sharpen your knowledge of major and minor key signatures."
+                }
+            ]
+        },
+        {
+            "id": 2,
+            "name": "History",
+            "quizzes" : [
+                {
+                    "id": 201, 
+                    "name": "Composer Match", 
+                    "description": "Match the composer to their famous works."
+                },
+                {
+                    "id": 202, 
+                    "name": "Historical Eras", 
+                    "description": "Test your knowledge of musical time periods."
+                },
+                {
+                    "id": 203, 
+                    "name": "Instruments Through Time", 
+                    "description": "Learn about the evolution of musical instruments."
+                }
+            ]
+        },
+        {
+            "id": 3,
+            "name": "Instruments",
+            "quizzes": [
+              {
+                "id": 301,
+                "name": "Identify the Instrument",
+                "description": "Guess the instrument from its sound or image."
+              },
+              {
+                "id": 302,
+                "name": "Instrument Families",
+                "description": "Classify instruments into their respective families."
+              },
+              {
+                "id": 303,
+                "name": "Unusual Instruments",
+                "description": "Learn about rare and unique instruments."
+              }
+            ]
+        }
+    ]
+}

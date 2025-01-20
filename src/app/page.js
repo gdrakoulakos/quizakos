@@ -1,4 +1,5 @@
 import Link from "next/link";
+import cardQuizData from "../data/cardQuizData.json";
 import styles from "./page.module.css";
 
 export default function Home() {
@@ -32,34 +33,19 @@ export default function Home() {
         </div>
         <div className={styles.allQuizContainer}>
           <div className={styles.theoryQuizContainer}>
-            <h2>Theory</h2>
-            <div className={styles.theoryQuiz}>
-              <h3>Find the music note</h3>
-              <p1>A small description of music note</p1>
-            </div>
-            <div className={styles.theoryQuiz}>
-              <h3>Find the intervals</h3>
-              <p1>A small description of intervals</p1>
-            </div>
-            <div className={styles.theoryQuiz}>
-              <h3>Find the key</h3>
-              <p1>A small description of the key</p1>
-            </div>
-          </div>
-          <div className={styles.historyQuizContainer}>
-            <h2>History</h2>
-            <div className={styles.historyQuiz}>
-              <h3>Find the music note</h3>
-              <p1>A small description of music note</p1>
-            </div>
-            <div className={styles.historyQuiz}>
-              <h3>Find the intervals</h3>
-              <p1>A small description of intervals</p1>
-            </div>
-            <div className={styles.historyQuiz}>
-              <h3>Find the key</h3>
-              <p1>A small description of the key</p1>
-            </div>
+            {cardQuizData.category.map((category) => (
+              <div key={category.id}>
+                <h2>{category.name}</h2>
+                <div className={styles.quizCard}>
+                  {category.quizzes.map((quiz) => (
+                    <div key={quiz.id}>
+                      <h3>{quiz.name}</h3>
+                      <p>{quiz.description}</p>
+                    </div>
+                  ))}
+                </div>
+              </div>
+            ))}
           </div>
         </div>
       </main>
