@@ -31,3 +31,7 @@
 .cardBottom h3{ 
     height: 40px;
 }
+
+.cardBottom p{ 
+    height: 90px;
+}

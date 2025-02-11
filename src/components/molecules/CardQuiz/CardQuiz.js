@@ -1,3 +1,4 @@
+import ButtonPlay from "@/components/atoms/ButtonPlay/ButtonPlay";
 import styles from "../CardQuiz/CardQuiz.module.css";
 
 export default function CardQuiz({ quizName, quizDescription }) {
@@ -10,6 +11,7 @@ export default function CardQuiz({ quizName, quizDescription }) {
         <h3>{quizName}</h3>
         <p>{quizDescription}</p>
       </div>
+      <ButtonPlay />
     </div>
   );
 }
