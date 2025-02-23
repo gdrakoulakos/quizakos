@@ -1,6 +1,6 @@
 import quizStyles from "../pages/quiz.module.css"; // Keep quiz styles
 import buttonStyles from "@/components/atoms/ButtonAnswer/ButtonAnswer.module.css"; // Import button styles
-import theoryQuestions from "../data/theoryQuestions.json";
+import notationAndStructure from "../data/quizQuestions/theory/notationAndStructure";
 import { useState } from "react";
 import ButtonAnswer from "@/components/atoms/ButtonAnswer/ButtonAnswer";
 
@@ -27,11 +27,11 @@ export default function Quiz() {
 
   return (
     <div className={quizStyles.quizContainer}>
-      <h1>{theoryQuestions.category}</h1>
-      <h2>🕒 {theoryQuestions.time} seconds</h2>
+      <h1>{notationAndStructure.category}</h1>
+      <h2>🕒 {notationAndStructure.time} seconds</h2>
       <h2>Correct Answers: {totalCorrectAnswers}</h2>
 
-      {theoryQuestions.questions.map((question, questionIndex) => (
+      {notationAndStructure.questions.map((question, questionIndex) => (
         <div key={questionIndex} className={quizStyles.questionBlock}>
           <h2>{`${question.id}. ${question.title}`}</h2>
 
