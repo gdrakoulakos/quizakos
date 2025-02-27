@@ -1,7 +1,7 @@
 import styles from "./page.module.css";
 import Header from "@/components/organisms/Header/Header";
 import Footer from "@/components/organisms/Footer/Footer";
-import CardQuizSection from "@/components/organisms/CardQuizSection/CardQuizSection";
+import TheoryQuizzes from "@/components/organisms/TheoryQuizzes/TheoryQuizzes";
 import WelcomeBanner from "@/components/organisms/WelcomeBanner/WelcomeBanner";
 
 export default function Home() {
@@ -10,7 +10,7 @@ export default function Home() {
       <Header />
       <main className={styles.main}>
         <WelcomeBanner />
-        <CardQuizSection />
+        <TheoryQuizzes />
       </main>
       <Footer />
     </div>
