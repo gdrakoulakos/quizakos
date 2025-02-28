@@ -8,7 +8,7 @@ import { QuizContext } from "../../context/AppContext";
 export default function Quiz() {
   const [totalCorrectAnswers, setTotalCorrectAnswers] = useState(0);
   const [selectedAnswers, setSelectedAnswers] = useState({});
-  const { category, quizData } = QuizContext();
+  const { quizData } = QuizContext();
 
   const handleAnswer = (answer, questionIndex, answerIndex, correctAnswer) => {
     setSelectedAnswers((prev) => ({

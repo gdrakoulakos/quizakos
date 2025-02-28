@@ -1,13 +1,10 @@
 import CardQuiz from "@/components/molecules/CardQuiz/CardQuiz";
-
 import styles from "../TheoryQuizzes/TheoryQuizzes.module.css";
 
 export default function TheoryQuizzes({
   notationAndStructureData,
   chordsAndHarmonyData,
 }) {
-  console.log("chordsAndHarmonyData is ", chordsAndHarmonyData);
-
   const cardsData = [
     {
       id: 1,
@@ -24,7 +21,7 @@ export default function TheoryQuizzes({
   ];
 
   return (
-    <div className={styles.allQuizContainer}>
+    <>
       <h1>{notationAndStructureData.category}</h1>
       <div className={styles.cardsContainer}>
         {cardsData.map((card) => (
@@ -36,6 +33,6 @@ export default function TheoryQuizzes({
           />
         ))}
       </div>
-    </div>
+    </>
   );
 }
