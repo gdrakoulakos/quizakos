@@ -3,10 +3,10 @@ import styles from "../Header/Header.module.css";
 
 export default function Header() {
   const headerList = [
-    { id: 1, name: "Theory", link: "/theory" },
-    { id: 2, name: "History", link: "/history" },
-    { id: 3, name: "Instruments", link: "/instruments" },
-    { id: 4, name: "Modern", link: "/modern" },
+    { id: 1, name: "Home", link: "/" },
+    { id: 2, name: "Theory", link: "/theory" },
+    { id: 3, name: "History", link: "/history" },
+    { id: 4, name: "Instruments", link: "/instruments" },
     { id: 5, name: "About Us", link: "/aboutUs" },
   ];
   return (
