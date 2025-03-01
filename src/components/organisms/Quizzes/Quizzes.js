@@ -12,6 +12,7 @@ export default function Quizzes({ category }) {
         {quiz.map((card) => (
           <CardQuiz
             key={card.id}
+            id={card.id}
             quizCategory={card.quizCategory}
             name={card.subcategory}
             description={card.description}
