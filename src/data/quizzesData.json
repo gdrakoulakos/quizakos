@@ -1,0 +1,479 @@
+[
+{
+    "id": 100,
+    "category": "Theory",
+    "subcategory": "Chords & Harmony",
+    "description": "Discover how chords and progressions shape the sound of music.",
+    "time": 20,
+    "questions": [
+        {
+            "id": 1,
+            "title": "What is the term for a chord built on the first scale degree?",
+            "availableAnswers": [
+                "Dominant",
+                "Subdominant",
+                "Tonic",
+                "Leading tone"
+            ],
+            "correctAnswer": "Tonic"
+        },
+        {
+            "id": 2,
+            "title": "Which chord is often referred to as the 'dominant' in a key?",
+            "availableAnswers": [
+                "I",
+                "IV",
+                "V",
+                "vi"
+            ],
+            "correctAnswer": "V"
+        },
+        {
+            "id": 3,
+            "title": "Which of these is a minor chord?",
+            "availableAnswers": [
+                "C-E-G",
+                "D-F#-A",
+                "A-C-E",
+                "F-A-C"
+            ],
+            "correctAnswer": "A-C-E"
+        },
+        {
+            "id": 4,
+            "title": "What is the term for a chord that sounds unstable and seeks resolution?",
+            "availableAnswers": [
+                "Consonant",
+                "Dissonant",
+                "Perfect",
+                "Harmonic"
+            ],
+            "correctAnswer": "Dissonant"
+        },
+        {
+            "id": 5,
+            "title": "What type of cadence consists of a V to I progression?",
+            "availableAnswers": [
+                "Plagal",
+                "Deceptive",
+                "Perfect Authentic",
+                "Half"
+            ],
+            "correctAnswer": "Perfect Authentic"
+        },
+        {
+            "id": 6,
+            "title": "Which chord is known as the 'subdominant'?",
+            "availableAnswers": [
+                "I",
+                "IV",
+                "V",
+                "vi"
+            ],
+            "correctAnswer": "IV"
+        },
+        {
+            "id": 7,
+            "title": "Which chord progression is most commonly found in classical music?",
+            "availableAnswers": [
+                "I-IV-V-I",
+                "ii-V-I",
+                "I-V-vi-IV",
+                "iii-vi-ii-V"
+            ],
+            "correctAnswer": "I-IV-V-I"
+        },
+        {
+            "id": 8,
+            "title": "A diminished triad consists of:",
+            "availableAnswers": [
+                "A major third and a perfect fifth",
+                "A minor third and a perfect fifth",
+                "A minor third and a diminished fifth",
+                "A major third and an augmented fifth"
+            ],
+            "correctAnswer": "A minor third and a diminished fifth"
+        },
+        {
+            "id": 9,
+            "title": "What is an 'augmented' triad?",
+            "availableAnswers": [
+                "A chord with a minor third and a diminished fifth",
+                "A chord with a major third and an augmented fifth",
+                "A chord with only minor intervals",
+                "A chord built on the dominant scale degree"
+            ],
+            "correctAnswer": "A chord with a major third and an augmented fifth"
+        },
+        {
+            "id": 10,
+            "title": "What is the term for a chord where the root note is not the lowest pitch?",
+            "availableAnswers": [
+                "Inverted chord",
+                "Triad",
+                "Diatonic chord",
+                "Suspended chord"
+            ],
+            "correctAnswer": "Inverted chord"
+        }
+    ]
+},
+{
+    "id": 101,
+    "category": "Theory",
+    "subcategory": "Notation & Structure",
+    "description": "Find the musical symbols, rhythms, and key signatures.",
+    "time": 20,
+    "questions": [
+        {
+            "id": 1,
+            "title": "What is the symbol used to indicate the end of a musical piece?",
+            "availableAnswers": [
+                "Repeat sign",
+                "Double bar line",
+                "Segno",
+                "Fermata"
+            ],
+            "correctAnswer": "Double bar line"
+        },
+        {
+            "id": 2,
+            "title": "Which of the following time signatures is compound?",
+            "availableAnswers": [
+                "4/4",
+                "3/4",
+                "6/8",
+                "2/2"
+            ],
+            "correctAnswer": "6/8"
+        },
+        {
+            "id": 3,
+            "title": "What does a dot placed next to a note do?",
+            "availableAnswers": [
+                "Lowers the pitch",
+                "Extends the note by half its value",
+                "Indicates staccato articulation",
+                "Raises the pitch"
+            ],
+            "correctAnswer": "Extends the note by half its value"
+        },
+        {
+            "id": 4,
+            "title": "How many lines are there in a standard musical staff?",
+            "availableAnswers": [
+                "4",
+                "5",
+                "6",
+                "7"
+            ],
+            "correctAnswer": "5"
+        },
+        {
+            "id": 5,
+            "title": "Which clef is commonly used for cello and bassoon music?",
+            "availableAnswers": [
+                "Treble clef",
+                "Bass clef",
+                "Alto clef",
+                "Tenor clef"
+            ],
+            "correctAnswer": "Bass clef"
+        },
+        {
+            "id": 6,
+            "title": "Which term indicates a gradual slowing down of the tempo?",
+            "availableAnswers": [
+                "Accelerando",
+                "Ritardando",
+                "Staccato",
+                "Legato"
+            ],
+            "correctAnswer": "Ritardando"
+        },
+        {
+            "id": 7,
+            "title": "What key signature has one sharp?",
+            "availableAnswers": [
+                "C major",
+                "D major",
+                "G major",
+                "F major"
+            ],
+            "correctAnswer": "G major"
+        },
+        {
+            "id": 8,
+            "title": "What is the bottom number in a time signature used to indicate?",
+            "availableAnswers": [
+                "The number of beats per measure",
+                "The type of note that gets one beat",
+                "The tempo of the piece",
+                "The key signature"
+            ],
+            "correctAnswer": "The type of note that gets one beat"
+        },
+        {
+            "id": 9,
+            "title": "What does the term 'fermata' indicate?",
+            "availableAnswers": [
+                "A note should be played softly",
+                "A note should be played loudly",
+                "A note or rest should be held longer",
+                "A note should be played staccato"
+            ],
+            "correctAnswer": "A note or rest should be held longer"
+        },
+        {
+            "id": 10,
+            "title": "How many semitones are in a perfect fifth?",
+            "availableAnswers": [
+                "5",
+                "6",
+                "7",
+                "8"
+            ],
+            "correctAnswer": "7"
+        }
+    ]
+},
+    {
+    "id": 200,
+    "category": "History",
+    "subcategory": "Baroque & Classical Eras",
+    "description": "Discover the composers, styles, and forms of these periods.",
+    "time": 20,
+    "questions": [
+        {
+            "id": 1,
+            "title": "Which composer is known for composing 'The Four Seasons'?",
+            "availableAnswers": [
+                "Johann Sebastian Bach",
+                "Antonio Vivaldi",
+                "Wolfgang Amadeus Mozart",
+                "Ludwig van Beethoven"
+            ],
+            "correctAnswer": "Antonio Vivaldi"
+        },
+        {
+            "id": 2,
+            "title": "Which musical form was most commonly used in the Classical era?",
+            "availableAnswers": [
+                "Fugue",
+                "Symphony",
+                "Sonata",
+                "Opera"
+            ],
+            "correctAnswer": "Sonata"
+        },
+        {
+            "id": 3,
+            "title": "Who is considered the father of the symphony?",
+            "availableAnswers": [
+                "Wolfgang Amadeus Mozart",
+                "Franz Joseph Haydn",
+                "Johann Sebastian Bach",
+                "Ludwig van Beethoven"
+            ],
+            "correctAnswer": "Franz Joseph Haydn"
+        },
+        {
+            "id": 4,
+            "title": "Which instrument was most commonly associated with Baroque music?",
+            "availableAnswers": [
+                "Piano",
+                "Harpsichord",
+                "Clarinet",
+                "Saxophone"
+            ],
+            "correctAnswer": "Harpsichord"
+        },
+        {
+            "id": 5,
+            "title": "Which composer transitioned from the Classical to the Romantic era?",
+            "availableAnswers": [
+                "Wolfgang Amadeus Mozart",
+                "Franz Schubert",
+                "Ludwig van Beethoven",
+                "Antonio Vivaldi"
+            ],
+            "correctAnswer": "Ludwig van Beethoven"
+        },
+        {
+            "id": 6,
+            "title": "What is a defining characteristic of Baroque music?",
+            "availableAnswers": [
+                "Simple harmonies",
+                "Ornamentation and counterpoint",
+                "Minimalist structure",
+                "Atonality"
+            ],
+            "correctAnswer": "Ornamentation and counterpoint"
+        },
+        {
+            "id": 7,
+            "title": "Which Classical composer was a child prodigy?",
+            "availableAnswers": [
+                "Johann Sebastian Bach",
+                "Wolfgang Amadeus Mozart",
+                "Ludwig van Beethoven",
+                "Franz Liszt"
+            ],
+            "correctAnswer": "Wolfgang Amadeus Mozart"
+        },
+        {
+            "id": 8,
+            "title": "What is the name of the large-scale musical form that became popular in the Classical era?",
+            "availableAnswers": [
+                "Fugue",
+                "Symphony",
+                "Concerto Grosso",
+                "Motet"
+            ],
+            "correctAnswer": "Symphony"
+        },
+        {
+            "id": 9,
+            "title": "Which composer wrote the Brandenburg Concertos?",
+            "availableAnswers": [
+                "Ludwig van Beethoven",
+                "Johann Sebastian Bach",
+                "Wolfgang Amadeus Mozart",
+                "Antonio Vivaldi"
+            ],
+            "correctAnswer": "Johann Sebastian Bach"
+        },
+        {
+            "id": 10,
+            "title": "Which of these composers was NOT from the Classical era?",
+            "availableAnswers": [
+                "Franz Joseph Haydn",
+                "Wolfgang Amadeus Mozart",
+                "Johann Sebastian Bach",
+                "Ludwig van Beethoven"
+            ],
+            "correctAnswer": "Johann Sebastian Bach"
+        }
+    ]
+},
+{
+    "id": 201,
+    "category": "History",
+    "subcategory": "Romantic & Modern Eras",
+    "description": "Feel Romantic passion and modern innovation.",
+    "time": 20,
+    "questions": [
+        {
+            "id": 1,
+            "title": "Which composer is known for his symphonies and the ballet 'Swan Lake'?",
+            "availableAnswers": [
+                "Johannes Brahms",
+                "Pyotr Ilyich Tchaikovsky",
+                "Gustav Mahler",
+                "Claude Debussy"
+            ],
+            "correctAnswer": "Pyotr Ilyich Tchaikovsky"
+        },
+        {
+            "id": 2,
+            "title": "Which musical period is known for its strong emotions and expressive melodies?",
+            "availableAnswers": [
+                "Baroque",
+                "Classical",
+                "Romantic",
+                "Medieval"
+            ],
+            "correctAnswer": "Romantic"
+        },
+        {
+            "id": 3,
+            "title": "Which composer pioneered atonality and the twelve-tone technique?",
+            "availableAnswers": [
+                "Igor Stravinsky",
+                "Arnold Schoenberg",
+                "Claude Debussy",
+                "Richard Wagner"
+            ],
+            "correctAnswer": "Arnold Schoenberg"
+        },
+        {
+            "id": 4,
+            "title": "Which famous composer wrote the opera cycle 'The Ring of the Nibelung'?",
+            "availableAnswers": [
+                "Giacomo Puccini",
+                "Richard Wagner",
+                "Johannes Brahms",
+                "Claude Debussy"
+            ],
+            "correctAnswer": "Richard Wagner"
+        },
+        {
+            "id": 5,
+            "title": "Which of these composers was known for Impressionist music?",
+            "availableAnswers": [
+                "Ludwig van Beethoven",
+                "Franz Liszt",
+                "Claude Debussy",
+                "Gustav Mahler"
+            ],
+            "correctAnswer": "Claude Debussy"
+        },
+        {
+            "id": 6,
+            "title": "Which of these compositions is an example of Modernist music?",
+            "availableAnswers": [
+                "Beethoven's 'Symphony No. 9'",
+                "Debussy's 'Clair de Lune'",
+                "Stravinsky's 'The Rite of Spring'",
+                "Bach's 'Well-Tempered Clavier'"
+            ],
+            "correctAnswer": "Stravinsky's 'The Rite of Spring'"
+        },
+        {
+            "id": 7,
+            "title": "Which composer is known for his innovative use of tone clusters and prepared piano?",
+            "availableAnswers": [
+                "John Cage",
+                "Maurice Ravel",
+                "Richard Strauss",
+                "Anton Bruckner"
+            ],
+            "correctAnswer": "John Cage"
+        },
+        {
+            "id": 8,
+            "title": "Which late Romantic composer is known for his massive symphonies and complex harmonies?",
+            "availableAnswers": [
+                "Johannes Brahms",
+                "Gustav Mahler",
+                "Frederic Chopin",
+                "Sergei Rachmaninoff"
+            ],
+            "correctAnswer": "Gustav Mahler"
+        },
+        {
+            "id": 9,
+            "title": "Which Romantic composer was famous for his solo piano works and nocturnes?",
+            "availableAnswers": [
+                "Franz Liszt",
+                "Frederic Chopin",
+                "Ludwig van Beethoven",
+                "Claude Debussy"
+            ],
+            "correctAnswer": "Frederic Chopin"
+        },
+        {
+            "id": 10,
+            "title": "Which 20th-century composer was known for his minimalist music?",
+            "availableAnswers": [
+                "Igor Stravinsky",
+                "Philip Glass",
+                "Dmitri Shostakovich",
+                "Bela Bartok"
+            ],
+            "correctAnswer": "Philip Glass"
+        }
+    ]
+}
+]
+
