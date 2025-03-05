@@ -1,81 +1,41 @@
-.mobileContainer {
+.menuContainer {
   width: 100%;
-  margin: auto;
-  color: white;
-  border-radius: 10px;
+  height: auto;
   display: flex;
   flex-direction: row;
-  justify-content: left;
   position: fixed;
-  
-}
-
-
-
-.topnav {
-  overflow: hidden;
-  background-color: #aaaaaa92;
-  position: relative;
-  display: flex;
-  width: 100%;
+  background-color: #e9e9e9e4;
   justify-content: space-between;
   
 }
 
-.topnav .myLinks {
-  display: none;
-  list-style-type: none;  
+.myLinks li {
+  list-style-type: none; 
 }
 
-.topnav a {
+.myLinks li a {
   color: rgb(0, 0, 0);
-  padding: 15px;
-  text-decoration: none;
   font-size: 25px;
-  display: block;
-  text-shadow: rgb(79, 74, 180) 1px 0 10px;
-}
-
-.topnav a.icon {
-  background: black;
-  display: block;
-  position: absolute;
-  right: 0;
-  top: 0;
-  
-}
-
-.topnav a:hover {
-  background-color: #ddd;
+  text-shadow: rgb(175, 123, 123) 1px 0 10px;
+  text-decoration: none;
   color: black;
+  margin-bottom: 10px;
+  border: red sol;
+}
+
+
+.menuIcon {
+  margin-left: 12px;
 }
 
 .active {
   color: rgb(0, 0, 0);
   align-self: center;
+  display: flex;
+  flex-direction: column;
 }
 
-.navList {
-    width: 100%;
-    list-style: none;
-    display: flex;
-    gap: 1rem;
-    padding: 0;
-    margin: 0;
-    text-align: center; 
-  
+.logoIcon {
+  margin: 5px 12px 0 0;
 }
-  
-  .navList li {
-    margin: 0;
-  }
-  
-  .navList a {
-    text-decoration: none;
-    color: rgb(0, 0, 0);
-    font-size:xx-small   
-  }
-  
-  .navList a:hover {
-    text-decoration: underline;
-  }
+

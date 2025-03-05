@@ -16,41 +16,41 @@ export default function Header() {
 
   return (
     <>
-      <header className={styles.mobileContainer}>
-        <div className={styles.topnav}>
-          <div className={styles.active}>
-            <div className={styles.icon} onClick={toggleMenu}>
-              <Image
-                src="/images/menu.png"
-                width={40}
-                height={40}
-                alt="Menu icon"
-              />
-            </div>
-            <div
-              className={styles.myLinks}
-              style={{ display: isMenuOpen ? "block" : "none" }}
-            >
-              {allQuizCategories.map((title, index) => (
-              <li key={index}>
-                <Link href={"/"}>{title}</Link>
-              </li>
-            ))}
-            </div>
+      <header className={styles.menuContainer}>
+        <div className={styles.active}>
+          <div className={styles.menuIcon} onClick={toggleMenu}>
+            <Image
+              src="/images/menu.png"
+              width={30}
+              height={30}
+              alt="Menu icon"
+            />
           </div>
-
-          <a href="#home">🦉</a>
+          {isMenuOpen && (
+            <div className={styles.openList}>
+              <ul
+                className={styles.myLinks}
+                style={{ display: isMenuOpen ? "block" : "none" }}
+              >
+                {allQuizCategories.map((title, index) => (
+                  <li key={index}>
+                    <Link href={"/"}>{title}</Link>
+                  </li>
+                ))}
+              </ul>
+            </div>
+          )}
         </div>
-
-        {/* <nav>
-          <ul className={styles.navList}>
-            {allQuizCategories.map((title, index) => (
-              <li key={index}>
-                <Link href={"/"}>{title}</Link>
-              </li>
-            ))}
-          </ul>
-        </nav> */}
+        <div className={styles.logoIcon}>
+          <Link href={"/"}>
+            <Image
+              src="/images/quiz.png"
+              width={50}
+              height={50}
+              alt="quiz icon"
+            />
+          </Link>
+        </div>
       </header>
     </>
   );
