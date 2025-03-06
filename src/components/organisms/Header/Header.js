@@ -20,7 +20,7 @@ export default function Header() {
         <div className={styles.active}>
           <div className={styles.menuIcon} onClick={toggleMenu}>
             <Image
-              src="/images/menu.png"
+              src={!isMenuOpen ? "/images/menu.png" : "/images/close.png"}
               width={30}
               height={30}
               alt="Menu icon"
