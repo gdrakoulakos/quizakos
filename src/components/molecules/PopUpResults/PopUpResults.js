@@ -3,6 +3,7 @@ import styles from "./PopUpResults.module.css";
 import Image from "next/image";
 
 export default function PopUpResults({
+  congratulationsMessage,
   resultMessage,
   correctAnswers,
   onClick,
@@ -12,13 +13,16 @@ export default function PopUpResults({
       <div className={styles.popUpResultsContainer}>
         <Image
           src="/images/bravo.png"
-          width={200}
-          height={200}
+          width={220}
+          height={220}
           alt="Bravo icon"
         />
-        <div>{resultMessage}</div>
+        <div className={styles.congratulationsMessage}>
+          {congratulationsMessage}
+        </div>
+        <div className={styles.resultMessage}>{resultMessage}</div>
         <div className={styles.correctAnswers}>{correctAnswers}</div>
-        <ButtonOk onClick={onClick} />
+        <ButtonOk onClick={onClick} buttonText={"OK"}/>
       </div>
     </div>
   );

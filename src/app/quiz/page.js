@@ -47,8 +47,9 @@ export default function Quiz() {
     <>
       {showPopUpResults && (
         <PopUpResults
-          resultMessage={"Μπράβο! Τα πήγες πολύ καλά!"}
-          correctAnswers={`${totalCorrectAnswers}/ ${" "}
+          congratulationsMessage={"Μπράβο! Τα πήγες πολύ καλά!"}
+          resultMessage={"Το σκορ σου είναι:"}
+          correctAnswers={`${totalCorrectAnswers} /
                 ${selectedQuiz.questions.length}`}
           onClick={() => setShowPopUpResults(false)}
         />
