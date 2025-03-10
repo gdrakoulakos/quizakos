@@ -37,7 +37,9 @@ export default function Quiz() {
 
   useEffect(() => {
     if (completionStatus === 100) {
-      setShowPopUpResults(true);
+      setTimeout(() => {
+        setShowPopUpResults(true);
+      }, 500);
     }
   }, [completionStatus]);
 
