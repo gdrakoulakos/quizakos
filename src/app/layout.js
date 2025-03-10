@@ -24,7 +24,7 @@ export default function RootLayout({ children }) {
           padding: "0",
           margin: "0",
           background:
-            "linear-gradient(rgb(249 226 215) 0%, rgb(137 153 255) 20%, rgb(221 246 216) 100%)",
+            "linear-gradient(#ffa5a5 0%, #ffffc2 33%, #c8e7ed 66%, #bfcfff 100%)",
         }}
       >
         <AppProvider>
