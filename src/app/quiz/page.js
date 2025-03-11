@@ -17,7 +17,7 @@ export default function Quiz() {
   const { selectedQuiz } = QuizContext();
 
   const questionRefs = useRef([]);
-  const totalAvailableQuestions = selectedQuiz.questions.length;
+  const totalAvailableQuestions = selectedQuiz?.questions?.length || 0;
 
   const scrollToNextQuestion = (nextIndex) => {
     if (questionRefs.current[nextIndex]) {
