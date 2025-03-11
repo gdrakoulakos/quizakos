@@ -1,7 +1,7 @@
 "use client";
 import styles from "./quiz.module.css";
 import buttonStyles from "@/components/atoms/ButtonAnswer/ButtonAnswer.module.css"; // Import button styles
-import { useEffect, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import ButtonAnswer from "@/components/atoms/ButtonAnswer/ButtonAnswer";
 import { QuizContext } from "../../context/AppContext";
 import PopUpResults from "@/components/molecules/PopUpResults/PopUpResults";
@@ -16,9 +16,24 @@ export default function Quiz() {
   const [scorePercentage, setScorePercentage] = useState(null);
   const { selectedQuiz } = QuizContext();
 
+  const questionRefs = useRef([]);
   const totalAvailableQuestions = selectedQuiz.questions.length;
 
-  const handleAnswer = (answer, questionIndex, answerIndex, correctAnswer) => {
+  const scrollToNextQuestion = (nextIndex) => {
+    if (questionRefs.current[nextIndex]) {
+      questionRefs.current[nextIndex].scrollIntoView({
+        behavior: "smooth",
+        block: "center",
+      });
+    }
+  };
+
+  const handleClickedAnswer = (
+    answer,
+    questionIndex,
+    answerIndex,
+    correctAnswer
+  ) => {
     setCompletionStatus((prev) => prev + 100 / totalAvailableQuestions);
     setSelectedAnswers((prev) => {
       const isCorrect = answer === correctAnswer;
@@ -34,6 +49,10 @@ export default function Quiz() {
         },
       };
     });
+
+    setTimeout(() => {
+      scrollToNextQuestion(questionIndex + 1);
+    }, 2000);
 
     if (answer === correctAnswer) {
       setTotalCorrectAnswers((prev) => prev + 1);
@@ -103,7 +122,11 @@ export default function Quiz() {
           </div>
           <div className={styles.allQuestionsContainer}>
             {selectedQuiz?.questions?.map((question, questionIndex) => (
-              <div key={questionIndex} className={styles.questionBlock}>
+              <div
+                key={questionIndex}
+                className={styles.questionBlock}
+                ref={(el) => (questionRefs.current[questionIndex] = el)}
+              >
                 <h3>{`${question.id}. ${question.title}`}</h3>
 
                 {question.availableAnswers.map((answer, answerIndex) => (
@@ -118,7 +141,7 @@ export default function Quiz() {
                             : "")
                         }`}
                         onClick={() =>
-                          handleAnswer(
+                          handleClickedAnswer(
                             answer,
                             questionIndex,
                             answerIndex,
