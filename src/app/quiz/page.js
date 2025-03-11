@@ -5,6 +5,7 @@ import { useEffect, useRef, useState } from "react";
 import ButtonAnswer from "@/components/atoms/ButtonAnswer/ButtonAnswer";
 import { QuizContext } from "../../context/AppContext";
 import PopUpResults from "@/components/molecules/PopUpResults/PopUpResults";
+import { useLaunchConfetti } from "@/customHooks";
 
 export default function Quiz() {
   const [totalCorrectAnswers, setTotalCorrectAnswers] = useState(0);
@@ -15,6 +16,7 @@ export default function Quiz() {
   const [congratsImg, setCongratsImg] = useState(null);
   const [scorePercentage, setScorePercentage] = useState(null);
   const { selectedQuiz } = QuizContext();
+  const launchConfetti = useLaunchConfetti;
 
   const questionRefs = useRef([]);
   const totalAvailableQuestions = selectedQuiz?.questions?.length || 0;
@@ -52,7 +54,7 @@ export default function Quiz() {
 
     setTimeout(() => {
       scrollToNextQuestion(questionIndex + 1);
-    }, 2000);
+    }, 200);
 
     if (answer === correctAnswer) {
       setTotalCorrectAnswers((prev) => prev + 1);
@@ -67,6 +69,9 @@ export default function Quiz() {
       if (scorePercentage >= 90) {
         setCongratulationsMessage("Είσαι αληθινός γνώστης! Συνέχισε έτσι!");
         setCongratsImg("/images/bravo4.gif");
+        setTimeout(() => {
+          launchConfetti();
+        }, 500);
       } else if (scorePercentage >= 70) {
         setCongratulationsMessage(
           "Εξαιρετική προσπάθεια! Συνέχισε έτσι και θα φτάσεις στην κορυφή!"
