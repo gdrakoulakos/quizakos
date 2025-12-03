@@ -22,12 +22,13 @@ export default function Quiz() {
   const totalAvailableQuestions = selectedQuiz?.questions?.length || 0;
 
   const scrollToNextQuestion = (nextIndex) => {
-    if (questionRefs.current[nextIndex]) {
-      questionRefs.current[nextIndex].scrollIntoView({
-        behavior: "smooth",
-        block: "center",
-      });
-    }
+    const el = questionRefs.current[nextIndex];
+    if (!el) return;
+    const top = el.getBoundingClientRect().top + window.pageYOffset;
+    window.scrollTo({
+      top: top - 200,
+      behavior: "smooth",
+    });
   };
 
   const handleClickedAnswer = (
