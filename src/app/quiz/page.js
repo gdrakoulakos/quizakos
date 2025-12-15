@@ -1,4 +1,5 @@
 "use client";
+import Image from "next/image";
 import styles from "./quiz.module.css";
 import buttonStyles from "@/components/atoms/ButtonAnswer/ButtonAnswer.module.css"; // Import button styles
 import { useEffect, useRef, useState } from "react";
@@ -131,6 +132,13 @@ export default function Quiz() {
                 ref={(el) => (questionRefs.current[questionIndex] = el)}
               >
                 <h3>{`${question.id}. ${question.title}`}</h3>
+
+                {question.img && <Image
+                  src={`/images/questions/music/${question.img}`}
+                  alt="question image"
+                  width={200}
+                  height={100}
+                />}
 
                 {question.availableAnswers.map((answer, answerIndex) => (
                   <div key={answerIndex} className={styles.answersContainer}>
