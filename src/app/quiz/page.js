@@ -136,6 +136,7 @@ export default function Quiz() {
                 {question.img && <Image
                   src={`/images/questions/music/${question.img}`}
                   alt="question image"
+                  className={styles.questionImage}
                   width={200}
                   height={100}
                 />}
