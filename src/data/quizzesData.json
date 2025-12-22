@@ -254,7 +254,7 @@
       {
         "id": 7,
         "title": "Ποιο γράμμα λείπει από τη λέξη: γ_τα;",
-        "availableAnswers": ["ε", "ο", "α", "ι"],
+        "availableAnswers": ["έ", "ό", "ά", "ί"],
         "correctAnswer": "ά"
       },
       {
