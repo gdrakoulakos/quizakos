@@ -1,42 +1,44 @@
-.quizCardContainer{
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    margin: 5px;
-    border: rgba(255, 255, 255, 0.702) solid 5px;
-    border-radius: 10%;
-    background: linear-gradient(70deg, #eae9ff 0%, #c3c3ff 50%, #80eaff 100%);
-    height: 230px;
-    text-align: center;  
-    flex: 0 0 auto; /* Ensures cards don't shrink */
-    scroll-snap-align: start; /* Snaps cards into position */
-    max-width: 140px; /* Prevents overly large cards */
-    padding: 10px 0px 10px 0px;
+.quizCardContainer {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  margin: 5px;
+  border: rgba(255, 255, 255, 0.702) solid 5px;
+  border-radius: 10%;
+  background: linear-gradient(70deg, #eae9ff 0%, #c3c3ff 50%, #80eaff 100%);
+  height: 235px;
+  text-align: center;
+  flex: 0 0 auto;
+  scroll-snap-align: start;
+  max-width: 140px;
+  padding: 10px 0px 10px 0px;
 }
 
 .cardTop {
-    font-size:xx-large;
-    border: rgba(19, 10, 139, 0.109) solid 5px;
-    border-radius: 50%;
-    width: 40%;
+  font-size: xx-large;
+  border: rgba(19, 10, 139, 0.109) solid 5px;
+  border-radius: 50%;
+  width: 40%;
 }
 
-.cardTop h1{
-    margin: 0;
-    font-size:xx-large
+.cardTop h1 {
+  margin: 0;
+  font-size: xx-large;
 }
 
 .cardBottom {
-    display: flex;
-    flex-direction: column;
+  display: flex;
+  flex-direction: column;
+  padding: 5px;
 }
 
-.cardBottom h3{ 
-    font-size: medium;
-    height: 20px;
+.cardBottom h3 {
+  font-size: medium;
+  height: 20px;
 }
 
-.cardBottom p{ 
-    font-size: small;
-    height: 60px;
+.cardBottom p {
+  font-size: small;
+  height: 60px;
+  margin: 10px;
 }
