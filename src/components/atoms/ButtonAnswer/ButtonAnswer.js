@@ -11,7 +11,7 @@ export default function ButtonAnswer({
   return (
     <button
       id={id}
-      className={`${className} ${additionalClassName}`} // No need for styles.answerButton again
+      className={`${styles.answerButton} ${className} ${additionalClassName}`} // No need for styles.answerButton again
       onClick={onClick}
       disabled={disabled}
     >

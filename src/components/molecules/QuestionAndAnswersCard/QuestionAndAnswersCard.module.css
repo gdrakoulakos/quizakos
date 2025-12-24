@@ -1,0 +1,16 @@
+.section {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.questionContainer {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.answersContainer {
+  display: flex;
+  flex-direction: column;
+}

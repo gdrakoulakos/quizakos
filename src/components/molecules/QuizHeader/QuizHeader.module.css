@@ -1,0 +1,26 @@
+.quizHeader {
+  width: 100%;
+  display: flex;
+  justify-content: space-between;
+  margin: 5px 0;
+  align-items: center;
+}
+
+.quizHeader p {
+  margin: 0;
+}
+
+.questionNum {
+  box-shadow: 1px 1px 7px 2px #b62c9f;
+  border-radius: 50%;
+  width: 30px;
+  height: 30px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.quizCategory {
+  border-radius: 20px;
+  padding: 3px 10px;
+}
