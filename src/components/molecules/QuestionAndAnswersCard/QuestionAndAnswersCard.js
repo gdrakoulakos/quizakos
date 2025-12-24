@@ -11,10 +11,10 @@ export default function QuestionAndAnswersCard() {
         <QuizQuestion />
       </div>
       <div className={styles.answersContainer}>
-        <ButtonAnswer children="Λα" />
-        <ButtonAnswer children="Ντο" />
-        <ButtonAnswer children="Σι" />
-        <ButtonAnswer children="Ρε" />
+        <ButtonAnswer children="Είναι το σύνολο των κανόνων ώστε οι νότες να αρμόζουν (ταιριάζουν) όταν ακούγονται ταυτόχρονα" />
+        <ButtonAnswer children="Oι νότες να αρμόζουν" />
+        <ButtonAnswer children="Oι νότες να αρμόζουν (ταιριάζουν) όταν ακούγονται ξεχωριστά η μία μετά την άλλη" />
+        <ButtonAnswer children="Είναι το σύνολο των κανόνων ώστε οι νότες να αρμόζουν (ταιριάζουν) όταν ακούγονται ξεχωριστά η μία μετά την άλλη" />
       </div>
     </div>
   );
