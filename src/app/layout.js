@@ -5,12 +5,11 @@ import { AppProvider } from "@/context/AppContext";
 import Header from "@/components/organisms/Header/Header";
 import Footer from "@/components/organisms/Footer/Footer";
 
-
 export default function RootLayout({ children }) {
   return (
     <html lang="el">
       <body
-      className={commissioner.className}
+        className={commissioner.className}
         style={{
           display: "flex",
           flexDirection: "column",
@@ -19,8 +18,8 @@ export default function RootLayout({ children }) {
           overflowX: "hidden",
           padding: "0",
           margin: "0",
-          background:
-            "linear-gradient(#ffa5a5 0%, #ffffc2 33%, #c8e7ed 66%, #bfcfff 100%)",
+          backgroundImage: "url('/images/background2.webp')",
+          backgroundSize: "contain",
         }}
       >
         <AppProvider>

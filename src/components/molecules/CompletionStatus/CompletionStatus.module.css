@@ -2,13 +2,15 @@
   border-radius: 17px;
   width: 100%;
   height: 15px;
-  box-shadow: 1px 1px 4px rgba(0, 0, 0, 0.2);
+  box-shadow: 0 0 5px 2px #d5d5d5;
 }
 
 .progress::-webkit-progress-bar {
   border-radius: 7px;
+  background-color: #f1f1f1;
 }
 .progress::-webkit-progress-value {
   border-radius: 7px;
-  background-color: #4caf50;
+  background: linear-gradient(0.25turn, #ffb077, #ff9951, #ff7d1e);
+  border: solid 2px #ffad72;
 }

@@ -1,4 +1,12 @@
 body {
-    font-family: var(--font-nunito-sans), sans-serif;
-  }
-  
+  font-family: var(--font-nunito-sans), sans-serif;
+}
+
+p {
+  color: #333333;
+}
+
+button {
+  cursor: pointer;
+  color: #333333;
+}

@@ -1,7 +1,7 @@
-import styles from "./quizNew.module.css";
+import styles from "./q.module.css";
 import QuizCard from "@/components/organisms/QuizCard/QuizCard";
 
-export default function QuizNew() {
+export default function q() {
   return (
     <div className={styles.QuizNew}>
       <QuizCard />

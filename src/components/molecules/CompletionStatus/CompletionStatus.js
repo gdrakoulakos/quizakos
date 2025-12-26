@@ -1,5 +1,5 @@
 import styles from "./CompletionStatus.module.css";
 
 export default function CompletionStatus() {
-  return <progress className={styles.progress} max="100" value="70"></progress>;
+  return <progress className={styles.progress} max="10" value="6"></progress>;
 }
