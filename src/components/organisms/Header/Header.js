@@ -42,6 +42,17 @@ export default function Header() {
             </div>
           )}
         </div>
+        <p>
+          <Link
+            style={{
+              color: "transparent",
+              textDecoration: "none",
+            }}
+            href={"/q"}
+          >
+            Hello
+          </Link>
+        </p>
         <div className={styles.logoIcon}>
           <Link href={"/"}>
             <Image
