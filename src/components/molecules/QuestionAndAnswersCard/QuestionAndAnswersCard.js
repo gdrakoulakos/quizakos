@@ -53,7 +53,7 @@ export default function QuestionAndAnswersCard() {
       setTimeout(() => {
         setDisplayedQuestionIndex((prev) => prev + 1);
         setCurrentClickedAnswerData({ result: "", answer: "" });
-      }, 112000);
+      }, 200);
     }
   };
 

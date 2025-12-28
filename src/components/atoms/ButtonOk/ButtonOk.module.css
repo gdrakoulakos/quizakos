@@ -1,16 +1,15 @@
-.okButton{
-    width: 150px;
-    height: 40px;
-    border-radius: 20px;
-    display: flex;
-    text-align: center;
-    align-items: center;
-    justify-content: center;
-    background-image: linear-gradient(144deg,#ff9393, #ff7979 50%,#ff2020);
-    border: solid #ff7f7f;
-    box-shadow: rgba(100, 100, 111, 0.2) 0px 7px 29px 0px;
-    color: white;
-    cursor: pointer;
-    
+.okButton {
+  width: 150px;
+  height: 40px;
+  border-radius: 20px;
+  display: flex;
+  text-align: center;
+  align-items: center;
+  justify-content: center;
+  background-image: linear-gradient(144deg, #ff9393, #ff7979 50%, #ff2020);
+  border: solid #ff7f7f;
+  box-shadow: rgba(100, 100, 111, 0.2) 0px 7px 29px 0px;
+  color: white;
+  cursor: pointer;
+  text-decoration: none;
 }
-
