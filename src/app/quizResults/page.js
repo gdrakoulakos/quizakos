@@ -9,11 +9,11 @@ export default function quizResults() {
 
   return (
     <div className={styles.quizResultsSection}>
-      {selectedQuiz.questions.map((quiz, index) => (
+      {selectedQuiz?.questions?.map((quiz, index) => (
         <React.Fragment key={index}>
           <h2 className={styles.quizTitle}>{quiz?.title}</h2>
 
-          {quiz.availableAnswers.map((answer, answerIndex) => (
+          {quiz?.availableAnswers?.map((answer, answerIndex) => (
             <div key={answerIndex} className={styles.answerContainer}>
               <p className={styles.answerText}>{answer}</p>
             </div>
