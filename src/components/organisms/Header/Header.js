@@ -48,7 +48,7 @@ export default function Header() {
               color: "transparent",
               textDecoration: "none",
             }}
-            href={"/q"}
+            href={"/quizResults"}
           >
             Hello
           </Link>
