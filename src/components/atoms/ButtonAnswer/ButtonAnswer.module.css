@@ -13,11 +13,17 @@
 }
 
 .correctAnswer {
-  background: linear-gradient(135deg, #e0ffec, #cffbde);
+  background: linear-gradient(135deg, #e0ffec, #8affb1);
   color: #0f5132;
 }
 
 .incorrectAnswer {
-  background: linear-gradient(135deg, #ffe6e6, #ffd1d1);
+  background: linear-gradient(135deg, #ffe6e6, #ffa8a8);
   color: #7a1c1c;
+}
+
+button:disabled {
+  background-color: #e8e8e8;
+  color: #676767;
+  cursor: not-allowed;
 }

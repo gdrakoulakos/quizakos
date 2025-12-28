@@ -9,7 +9,6 @@ export default function ButtonAnswer({
   currentClickedAnswerData,
 }) {
   const [additionalButtonStyle, setAdditionalButtonStyle] = useState("");
-  console.log("currentClickedAnswerData", currentClickedAnswerData);
 
   useEffect(() => {
     if (
@@ -17,14 +16,9 @@ export default function ButtonAnswer({
       currentClickedAnswerData.answer === children
     ) {
       if (currentClickedAnswerData.result === "correct") {
-        console.log("Your answer is correct!", currentClickedAnswerData.answer);
         setAdditionalButtonStyle("correctAnswer");
       } else {
         setAdditionalButtonStyle("incorrectAnswer");
-        console.log(
-          "Your answer is incorrect.",
-          currentClickedAnswerData.answer
-        );
       }
     }
     return () => {
@@ -37,7 +31,7 @@ export default function ButtonAnswer({
       id={id}
       className={`${styles.answerButton} ${styles[additionalButtonStyle]}`}
       onClick={onClick}
-      disabled={disabled}
+      disabled={currentClickedAnswerData?.result !== "" ? true : disabled}
     >
       {children}
     </button>

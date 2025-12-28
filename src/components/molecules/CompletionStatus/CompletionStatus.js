@@ -4,7 +4,7 @@ import styles from "./CompletionStatus.module.css";
 export default function CompletionStatus() {
   const { selectedQuiz, displayedQuestionIndex } = QuizContext();
   const quizQuestionCounter = selectedQuiz?.questions.length;
-  const quizQuestionCurrentNum = displayedQuestionIndex + 1;
+  const quizQuestionCurrentNum = displayedQuestionIndex;
 
   return (
     <progress
