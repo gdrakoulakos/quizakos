@@ -12,15 +12,15 @@ export default function QuizHeader() {
 
   return (
     <div className={styles.quizHeader}>
-      <p>
+      <p className={styles.questionCounter}>
         {quizQuestionCurrentNum}/{quizQuestionCounter}
       </p>
-      <div className={styles.quizInfo}>
-        <p className={styles.quizCategory}>
+      <div className={styles.info}>
+        <p className={styles.category}>
           {quizCategory} / {quizSubcategory}
         </p>
       </div>
-      <p>✅ {clickedCorrectAnswers}</p>
+      <p className={styles.correctAnswers}>✅ {clickedCorrectAnswers}</p>
     </div>
   );
 }

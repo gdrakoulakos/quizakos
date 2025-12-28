@@ -18,6 +18,7 @@ export default function PopUpResults({
         </div>
         <div className={styles.resultMessage}>{resultMessage}</div>
         <div className={styles.correctAnswers}>{correctAnswers}</div>
+        <button className={styles.seeResultsButton}>Δες τα αποτελέσματα</button>
         <ButtonOk onClick={onClick} buttonText={"OK"} />
       </div>
     </div>

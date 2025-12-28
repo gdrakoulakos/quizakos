@@ -5,6 +5,10 @@
   align-items: center;
 }
 
+.questionCounter {
+  width: 15%;
+}
+
 .quizHeader p {
   margin: 0;
 }
@@ -19,7 +23,18 @@
   align-items: center;
 }
 
-.quizCategory {
+.info {
+  width: 70%;
+  text-align: center;
+}
+
+.category {
   border-radius: 20px;
   padding: 3px 10px;
+  text-align: center;
+}
+
+.correctAnswers {
+  width: 15%;
+  text-align: end;
 }

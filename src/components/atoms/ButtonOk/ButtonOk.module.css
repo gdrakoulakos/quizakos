@@ -6,9 +6,8 @@
   text-align: center;
   align-items: center;
   justify-content: center;
-  background-image: linear-gradient(144deg, #ff9393, #ff7979 50%, #ff2020);
-  border: solid #ff7f7f;
-  box-shadow: rgba(100, 100, 111, 0.2) 0px 7px 29px 0px;
+  background: linear-gradient(135deg, #ffb077, #ff7d1e);
+  box-shadow: 0 0 2px 1px #ffad72;
   color: white;
   cursor: pointer;
   text-decoration: none;

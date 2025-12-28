@@ -1,50 +1,61 @@
 .blurBackground {
-    width: 100%;
-    height: 100%;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    backdrop-filter: blur(3px);
-    position: fixed;
-    z-index: 1;
-
-
+  width: 100%;
+  height: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  backdrop-filter: blur(3px);
+  position: fixed;
+  z-index: 1;
 }
 
 .popUpResultsContainer {
-    border-radius: 10px;
-    width: 80%;
-    height: 500px;
-    margin-top: 20%;
-    display: flex;
-    flex-direction: column;
-    justify-content: space-evenly;
-    align-items: center;
-    background-color: rgba(255, 255, 255, 0.89);
-    box-shadow: rgba(0, 0, 0, 0.25) 0px 54px 55px, rgba(0, 0, 0, 0.12) 0px -12px 30px, rgba(0, 0, 0, 0.12) 0px 4px 6px, rgba(0, 0, 0, 0.17) 0px 12px 13px, rgba(0, 0, 0, 0.09) 0px -3px 5px;
-    
-
+  border-radius: 10px;
+  width: 80%;
+  height: 500px;
+  margin-top: 20%;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-evenly;
+  align-items: center;
+  background-image: url("/images/backgroundResult.avif");
+  background-size: cover;
+  box-shadow: 0 0 5px 2px #d5d5d5;
 }
 
-.congratulationsMessage{
-    font-size: large;   
-    text-align: center; 
+.congratulationsMessage {
+  font-size: 20px;
+  text-align: center;
+  color: #222;
 }
 
 .resultMessage {
-    font-size:medium;
+  font-size: medium;
+  color: #333;
 }
 
 .correctAnswers {
-    width: 80px;
-    height: 80px;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    background-color: #c8e7ed;
-    border: solid #d5e6ea;;
-    box-shadow: rgba(100, 100, 111, 0.2) 0px 7px 29px 0px;
-    border-radius: 50%;
+  width: 65px;
+  height: 65px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background: linear-gradient(135deg, rgb(210, 61, 236), #6f0c81);
+  font-size: 20px;
+  color: white;
+  border: solid #d5e6ea;
+  box-shadow: 0 0 5px 2px #d5d5d5;
+  border-radius: 50%;
 }
 
-
+.seeResultsButton {
+  width: 180px;
+  height: 25px;
+  border: none;
+  border-radius: 25px;
+  background: linear-gradient(135deg, rgb(210, 61, 236), #6f0c81);
+  color: white;
+  font-size: 14px;
+  box-shadow: 0 0 5px 2px #d5d5d5;
+  cursor: pointer;
+}
