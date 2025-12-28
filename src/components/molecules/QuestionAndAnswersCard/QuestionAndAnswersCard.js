@@ -22,12 +22,12 @@ export default function QuestionAndAnswersCard() {
   const availableAnswers =
     selectedQuiz?.questions[displayedQuestionIndex]?.availableAnswers;
 
+  const correctAnswer =
+    selectedQuiz?.questions[displayedQuestionIndex]?.correctAnswer;
+
   const handleClickedAnswer = (clickedAnswer) => {
     if (clickedAnswersResults.totalAnswers < 10) {
-      if (
-        clickedAnswer ===
-        selectedQuiz?.questions[displayedQuestionIndex]?.correctAnswer
-      ) {
+      if (clickedAnswer === correctAnswer) {
         setClickedAnswersResults((prev) => ({
           ...prev,
           correctAnswers: prev.correctAnswers + 1,
@@ -53,7 +53,7 @@ export default function QuestionAndAnswersCard() {
       setTimeout(() => {
         setDisplayedQuestionIndex((prev) => prev + 1);
         setCurrentClickedAnswerData({ result: "", answer: "" });
-      }, 200);
+      }, 2000);
     }
   };
 
@@ -70,6 +70,7 @@ export default function QuestionAndAnswersCard() {
             children={availableAnswer}
             onClick={() => handleClickedAnswer(availableAnswer)}
             currentClickedAnswerData={currentClickedAnswerData}
+            correctAnswer={correctAnswer}
           />
         ))}
       </div>

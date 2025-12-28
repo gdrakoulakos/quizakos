@@ -7,11 +7,15 @@ export default function ButtonAnswer({
   onClick,
   disabled,
   currentClickedAnswerData,
+  correctAnswer,
 }) {
   const [additionalButtonStyle, setAdditionalButtonStyle] = useState("");
 
   useEffect(() => {
-    if (!currentClickedAnswerData) return;
+    if (currentClickedAnswerData.result === "") return;
+    if (children === correctAnswer) {
+      setAdditionalButtonStyle("correctAnswer");
+    }
     if (
       currentClickedAnswerData.result !== "" &&
       currentClickedAnswerData.answer === children

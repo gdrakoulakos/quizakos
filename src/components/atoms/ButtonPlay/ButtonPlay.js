@@ -7,11 +7,8 @@ export default function ButtonPlay({ id }) {
   const { setSelectedQuizId } = QuizContext();
   return (
     <div className={styles.buttonContainer}>
-      <Link href={"/quiz"}>
-        <button onClick={() => setSelectedQuizId(id)}>Παίξε!</button>
-      </Link>
       <Link href={"/q"}>
-        <button onClick={() => setSelectedQuizId(id)}>Test!</button>
+        <button onClick={() => setSelectedQuizId(id)}>Παίξε!</button>
       </Link>
     </div>
   );
