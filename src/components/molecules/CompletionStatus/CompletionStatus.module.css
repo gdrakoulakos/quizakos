@@ -12,5 +12,5 @@
 .progress::-webkit-progress-value {
   border-radius: 7px;
   background: linear-gradient(0.25turn, #ffb077, #ff9951, #ff7d1e);
-  border: solid 2px #ffad72;
+  box-shadow: 0 0 2px 2px #ffad72;
 }

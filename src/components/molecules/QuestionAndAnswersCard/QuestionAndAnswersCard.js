@@ -3,6 +3,7 @@ import QuizQuestion from "@/components/atoms/QuizQuestion/QuizQuestion";
 import ButtonAnswer from "@/components/atoms/ButtonAnswer/ButtonAnswer";
 import QuestionImage from "@/components/atoms/QuestionImage/QuestionImage";
 import { QuizContext } from "@/context/AppContext";
+import { useState } from "react";
 
 export default function QuestionAndAnswersCard() {
   const {
@@ -12,10 +13,18 @@ export default function QuestionAndAnswersCard() {
     clickedAnswersResults,
     setClickedAnswersResults,
   } = QuizContext();
+
+  const [currentClickedAnswerData, setCurrentClickedAnswerData] = useState({
+    result: "",
+    answer: "",
+  });
+
   const availableAnswers =
     selectedQuiz?.questions[displayedQuestionIndex]?.availableAnswers;
 
   const handleClickedAnswer = (clickedAnswer) => {
+    console.log("clickedAnswer", clickedAnswer);
+
     if (clickedAnswersResults.totalAnswers < 10) {
       if (
         clickedAnswer ===
@@ -26,20 +35,27 @@ export default function QuestionAndAnswersCard() {
           correctAnswers: prev.correctAnswers + 1,
           totalAnswers: prev.totalAnswers + 1,
         }));
-        console.log("Correct answer!");
+        setCurrentClickedAnswerData({
+          result: "correct",
+          answer: clickedAnswer,
+        });
       } else {
         setClickedAnswersResults((prev) => ({
           ...prev,
           incorrectAnswers: prev.incorrectAnswers + 1,
           totalAnswers: prev.totalAnswers + 1,
         }));
-        console.log("Wrong answer!");
+        setCurrentClickedAnswerData({
+          result: "incorrect",
+          answer: clickedAnswer,
+        });
       }
     }
     if (displayedQuestionIndex < 9) {
       setTimeout(() => {
         setDisplayedQuestionIndex((prev) => prev + 1);
-      }, 200);
+        setCurrentClickedAnswerData({ result: "", answer: "" });
+      }, 2000);
     }
   };
 
@@ -55,6 +71,7 @@ export default function QuestionAndAnswersCard() {
             key={index}
             children={availableAnswer}
             onClick={() => handleClickedAnswer(availableAnswer)}
+            currentClickedAnswerData={currentClickedAnswerData}
           />
         ))}
       </div>
