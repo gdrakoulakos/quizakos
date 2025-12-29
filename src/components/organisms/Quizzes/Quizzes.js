@@ -7,7 +7,7 @@ export default function Quizzes({ category }) {
   const quiz = allQuizzes.filter((q) => q.category === category);
   return (
     <>
-      <h1>{category}</h1>
+      <h1 className={styles.category}>{category}</h1>
       <div className={styles.cardsContainer}>
         {quiz.map((card) => (
           <CardQuiz

@@ -7,11 +7,14 @@
   height: 40px;
   width: 100px;
   border-radius: 20px;
-  background-color: #00ddff2d;
-  border: solid rgba(0, 110, 255, 0.73) 3px;
+  background: linear-gradient(135deg, #d84048, #f68c40);
+  box-shadow: 0 0 2px 1px #a63137;
+  color: white;
+  border: none;
+  font-size: 15px;
+  font-weight: bold;
 }
 
 .buttonContainer button:hover {
-  border: solid rgba(0, 110, 255, 0.157) 3px;
   cursor: pointer;
 }

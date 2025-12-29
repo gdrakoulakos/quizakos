@@ -4,7 +4,6 @@ import Image from "next/image";
 import styles from "./quizResults.module.css";
 import { QuizContext } from "@/context/AppContext";
 import ButtonOk from "@/components/atoms/ButtonOk/ButtonOk";
-import Link from "next/link";
 
 export default function quizResults() {
   const { selectedQuiz, clickedAnswersResults } = QuizContext();
@@ -14,9 +13,12 @@ export default function quizResults() {
       {selectedQuiz && (
         <div className={styles.quizResultsSection}>
           <div className={styles.questionsInfo}>
-            <h3>{selectedQuiz.category}</h3>
-            <h3>{selectedQuiz.subcategory}</h3>
-            <h3>Σωστές Απαντήσεις:</h3>
+            <h3>
+              {selectedQuiz.category} / {selectedQuiz.subcategory}
+            </h3>
+            <h3></h3>
+            <h3>Σωστές Απαντήσεις: {clickedAnswersResults.correctAnswers}</h3>
+            <h3>Λάθος Απαντήσεις: {clickedAnswersResults.incorrectAnswers}</h3>
           </div>
           <div className={styles.allQuestionsContainer}>
             {selectedQuiz?.questions?.map((question, questionIndex) => (
@@ -55,9 +57,9 @@ export default function quizResults() {
               </div>
             ))}
           </div>
-          <Link className={styles.buttonOkContainer} href="/">
+          <div className={styles.buttonOkContainer}>
             <ButtonOk buttonText="Επιστροφή" />
-          </Link>
+          </div>
         </div>
       )}
     </>

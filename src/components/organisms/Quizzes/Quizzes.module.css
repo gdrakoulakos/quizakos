@@ -3,9 +3,14 @@
   flex-direction: row;
   overflow-x: auto;
   -webkit-overflow-scrolling: touch;
-  width: 100%;
+  width: auto;
 }
 
 .cardsContainer::-webkit-scrollbar {
   display: none;
+}
+
+.category {
+  color: #ffa100;
+  text-shadow: 2px 2px 10px #000;
 }

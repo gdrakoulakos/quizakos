@@ -1,0 +1,12 @@
+.welcomeText {
+  color: aliceblue;
+  font-size: 20px;
+  text-shadow: 2px 2px 10px #000;
+  margin: 20px 0;
+}
+.forteQuiz {
+  color: white;
+  font-size: 60px;
+  text-shadow: 2px 2px 10px #000;
+  margin: 0;
+}

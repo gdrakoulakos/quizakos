@@ -2,29 +2,28 @@
   display: flex;
   flex-direction: column;
   align-items: center;
-  margin: 5px;
-  border: rgba(255, 255, 255, 0.702) solid 5px;
-  border-radius: 10%;
-  background: linear-gradient(70deg, #eae9ff 0%, #c3c3ff 50%, #80eaff 100%);
-  height: 245px;
+  margin: 5px 10px;
+  box-shadow: 0 0 2px 3px #d5d5d5;
+  border-radius: 20px;
+  background: linear-gradient(70deg, #665980 0%, #59428c 50%, #50338e 100%);
+  height: 255px;
   text-align: center;
   flex: 0 0 auto;
   scroll-snap-align: start;
   max-width: 140px;
-  padding: 10px 0px 10px 0px;
+  padding: 10px 0;
   gap: 10px;
+  color: white;
 }
 
 .cardTop {
-  font-size: xx-large;
-  border: rgba(19, 10, 139, 0.109) solid 5px;
-  border-radius: 50%;
   width: 40%;
 }
 
 .cardTop h1 {
   margin: 0;
-  font-size: xx-large;
+  font-size: 50px;
+  text-shadow: 1px 1px 12px #000000;
 }
 
 .cardBottom {
@@ -35,10 +34,14 @@
 .cardBottom h3 {
   font-size: medium;
   height: 20px;
+  text-shadow: 1px 1px 12px #000;
+  margin: 10px 0 30px 0;
 }
 
 .cardBottom p {
   font-size: small;
   height: 60px;
-  margin: 10px;
+  margin: 5px 0;
+  color: white;
+  text-shadow: 1px 1px 5px #000;
 }

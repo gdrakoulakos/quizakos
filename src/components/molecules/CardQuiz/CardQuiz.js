@@ -5,7 +5,7 @@ export default function CardQuiz({ id, name, description }) {
   return (
     <div key={id} className={styles.quizCardContainer}>
       <div className={styles.cardTop}>
-        <h1>🎼</h1>
+        <h1>📖</h1>
       </div>
       <div className={styles.cardBottom}>
         <h3>{name}</h3>
