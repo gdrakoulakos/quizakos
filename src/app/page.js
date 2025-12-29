@@ -23,7 +23,7 @@ export default function Home() {
   }, []);
 
   return (
-    <div className={styles.page}>
+    <div className={styles.homePage}>
       <WelcomeBanner />
       {allQuizCategories.map((quiz) => (
         <div key={quiz}>

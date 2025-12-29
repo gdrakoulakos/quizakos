@@ -3,6 +3,8 @@ import React from "react";
 import Image from "next/image";
 import styles from "./quizResults.module.css";
 import { QuizContext } from "@/context/AppContext";
+import ButtonOk from "@/components/atoms/ButtonOk/ButtonOk";
+import Link from "next/link";
 
 export default function quizResults() {
   const { selectedQuiz, clickedAnswersResults } = QuizContext();
@@ -53,6 +55,9 @@ export default function quizResults() {
               </div>
             ))}
           </div>
+          <Link className={styles.buttonOkContainer} href="/">
+            <ButtonOk buttonText="Επιστροφή" />
+          </Link>
         </div>
       )}
     </>
