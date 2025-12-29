@@ -12,6 +12,7 @@ export const AppProvider = ({ children }) => {
     correctAnswers: 0,
     incorrectAnswers: 0,
     totalAnswers: 0,
+    incorrectAnswersData: [],
   });
   const allQuizCategories = [
     ...new Set(allQuizzes.map((item) => item.category)),

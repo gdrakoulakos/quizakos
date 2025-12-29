@@ -1,6 +1,7 @@
 import ButtonOk from "@/components/atoms/ButtonOk/ButtonOk";
 import styles from "./PopUpResults.module.css";
 import Image from "next/image";
+import Link from "next/link";
 
 export default function PopUpResults({
   congratulationsMessage,
@@ -18,7 +19,11 @@ export default function PopUpResults({
         </div>
         <div className={styles.resultMessage}>{resultMessage}</div>
         <div className={styles.correctAnswers}>{correctAnswers}</div>
-        <button className={styles.seeResultsButton}>Δες τα αποτελέσματα</button>
+        <Link href="/quizResults">
+          <button className={styles.seeResultsButton}>
+            Δες τα αποτελέσματα
+          </button>
+        </Link>
         <ButtonOk onClick={onClick} buttonText={"OK"} />
       </div>
     </div>

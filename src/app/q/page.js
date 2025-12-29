@@ -20,6 +20,7 @@ export default function q() {
       correctAnswers: 0,
       incorrectAnswers: 0,
       totalAnswers: 0,
+      incorrectAnswersData: [],
     });
     setShowPopUpResults(false);
   };

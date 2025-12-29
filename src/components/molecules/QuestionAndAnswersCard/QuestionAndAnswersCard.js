@@ -42,6 +42,13 @@ export default function QuestionAndAnswersCard() {
           ...prev,
           incorrectAnswers: prev.incorrectAnswers + 1,
           totalAnswers: prev.totalAnswers + 1,
+          incorrectAnswersData: [
+            ...prev.incorrectAnswersData,
+            {
+              id: selectedQuiz.questions[displayedQuestionIndex].id,
+              incorrectAnswer: clickedAnswer,
+            },
+          ],
         }));
         setCurrentClickedAnswerData({
           result: "incorrect",

@@ -18,6 +18,7 @@ export default function Home() {
       correctAnswers: 0,
       incorrectAnswers: 0,
       totalAnswers: 0,
+      incorrectAnswersData: [],
     });
   }, []);
 
