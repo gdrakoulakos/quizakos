@@ -15,7 +15,7 @@ body::before {
   position: fixed;
   inset: 0;
   background-image: url("/images/background2.webp");
-  background-size: contain;
+  background-size: cover;
   background-repeat: no-repeat;
   background-position: center;
   z-index: -1;
