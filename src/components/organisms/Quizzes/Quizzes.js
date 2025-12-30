@@ -51,6 +51,7 @@ export default function Quizzes({ category }) {
             quizCategory={card.quizCategory}
             name={card.subcategory}
             description={card.description}
+            imgQuiz={card.imgQuiz}
           />
         ))}
         {quiz.length > 2 && (
