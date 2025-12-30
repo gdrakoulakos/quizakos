@@ -4,6 +4,7 @@ import WelcomeBanner from "@/components/organisms/WelcomeBanner/WelcomeBanner";
 import Quizzes from "@/components/organisms/Quizzes/Quizzes";
 import { QuizContext } from "../context/AppContext";
 import { useEffect } from "react";
+import { motion } from "motion/react";
 
 export default function Home() {
   const {
@@ -23,13 +24,18 @@ export default function Home() {
   }, []);
 
   return (
-    <div className={styles.homePage}>
+    <motion.div
+      className={styles.homePage}
+      initial={{ opacity: 0 }}
+      animate={{ opacity: 1 }}
+      transition={{ duration: 0.5 }}
+    >
       <WelcomeBanner />
       {allQuizCategories.map((quiz) => (
         <div key={quiz}>
           <Quizzes category={quiz} />
         </div>
       ))}
-    </div>
+    </motion.div>
   );
 }
