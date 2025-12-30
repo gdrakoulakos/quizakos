@@ -11,6 +11,7 @@ export default function Home() {
     allQuizCategories,
     setDisplayedQuestionIndex,
     setClickedAnswersResults,
+    setShowPopUpResults,
   } = QuizContext();
 
   useEffect(() => {
@@ -21,6 +22,7 @@ export default function Home() {
       totalAnswers: 0,
       incorrectAnswersData: [],
     });
+    setShowPopUpResults(false);
   }, []);
 
   return (

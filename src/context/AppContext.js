@@ -8,6 +8,7 @@ export const AppProvider = ({ children }) => {
   const [selectedQuizId, setSelectedQuizId] = useState(null);
   const [selectedQuiz, setSelectedQuiz] = useState(null);
   const [displayedQuestionIndex, setDisplayedQuestionIndex] = useState(0);
+  const [showPopUpResults, setShowPopUpResults] = useState(false);
   const [clickedAnswersResults, setClickedAnswersResults] = useState({
     correctAnswers: 0,
     incorrectAnswers: 0,
@@ -46,6 +47,8 @@ export const AppProvider = ({ children }) => {
         setDisplayedQuestionIndex,
         clickedAnswersResults,
         setClickedAnswersResults,
+        showPopUpResults,
+        setShowPopUpResults,
       }}
     >
       {children}

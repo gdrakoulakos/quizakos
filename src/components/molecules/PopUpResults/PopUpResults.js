@@ -8,7 +8,6 @@ export default function PopUpResults({
   congratulationsMessage,
   resultMessage,
   correctAnswers,
-  onClick,
   congratsImg,
 }) {
   return (
@@ -30,7 +29,7 @@ export default function PopUpResults({
             Δες τα αποτελέσματα
           </button>
         </Link>
-        <ButtonOk onClick={onClick} buttonText={"OK"} />
+        <ButtonOk buttonText={"OK"} />
       </div>
     </motion.div>
   );

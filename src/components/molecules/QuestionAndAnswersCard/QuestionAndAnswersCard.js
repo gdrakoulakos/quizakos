@@ -4,6 +4,8 @@ import ButtonAnswer from "@/components/atoms/ButtonAnswer/ButtonAnswer";
 import QuestionImage from "@/components/atoms/QuestionImage/QuestionImage";
 import { QuizContext } from "@/context/AppContext";
 import { useState } from "react";
+import ButtonNext from "@/components/atoms/ButtonNext/ButtonNext";
+import PopUpResults from "../PopUpResults/PopUpResults";
 
 export default function QuestionAndAnswersCard() {
   const {
@@ -12,12 +14,16 @@ export default function QuestionAndAnswersCard() {
     displayedQuestionIndex,
     clickedAnswersResults,
     setClickedAnswersResults,
+    showPopUpResults,
+    setShowPopUpResults,
   } = QuizContext();
 
   const [currentClickedAnswerData, setCurrentClickedAnswerData] = useState({
     result: "",
     answer: "",
   });
+
+  const totalQuestionsAnswered = clickedAnswersResults.totalAnswers;
 
   const availableAnswers =
     selectedQuiz?.questions[displayedQuestionIndex]?.availableAnswers;
@@ -56,16 +62,28 @@ export default function QuestionAndAnswersCard() {
         });
       }
     }
+  };
+
+  const handleNextQuestion = () => {
     if (displayedQuestionIndex < 9) {
-      setTimeout(() => {
-        setDisplayedQuestionIndex((prev) => prev + 1);
-        setCurrentClickedAnswerData({ result: "", answer: "" });
-      }, 2000);
+      setDisplayedQuestionIndex((prev) => prev + 1);
+      setCurrentClickedAnswerData({ result: "", answer: "" });
+    } else {
+      setShowPopUpResults(true);
     }
   };
 
   return (
     <div className={styles.section}>
+      {showPopUpResults && (
+        <PopUpResults
+          congratsImg={"/images/bravo3.png"}
+          congratulationsMessage={"Συγχαρητήρια!"}
+          resultMessage={"Το σκορ σου είναι:"}
+          correctAnswers={`${clickedAnswersResults.correctAnswers} /
+                    ${clickedAnswersResults.totalAnswers}`}
+        />
+      )}
       <div className={styles.questionContainer}>
         <QuestionImage />
         <QuizQuestion />
@@ -81,6 +99,12 @@ export default function QuestionAndAnswersCard() {
           />
         ))}
       </div>
+      {currentClickedAnswerData.result !== "" && (
+        <ButtonNext
+          onClick={handleNextQuestion}
+          buttonText={totalQuestionsAnswered < 10 ? "Επόμενη" : "Τέλος"}
+        />
+      )}
     </div>
   );
 }
