@@ -60,7 +60,7 @@ export default function QuestionAndAnswersCard() {
       setTimeout(() => {
         setDisplayedQuestionIndex((prev) => prev + 1);
         setCurrentClickedAnswerData({ result: "", answer: "" });
-      }, 2000);
+      }, 200);
     }
   };
 

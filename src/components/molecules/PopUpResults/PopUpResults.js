@@ -2,6 +2,7 @@ import ButtonOk from "@/components/atoms/ButtonOk/ButtonOk";
 import styles from "./PopUpResults.module.css";
 import Image from "next/image";
 import Link from "next/link";
+import { motion } from "motion/react";
 
 export default function PopUpResults({
   congratulationsMessage,
@@ -11,7 +12,12 @@ export default function PopUpResults({
   congratsImg,
 }) {
   return (
-    <div className={styles.blurBackground}>
+    <motion.div
+      className={styles.blurBackground}
+      initial={{ opacity: 0 }}
+      animate={{ opacity: 1 }}
+      transition={{ duration: 0.3 }}
+    >
       <div className={styles.popUpResultsContainer}>
         <Image src={congratsImg} width={220} height={220} alt="Bravo icon" />
         <div className={styles.congratulationsMessage}>
@@ -26,6 +32,6 @@ export default function PopUpResults({
         </Link>
         <ButtonOk onClick={onClick} buttonText={"OK"} />
       </div>
-    </div>
+    </motion.div>
   );
 }
