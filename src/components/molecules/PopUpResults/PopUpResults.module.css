@@ -23,14 +23,16 @@
 }
 
 .congratulationsMessage {
-  font-size: 20px;
+  font-size: 25px;
   text-align: center;
   color: #222;
+  text-shadow: 2px 2px 10px #ff7c92;
 }
 
 .resultMessage {
   font-size: medium;
   color: #333;
+  text-shadow: 2px 2px 10px #ff7c92;
 }
 
 .correctAnswers {
@@ -41,6 +43,7 @@
   align-items: center;
   background: linear-gradient(135deg, rgb(210, 61, 236), #6f0c81);
   font-size: 20px;
+  text-shadow: 1px 1px 5px #ff7c92;
   color: white;
   border: solid #d5e6ea;
   box-shadow: 0 0 5px 2px #d5d5d5;
@@ -49,12 +52,14 @@
 
 .seeResultsButton {
   width: 180px;
-  height: 25px;
+  height: 30px;
   border: none;
   border-radius: 25px;
   background: linear-gradient(135deg, rgb(210, 61, 236), #6f0c81);
   color: white;
   font-size: 14px;
-  box-shadow: 0 0 5px 2px #d5d5d5;
+  text-shadow: 2px 2px 10px #ff7c92;
+
+  box-shadow: 0 0 5px 4px #d5d5d5;
   cursor: pointer;
 }
