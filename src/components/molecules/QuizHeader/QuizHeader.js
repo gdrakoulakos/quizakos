@@ -25,8 +25,8 @@ export default function QuizHeader() {
         {quizQuestionCurrentNum}/{quizQuestionCounter}
       </p>
       <div className={styles.info}>
-        <p className={styles.category}>{quizCategory}</p>
         <p className={styles.subcategory}>{quizSubcategory}</p>
+        <p className={styles.category}>{quizCategory}</p>
       </div>
       <div className={styles.correctInfoContainer}>
         <Image
