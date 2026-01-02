@@ -77,9 +77,6 @@ export default function QuestionAndAnswersCard() {
     <div className={styles.section}>
       {showPopUpResults && (
         <PopUpResults
-          congratsImg={"/images/bravo3.png"}
-          congratulationsMessage={"Συγχαρητήρια!"}
-          resultMessage={"Το σκορ σου είναι:"}
           correctAnswers={`${clickedAnswersResults.correctAnswers} /
                     ${clickedAnswersResults.totalAnswers}`}
         />
