@@ -1,7 +1,7 @@
 import CardQuiz from "@/components/molecules/CardQuiz/CardQuiz";
 import styles from "../CardQuizzes/CardQuizzes.module.css";
 import { QuizContext } from "@/context/AppContext";
-import { useEffect, useRef, useState } from "react";
+import { useRef, useState } from "react";
 import { AnimatePresence } from "motion/react";
 import ButtonSwiper from "@/components/atoms/ButtonSwiper/ButtonSwiper";
 
@@ -10,42 +10,6 @@ export default function CardQuizzes({ category }) {
   const quiz = allQuizzes.filter((q) => q.category === category);
   const ref = useRef(null);
   const [showSwiper, setShowSwiper] = useState({ left: false, right: true });
-
-  const scroll = (scrollOffset) => {
-    ref.current.scrollBy({
-      left: scrollOffset,
-      behavior: "smooth",
-    });
-  };
-
-  useEffect(() => {
-    if (!ref.current) return;
-
-    const container = ref.current;
-
-    const handleScroll = () => {
-      const current = container.scrollLeft;
-      const max = container.scrollWidth - container.clientWidth;
-
-      if (current <= 0) {
-        setTimeout(() => {
-          setShowSwiper({ left: false, right: true });
-        }, 200);
-      } else if (Math.ceil(current) >= max) {
-        setTimeout(() => {
-          setShowSwiper({ left: true, right: false });
-        }, 200);
-      } else {
-        setTimeout(() => {
-          setShowSwiper({ left: true, right: true });
-        }, 200);
-      }
-    };
-
-    container.addEventListener("scroll", handleScroll);
-
-    return () => container.removeEventListener("scroll", handleScroll);
-  }, [showSwiper]);
 
   return (
     <>
@@ -68,14 +32,18 @@ export default function CardQuizzes({ category }) {
                 <ButtonSwiper
                   key="swiper-left"
                   direction={"left"}
-                  onClick={() => scroll(-150)}
+                  ref={ref}
+                  showSwiper={showSwiper}
+                  setShowSwiper={setShowSwiper}
                 />
               )}
               {showSwiper.right && (
                 <ButtonSwiper
                   key="swiper-right"
                   direction={"right"}
-                  onClick={() => scroll(150)}
+                  ref={ref}
+                  showSwiper={showSwiper}
+                  setShowSwiper={setShowSwiper}
                 />
               )}
             </AnimatePresence>
