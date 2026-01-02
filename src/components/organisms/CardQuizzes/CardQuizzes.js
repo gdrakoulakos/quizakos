@@ -1,11 +1,11 @@
 import CardQuiz from "@/components/molecules/CardQuiz/CardQuiz";
-import styles from "../Quizzes/Quizzes.module.css";
+import styles from "../CardQuizzes/CardQuizzes.module.css";
 import { QuizContext } from "@/context/AppContext";
 import Image from "next/image";
 import { useEffect, useRef, useState } from "react";
 import { AnimatePresence, motion } from "motion/react";
 
-export default function Quizzes({ category }) {
+export default function CardQuizzes({ category }) {
   const { allQuizzes } = QuizContext();
   const quiz = allQuizzes.filter((q) => q.category === category);
   const ref = useRef(null);

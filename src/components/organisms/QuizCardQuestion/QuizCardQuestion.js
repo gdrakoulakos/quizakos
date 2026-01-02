@@ -1,10 +1,10 @@
 import QuestionAndAnswersCard from "@/components/molecules/QuestionAndAnswersCard/QuestionAndAnswersCard";
 import QuizHeader from "@/components/molecules/QuizHeader/QuizHeader";
-import styles from "./QuizCard.module.css";
+import styles from "./QuizCardQuestion.module.css";
 import CompletionStatus from "@/components/molecules/CompletionStatus/CompletionStatus";
 import { QuizContext } from "@/context/AppContext";
 
-export default function QuizCard() {
+export default function QuizCardQuestion() {
   const { selectedQuiz } = QuizContext();
 
   if (!selectedQuiz?.id) {

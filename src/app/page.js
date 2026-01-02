@@ -1,7 +1,7 @@
 "use client";
 import styles from "./page.module.css";
 import WelcomeBanner from "@/components/organisms/WelcomeBanner/WelcomeBanner";
-import Quizzes from "@/components/organisms/Quizzes/Quizzes";
+import CardQuizzes from "@/components/organisms/CardQuizzes/CardQuizzes";
 import { QuizContext } from "../context/AppContext";
 import { useEffect } from "react";
 import { motion } from "motion/react";
@@ -42,7 +42,7 @@ export default function Home() {
       >
         {allQuizCategories.map((quiz) => (
           <div key={quiz}>
-            <Quizzes category={quiz} />
+            <CardQuizzes category={quiz} />
           </div>
         ))}
       </motion.div>

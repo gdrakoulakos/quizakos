@@ -1,6 +1,6 @@
 "use client";
 import styles from "./quiz.module.css";
-import QuizCard from "@/components/organisms/QuizCard/QuizCard";
+import QuizCardQuestion from "@/components/organisms/QuizCardQuestion/QuizCardQuestion";
 import { QuizContext } from "../../context/AppContext";
 import { AnimatePresence, motion } from "motion/react";
 
@@ -22,7 +22,7 @@ export default function quiz() {
           key={displayedQuestionIndex}
           {...motionProps}
         >
-          <QuizCard />
+          <QuizCardQuestion />
         </motion.div>
       </AnimatePresence>
     </>

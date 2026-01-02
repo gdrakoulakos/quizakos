@@ -1,4 +1,3 @@
-import { useEffect } from "react";
 import confetti from "canvas-confetti";
 
 export const useLaunchConfetti = () => {
