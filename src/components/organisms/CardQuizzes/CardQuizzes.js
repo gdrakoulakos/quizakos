@@ -1,22 +1,15 @@
 import CardQuiz from "@/components/molecules/CardQuiz/CardQuiz";
 import styles from "../CardQuizzes/CardQuizzes.module.css";
 import { QuizContext } from "@/context/AppContext";
-import Image from "next/image";
 import { useEffect, useRef, useState } from "react";
-import { AnimatePresence, motion } from "motion/react";
+import { AnimatePresence } from "motion/react";
+import ButtonSwiper from "@/components/atoms/ButtonSwiper/ButtonSwiper";
 
 export default function CardQuizzes({ category }) {
   const { allQuizzes } = QuizContext();
   const quiz = allQuizzes.filter((q) => q.category === category);
   const ref = useRef(null);
   const [showSwiper, setShowSwiper] = useState({ left: false, right: true });
-
-  const motionProps = {
-    initial: { opacity: 0 },
-    animate: { opacity: 1 },
-    exit: { opacity: 0 },
-    transition: { duration: 0.2 },
-  };
 
   const scroll = (scrollOffset) => {
     ref.current.scrollBy({
@@ -72,28 +65,18 @@ export default function CardQuizzes({ category }) {
           <>
             <AnimatePresence mode="sync">
               {showSwiper.left && (
-                <motion.div key="left-arrow" {...motionProps}>
-                  <Image
-                    className={styles.swiperLeft}
-                    src={"/images/arrow-small-left.png"}
-                    alt="scroll to left"
-                    width={30}
-                    height={30}
-                    onClick={() => scroll(-150)}
-                  />
-                </motion.div>
+                <ButtonSwiper
+                  key="swiper-left"
+                  direction={"left"}
+                  onClick={() => scroll(-150)}
+                />
               )}
               {showSwiper.right && (
-                <motion.div key="right-arrow" {...motionProps}>
-                  <Image
-                    className={styles.swiperRight}
-                    src={"/images/arrow-small-right.png"}
-                    alt="scroll to right"
-                    width={30}
-                    height={30}
-                    onClick={() => scroll(150)}
-                  />
-                </motion.div>
+                <ButtonSwiper
+                  key="swiper-right"
+                  direction={"right"}
+                  onClick={() => scroll(150)}
+                />
               )}
             </AnimatePresence>
           </>
