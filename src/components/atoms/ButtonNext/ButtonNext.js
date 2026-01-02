@@ -10,6 +10,7 @@ export default function ButtonNext({ buttonText, onClick }) {
       animate={{ opacity: 1 }}
       transition={{ duration: 0.5, delay: 0.3 }}
       className={styles.buttonContainer}
+      onClick={onClick}
     >
       <Image
         src={"/images/next.svg"}
@@ -17,7 +18,6 @@ export default function ButtonNext({ buttonText, onClick }) {
         width={50}
         height={50}
         className={styles.buttonImage}
-        onClick={onClick}
       />
       <div className={styles.buttonText}>{buttonText}</div>
     </motion.div>
