@@ -2,6 +2,7 @@
 import Link from "next/link";
 import styles from "../Header/Header.module.css";
 import Image from "next/image";
+import LoginArea from "../LoginArea/LoginArea";
 
 export default function Header() {
   return (
@@ -18,6 +19,7 @@ export default function Header() {
             />
           </Link>
         </div>
+        <LoginArea />
       </header>
     </>
   );

@@ -5,18 +5,21 @@ import { AppProvider } from "@/context/AppContext";
 import { CookiesProvider } from "react-cookie";
 import Header from "@/components/organisms/Header/Header";
 import Footer from "@/components/organisms/Footer/Footer";
+import { ClerkProvider } from "@clerk/nextjs";
 
 export default function RootLayout({ children }) {
   return (
     <html lang="el">
       <body className={commissioner.className}>
-        <CookiesProvider>
-          <AppProvider>
-            <Header />
-            {children}
-            <Footer />
-          </AppProvider>
-        </CookiesProvider>
+        <ClerkProvider>
+          <CookiesProvider>
+            <AppProvider>
+              <Header />
+              {children}
+              <Footer />
+            </AppProvider>
+          </CookiesProvider>
+        </ClerkProvider>
       </body>
     </html>
   );

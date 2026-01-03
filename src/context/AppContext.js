@@ -2,6 +2,7 @@ const { createContext, useContext, useState, useEffect } = require("react");
 import allQuizzes from "../data/quizzesData.json";
 import { useCookies } from "react-cookie";
 import { useRouter } from "next/navigation";
+import { useUser } from "@clerk/nextjs";
 
 const AppContext = createContext();
 
@@ -20,8 +21,16 @@ export const AppProvider = ({ children }) => {
     ...new Set(allQuizzes.map((item) => item.category)),
   ];
   const [cookies, setCookie] = useCookies(["quizId"]);
+  const [userData, setUserData] = useState(null);
 
   const router = useRouter();
+  const { user, isSignedIn } = useUser();
+
+  useEffect(() => {
+    if (isSignedIn && user) {
+      setUserData(user);
+    }
+  }, [isSignedIn, user]);
 
   useEffect(() => {
     if (!selectedQuizId) {
@@ -54,6 +63,7 @@ export const AppProvider = ({ children }) => {
         setClickedAnswersResults,
         showPopUpResults,
         setShowPopUpResults,
+        userData,
       }}
     >
       {children}
