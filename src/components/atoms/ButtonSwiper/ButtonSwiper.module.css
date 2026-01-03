@@ -7,4 +7,9 @@
   background-color: #ffffff9b;
   padding: 10px;
   box-shadow: 0 0 3px 2px #ffffff;
+  cursor: pointer;
+}
+
+.swiperButton:hover {
+  background-color: #d2d2d296;
 }

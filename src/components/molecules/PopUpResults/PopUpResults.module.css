@@ -79,3 +79,7 @@
   cursor: pointer;
   margin-bottom: 10px;
 }
+
+.seeResultsButton:hover {
+  background: linear-gradient(135deg, rgb(169, 50, 190), #490855);
+}

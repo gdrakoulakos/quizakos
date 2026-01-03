@@ -9,8 +9,7 @@ import { useLaunchConfetti } from "@/customHooks";
 
 export default function PopUpResults({ correctAnswers }) {
   const { clickedAnswersResults } = QuizContext();
-  const [congratulationsMessage, setCongratulationsMessage] =
-    useState("/images/bravo3.png");
+  const [congratulationsMessage, setCongratulationsMessage] = useState(null);
   const [resultImg, setResultImg] = useState("/images/bravo2.png");
   const launchConfetti = useLaunchConfetti;
 
@@ -19,26 +18,24 @@ export default function PopUpResults({ correctAnswers }) {
   const scorePercentage = (correctAnswersLength / totalAnswersLength) * 100;
 
   useEffect(() => {
-    if (scorePercentage) {
-      if (scorePercentage === 100) {
-        setResultImg("/images/bravo4.gif");
-        setCongratulationsMessage("ΜΠΡΑΒΟ! Τα κατάφερες τέλεια!");
-        setTimeout(() => {
-          launchConfetti();
-        }, 500);
-      } else if (scorePercentage >= 80) {
-        setResultImg("/images/bravo3.png");
-        setCongratulationsMessage("Μπράβο! Πολύ καλή προσπάθεια!");
-      } else if (scorePercentage >= 60) {
-        setResultImg("/images/bravo2.png");
-        setCongratulationsMessage("Καλά τα πήγες! Συνέχισε έτσι!");
-      } else if (scorePercentage >= 40) {
-        setResultImg("/images/bravo2.png");
-        setCongratulationsMessage("Ωραία προσπάθεια! Μπορείς και καλύτερα!");
-      } else {
-        setResultImg("/images/bravo2.png");
-        setCongratulationsMessage("Μην τα παρατάς! Κάθε προσπάθεια μετράει!");
-      }
+    if (scorePercentage === 100) {
+      setResultImg("/images/bravo4.gif");
+      setCongratulationsMessage("ΜΠΡΑΒΟ! Τα κατάφερες τέλεια!");
+      setTimeout(() => {
+        launchConfetti();
+      }, 500);
+    } else if (scorePercentage >= 80) {
+      setResultImg("/images/bravo3.png");
+      setCongratulationsMessage("Μπράβο! Πολύ καλή προσπάθεια!");
+    } else if (scorePercentage >= 60) {
+      setResultImg("/images/bravo2.png");
+      setCongratulationsMessage("Καλά τα πήγες! Συνέχισε έτσι!");
+    } else if (scorePercentage >= 40) {
+      setResultImg("/images/bravo2.png");
+      setCongratulationsMessage("Ωραία προσπάθεια! Μπορείς και καλύτερα!");
+    } else {
+      setResultImg("/images/bravo2.png");
+      setCongratulationsMessage("Μην τα παρατάς! Κάθε προσπάθεια μετράει!");
     }
   }, []);
 

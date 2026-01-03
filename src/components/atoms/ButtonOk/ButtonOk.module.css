@@ -12,3 +12,7 @@
   cursor: pointer;
   text-decoration: none;
 }
+
+.okButton:hover {
+  background: linear-gradient(135deg, #e19c6b, #d16518);
+}
