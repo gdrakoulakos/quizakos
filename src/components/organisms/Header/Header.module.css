@@ -3,6 +3,7 @@
   height: 60px;
   display: flex;
   position: sticky;
+  position: -webkit-sticky;
   top: 0;
   background-color: #ffffff6e;
   backdrop-filter: blur(2px);
