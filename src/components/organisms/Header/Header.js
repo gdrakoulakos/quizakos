@@ -11,7 +11,7 @@ export default function Header() {
         <div className={styles.logoIcon}>
           <Link href={"/"}>
             <Image
-              src="/images/quiz.png"
+              src="/images/logo.png"
               width={50}
               height={50}
               alt="quiz icon"
