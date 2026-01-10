@@ -12,9 +12,9 @@ export default function Header() {
           <Link href={"/"}>
             <Image
               src="/images/logo.png"
-              width={50}
-              height={50}
-              alt="quiz icon"
+              width={60}
+              height={60}
+              alt="forte quiz logo"
               loading="eager"
             />
           </Link>
