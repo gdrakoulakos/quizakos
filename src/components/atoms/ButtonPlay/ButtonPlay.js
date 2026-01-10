@@ -5,6 +5,7 @@ import { QuizContext } from "../../../context/AppContext";
 
 export default function ButtonPlay({ id }) {
   const { setSelectedQuizId } = QuizContext();
+
   return (
     <div className={styles.buttonContainer}>
       <Link href={"/quiz"}>

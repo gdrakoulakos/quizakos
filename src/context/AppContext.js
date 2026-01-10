@@ -69,15 +69,17 @@ export const AppProvider = ({ children }) => {
   }, [isSignedIn, user]);
 
   useEffect(() => {
-    if (!selectedQuizId) {
+    if (!selectedQuiz) {
       const cookieQuizId = cookies.quizId;
       if (cookieQuizId) {
         setSelectedQuizId(cookieQuizId);
       } else {
         router.push("/");
       }
-      return;
     }
+  }, [selectedQuiz]);
+
+  useEffect(() => {
     if (selectedQuizId) {
       const foundQuiz = allQuizQuestions.filter(
         (q) => q.quiz_id === selectedQuizId
@@ -101,7 +103,7 @@ export const AppProvider = ({ children }) => {
 
       setCookie("quizId", selectedQuizId, { path: "/" });
     }
-  }, [selectedQuizId]);
+  }, [selectedQuizId, allQuizQuestions]);
 
   return (
     <AppContext.Provider
