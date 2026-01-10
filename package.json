@@ -9,6 +9,7 @@
     "lint": "next lint"
   },
   "dependencies": {
+    "@clerk/localizations": "^3.34.0",
     "@clerk/nextjs": "^6.36.5",
     "@supabase/supabase-js": "^2.90.1",
     "canvas-confetti": "^1.9.3",
