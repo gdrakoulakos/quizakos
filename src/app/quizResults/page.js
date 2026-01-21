@@ -25,9 +25,9 @@ export default function quizResults() {
               <div key={questionIndex} className={styles.questionBlock}>
                 <h3>{`${question.id}. ${question.title}`}</h3>
 
-                {question.img && (
+                {question.question_img && (
                   <Image
-                    src={`/images/questions/music/${question.img}`}
+                    src={`/images/questions/music/${question.question_img}`}
                     alt="question image"
                     className={styles.questionImage}
                     width={240}

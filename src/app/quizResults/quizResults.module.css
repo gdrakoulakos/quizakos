@@ -41,6 +41,14 @@
   text-shadow: 1px 1px 4px #a7a7a7;
 }
 
+.questionImage {
+  border-radius: 20px;
+  box-shadow: 0 0 5px 2px #d5d5d5;
+  margin-top: 5px;
+  width: auto;
+  max-height: 35%;
+}
+
 .answersContainer button {
   margin: 5px;
   border-radius: 30px;
