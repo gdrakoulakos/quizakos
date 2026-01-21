@@ -3,6 +3,7 @@ import Link from "next/link";
 import styles from "../Header/Header.module.css";
 import Image from "next/image";
 import LoginArea from "../LoginArea/LoginArea";
+import { SignedIn } from "@clerk/nextjs";
 
 export default function Header() {
   return (
@@ -19,6 +20,9 @@ export default function Header() {
             />
           </Link>
         </div>
+        <SignedIn>
+          <div className={styles.myQuizzes}>Τα Quiz μου</div>
+        </SignedIn>
         <div className={styles.loginArea}>
           <LoginArea />
         </div>

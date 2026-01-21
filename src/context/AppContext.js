@@ -22,6 +22,7 @@ export const AppProvider = ({ children }) => {
   const [userData, setUserData] = useState(null);
   const [quizCategoriesData, setQuizCategoriesData] = useState([]);
   const [allQuizQuestions, setAllQuizQuestions] = useState([]);
+  const [athenaeumQuestions, setAthenaeumQuestions] = useState([]);
   const [userInfo, setUserInfo] = useState([]);
 
   const router = useRouter();
@@ -63,19 +64,33 @@ export const AppProvider = ({ children }) => {
     fetchData();
   }, []);
 
-  // useEffect(() => {
-  //   const fetchData = async () => {
-  //     const { data, error } = await supabase.from("user_data").select("*");
+  useEffect(() => {
+    const fetchData = async () => {
+      const { data, error } = await supabase.from("athenaeum").select("*");
 
-  //     if (error) {
-  //       console.error(error);
-  //     } else {
-  //       setUserInfo(data);
-  //     }
-  //   };
+      if (error) {
+        console.error(error);
+      } else {
+        setAthenaeumQuestions(data);
+      }
+    };
 
-  //   fetchData();
-  // }, []);
+    fetchData();
+  }, []);
+
+  useEffect(() => {
+    const fetchData = async () => {
+      const { data, error } = await supabase.from("user_data").select("*");
+
+      if (error) {
+        console.error(error);
+      } else {
+        setUserInfo(data);
+      }
+    };
+
+    fetchData();
+  }, []);
 
   useEffect(() => {
     if (isSignedIn && user) {
@@ -119,8 +134,6 @@ export const AppProvider = ({ children }) => {
       setCookie("quizId", selectedQuizId, { path: "/" });
     }
   }, [selectedQuizId, allQuizQuestions]);
-
-  // console.log("userInfo", userInfo);
 
   return (
     <AppContext.Provider
