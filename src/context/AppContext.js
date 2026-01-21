@@ -20,16 +20,28 @@ export const AppProvider = ({ children }) => {
 
   const [cookies, setCookie] = useCookies(["quizId"]);
   const [userData, setUserData] = useState(null);
-  const [quizCategoriesData, setQuizCategoriesData] = useState([]);
-  const [allQuizQuestions, setAllQuizQuestions] = useState([]);
+  const [defaultQuizCategoriesData, setDefaultQuizCategoriesData] = useState(
+    []
+  );
+  const [athenaeumQuizCategoriesData, setAthenaeumQuizCategoriesData] =
+    useState([]);
+  const [allDefaultQuizQuestions, setAllDefaultQuizQuestions] = useState([]);
   const [athenaeumQuestions, setAthenaeumQuestions] = useState([]);
   const [userInfo, setUserInfo] = useState([]);
 
   const router = useRouter();
   const { user, isSignedIn } = useUser();
 
-  const allQuizCategories = [
-    ...new Set(quizCategoriesData.map((quizCategory) => quizCategory.category)),
+  const allDefaultQuizCategories = [
+    ...new Set(
+      defaultQuizCategoriesData.map((quizCategory) => quizCategory.category)
+    ),
+  ];
+
+  const allAthenaeumQuizCategories = [
+    ...new Set(
+      athenaeumQuizCategoriesData.map((quizCategory) => quizCategory.category)
+    ),
   ];
 
   useEffect(() => {
@@ -41,7 +53,23 @@ export const AppProvider = ({ children }) => {
       if (error) {
         console.error(error);
       } else {
-        setQuizCategoriesData(data);
+        setDefaultQuizCategoriesData(data);
+      }
+    };
+
+    fetchData();
+  }, []);
+
+  useEffect(() => {
+    const fetchData = async () => {
+      const { data, error } = await supabase
+        .from("athenaeum_quiz_categories")
+        .select("*");
+
+      if (error) {
+        console.error(error);
+      } else {
+        setAthenaeumQuizCategoriesData(data);
       }
     };
 
@@ -57,7 +85,7 @@ export const AppProvider = ({ children }) => {
       if (error) {
         console.error(error);
       } else {
-        setAllQuizQuestions(data);
+        setAllDefaultQuizQuestions(data);
       }
     };
 
@@ -66,7 +94,9 @@ export const AppProvider = ({ children }) => {
 
   useEffect(() => {
     const fetchData = async () => {
-      const { data, error } = await supabase.from("athenaeum").select("*");
+      const { data, error } = await supabase
+        .from("athenaeum_quiz_questions")
+        .select("*");
 
       if (error) {
         console.error(error);
@@ -111,7 +141,7 @@ export const AppProvider = ({ children }) => {
 
   useEffect(() => {
     if (selectedQuizId) {
-      const foundQuiz = allQuizQuestions.filter(
+      const foundQuiz = allDefaultQuizQuestions.filter(
         (q) => q.quiz_id === selectedQuizId
       );
 
@@ -133,15 +163,16 @@ export const AppProvider = ({ children }) => {
 
       setCookie("quizId", selectedQuizId, { path: "/" });
     }
-  }, [selectedQuizId, allQuizQuestions]);
+  }, [selectedQuizId, allDefaultQuizQuestions]);
 
   return (
     <AppContext.Provider
       value={{
-        quizCategoriesData,
+        defaultQuizCategoriesData,
+        allAthenaeumQuizCategories,
         setSelectedQuizId,
         selectedQuiz,
-        allQuizCategories,
+        allDefaultQuizCategories,
         displayedQuestionIndex,
         setDisplayedQuestionIndex,
         clickedAnswersResults,

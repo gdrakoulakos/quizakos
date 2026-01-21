@@ -21,7 +21,9 @@ export default function Header() {
           </Link>
         </div>
         <SignedIn>
-          <div className={styles.myQuizzes}>Τα Quiz μου</div>
+          <Link href={"/myQuizzes"} className={styles.myQuizzes}>
+            Τα Quiz μου
+          </Link>
         </SignedIn>
         <div className={styles.loginArea}>
           <LoginArea />

@@ -8,7 +8,7 @@ import { motion } from "motion/react";
 
 export default function Home() {
   const {
-    allQuizCategories,
+    allDefaultQuizCategories,
     setDisplayedQuestionIndex,
     setClickedAnswersResults,
     setShowPopUpResults,
@@ -41,7 +41,7 @@ export default function Home() {
         transition={{ duration: 0.5, delay: 1 }}
         className={styles.allQuizCategories}
       >
-        {allQuizCategories.map((quiz) => (
+        {allDefaultQuizCategories.map((quiz) => (
           <div key={quiz}>
             <CardQuizzes category={quiz} />
           </div>

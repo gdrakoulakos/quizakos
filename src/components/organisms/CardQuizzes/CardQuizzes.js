@@ -6,8 +6,8 @@ import { AnimatePresence } from "motion/react";
 import ButtonSwiper from "@/components/atoms/ButtonSwiper/ButtonSwiper";
 
 export default function CardQuizzes({ category }) {
-  const { quizCategoriesData } = QuizContext();
-  const quiz = quizCategoriesData.filter((q) => q.category === category);
+  const { defaultQuizCategoriesData } = QuizContext();
+  const quiz = defaultQuizCategoriesData.filter((q) => q.category === category);
   const ref = useRef(null);
   const [showSwiper, setShowSwiper] = useState({ left: false, right: true });
 
