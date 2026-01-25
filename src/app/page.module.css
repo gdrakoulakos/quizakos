@@ -6,7 +6,7 @@
   height: 100%;
 }
 
-.allQuizCategories {
+.allDefaultGrades {
   display: flex;
   flex-direction: column;
   align-items: center;

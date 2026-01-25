@@ -3,12 +3,12 @@ import CardQuizzes from "@/components/organisms/CardQuizzes/CardQuizzes";
 import { QuizContext } from "../../context/AppContext";
 
 export default function myQuizzes() {
-  const { allAthenaeumQuizCategories } = QuizContext();
+  const { allAthenaeumCourses } = QuizContext();
   return (
     <div>
-      {allAthenaeumQuizCategories.map((quiz) => (
-        <div key={quiz}>
-          <CardQuizzes category={quiz} />
+      {allAthenaeumCourses.map((athenaeumCourse) => (
+        <div key={athenaeumCourse}>
+          <CardQuizzes group={athenaeumCourse} />
         </div>
       ))}
     </div>

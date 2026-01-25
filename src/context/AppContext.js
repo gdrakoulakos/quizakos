@@ -20,11 +20,9 @@ export const AppProvider = ({ children }) => {
 
   const [cookies, setCookie] = useCookies(["quizId"]);
   const [userData, setUserData] = useState(null);
-  const [defaultQuizCategoriesData, setDefaultQuizCategoriesData] = useState(
-    [],
-  );
-  const [athenaeumQuizCategoriesData, setAthenaeumQuizCategoriesData] =
-    useState([]);
+  const [defaultLessonsData, setDefaultLessonsData] = useState([]);
+  const [athenaeumCoursesData, setAthenaeumCoursesData] = useState([]);
+
   const [allDefaultQuizQuestions, setAllDefaultQuizQuestions] = useState([]);
   const [athenaeumQuestions, setAthenaeumQuestions] = useState([]);
   const [userInfo, setUserInfo] = useState([]);
@@ -33,27 +31,25 @@ export const AppProvider = ({ children }) => {
   const { user, isSignedIn } = useUser();
 
   const allDefaultGrades = [
-    ...new Set(
-      defaultQuizCategoriesData.map((quizCategory) => quizCategory.grade),
-    ),
+    ...new Set(defaultLessonsData.map((defaultGrade) => defaultGrade.grade)),
   ];
 
-  const allAthenaeumQuizCategories = [
+  const allAthenaeumCourses = [
     ...new Set(
-      athenaeumQuizCategoriesData.map((quizCategory) => quizCategory.category),
+      athenaeumCoursesData.map((athenaeumGrade) => athenaeumGrade.course),
     ),
   ];
 
   useEffect(() => {
     const fetchData = async () => {
       const { data, error } = await supabase
-        .from("default_quiz_categories")
+        .from("default_quiz_lessons")
         .select("*");
 
       if (error) {
         console.error(error);
       } else {
-        setDefaultQuizCategoriesData(data);
+        setDefaultLessonsData(data);
       }
     };
 
@@ -63,13 +59,13 @@ export const AppProvider = ({ children }) => {
   useEffect(() => {
     const fetchData = async () => {
       const { data, error } = await supabase
-        .from("athenaeum_quiz_categories")
+        .from("athenaeum_quiz_lessons")
         .select("*");
 
       if (error) {
         console.error(error);
       } else {
-        setAthenaeumQuizCategoriesData(data);
+        setAthenaeumCoursesData(data);
       }
     };
 
@@ -168,8 +164,8 @@ export const AppProvider = ({ children }) => {
   return (
     <AppContext.Provider
       value={{
-        defaultQuizCategoriesData,
-        allAthenaeumQuizCategories,
+        defaultLessonsData,
+        allAthenaeumCourses,
         setSelectedQuizId,
         selectedQuiz,
         allDefaultGrades,
