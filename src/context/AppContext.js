@@ -21,7 +21,7 @@ export const AppProvider = ({ children }) => {
   const [cookies, setCookie] = useCookies(["quizId"]);
   const [userData, setUserData] = useState(null);
   const [defaultQuizCategoriesData, setDefaultQuizCategoriesData] = useState(
-    []
+    [],
   );
   const [athenaeumQuizCategoriesData, setAthenaeumQuizCategoriesData] =
     useState([]);
@@ -32,15 +32,15 @@ export const AppProvider = ({ children }) => {
   const router = useRouter();
   const { user, isSignedIn } = useUser();
 
-  const allDefaultQuizCategories = [
+  const allDefaultGrades = [
     ...new Set(
-      defaultQuizCategoriesData.map((quizCategory) => quizCategory.category)
+      defaultQuizCategoriesData.map((quizCategory) => quizCategory.grade),
     ),
   ];
 
   const allAthenaeumQuizCategories = [
     ...new Set(
-      athenaeumQuizCategoriesData.map((quizCategory) => quizCategory.category)
+      athenaeumQuizCategoriesData.map((quizCategory) => quizCategory.category),
     ),
   ];
 
@@ -142,16 +142,16 @@ export const AppProvider = ({ children }) => {
   useEffect(() => {
     if (selectedQuizId) {
       const foundQuiz = allDefaultQuizQuestions.filter(
-        (q) => q.quiz_id === selectedQuizId
+        (q) => q.lesson_id === selectedQuizId,
       );
 
       if (foundQuiz.length !== 0) {
         const quizTest = {
-          quiz_id: foundQuiz[0].quiz_id,
-          category: foundQuiz[0].category,
-          subcategory: foundQuiz[0].subcategory,
+          quiz_id: foundQuiz[0].lesson_id,
+          grade: foundQuiz[0].grade,
+          lesson: foundQuiz[0].lesson,
           questions: foundQuiz.map((q) => ({
-            id: q.question_id,
+            id: q.index_num,
             title: q.question_title,
             question_img: q.question_img,
             availableAnswers: [q.answer_1, q.answer_2, q.answer_3, q.answer_4],
@@ -172,7 +172,7 @@ export const AppProvider = ({ children }) => {
         allAthenaeumQuizCategories,
         setSelectedQuizId,
         selectedQuiz,
-        allDefaultQuizCategories,
+        allDefaultGrades,
         displayedQuestionIndex,
         setDisplayedQuestionIndex,
         clickedAnswersResults,

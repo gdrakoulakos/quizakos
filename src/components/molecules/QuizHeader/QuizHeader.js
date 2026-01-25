@@ -6,8 +6,8 @@ export default function QuizHeader() {
   const { selectedQuiz, displayedQuestionIndex, clickedAnswersResults } =
     QuizContext();
 
-  const quizCategory = selectedQuiz?.category;
-  const quizSubcategory = selectedQuiz?.subcategory;
+  const quizGrade = selectedQuiz?.grade;
+  const quizLesson = selectedQuiz?.lesson;
   const quizQuestionCounter = selectedQuiz?.questions.length;
   const quizQuestionCurrentNum = displayedQuestionIndex + 1;
   const clickedCorrectAnswers = clickedAnswersResults.correctAnswers;
@@ -18,8 +18,8 @@ export default function QuizHeader() {
         {quizQuestionCurrentNum}/{quizQuestionCounter}
       </p>
       <div className={styles.info}>
-        <p className={styles.subcategory}>{quizSubcategory}</p>
-        <p className={styles.category}>{quizCategory}</p>
+        <p className={styles.lesson}>{quizLesson}</p>
+        <p className={styles.grade}>{quizGrade}</p>
       </div>
       <div className={styles.correctInfoContainer}>
         <Image

@@ -14,7 +14,7 @@ export default function quizResults() {
         <div className={styles.quizResultsSection}>
           <div className={styles.questionsInfo}>
             <h3 className={styles.quizCategory}>
-              {selectedQuiz.category} / {selectedQuiz.subcategory}
+              {selectedQuiz.grade} / {selectedQuiz.lesson}
             </h3>
             <h3></h3>
             <h3>Σωστές Απαντήσεις: {clickedAnswersResults.correctAnswers}</h3>
@@ -42,12 +42,12 @@ export default function quizResults() {
                         clickedAnswersResults.incorrectAnswersData.some(
                           (item) =>
                             item.id === question.id &&
-                            item.incorrectAnswer === answer
+                            item.incorrectAnswer === answer,
                         )
                           ? styles.incorrectAnswer
                           : question.correctAnswer === answer
-                          ? styles.correctAnswer
-                          : ""
+                            ? styles.correctAnswer
+                            : ""
                       }
                     >
                       {answer}
