@@ -1,4 +1,10 @@
-const { createContext, useContext, useState, useEffect } = require("react");
+const {
+  createContext,
+  useContext,
+  useState,
+  useEffect,
+  useMemo,
+} = require("react");
 import { useCookies } from "react-cookie";
 import { useRouter } from "next/navigation";
 import { useUser } from "@clerk/nextjs";
@@ -7,6 +13,12 @@ import { supabase } from "@/lib/supabase";
 const AppContext = createContext();
 
 export const AppProvider = ({ children }) => {
+  const [currentInstitution, setCurrentInstitution] = useState(null);
+  const [defaultSchoolLevels, setDefaultSchoolLevels] = useState([]);
+  const [defaultGrades, setDefaultGrades] = useState([]);
+  const [defaultLessons, setDefaultLessons] = useState([]);
+  const [defaultQuestions, setDefaultQuestions] = useState([]);
+
   const [selectedQuizId, setSelectedQuizId] = useState(null);
   const [selectedQuiz, setSelectedQuiz] = useState(null);
   const [displayedQuestionIndex, setDisplayedQuestionIndex] = useState(0);
@@ -39,6 +51,47 @@ export const AppProvider = ({ children }) => {
       athenaeumCoursesData.map((athenaeumGrade) => athenaeumGrade.course),
     ),
   ];
+
+  const institutionDataMap = {
+    default: {
+      schoolLevels: defaultSchoolLevels,
+      grades: defaultGrades,
+      lessons: defaultLessons,
+      questions: defaultQuestions,
+    },
+    athenaeum: {
+      schoolLevels: [],
+      grades: [],
+      lessons: [],
+      questions: [],
+    },
+  };
+
+  const currentInstitutionData = useMemo(() => {
+    if (!currentInstitution) {
+      return {
+        schoolLevels: [],
+        grades: [],
+        lessons: [],
+        questions: [],
+      };
+    }
+
+    return (
+      institutionDataMap[currentInstitution] || {
+        schoolLevels: [],
+        grades: [],
+        lessons: [],
+        questions: [],
+      }
+    );
+  }, [
+    currentInstitution,
+    defaultSchoolLevels,
+    defaultGrades,
+    defaultLessons,
+    defaultQuestions,
+  ]);
 
   useEffect(() => {
     const fetchData = async () => {
@@ -104,6 +157,72 @@ export const AppProvider = ({ children }) => {
     fetchData();
   }, []);
 
+  //Test tables start
+
+  useEffect(() => {
+    const fetchData = async () => {
+      const { data, error } = await supabase
+        .from("default_school_levels")
+        .select("*");
+
+      if (error) {
+        console.error(error);
+      } else {
+        setDefaultSchoolLevels(data);
+      }
+    };
+
+    fetchData();
+  }, []);
+
+  useEffect(() => {
+    const fetchData = async () => {
+      const { data, error } = await supabase.from("default_grades").select("*");
+
+      if (error) {
+        console.error(error);
+      } else {
+        setDefaultGrades(data);
+      }
+    };
+
+    fetchData();
+  }, []);
+
+  useEffect(() => {
+    const fetchData = async () => {
+      const { data, error } = await supabase
+        .from("default_lessons")
+        .select("*");
+
+      if (error) {
+        console.error(error);
+      } else {
+        setDefaultLessons(data);
+      }
+    };
+
+    fetchData();
+  }, []);
+
+  useEffect(() => {
+    const fetchData = async () => {
+      const { data, error } = await supabase
+        .from("default_questions")
+        .select("*");
+
+      if (error) {
+        console.error(error);
+      } else {
+        setDefaultQuestions(data);
+      }
+    };
+
+    fetchData();
+  }, []);
+
+  //Test tables end
+
   useEffect(() => {
     const fetchData = async () => {
       const { data, error } = await supabase.from("user_data").select("*");
@@ -136,19 +255,21 @@ export const AppProvider = ({ children }) => {
   }, [selectedQuiz]);
 
   useEffect(() => {
-    if (selectedQuizId) {
-      const foundQuiz = allDefaultQuizQuestions.filter(
+    if (selectedQuizId && currentInstitutionData.questions.length > 0) {
+      const foundQuiz = currentInstitutionData?.questions?.filter(
         (q) => q.lesson_id === selectedQuizId,
       );
+
+      console.log("foundQuiz:", foundQuiz);
 
       if (foundQuiz.length !== 0) {
         const quizTest = {
           quiz_id: foundQuiz[0].lesson_id,
-          grade: foundQuiz[0].grade,
-          lesson: foundQuiz[0].lesson,
+          grade: foundQuiz[0].grade_name,
+          lesson: foundQuiz[0].lesson_name,
           questions: foundQuiz.map((q) => ({
-            id: q.index_num,
-            title: q.question_title,
+            id: q.sort_order,
+            title: q.question,
             question_img: q.question_img,
             availableAnswers: [q.answer_1, q.answer_2, q.answer_3, q.answer_4],
             correctAnswer: q.correct_answer,
@@ -159,11 +280,16 @@ export const AppProvider = ({ children }) => {
 
       setCookie("quizId", selectedQuizId, { path: "/" });
     }
-  }, [selectedQuizId, allDefaultQuizQuestions]);
+  }, [selectedQuizId, defaultQuestions]);
 
   return (
     <AppContext.Provider
       value={{
+        currentInstitutionData,
+        setCurrentInstitution,
+        currentInstitution,
+        defaultSchoolLevels,
+        defaultGrades,
         defaultLessonsData,
         allAthenaeumCourses,
         setSelectedQuizId,

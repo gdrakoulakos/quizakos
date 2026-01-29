@@ -8,6 +8,11 @@ import { motion } from "motion/react";
 
 export default function Home() {
   const {
+    currentInstitutionData,
+    setCurrentInstitution,
+    currentInstitution,
+    defaultSchoolLevels,
+    defaultGrades,
     allDefaultGrades,
     setDisplayedQuestionIndex,
     setClickedAnswersResults,
@@ -15,6 +20,7 @@ export default function Home() {
   } = QuizContext();
 
   useEffect(() => {
+    setCurrentInstitution("default");
     setDisplayedQuestionIndex(0);
     setClickedAnswersResults({
       correctAnswers: 0,
@@ -24,6 +30,9 @@ export default function Home() {
     });
     setShowPopUpResults(false);
   }, []);
+
+  const currentInstitutionGrades =
+    currentInstitutionData?.grades?.map((g) => g.grade_name) || null;
 
   return (
     <>
@@ -35,18 +44,36 @@ export default function Home() {
       >
         <WelcomeBanner />
       </motion.div>
-      <motion.div
-        initial={{ opacity: 0, y: 20 }}
-        animate={{ opacity: 1, y: 0 }}
-        transition={{ duration: 0.5, delay: 1 }}
-        className={styles.allDefaultGrades}
-      >
-        {allDefaultGrades.map((defaultGrade) => (
-          <div key={defaultGrade}>
-            <CardQuizzes group={defaultGrade} />
+      {/* <div className={styles.schoolLevels}>
+        {defaultSchoolLevels.map((level) => (
+          <div key={level.level_name} className={styles.schoolLevel}>
+            <h1 className={styles.schoolLevelTitle}>{level.level_name}</h1>
+            <div className={styles.gradesContainer}>
+              {defaultGrades
+                .filter((grade) => grade.school_level_id === level.level_name)
+                .map((grade) => (
+                  <div key={grade.grade_name}>{grade.grade_name}</div>
+                ))}
+            </div>
           </div>
         ))}
-      </motion.div>
+      </div> */}
+      <div className={styles.allQuizzes}>
+        {currentInstitutionGrades && (
+          <motion.div
+            initial={{ opacity: 0, y: 20 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.5, delay: 1 }}
+            className={styles.allDefaultGrades}
+          >
+            {currentInstitutionGrades.map((grade) => (
+              <div key={grade}>
+                <CardQuizzes grade={grade} />
+              </div>
+            ))}
+          </motion.div>
+        )}
+      </div>
     </>
   );
 }
