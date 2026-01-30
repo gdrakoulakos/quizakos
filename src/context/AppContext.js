@@ -13,6 +13,7 @@ import { supabase } from "@/lib/supabase";
 const AppContext = createContext();
 
 export const AppProvider = ({ children }) => {
+  const [activeQuiz, setActiveQuiz] = useState({});
   const [currentInstitution, setCurrentInstitution] = useState(null);
   const [defaultQuizData, setDefaultQuizData] = useState([]);
   const [defaultSchoolLevels, setDefaultSchoolLevels] = useState([]);
@@ -50,6 +51,8 @@ export const AppProvider = ({ children }) => {
   };
 
   const currentInstitutionData = institutionsDataMap[currentInstitution] || [];
+
+  console.log("defaultLessons", defaultLessons);
 
   useEffect(() => {
     const fetchData = async () => {
@@ -213,17 +216,26 @@ export const AppProvider = ({ children }) => {
   }, [selectedQuiz]);
 
   useEffect(() => {
-    if (selectedQuizId && currentInstitutionData.length > 0) {
-      const foundQuiz = currentInstitutionData?.questions?.filter(
+    if (selectedQuizId && defaultQuestions.length > 0) {
+      const foundQuizQuestions = defaultQuestions.filter(
         (q) => q.lesson_id === selectedQuizId,
       );
+      const foundLesson = defaultLessons.find(
+        (lesson) => lesson.id === selectedQuizId,
+      );
+      const lessonName = foundLesson.lesson_name;
 
-      if (foundQuiz.length !== 0) {
+      const lessonGrade = defaultGrades.find(
+        (grade) => grade.id === foundLesson.grade_id,
+      );
+      const gradeName = lessonGrade.grade_name;
+
+      if (foundQuizQuestions.length !== 0) {
         const quizTest = {
-          quiz_id: foundQuiz[0].lesson_id,
-          grade: foundQuiz[0].grade_name,
-          lesson: foundQuiz[0].lesson_name,
-          questions: foundQuiz.map((q) => ({
+          quiz_id: selectedQuizId,
+          grade: gradeName,
+          lesson: lessonName,
+          questions: foundQuizQuestions.map((q) => ({
             id: q.sort_order,
             title: q.question,
             question_img: q.question_img,

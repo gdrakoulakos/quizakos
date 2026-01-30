@@ -4,7 +4,8 @@ import styles from "../ButtonPlay/ButtonPlay.module.css";
 import { QuizContext } from "../../../context/AppContext";
 
 export default function ButtonPlay({ id }) {
-  const { setSelectedQuizId } = QuizContext();
+  const { setSelectedQuizId, currentInstitutionData } = QuizContext();
+
 
   return (
     <div className={styles.buttonContainer}>
