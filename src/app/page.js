@@ -10,10 +10,6 @@ export default function Home() {
   const {
     currentInstitutionData,
     setCurrentInstitution,
-    currentInstitution,
-    defaultSchoolLevels,
-    defaultGrades,
-    allDefaultGrades,
     setDisplayedQuestionIndex,
     setClickedAnswersResults,
     setShowPopUpResults,
@@ -44,20 +40,6 @@ export default function Home() {
       >
         <WelcomeBanner />
       </motion.div>
-      {/* <div className={styles.schoolLevels}>
-        {defaultSchoolLevels.map((level) => (
-          <div key={level.level_name} className={styles.schoolLevel}>
-            <h1 className={styles.schoolLevelTitle}>{level.level_name}</h1>
-            <div className={styles.gradesContainer}>
-              {defaultGrades
-                .filter((grade) => grade.school_level_id === level.level_name)
-                .map((grade) => (
-                  <div key={grade.grade_name}>{grade.grade_name}</div>
-                ))}
-            </div>
-          </div>
-        ))}
-      </div> */}
       <div className={styles.allQuizzes}>
         {currentInstitutionGrades && (
           <motion.div

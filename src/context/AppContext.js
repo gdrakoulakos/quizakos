@@ -18,7 +18,6 @@ export const AppProvider = ({ children }) => {
   const [defaultGrades, setDefaultGrades] = useState([]);
   const [defaultLessons, setDefaultLessons] = useState([]);
   const [defaultQuestions, setDefaultQuestions] = useState([]);
-
   const [selectedQuizId, setSelectedQuizId] = useState(null);
   const [selectedQuiz, setSelectedQuiz] = useState(null);
   const [displayedQuestionIndex, setDisplayedQuestionIndex] = useState(0);
@@ -32,19 +31,11 @@ export const AppProvider = ({ children }) => {
 
   const [cookies, setCookie] = useCookies(["quizId"]);
   const [userData, setUserData] = useState(null);
-  const [defaultLessonsData, setDefaultLessonsData] = useState([]);
   const [athenaeumCoursesData, setAthenaeumCoursesData] = useState([]);
-
-  const [allDefaultQuizQuestions, setAllDefaultQuizQuestions] = useState([]);
   const [athenaeumQuestions, setAthenaeumQuestions] = useState([]);
-  const [userInfo, setUserInfo] = useState([]);
 
   const router = useRouter();
   const { user, isSignedIn } = useUser();
-
-  const allDefaultGrades = [
-    ...new Set(defaultLessonsData.map((defaultGrade) => defaultGrade.grade)),
-  ];
 
   const allAthenaeumCourses = [
     ...new Set(
@@ -52,7 +43,7 @@ export const AppProvider = ({ children }) => {
     ),
   ];
 
-  const institutionDataMap = {
+  const institutionsDataMap = {
     default: {
       schoolLevels: defaultSchoolLevels,
       grades: defaultGrades,
@@ -78,7 +69,7 @@ export const AppProvider = ({ children }) => {
     }
 
     return (
-      institutionDataMap[currentInstitution] || {
+      institutionsDataMap[currentInstitution] || {
         schoolLevels: [],
         grades: [],
         lessons: [],
@@ -96,22 +87,6 @@ export const AppProvider = ({ children }) => {
   useEffect(() => {
     const fetchData = async () => {
       const { data, error } = await supabase
-        .from("default_quiz_lessons")
-        .select("*");
-
-      if (error) {
-        console.error(error);
-      } else {
-        setDefaultLessonsData(data);
-      }
-    };
-
-    fetchData();
-  }, []);
-
-  useEffect(() => {
-    const fetchData = async () => {
-      const { data, error } = await supabase
         .from("athenaeum_quiz_lessons")
         .select("*");
 
@@ -119,22 +94,6 @@ export const AppProvider = ({ children }) => {
         console.error(error);
       } else {
         setAthenaeumCoursesData(data);
-      }
-    };
-
-    fetchData();
-  }, []);
-
-  useEffect(() => {
-    const fetchData = async () => {
-      const { data, error } = await supabase
-        .from("default_quiz_questions")
-        .select("*");
-
-      if (error) {
-        console.error(error);
-      } else {
-        setAllDefaultQuizQuestions(data);
       }
     };
 
@@ -224,20 +183,6 @@ export const AppProvider = ({ children }) => {
   //Test tables end
 
   useEffect(() => {
-    const fetchData = async () => {
-      const { data, error } = await supabase.from("user_data").select("*");
-
-      if (error) {
-        console.error(error);
-      } else {
-        setUserInfo(data);
-      }
-    };
-
-    fetchData();
-  }, []);
-
-  useEffect(() => {
     if (isSignedIn && user) {
       setUserData(user);
     }
@@ -259,8 +204,6 @@ export const AppProvider = ({ children }) => {
       const foundQuiz = currentInstitutionData?.questions?.filter(
         (q) => q.lesson_id === selectedQuizId,
       );
-
-      console.log("foundQuiz:", foundQuiz);
 
       if (foundQuiz.length !== 0) {
         const quizTest = {
@@ -288,13 +231,9 @@ export const AppProvider = ({ children }) => {
         currentInstitutionData,
         setCurrentInstitution,
         currentInstitution,
-        defaultSchoolLevels,
-        defaultGrades,
-        defaultLessonsData,
         allAthenaeumCourses,
         setSelectedQuizId,
         selectedQuiz,
-        allDefaultGrades,
         displayedQuestionIndex,
         setDisplayedQuestionIndex,
         clickedAnswersResults,
