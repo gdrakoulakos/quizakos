@@ -13,10 +13,8 @@ import { supabase } from "@/lib/supabase";
 const AppContext = createContext();
 
 export const AppProvider = ({ children }) => {
-  const [activeQuiz, setActiveQuiz] = useState({});
   const [currentInstitution, setCurrentInstitution] = useState(null);
   const [defaultQuizData, setDefaultQuizData] = useState([]);
-  const [defaultSchoolLevels, setDefaultSchoolLevels] = useState([]);
   const [defaultGrades, setDefaultGrades] = useState([]);
   const [defaultLessons, setDefaultLessons] = useState([]);
   const [defaultQuestions, setDefaultQuestions] = useState([]);
@@ -51,8 +49,6 @@ export const AppProvider = ({ children }) => {
   };
 
   const currentInstitutionData = institutionsDataMap[currentInstitution] || [];
-
-  console.log("defaultLessons", defaultLessons);
 
   useEffect(() => {
     const fetchData = async () => {
@@ -132,22 +128,6 @@ export const AppProvider = ({ children }) => {
     };
 
     fetchAllData();
-  }, []);
-
-  useEffect(() => {
-    const fetchData = async () => {
-      const { data, error } = await supabase
-        .from("default_school_levels")
-        .select("*");
-
-      if (error) {
-        console.error(error);
-      } else {
-        setDefaultSchoolLevels(data);
-      }
-    };
-
-    fetchData();
   }, []);
 
   useEffect(() => {

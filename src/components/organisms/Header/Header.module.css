@@ -1,5 +1,5 @@
 .menuContainer {
-  width: 100%;
+  width: 100vw;
   height: 70px;
   display: flex;
   position: sticky;
@@ -21,7 +21,6 @@
   text-decoration: none;
 }
 
-.logoIcon,
-.loginArea {
-  margin: 15px;
+.logoIcon {
+  margin-left: 10px;
 }

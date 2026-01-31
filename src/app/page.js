@@ -5,6 +5,7 @@ import { QuizContext } from "../context/AppContext";
 import { useEffect } from "react";
 import { motion } from "motion/react";
 import CardQuizzesSection from "@/components/templates/CardQuizzesSection/CardQuizzesSection";
+import LoadingSpinner from "@/components/organisms/LoadingSpinner/LoadingSpinner";
 
 export default function Home() {
   const {
@@ -27,6 +28,8 @@ export default function Home() {
     setShowPopUpResults(false);
   }, []);
 
+  console.log("currentInstitutionData,", currentInstitutionData?.length);
+
   return (
     <>
       <motion.div
@@ -44,7 +47,11 @@ export default function Home() {
         animate={{ opacity: 1, y: 0 }}
         transition={{ duration: 0.5, delay: 1 }}
       >
-        <CardQuizzesSection currentInstitutionData={currentInstitutionData} />
+        {currentInstitutionData?.length === 0 ? (
+          <LoadingSpinner message={"Φόρτωση..."} />
+        ) : (
+          <CardQuizzesSection currentInstitutionData={currentInstitutionData} />
+        )}
       </motion.div>
     </>
   );

@@ -13,9 +13,9 @@ export default function WelcomeBanner() {
       >
         <Image
           className={styles.forteQuiz}
-          src="/images/logo/logo.png"
+          src="/images/logo/logo2.png"
           width={350}
-          height={350}
+          height={281}
           alt="forte quiz logo"
         />
       </motion.div>
