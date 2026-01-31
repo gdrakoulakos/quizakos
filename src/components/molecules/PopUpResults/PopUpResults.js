@@ -25,19 +25,19 @@ export default function PopUpResults({ correctAnswers }) {
         launchConfetti();
       }, 500);
     } else if (scorePercentage >= 80) {
-      setResultImg("/images/bravo3.png");
+      setResultImg("/images/quizakos/guizakos4.png");
       setCongratulationsMessage("Μπράβο! Πολύ καλή προσπάθεια!");
     } else if (scorePercentage >= 60) {
-      setResultImg("/images/bravo2.png");
+      setResultImg("/images/quizakos/guizakos3.png");
       setCongratulationsMessage("Καλά τα πήγες! Συνέχισε έτσι!");
     } else if (scorePercentage >= 40) {
-      setResultImg("/images/bravo2.png");
+      setResultImg("/images/quizakos/guizakos2.png");
       setCongratulationsMessage("Ωραία προσπάθεια! Μπορείς και καλύτερα!");
     } else {
-      setResultImg("/images/bravo2.png");
+      setResultImg("/images/quizakos/guizakos1.png");
       setCongratulationsMessage("Μην τα παρατάς! Κάθε προσπάθεια μετράει!");
     }
-  }, []);
+  }, [scorePercentage]);
 
   return (
     <motion.div
@@ -47,7 +47,13 @@ export default function PopUpResults({ correctAnswers }) {
       transition={{ duration: 0.3 }}
     >
       <div className={styles.popUpResultsContainer}>
-        <Image src={resultImg} width={220} height={220} alt="Bravo icon" />
+        <Image
+          className={styles.resultImage}
+          src={resultImg}
+          width={500}
+          height={500}
+          alt="Bravo icon"
+        />
         <div className={styles.congratulationsMessage}>
           {congratulationsMessage}
         </div>
