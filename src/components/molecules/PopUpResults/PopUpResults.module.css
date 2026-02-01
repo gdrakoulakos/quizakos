@@ -40,6 +40,47 @@
 .resultImage {
   width: 300px;
   height: auto;
+  transform-origin: bottom center;
+}
+
+.hopping {
+  animation: hop 1.2s ease-in-out infinite;
+}
+
+@keyframes hop {
+  0% {
+    transform: translateY(0) scaleY(1);
+  }
+
+  /* slight crouch */
+  12% {
+    transform: translateY(0) scaleY(0.95);
+  }
+
+  /* takeoff */
+  30% {
+    transform: translateY(-35px) scaleY(1.05);
+  }
+
+  /* peak */
+  45% {
+    transform: translateY(-40px) scaleY(1);
+  }
+
+  /* coming down */
+  65% {
+    transform: translateY(-15px) scaleY(1);
+  }
+
+  /* landing */
+  80% {
+    transform: translateY(0) scaleY(0.95);
+  }
+
+  /* rest */
+  100% {
+    transform: translateY(0) scaleY(1);
+  }
 }
 
 .congratulationsMessage {

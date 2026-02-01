@@ -11,6 +11,7 @@ export default function PopUpResults({ correctAnswers }) {
   const { clickedAnswersResults } = QuizContext();
   const [congratulationsMessage, setCongratulationsMessage] = useState(null);
   const [resultImg, setResultImg] = useState("/images/bravo2.png");
+  const [hoppingEffect, setHoppingEffect] = useState(false);
   const launchConfetti = useLaunchConfetti;
 
   const totalAnswersLength = clickedAnswersResults.totalAnswers;
@@ -19,8 +20,9 @@ export default function PopUpResults({ correctAnswers }) {
 
   useEffect(() => {
     if (scorePercentage === 100) {
-      setResultImg("/images/bravo4.gif");
+      setResultImg("/images/quizakos/guizakos-with-friends-4.png");
       setCongratulationsMessage("ΜΠΡΑΒΟ! Τα κατάφερες τέλεια!");
+      setHoppingEffect(true);
       setTimeout(() => {
         launchConfetti();
       }, 500);
@@ -48,7 +50,7 @@ export default function PopUpResults({ correctAnswers }) {
     >
       <div className={styles.popUpResultsContainer}>
         <Image
-          className={styles.resultImage}
+          className={`${styles.resultImage} ${hoppingEffect ? styles.hopping : ""}`}
           src={resultImg}
           width={500}
           height={500}
