@@ -11,6 +11,9 @@ import { elGR } from "@clerk/localizations";
 export default function RootLayout({ children }) {
   return (
     <html lang="el">
+      <head>
+        <title>Quizakos! - Παίξε και δοκίμασε τις γνώσεις σου!</title>
+      </head>
       <body className={commissioner.className}>
         <ClerkProvider
           publishableKey={process.env.NEXT_PUBLIC_CLERK_PUBLISHABLE_KEY}
