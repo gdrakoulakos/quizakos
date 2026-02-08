@@ -4,9 +4,12 @@ import QuizCardQuestion from "@/components/organisms/QuizCardQuestion/QuizCardQu
 import { QuizContext } from "../../context/AppContext";
 import { AnimatePresence, motion } from "motion/react";
 import LoadingSpinner from "@/components/organisms/LoadingSpinner/LoadingSpinner";
+import { useEffect } from "react";
+import { supabase } from "@/lib/supabase";
 
 export default function quiz() {
-  const { displayedQuestionIndex, selectedQuiz } = QuizContext();
+  const { displayedQuestionIndex, selectedQuiz, setDefaultQuestions } =
+    QuizContext();
 
   const motionProps = {
     initial: { opacity: 0, x: 30 },
@@ -14,6 +17,31 @@ export default function quiz() {
     exit: { opacity: 0, x: -30 },
     transition: { duration: 0.2 },
   };
+
+  useEffect(() => {
+    const fetchData = async () => {
+      const { data, error } = await supabase.from("default_questions").select(`
+        *,
+        lesson:default_lessons!lesson_id (
+          id,
+          lesson_name,
+          grade:default_grades!grade_id (
+            id,
+            grade_name
+          )
+        )
+      `);
+
+      if (error) {
+        console.error(error);
+      } else {
+        const shuffled = [...data].sort(() => Math.random() - 0.5);
+        setDefaultQuestions(shuffled);
+      }
+    };
+
+    fetchData();
+  }, []);
 
   return (
     <>

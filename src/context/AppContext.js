@@ -1,10 +1,4 @@
-const {
-  createContext,
-  useContext,
-  useState,
-  useEffect,
-  useMemo,
-} = require("react");
+const { createContext, useContext, useState, useEffect } = require("react");
 import { useCookies } from "react-cookie";
 import { useRouter } from "next/navigation";
 import { useUser } from "@clerk/nextjs";
@@ -15,8 +9,6 @@ const AppContext = createContext();
 export const AppProvider = ({ children }) => {
   const [currentInstitution, setCurrentInstitution] = useState(null);
   const [defaultQuizData, setDefaultQuizData] = useState([]);
-  const [defaultGrades, setDefaultGrades] = useState([]);
-  const [defaultLessons, setDefaultLessons] = useState([]);
   const [defaultQuestions, setDefaultQuestions] = useState([]);
   const [selectedQuizId, setSelectedQuizId] = useState(null);
   const [selectedQuiz, setSelectedQuiz] = useState(null);
@@ -31,17 +23,9 @@ export const AppProvider = ({ children }) => {
 
   const [cookies, setCookie] = useCookies(["quizId"]);
   const [userData, setUserData] = useState(null);
-  const [athenaeumCoursesData, setAthenaeumCoursesData] = useState([]);
-  const [athenaeumQuestions, setAthenaeumQuestions] = useState([]);
 
   const router = useRouter();
   const { user, isSignedIn } = useUser();
-
-  const allAthenaeumCourses = [
-    ...new Set(
-      athenaeumCoursesData.map((athenaeumGrade) => athenaeumGrade.course),
-    ),
-  ];
 
   const institutionsDataMap = {
     default: defaultQuizData,
@@ -51,41 +35,7 @@ export const AppProvider = ({ children }) => {
   const currentInstitutionData = institutionsDataMap[currentInstitution] || [];
 
   useEffect(() => {
-    const fetchData = async () => {
-      const { data, error } = await supabase
-        .from("athenaeum_quiz_lessons")
-        .select("*");
-
-      if (error) {
-        console.error(error);
-      } else {
-        setAthenaeumCoursesData(data);
-      }
-    };
-
-    fetchData();
-  }, []);
-
-  useEffect(() => {
-    const fetchData = async () => {
-      const { data, error } = await supabase
-        .from("athenaeum_quiz_questions")
-        .select("*");
-
-      if (error) {
-        console.error(error);
-      } else {
-        setAthenaeumQuestions(data);
-      }
-    };
-
-    fetchData();
-  }, []);
-
-  //Test tables start
-
-  useEffect(() => {
-    const fetchAllData = async () => {
+    const fetchAllDefaultQuizData = async () => {
       try {
         const { data, error } = await supabase.from("default_school_levels")
           .select(`
@@ -100,19 +50,7 @@ export const AppProvider = ({ children }) => {
               lesson_name,
               quiz_description,
               imgCard,
-              grade_id,
-              questions:default_questions (
-                id,
-                lesson_id,
-                sort_order,
-                question,
-                answer_1,
-                answer_2,
-                answer_3,
-                answer_4,
-                correct_answer,
-                question_img
-              )
+              grade_id
             )
           )
         `);
@@ -127,57 +65,8 @@ export const AppProvider = ({ children }) => {
       }
     };
 
-    fetchAllData();
+    fetchAllDefaultQuizData();
   }, []);
-
-  useEffect(() => {
-    const fetchData = async () => {
-      const { data, error } = await supabase.from("default_grades").select("*");
-
-      if (error) {
-        console.error(error);
-      } else {
-        setDefaultGrades(data);
-      }
-    };
-
-    fetchData();
-  }, []);
-
-  useEffect(() => {
-    const fetchData = async () => {
-      const { data, error } = await supabase
-        .from("default_lessons")
-        .select("*");
-
-      if (error) {
-        console.error(error);
-      } else {
-        setDefaultLessons(data);
-      }
-    };
-
-    fetchData();
-  }, []);
-
-  useEffect(() => {
-    const fetchData = async () => {
-      const { data, error } = await supabase
-        .from("default_questions")
-        .select("*");
-
-      if (error) {
-        console.error(error);
-      } else {
-        const shuffled = [...data].sort(() => Math.random() - 0.5);
-        setDefaultQuestions(shuffled);
-      }
-    };
-
-    fetchData();
-  }, []);
-
-  //Test tables end
 
   useEffect(() => {
     if (isSignedIn && user) {
@@ -201,19 +90,11 @@ export const AppProvider = ({ children }) => {
       const foundQuizQuestions = defaultQuestions.filter(
         (q) => q.lesson_id === selectedQuizId,
       );
-      const foundLesson = defaultLessons.find(
-        (lesson) => lesson.id === selectedQuizId,
-      );
-      const lessonName = foundLesson.lesson_name;
 
-      const lessonGrade = defaultGrades.find(
-        (grade) => grade.id === foundLesson.grade_id,
-      );
-      const gradeName = lessonGrade.grade_name;
+      const lessonName = defaultQuestions[0].lesson.lesson_name;
+      const gradeName = defaultQuestions[0].lesson.grade.grade_name;
 
       if (foundQuizQuestions.length !== 0) {
-        console.log("foundQuizQuestions", foundQuizQuestions);
-
         const quizTest = {
           quiz_id: selectedQuizId,
           grade: gradeName,
@@ -241,10 +122,10 @@ export const AppProvider = ({ children }) => {
   return (
     <AppContext.Provider
       value={{
+        setDefaultQuestions,
         currentInstitutionData,
         setCurrentInstitution,
         currentInstitution,
-        allAthenaeumCourses,
         setSelectedQuizId,
         selectedQuiz,
         displayedQuestionIndex,

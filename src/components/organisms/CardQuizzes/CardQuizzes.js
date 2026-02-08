@@ -1,6 +1,5 @@
 import CardQuiz from "@/components/molecules/CardQuiz/CardQuiz";
 import styles from "../CardQuizzes/CardQuizzes.module.css";
-import { QuizContext } from "@/context/AppContext";
 import { useRef, useState } from "react";
 import { AnimatePresence } from "motion/react";
 import ButtonSwiper from "@/components/atoms/ButtonSwiper/ButtonSwiper";
