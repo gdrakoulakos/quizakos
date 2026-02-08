@@ -91,8 +91,8 @@ export const AppProvider = ({ children }) => {
         (q) => q.lesson_id === selectedQuizId,
       );
 
-      const lessonName = defaultQuestions[0].lesson.lesson_name;
-      const gradeName = defaultQuestions[0].lesson.grade.grade_name;
+      const lessonName = foundQuizQuestions[0].lesson.lesson_name;
+      const gradeName = foundQuizQuestions[0].lesson.grade.grade_name;
 
       if (foundQuizQuestions.length !== 0) {
         const quizTest = {
