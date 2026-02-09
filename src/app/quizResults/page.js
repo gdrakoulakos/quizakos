@@ -3,6 +3,7 @@ import React from "react";
 import Image from "next/image";
 import styles from "./quizResults.module.css";
 import { QuizContext } from "@/context/AppContext";
+import { motion } from "motion/react";
 import ButtonOk from "@/components/atoms/ButtonOk/ButtonOk";
 
 export default function quizResults() {
@@ -11,7 +12,12 @@ export default function quizResults() {
   return (
     <>
       {selectedQuiz && (
-        <div className={styles.quizResultsSection}>
+        <motion.div
+          className={styles.quizResultsSection}
+          initial={{ opacity: 0, y: 20 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.5 }}
+        >
           <div className={styles.questionsInfo}>
             <h3 className={styles.quizGradeAndLesson}>
               {selectedQuiz.grade} / {selectedQuiz.lesson}
@@ -60,7 +66,7 @@ export default function quizResults() {
           <div className={styles.buttonOkContainer}>
             <ButtonOk buttonText="Επιστροφή" />
           </div>
-        </div>
+        </motion.div>
       )}
     </>
   );

@@ -14,6 +14,7 @@ export default function quiz() {
     selectedQuizId,
     defaultQuestions,
     setSelectedQuiz,
+    displayedQuestionIndex,
   } = QuizContext();
 
   const motionProps = {
@@ -81,6 +82,8 @@ export default function quiz() {
     }
   }, [defaultQuestions, selectedQuizId]);
 
+  console.log("selectedQuiz", selectedQuiz);
+
   return (
     <>
       {selectedQuiz ? (
@@ -88,7 +91,7 @@ export default function quiz() {
           <div className={styles.quizSection}>
             <motion.div
               className={styles.quizNew}
-              key={selectedQuiz.quiz_id}
+              key={displayedQuestionIndex}
               {...motionProps}
             >
               <QuizCardQuestion />

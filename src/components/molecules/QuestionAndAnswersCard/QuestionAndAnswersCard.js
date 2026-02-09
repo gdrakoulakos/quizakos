@@ -28,6 +28,8 @@ export default function QuestionAndAnswersCard() {
   const availableAnswers =
     selectedQuiz?.questions[displayedQuestionIndex]?.availableAnswers;
 
+  console.log("displayedQuestionIndex", displayedQuestionIndex);
+
   const correctAnswer =
     selectedQuiz?.questions[displayedQuestionIndex]?.correctAnswer;
 
