@@ -21,10 +21,8 @@ export const AppProvider = ({ children }) => {
     incorrectAnswersData: [],
   });
 
-  const [cookies, setCookie] = useCookies(["quizId"]);
   const [userData, setUserData] = useState(null);
 
-  const router = useRouter();
   const { user, isSignedIn } = useUser();
 
   const institutionsDataMap = {
@@ -74,60 +72,18 @@ export const AppProvider = ({ children }) => {
     }
   }, [isSignedIn, user]);
 
-  useEffect(() => {
-    if (!selectedQuiz) {
-      const cookieQuizId = cookies.quizId;
-      if (cookieQuizId) {
-        setSelectedQuizId(null);
-      } else {
-        router.push("/");
-      }
-    }
-  }, [selectedQuiz]);
-
-  useEffect(() => {
-    if (selectedQuizId && defaultQuestions.length > 0) {
-      const foundQuizQuestions = defaultQuestions.filter(
-        (q) => q.lesson_id === selectedQuizId,
-      );
-
-      const lessonName = foundQuizQuestions[0].lesson.lesson_name;
-      const gradeName = foundQuizQuestions[0].lesson.grade.grade_name;
-
-      if (foundQuizQuestions.length !== 0) {
-        const quizTest = {
-          quiz_id: selectedQuizId,
-          grade: gradeName,
-          lesson: lessonName,
-          questions: foundQuizQuestions.map((q) => ({
-            id: q.sort_order,
-            title: q.question,
-            question_img: q.question_img,
-            availableAnswers: [
-              q.answer_1,
-              q.answer_2,
-              q.answer_3,
-              q.answer_4,
-            ].sort(() => Math.random() - 0.5),
-            correctAnswer: q.correct_answer,
-          })),
-        };
-        setSelectedQuiz(quizTest);
-      }
-
-      setCookie("quizId", selectedQuizId, { path: "/" });
-    }
-  }, [selectedQuizId, defaultQuestions]);
-
   return (
     <AppContext.Provider
       value={{
+        defaultQuestions,
         setDefaultQuestions,
         currentInstitutionData,
         setCurrentInstitution,
         currentInstitution,
+        selectedQuizId,
         setSelectedQuizId,
         selectedQuiz,
+        setSelectedQuiz,
         displayedQuestionIndex,
         setDisplayedQuestionIndex,
         clickedAnswersResults,
