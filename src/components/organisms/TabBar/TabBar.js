@@ -1,17 +1,14 @@
 "use client";
 import Link from "next/link";
-import styles from "../Header/Header.module.css";
-import Image from "next/image";
-import LoginArea from "../LoginArea/LoginArea";
-import { SignedIn } from "@clerk/nextjs";
+import styles from "../TabBar/TabBar.module.css";
 import { motion } from "motion/react";
 import HomeIcon from "@mui/icons-material/Home";
 import HistoryIcon from "@mui/icons-material/History";
 import SentimentSatisfiedAltIcon from "@mui/icons-material/SentimentSatisfiedAlt";
 import InfoIcon from "@mui/icons-material/Info";
 
-export default function Header() {
-  const headerMenuItems = [
+export default function TabBar() {
+  const tabBarMenuItems = [
     {
       name: "Αρχική",
       href: "/",
@@ -35,19 +32,19 @@ export default function Header() {
   ];
 
   return (
-    <motion.header
+    <motion.div
       className={styles.menuContainer}
       initial={{ opacity: 0 }}
       animate={{ opacity: 1 }}
-      transition={{ duration: 0.5, delay: 2 }}
+      transition={{ duration: 0.5, delay: 1.5 }}
     >
-      {headerMenuItems.map((item) => (
+      {tabBarMenuItems.map((item) => (
         <Link key={item.name} href={item.href} className={styles.menuOption}>
           {item.icon}
           <span className={styles.menuOptionText}>{item.name}</span>
         </Link>
       ))}
-    </motion.header>
+    </motion.div>
   );
 }
 
