@@ -14,10 +14,11 @@ body::before {
   position: fixed;
   inset: 0;
   background-image: url("/images/background2.webp");
-  background-size: cover;
+  background-size: contain;
   background-repeat: no-repeat;
   background-position: center;
   z-index: -1;
+  background-color: #59428c;
 }
 
 p {
@@ -32,4 +33,12 @@ button {
 h1 {
   color: #f0f8ff;
   text-shadow: 2px 2px 10px #000;
+}
+
+@media (min-width: 1000px) {
+  body::before {
+    background-size: cover;
+    background-repeat: inherit;
+    background-position: top;
+  }
 }

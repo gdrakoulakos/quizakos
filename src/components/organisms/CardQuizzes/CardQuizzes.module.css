@@ -31,3 +31,10 @@
   text-shadow: 2px 2px 10px #000;
   text-align: center;
 }
+
+@media (min-width: 1000px) {
+  .cardsContainer {
+    max-width: 100%;
+    justify-content: center;
+  }
+}
