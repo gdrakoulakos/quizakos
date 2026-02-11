@@ -3,7 +3,6 @@
   display: flex;
   flex-direction: column;
   align-items: center;
-  max-width: 310px;
 }
 
 .questionsInfo {
@@ -40,6 +39,7 @@
 
 .questionBlock h3 {
   text-shadow: 1px 1px 4px #a7a7a7;
+  max-width: 300px;
 }
 
 .questionImage {
@@ -76,7 +76,7 @@
 }
 
 .buttonOkContainer {
-  position: sticky;
+  position: fixed;
   bottom: 70px;
   text-decoration: none;
 }
