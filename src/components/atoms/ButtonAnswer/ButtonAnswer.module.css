@@ -10,6 +10,7 @@
   box-shadow: 0 0 4px 1px #d5d5d5;
   cursor: pointer;
   text-shadow: 1px 1px 4px #a7a7a7;
+  box-sizing: border-box;
 }
 
 .answerButton:hover {
@@ -19,13 +20,17 @@
 .answerButton.correctAnswer {
   background-color: #b8f5d0;
   color: #0f5132;
-  transition: background-color 0.6s ease, color 0.6s ease;
+  transition:
+    background-color 0.6s ease,
+    color 0.6s ease;
 }
 
 .answerButton.incorrectAnswer {
   background-color: #ffcccb;
   color: #7a1c1c;
-  transition: background-color 0.6s ease, color 0.6s ease;
+  transition:
+    background-color 0.6s ease,
+    color 0.6s ease;
 }
 
 .answerButton:disabled {

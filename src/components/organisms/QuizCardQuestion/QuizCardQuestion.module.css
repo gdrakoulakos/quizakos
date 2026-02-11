@@ -7,5 +7,6 @@
   padding: 10px 15px;
   border-radius: 20px;
   box-shadow: 0 0 5px 2px #d5d5d5;
-  max-width: 310px;
+  max-width: 340px;
+  box-sizing: border-box;
 }
