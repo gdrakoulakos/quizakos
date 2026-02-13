@@ -29,7 +29,7 @@ export default function quizResults() {
           <div className={styles.allQuestionsContainer}>
             {selectedQuiz?.questions?.map((question, questionIndex) => (
               <div key={questionIndex} className={styles.questionBlock}>
-                <h3>{`${question.id}. ${question.title}`}</h3>
+                <h3>{`${question.title}`}</h3>
 
                 {question.question_img && (
                   <Image

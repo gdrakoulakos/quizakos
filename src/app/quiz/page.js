@@ -29,8 +29,14 @@ export default function quiz() {
   };
 
   useEffect(() => {
+    if (!selectedQuizId) return;
+    console.log("selectedQuizId", !!selectedQuizId);
+
     const fetchData = async () => {
-      const { data, error } = await supabase.from("default_questions").select(`
+      const { data, error } = await supabase
+        .from("default_questions")
+        .select(
+          `
         *,
         lesson:default_lessons!lesson_id (
           id,
@@ -40,7 +46,9 @@ export default function quiz() {
             grade_name
           )
         )
-      `);
+      `,
+        )
+        .eq("lesson_id", selectedQuizId);
 
       if (error) {
         console.error(error);
@@ -51,7 +59,7 @@ export default function quiz() {
     };
 
     fetchData();
-  }, []);
+  }, [selectedQuizId]);
 
   useEffect(() => {
     if (!selectedQuizId) {
@@ -64,8 +72,8 @@ export default function quiz() {
       (q) => q.lesson_id === selectedQuizId,
     );
 
-    const lessonName = foundQuizQuestions[0].lesson.lesson_name;
-    const gradeName = foundQuizQuestions[0].lesson.grade.grade_name;
+    const lessonName = foundQuizQuestions[0]?.lesson.lesson_name;
+    const gradeName = foundQuizQuestions[0]?.lesson.grade.grade_name;
 
     if (foundQuizQuestions.length !== 0) {
       const quizTest = {
@@ -73,7 +81,7 @@ export default function quiz() {
         grade: gradeName,
         lesson: lessonName,
         questions: foundQuizQuestions.map((q) => ({
-          id: q.sort_order,
+          id: q.id,
           title: q.question,
           question_img: q.question_img,
           availableAnswers: [
