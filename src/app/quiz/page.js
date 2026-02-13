@@ -17,6 +17,8 @@ export default function quiz() {
     defaultQuestions,
     setSelectedQuiz,
     displayedQuestionIndex,
+    numberOfQuestions,
+    setNumberOfQuestions,
   } = QuizContext();
 
   const [cookies, ,] = useCookies(["quiz_id"]);
@@ -29,8 +31,7 @@ export default function quiz() {
   };
 
   useEffect(() => {
-    if (!selectedQuizId) return;
-    console.log("selectedQuizId", !!selectedQuizId);
+    if (!selectedQuizId || !numberOfQuestions) return;
 
     const fetchData = async () => {
       const { data, error } = await supabase
@@ -54,16 +55,21 @@ export default function quiz() {
         console.error(error);
       } else {
         const shuffled = [...data].sort(() => Math.random() - 0.5);
-        setDefaultQuestions(shuffled);
+        const pickedQuestions = shuffled.slice(0, numberOfQuestions);
+        setDefaultQuestions(pickedQuestions);
       }
     };
 
     fetchData();
-  }, [selectedQuizId]);
+  }, [selectedQuizId, numberOfQuestions]);
 
   useEffect(() => {
     if (!selectedQuizId) {
       setSelectedQuizId(cookies.quiz_id);
+    }
+
+    if (!numberOfQuestions) {
+      setNumberOfQuestions(cookies.total_questions);
     }
 
     if (!selectedQuizId || !defaultQuestions?.length) return;

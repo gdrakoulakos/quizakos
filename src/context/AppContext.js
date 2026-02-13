@@ -9,6 +9,7 @@ export const AppProvider = ({ children }) => {
   const [defaultQuizData, setDefaultQuizData] = useState([]);
   const [defaultQuestions, setDefaultQuestions] = useState([]);
   const [selectedQuizId, setSelectedQuizId] = useState(null);
+  const [numberOfQuestions, setNumberOfQuestions] = useState(null);
   const [selectedQuiz, setSelectedQuiz] = useState(null);
   const [displayedQuestionIndex, setDisplayedQuestionIndex] = useState(0);
   const [showPopUpResults, setShowPopUpResults] = useState(false);
@@ -40,6 +41,7 @@ export const AppProvider = ({ children }) => {
           grades:default_grades (
             id,
             grade_name,
+            total_questions,
             school_level_id,
             lessons:default_lessons (
               id,
@@ -89,6 +91,8 @@ export const AppProvider = ({ children }) => {
         showPopUpResults,
         setShowPopUpResults,
         userData,
+        numberOfQuestions,
+        setNumberOfQuestions,
       }}
     >
       {children}

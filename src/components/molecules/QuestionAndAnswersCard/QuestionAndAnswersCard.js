@@ -16,6 +16,7 @@ export default function QuestionAndAnswersCard() {
     setClickedAnswersResults,
     showPopUpResults,
     setShowPopUpResults,
+    numberOfQuestions,
   } = QuizContext();
 
   const [currentClickedAnswerData, setCurrentClickedAnswerData] = useState({
@@ -32,7 +33,7 @@ export default function QuestionAndAnswersCard() {
     selectedQuiz?.questions[displayedQuestionIndex]?.correctAnswer;
 
   const handleClickedAnswer = (clickedAnswer) => {
-    if (clickedAnswersResults.totalAnswers < 10) {
+    if (clickedAnswersResults.totalAnswers < numberOfQuestions) {
       if (clickedAnswer === correctAnswer) {
         setClickedAnswersResults((prev) => ({
           ...prev,
@@ -65,7 +66,7 @@ export default function QuestionAndAnswersCard() {
   };
 
   const handleNextQuestion = () => {
-    if (displayedQuestionIndex < 9) {
+    if (displayedQuestionIndex < numberOfQuestions - 1) {
       setDisplayedQuestionIndex((prev) => prev + 1);
       setCurrentClickedAnswerData({ result: "", answer: "" });
     } else {
@@ -99,7 +100,9 @@ export default function QuestionAndAnswersCard() {
       {currentClickedAnswerData.result !== "" && (
         <ButtonNext
           onClick={handleNextQuestion}
-          buttonText={totalQuestionsAnswered < 10 ? "Επόμενη" : "Τέλος"}
+          buttonText={
+            totalQuestionsAnswered < numberOfQuestions ? "Επόμενη" : "Τέλος"
+          }
         />
       )}
     </div>

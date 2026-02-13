@@ -20,6 +20,7 @@ export default function CardQuizzes({ grades }) {
               lesson={lesson.lesson_name}
               description={lesson.quiz_description}
               imgQuiz={lesson.imgCard}
+              totalQuestions={grades.total_questions}
             />
           </div>
         ))}
