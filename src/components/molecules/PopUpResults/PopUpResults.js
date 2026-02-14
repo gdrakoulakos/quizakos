@@ -10,7 +10,7 @@ import { useLaunchConfetti } from "@/customHooks";
 export default function PopUpResults({ correctAnswers }) {
   const { clickedAnswersResults } = QuizContext();
   const [congratulationsMessage, setCongratulationsMessage] = useState(null);
-  const [resultImg, setResultImg] = useState("/images/bravo2.png");
+  const [resultImg, setResultImg] = useState("/images/quizakos/guizakos1.png");
   const [hoppingEffect, setHoppingEffect] = useState(false);
   const launchConfetti = useLaunchConfetti;
 
@@ -28,7 +28,7 @@ export default function PopUpResults({ correctAnswers }) {
       }, 500);
     } else if (scorePercentage >= 80) {
       setResultImg("/images/quizakos/guizakos4.png");
-      setCongratulationsMessage("Μπράβο! Πολύ καλή προσπάθεια!");
+      setCongratulationsMessage("Μπράβο! Τα πήγες εξαιρετικά!");
     } else if (scorePercentage >= 60) {
       setResultImg("/images/quizakos/guizakos3.png");
       setCongratulationsMessage("Καλά τα πήγες! Συνέχισε έτσι!");

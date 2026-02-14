@@ -1,5 +1,5 @@
 .announcementsContainer {
-  position: sticky;
+  position: fixed;
   top: 0;
   width: 100%;
   display: flex;
@@ -8,15 +8,40 @@
   z-index: 1000;
 }
 
+.container {
+  display: flex;
+  justify-content: center;
+}
+
+.closeButton {
+  position: relative;
+  top: 165px;
+  right: -170;
+  z-index: 1001;
+  border-radius: 50%;
+  box-shadow: 0 0 2px 3px #ffffff;
+  width: 25px;
+  height: 25px;
+  color: #f68c40f2;
+  font-size: 20px;
+  font-weight: bold;
+  margin: 0;
+  padding: 0;
+  border: none;
+  background-color: #ffffff;
+  box-sizing: border-box;
+}
+
 .announcementText {
   position: fixed;
   top: 160px;
   width: 90%;
-  max-width: 500px;
+  max-width: 340px;
   border-radius: 10px;
   text-align: center;
   background-color: #f68c40f2;
   box-shadow: 0 0 2px 3px #d5d5d5;
   text-shadow: 2px 2px 10px #ffffff;
   padding: 5px;
+  box-sizing: border-box;
 }

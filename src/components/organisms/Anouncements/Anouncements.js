@@ -5,19 +5,19 @@ import styles from "./Anouncements.module.css";
 import { AnimatePresence, motion } from "motion/react";
 
 export default function Anouncements() {
-  const [showAnnouncement, setShowAnnouncement] = useState(true);
+  const [showAnnouncement, setShowAnnouncement] = useState(false);
 
   const motionProps = {
     initial: { opacity: 0 },
     animate: { opacity: 1 },
     exit: { opacity: 0 },
-    transition: { duration: 0.2, delay: 3 },
+    transition: { duration: 0.2 },
   };
 
   useEffect(() => {
     const timer = setTimeout(() => {
-      setShowAnnouncement(false);
-    }, 10000);
+      setShowAnnouncement(true);
+    }, 3000);
 
     return () => clearTimeout(timer);
   }, []);
@@ -28,12 +28,20 @@ export default function Anouncements() {
         <motion.div
           className={styles.announcementsContainer}
           {...motionProps}
-          key={"announcementsContainer"}
+          key="announcementsContainer"
         >
-          <p className={styles.announcementText}>
-            Ο Quizakos μας βρίσκεται σε στάδιο ανάπτυξης και οι ερωτήσεις του
-            μπορεί να περιέχουν λάθη. Λίγη υπομονή...
-          </p>
+          <div className={styles.container}>
+            <button
+              className={styles.closeButton}
+              onClick={() => setShowAnnouncement(false)}
+            >
+              ×
+            </button>
+            <p className={styles.announcementText}>
+              Ο Quizakos μας βρίσκεται σε στάδιο ανάπτυξης και οι ερωτήσεις του
+              μπορεί να περιέχουν λάθη. Λίγη υπομονή...
+            </p>
+          </div>
         </motion.div>
       )}
     </AnimatePresence>
