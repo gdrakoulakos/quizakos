@@ -5,13 +5,13 @@ export default function CardScore({ lessonData }) {
   const quizCompleted = lessonData.score >= 60;
 
   return (
-    <div className={styles.scoreCard}>
+    <div key={lessonData.lesson_id} className={styles.scoreCard}>
       <div className={styles.title}>{lessonData.lesson_and_grade}</div>
       <div className={styles.scoreCardBody}>
         <div className={styles.status}>
           Κατάσταση:{" "}
           <div className={quizCompleted ? styles.statusCompleted : ""}>
-            {lessonData.score >= 60 ? "Ολοκληρωμένο" : "Εκκρεμεί"}
+            {lessonData.score >= 60 ? "Ολοκληρώθηκε!" : "Σε εκκρεμότητα"}
           </div>
         </div>
         <div className={styles.score}>

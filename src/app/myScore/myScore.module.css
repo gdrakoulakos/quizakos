@@ -4,3 +4,18 @@
   align-items: center;
   margin-bottom: 80px;
 }
+
+.noScore {
+  color: #fff;
+  background: linear-gradient(
+    70deg,
+    #665980f3 0%,
+    #59428cf1 50%,
+    #50338ef5 100%
+  );
+  border-radius: 20px;
+  max-width: 310;
+  padding: 20px;
+  box-shadow: 0 0 2px 3px #d5d5d5;
+  text-align: center;
+}

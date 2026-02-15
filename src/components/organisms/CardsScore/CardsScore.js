@@ -12,7 +12,7 @@ export default function CardsScore({}) {
   return (
     <div className={styles.scoreCards}>
       {sortedUserProgressData.map((lessonData) => (
-        <CardScore lessonData={lessonData} />
+        <CardScore lessonData={lessonData} key={lessonData.lesson_id} />
       ))}
     </div>
   );
