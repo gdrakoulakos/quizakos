@@ -12,6 +12,7 @@ export default function CardQuiz({
   totalQuestions,
 }) {
   const [completedQuiz, setCompletedQuiz] = useState(false);
+  const [starsCounter, setStarsCounter] = useState(0);
   const [gainedMedal, setGainedMedal] = useState({ gained: false, medal: "" });
   const storedResults = localStorage.getItem("quiz_results");
   const storedResultsArray = storedResults ? JSON.parse(storedResults) : [];
@@ -21,6 +22,7 @@ export default function CardQuiz({
 
   useEffect(() => {
     if (!lessonExistsInStoredResults?.lesson_id) return;
+    setStarsCounter(lessonExistsInStoredResults.stars);
     if (lessonExistsInStoredResults.score === 100) {
       setGainedMedal({ gained: true, medal: "medal-one" });
     } else if (lessonExistsInStoredResults.score >= 80) {
@@ -39,8 +41,8 @@ export default function CardQuiz({
           src={`/images/red-book-completed.png`}
           alt="completed quiz"
           className={styles.completedQuiz}
-          width={50}
-          height={50}
+          width={45}
+          height={45}
         />
       )}
       {gainedMedal.gained && (
@@ -48,8 +50,8 @@ export default function CardQuiz({
           src={`/images/${gainedMedal.medal}.png`}
           alt="medal"
           className={styles.medal}
-          width={70}
-          height={70}
+          width={60}
+          height={60}
         />
       )}
 
@@ -58,6 +60,16 @@ export default function CardQuiz({
       </div>
       <div className={styles.cardBottom}>
         <h3>{lesson}</h3>
+        <div className={styles.starsContainer}>
+          <Image
+            src={`/images/star.png`}
+            alt="star"
+            className={styles.starIcon}
+            width={20}
+            height={20}
+          />
+          <div>{starsCounter}</div>
+        </div>
         <p>{description}</p>
       </div>
       <ButtonPlay id={id} totalQuestions={totalQuestions} />

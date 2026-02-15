@@ -23,7 +23,11 @@ export default function PopUpResults({ correctAnswers }) {
 
     const storedResults = localStorage.getItem("quiz_results");
     const storedResultsArray = storedResults ? JSON.parse(storedResults) : [];
-    const newResults = { lesson_id: selectedQuizId, score: scorePercentage };
+    const newResults = {
+      lesson_id: selectedQuizId,
+      score: scorePercentage,
+      stars: scorePercentage,
+    };
     const lessonExistsInStoredResults = storedResultsArray.find(
       (lesson) => lesson.lesson_id === selectedQuizId,
     );
@@ -36,7 +40,13 @@ export default function PopUpResults({ correctAnswers }) {
       lessonExistsInStoredResults.score < scorePercentage
     ) {
       const updatedResults = storedResultsArray.map((lesson) =>
-        lesson.lesson_id === selectedQuizId ? newResults : lesson,
+        lesson.lesson_id === selectedQuizId
+          ? {
+              ...lesson,
+              score: scorePercentage,
+              stars: lesson.stars + scorePercentage,
+            }
+          : lesson,
       );
       localStorage.setItem("quiz_results", JSON.stringify(updatedResults));
     }
