@@ -1,5 +1,4 @@
 const { createContext, useContext, useState, useEffect } = require("react");
-import { useUser } from "@clerk/nextjs";
 import { supabase } from "@/lib/supabase";
 
 const AppContext = createContext();
@@ -20,10 +19,6 @@ export const AppProvider = ({ children }) => {
     totalAnswers: 0,
     incorrectAnswersData: [],
   });
-
-  const [userData, setUserData] = useState(null);
-
-  const { user, isSignedIn } = useUser();
 
   useEffect(() => {
     const loadProgress = () => {
@@ -83,12 +78,6 @@ export const AppProvider = ({ children }) => {
     fetchAllDefaultQuizData();
   }, []);
 
-  useEffect(() => {
-    if (isSignedIn && user) {
-      setUserData(user);
-    }
-  }, [isSignedIn, user]);
-
   return (
     <AppContext.Provider
       value={{
@@ -107,7 +96,6 @@ export const AppProvider = ({ children }) => {
         setClickedAnswersResults,
         showPopUpResults,
         setShowPopUpResults,
-        userData,
         numberOfQuestions,
         setNumberOfQuestions,
         userProgressData,

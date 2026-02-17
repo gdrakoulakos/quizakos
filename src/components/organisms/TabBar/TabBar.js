@@ -47,22 +47,3 @@ export default function TabBar() {
     </motion.div>
   );
 }
-
-{
-  /* <Link href={"/"}>
-        <Image
-          className={styles.logoIcon}
-          src="/images/quizakos/quizakos11.png"
-          width={40}
-          height={40}
-          alt="quizakosLogo logo"
-          loading="eager"
-        />
-      </Link>
-      <SignedIn>
-        <Link href={"/myQuizzes"} className={styles.myQuizzes}>
-          Τα Quiz μου
-        </Link>
-      </SignedIn>
-      <LoginArea /> */
-}
