@@ -17,7 +17,26 @@ export default function RootLayout({ children }) {
 }
 
 export const metadata = {
-  title: "Quizakos! - Παίξε και δοκίμασε τις γνώσεις σου!",
+  metadataBase: new URL("https://quizakos.gr"),
+  title: {
+    default: "Quizakos! - Παίξε και δοκίμασε τις γνώσεις σου!",
+    template: "%s | Quizakos",
+  },
   description:
-    "Το Quizakos! είναι μια διασκεδαστική πλατφόρμα κουίζ όπου μπορείς να δοκιμάσεις τις γνώσεις σου στα βασικά μαθήματα του Δημοτικού όπως επίσης και θεωρητικά μαθήματα μουσικής των Ωδείων!",
+    "Το Quizakos! είναι μια διασκεδαστική πλατφόρμα κουίζ όπου μπορείς να δοκιμάσεις τις γνώσεις σου στα βασικά μαθήματα του Δημοτικού και στη θεωρία μουσικής των Ωδείων.",
+
+  robots: {
+    index: true,
+    follow: true,
+  },
+
+  openGraph: {
+    title: "Quizakos! - Online Κουίζ",
+    description:
+      "Δοκίμασε τις γνώσεις σου με διαδραστικά κουίζ για τα παιδιά του Δημοτικύ και των Ωδείων.",
+    url: "https://quizakos.gr",
+    siteName: "Quizakos",
+    locale: "el_GR",
+    type: "website",
+  },
 };
