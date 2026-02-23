@@ -19,11 +19,11 @@ export default function RootLayout({ children }) {
 export const metadata = {
   metadataBase: new URL("https://quizakos.gr"),
   title: {
-    default: "Quizakos! - Παίξε και δοκίμασε τις γνώσεις σου!",
+    default: "Quizakos - Παίξε και δοκίμασε τις γνώσεις σου!",
     template: "%s | Quizakos",
   },
   description:
-    "Το Quizakos! είναι μια διασκεδαστική πλατφόρμα κουίζ όπου μπορείς να δοκιμάσεις τις γνώσεις σου στα βασικά μαθήματα του Δημοτικού και στη θεωρία μουσικής των Ωδείων.",
+    "Το Quizakos είναι μια διασκεδαστική πλατφόρμα κουίζ όπου μπορείς να δοκιμάσεις τις γνώσεις σου στα βασικά μαθήματα του Δημοτικού και στη θεωρία μουσικής των Ωδείων.",
 
   robots: {
     index: true,
