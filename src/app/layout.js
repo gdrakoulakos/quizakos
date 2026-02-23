@@ -17,7 +17,7 @@ export default function RootLayout({ children }) {
 }
 
 export const metadata = {
-  metadataBase: new URL("https://quizakos.gr"),
+  metadataBase: new URL("https://www.quizakos.gr"),
   title: {
     default: "Quizakos - Παίξε και δοκίμασε τις γνώσεις σου!",
     template: "%s | Quizakos",
