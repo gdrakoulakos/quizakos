@@ -87,7 +87,7 @@ export default function quiz() {
         grade: gradeName,
         lesson: lessonName,
         questions: foundQuizQuestions.map((q) => ({
-          id: q.id,
+          id: q.uuid,
           title: q.question,
           question_img: q.question_img,
           availableAnswers: [
