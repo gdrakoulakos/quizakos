@@ -7,6 +7,7 @@ import LoadingSpinner from "@/components/organisms/LoadingSpinner/LoadingSpinner
 import { useEffect } from "react";
 import { supabase } from "@/lib/supabase";
 import { useCookies } from "react-cookie";
+import { useRouter } from "next/navigation";
 
 export default function quiz() {
   const {
@@ -22,6 +23,7 @@ export default function quiz() {
   } = QuizContext();
 
   const [cookies, ,] = useCookies(["quiz_id"]);
+  const router = useRouter();
 
   const motionProps = {
     initial: { opacity: 0, x: 30 },
@@ -71,9 +73,17 @@ export default function quiz() {
     if (!numberOfQuestions) {
       setNumberOfQuestions(cookies.total_questions);
     }
+    console.log("1");
+
+    if (!cookies.quiz_id && !selectedQuizId) {
+      router.push("/");
+    }
 
     if (!selectedQuizId || !defaultQuestions?.length) return;
+
+    console.log("2");
     if (selectedQuiz) return;
+    console.log("3");
     const foundQuizQuestions = defaultQuestions.filter(
       (q) => q.lesson_id === selectedQuizId,
     );
