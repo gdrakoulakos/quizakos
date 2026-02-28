@@ -15,7 +15,7 @@ export default function TabBar() {
       icon: <HomeIcon fontSize="medium" />,
     },
     {
-      name: "Τα σκορ μου",
+      name: "Το σκορ μου",
       href: "/myScore",
       icon: <EmojiEventsIcon fontSize="medium" />,
     },
