@@ -12,7 +12,7 @@ export default function CardQuiz({
   imgQuiz,
   totalQuestions,
 }) {
-  const { userProgressData } = QuizContext();
+  const { userProgressData, setShowPopUpAwardsInfo } = QuizContext();
   const [completedQuiz, setCompletedQuiz] = useState(false);
   const [starsCounter, setStarsCounter] = useState("");
   const [gainedMedal, setGainedMedal] = useState({ gained: false, medal: "" });
@@ -47,6 +47,7 @@ export default function CardQuiz({
         className={styles.completedQuiz}
         width={45}
         height={45}
+        onClick={() => setShowPopUpAwardsInfo((prev) => !prev)}
       />
 
       {gainedMedal.gained && (
@@ -56,6 +57,7 @@ export default function CardQuiz({
           className={styles.medal}
           width={60}
           height={60}
+          onClick={() => setShowPopUpAwardsInfo((prev) => !prev)}
         />
       )}
 
@@ -71,6 +73,7 @@ export default function CardQuiz({
             className={styles.starIcon}
             width={20}
             height={20}
+            onClick={() => setShowPopUpAwardsInfo((prev) => !prev)}
           />
           <div>{starsCounter}</div>
         </div>

@@ -73,7 +73,6 @@ export default function quiz() {
     if (!numberOfQuestions) {
       setNumberOfQuestions(cookies.total_questions);
     }
-    console.log("1");
 
     if (!cookies.quiz_id && !selectedQuizId) {
       router.push("/");
@@ -81,9 +80,7 @@ export default function quiz() {
 
     if (!selectedQuizId || !defaultQuestions?.length) return;
 
-    console.log("2");
     if (selectedQuiz) return;
-    console.log("3");
     const foundQuizQuestions = defaultQuestions.filter(
       (q) => q.lesson_id === selectedQuizId,
     );
