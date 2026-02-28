@@ -14,7 +14,7 @@
   position: relative;
   box-shadow: 0 0 2px 3px #d5d5d5;
   width: 330px;
-  height: 600px;
+  height: auto;
   background: linear-gradient(
     70deg,
     #665980f3 0%,
