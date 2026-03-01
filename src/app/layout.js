@@ -4,8 +4,22 @@ import TabBar from "@/components/organisms/TabBar/TabBar";
 import { Providers } from "./providers";
 
 export default function RootLayout({ children }) {
+  const structuredData = {
+    "@context": "https://schema.org",
+    "@type": "WebSite",
+    name: "Quizakos",
+    alternateName: "quizakos.gr",
+    url: "https://www.quizakos.gr/",
+  };
+
   return (
     <html lang="el">
+      <head>
+        <script
+          type="application/ld+json"
+          dangerouslySetInnerHTML={{ __html: JSON.stringify(structuredData) }}
+        />
+      </head>
       <body className={commissioner.className}>
         <Providers>
           <TabBar />
@@ -19,7 +33,7 @@ export default function RootLayout({ children }) {
 export const metadata = {
   metadataBase: new URL("https://www.quizakos.gr"),
   title: {
-    default: "Quizakos - Παίξε και δοκίμασε τις γνώσεις σου!",
+    default: "Quizakos",
     template: "%s | Quizakos",
   },
   description:
@@ -31,10 +45,10 @@ export const metadata = {
   },
 
   openGraph: {
-    title: "Quizakos! - Online Κουίζ",
+    title: "Quizakos",
     description:
-      "Δοκίμασε τις γνώσεις σου με διαδραστικά κουίζ για τα παιδιά του Δημοτικύ και των Ωδείων.",
-    url: "https://quizakos.gr",
+      "Δοκίμασε τις γνώσεις σου με διαδραστικά κουίζ για τα παιδιά του Δημοτικού και των Ωδείων.",
+    url: "https://www.quizakos.gr",
     siteName: "Quizakos",
     locale: "el_GR",
     type: "website",
