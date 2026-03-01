@@ -29,6 +29,7 @@
   top: -15px;
   left: -20px;
   overflow: hidden;
+  cursor: pointer;
 }
 
 .medal {
@@ -36,12 +37,14 @@
   top: 40px;
   left: -25px;
   overflow: hidden;
+  cursor: pointer;
 }
 
 .starsContainer {
   display: flex;
   flex-direction: row;
   align-items: center;
+  cursor: pointer;
 }
 
 .starIcon {

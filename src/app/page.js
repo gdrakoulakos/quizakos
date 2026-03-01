@@ -7,7 +7,7 @@ import { motion } from "motion/react";
 import CardQuizzesSection from "@/components/templates/CardQuizzesSection/CardQuizzesSection";
 import LoadingSpinner from "@/components/organisms/LoadingSpinner/LoadingSpinner";
 import Anouncements from "@/components/organisms/Anouncements/Anouncements";
-import PopUpAwardsInfo from "@/components/molecules/PopUpAwardsInfo/PopUpAwardsInfo";
+import PopUpAwardsInfo from "@/components/templates/PopUpAwardsInfo/PopUpAwardsInfo";
 
 export default function Home() {
   const {

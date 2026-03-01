@@ -5,7 +5,7 @@ import QuestionImage from "@/components/atoms/QuestionImage/QuestionImage";
 import { QuizContext } from "@/context/AppContext";
 import { useState } from "react";
 import ButtonNext from "@/components/atoms/ButtonNext/ButtonNext";
-import PopUpResults from "../PopUpResults/PopUpResults";
+import PopUpResults from "../../templates/PopUpResults/PopUpResults";
 
 export default function QuestionAndAnswersCard() {
   const {
