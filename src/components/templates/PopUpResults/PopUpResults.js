@@ -12,6 +12,7 @@ export default function PopUpResults({ correctAnswers, lessonAndGrade }) {
     QuizContext();
   const [congratulationsMessage, setCongratulationsMessage] = useState(null);
   const [resultImg, setResultImg] = useState("/images/quizakos/guizakos1.png");
+  const [medal, setMedal] = useState(null);
   const [hoppingEffect, setHoppingEffect] = useState(false);
   const launchConfetti = useLaunchConfetti;
 
@@ -20,6 +21,10 @@ export default function PopUpResults({ correctAnswers, lessonAndGrade }) {
   const scorePercentage = (correctAnswersLength / totalAnswersLength) * 100;
 
   const hasStoredResult = useRef(false);
+  const lessonExistsInStoredResults = userProgressData.find(
+    (lesson) => lesson.lesson_id === selectedQuizId,
+  );
+  const scoreInStoredResults = lessonExistsInStoredResults?.score || null;
 
   useEffect(() => {
     if (!selectedQuizId || hasStoredResult.current) return;
@@ -31,9 +36,6 @@ export default function PopUpResults({ correctAnswers, lessonAndGrade }) {
       stars: scorePercentage,
       lesson_and_grade: lessonAndGrade,
     };
-    const lessonExistsInStoredResults = userProgressData.find(
-      (lesson) => lesson.lesson_id === selectedQuizId,
-    );
 
     if (!lessonExistsInStoredResults) {
       const updatedResults = [...userProgressData, newResults];
@@ -94,6 +96,16 @@ export default function PopUpResults({ correctAnswers, lessonAndGrade }) {
     }
   }, [scorePercentage]);
 
+  useEffect(() => {
+    if (scorePercentage > (scoreInStoredResults ?? -1)) {
+      if (scorePercentage === 100) {
+        setMedal("/images/medal-one.png");
+      } else if (scorePercentage >= 80) {
+        setMedal("/images/medal-two.png");
+      }
+    }
+  }, [scoreInStoredResults, scorePercentage]);
+
   return (
     <motion.div
       className={styles.blurBackground}
@@ -102,6 +114,22 @@ export default function PopUpResults({ correctAnswers, lessonAndGrade }) {
       transition={{ duration: 0.3 }}
     >
       <div className={styles.popUpResultsContainer}>
+        {medal && (
+          <motion.div
+            className={styles.medalContainer}
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            transition={{ duration: 0.6, delay: 1 }}
+          >
+            <Image
+              className={styles.medal}
+              src={medal}
+              width={100}
+              height={100}
+              alt="Bravo icon"
+            />
+          </motion.div>
+        )}
         <Image
           className={`${styles.resultImage} ${hoppingEffect ? styles.hopping : ""}`}
           src={resultImg}
