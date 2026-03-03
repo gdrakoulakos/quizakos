@@ -83,7 +83,7 @@ export default function PopUpAwardsInfo() {
                 </div>
               </div>
             </div>
-            <h4 className={styles.collectThemAll}>Μάζεψέ τα όλα! </h4>
+            <h4 className={styles.collectThemAll}>Κέρδισέ τα όλα! </h4>
           </motion.div>
         </div>
       )}
