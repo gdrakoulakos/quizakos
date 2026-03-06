@@ -1,6 +1,7 @@
 import styles from "./PopUpConfirmation.module.css";
 import ButtonYesNo from "@/components/atoms/ButtonYesNo/ButtonYesNo";
 import { QuizContext } from "@/context/AppContext";
+import { motion } from "motion/react";
 
 export default function PopUpConfirmation() {
   const { setShowPopUpConfirmation, selectedQuizId } = QuizContext();
@@ -32,7 +33,12 @@ export default function PopUpConfirmation() {
 
   return (
     <div className={styles.popUpConfirmationWrapper}>
-      <div className={styles.popUpConfirmationSection}>
+      <motion.div
+        className={styles.popUpConfirmationSection}
+        initial={{ opacity: 0 }}
+        animate={{ opacity: 1 }}
+        transition={{ duration: 0.3 }}
+      >
         <h3>
           Θες σίγουρα να διαγράψεις τα αποτελέσματα και τα βραβεία σου για το
           συγκεκριμένο μάθημα;
@@ -47,7 +53,7 @@ export default function PopUpConfirmation() {
             />
           ))}
         </div>
-      </div>
+      </motion.div>
     </div>
   );
 }

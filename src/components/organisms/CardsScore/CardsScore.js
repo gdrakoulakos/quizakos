@@ -1,6 +1,7 @@
 import CardScore from "@/components/molecules/CardScore/CardScore";
 import styles from "./CardsScore.module.css";
 import { QuizContext } from "@/context/AppContext";
+import { AnimatePresence } from "motion/react";
 
 export default function CardsScore({}) {
   const { userProgressData } = QuizContext();
@@ -11,9 +12,11 @@ export default function CardsScore({}) {
 
   return (
     <div className={styles.scoreCards}>
-      {sortedUserProgressData.map((lessonData) => (
-        <CardScore lessonData={lessonData} key={lessonData.lesson_id} />
-      ))}
+      <AnimatePresence mode="wait">
+        {sortedUserProgressData.map((lessonData) => (
+          <CardScore lessonData={lessonData} key={lessonData.lesson_id} />
+        ))}
+      </AnimatePresence>
     </div>
   );
 }

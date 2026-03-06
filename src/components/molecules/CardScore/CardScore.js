@@ -1,6 +1,7 @@
 import styles from "./CardScore.module.css";
 import Image from "next/image";
 import { QuizContext } from "@/context/AppContext";
+import { motion } from "motion/react";
 
 export default function CardScore({ lessonData }) {
   const { setShowPopUpConfirmation, setSelectedQuizId } = QuizContext();
@@ -13,7 +14,14 @@ export default function CardScore({ lessonData }) {
   };
 
   return (
-    <div key={lessonData.lesson_id} className={styles.scoreCard}>
+    <motion.div
+      key={lessonData.lesson_id}
+      className={styles.scoreCard}
+      initial={{ opacity: 0 }}
+      animate={{ opacity: 1 }}
+      exit={{ opacity: 0 }}
+      transition={{ duration: 0.3 }}
+    >
       <Image
         src={`/images/bin.svg`}
         alt="delete icon"
@@ -57,6 +65,6 @@ export default function CardScore({ lessonData }) {
           )}
         </div>
       </div>
-    </div>
+    </motion.div>
   );
 }
