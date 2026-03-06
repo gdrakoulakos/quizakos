@@ -14,7 +14,7 @@ body::before {
   content: "";
   position: fixed;
   inset: 0;
-  bottom: -100px; /* Extend below the visible area */
+  bottom: -100px;
   background-image: url("/images/background2.webp");
   background-size: cover;
   background-repeat: no-repeat;
@@ -38,6 +38,9 @@ h1 {
 }
 
 @media (min-width: 1000px) {
+  body {
+    padding-top: 50px;
+  }
   body::before {
     background-size: cover;
     background-repeat: inherit;
