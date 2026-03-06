@@ -1,11 +1,27 @@
 import styles from "./CardScore.module.css";
 import Image from "next/image";
+import { QuizContext } from "@/context/AppContext";
 
 export default function CardScore({ lessonData }) {
+  const { setShowPopUpConfirmation, setSelectedQuizId } = QuizContext();
+
   const quizCompleted = lessonData.score >= 60;
+
+  const handleDeleteClick = (lessonId) => {
+    setShowPopUpConfirmation(true);
+    setSelectedQuizId(lessonId);
+  };
 
   return (
     <div key={lessonData.lesson_id} className={styles.scoreCard}>
+      <Image
+        src={`/images/bin.svg`}
+        alt="delete icon"
+        className={styles.binIcon}
+        width={30}
+        height={30}
+        onClick={() => handleDeleteClick(lessonData.lesson_id)}
+      />
       <div className={styles.title}>{lessonData.lesson_and_grade}</div>
       <div className={styles.scoreCardBody}>
         <div className={styles.status}>
