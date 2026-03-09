@@ -11,7 +11,7 @@
     #59428cf1 50%,
     #50338ef5 100%
   );
-  height: 285px;
+  height: auto;
   text-align: center;
   flex: 0 0 auto;
   scroll-snap-align: start;
@@ -21,7 +21,40 @@
   color: white;
   position: relative;
   overflow: visible;
-  box-sizing: border-box;
+}
+
+.quizCardContainer.goldenRibbon {
+  box-shadow: 0 0 13px rgba(255, 200, 0, 0.6);
+  border: 3px solid transparent;
+  border-radius: 20px;
+  background:
+    linear-gradient(70deg, #665980f3 0%, #59428cf1 50%, #50338ef5 100%)
+      padding-box,
+    conic-gradient(
+        from var(--angle),
+        red,
+        orange,
+        yellow,
+        lime,
+        cyan,
+        blue,
+        violet,
+        red
+      )
+      border-box;
+  animation: rotateBorder 4s linear infinite;
+}
+
+@property --angle {
+  syntax: "<angle>";
+  initial-value: 0deg;
+  inherits: false;
+}
+
+@keyframes rotateBorder {
+  to {
+    --angle: 360deg;
+  }
 }
 
 .completedQuiz {

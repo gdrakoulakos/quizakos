@@ -27,7 +27,11 @@ export default function CardQuiz({
     }
     setStarsCounter(lessonExistsInStoredResults.stars);
     if (lessonExistsInStoredResults.score === 100) {
-      setGainedMedal({ gained: true, medal: "medal-one" });
+      if (lessonExistsInStoredResults.stars >= 1000) {
+        setGainedMedal({ gained: true, medal: "golden-ribbon" });
+      } else {
+        setGainedMedal({ gained: true, medal: "medal-one" });
+      }
     } else if (lessonExistsInStoredResults.score >= 80) {
       setGainedMedal({ gained: true, medal: "medal-two" });
     } else {
@@ -40,7 +44,12 @@ export default function CardQuiz({
   }, []);
 
   return (
-    <div key={id} className={styles.quizCardContainer}>
+    <div
+      key={id}
+      className={`${styles.quizCardContainer} ${
+        gainedMedal.medal === "golden-ribbon" ? styles.goldenRibbon : ""
+      }`}
+    >
       <Image
         src={`/images/red-book-${completedQuiz ? "completed" : "completed-3"}.png`}
         alt="completed quiz"
@@ -49,7 +58,6 @@ export default function CardQuiz({
         height={45}
         onClick={() => setShowPopUpAwardsInfo((prev) => !prev)}
       />
-
       {gainedMedal.gained && (
         <Image
           src={`/images/${gainedMedal.medal}.png`}
@@ -60,7 +68,6 @@ export default function CardQuiz({
           onClick={() => setShowPopUpAwardsInfo((prev) => !prev)}
         />
       )}
-
       <div className={styles.cardTop}>
         <QuizImage imgSrc={imgQuiz} />
       </div>

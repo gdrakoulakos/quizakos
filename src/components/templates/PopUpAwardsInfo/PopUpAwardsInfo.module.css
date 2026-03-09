@@ -50,13 +50,14 @@
 .popUpAwardsInfoContainer p {
   color: white;
   text-shadow: 1px 1px 5px #000;
-  font-size: 15px;
+  font-size: 14px;
   padding: 0;
   margin: 0;
 }
 
 .starContainer,
 .medal-one-container,
+.golden-ribbon-container,
 .medal-two-container,
 .red-book-completed-container {
   display: flex;
