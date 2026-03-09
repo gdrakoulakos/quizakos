@@ -13,7 +13,7 @@ export default function QuestionImage() {
 
   return (
     <Image
-      src={`/images/questions/music/${imgSrc}`}
+      src={`/images/questions/${imgSrc}`}
       alt="question image"
       className={styles.questionImage}
       width={240}

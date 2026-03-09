@@ -33,7 +33,7 @@ export default function quizResults() {
 
                 {question.question_img && (
                   <Image
-                    src={`/images/questions/music/${question.question_img}`}
+                    src={`/images/questions/${question.question_img}`}
                     alt="question image"
                     className={styles.questionImage}
                     width={240}
