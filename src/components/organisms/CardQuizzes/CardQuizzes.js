@@ -7,12 +7,13 @@ import ButtonSwiper from "@/components/atoms/ButtonSwiper/ButtonSwiper";
 export default function CardQuizzes({ grades }) {
   const ref = useRef(null);
   const [showSwiper, setShowSwiper] = useState({ left: false, right: true });
+  const sortedLessons = grades?.lessons.sort((a, b) => a.id - b.id);
 
   return (
     <>
       <h1 className={styles.grade}>{grades.grade_name}</h1>
       <div className={styles.cardsContainer} ref={ref}>
-        {grades.lessons.map((lesson) => (
+        {sortedLessons.map((lesson) => (
           <div key={lesson.id}>
             <CardQuiz
               key={lesson.id}
@@ -25,7 +26,7 @@ export default function CardQuizzes({ grades }) {
           </div>
         ))}
 
-        {grades.lessons.length > 2 && (
+        {sortedLessons.length > 2 && (
           <AnimatePresence mode="sync">
             {showSwiper.left && (
               <ButtonSwiper
