@@ -81,9 +81,9 @@ export default function quiz() {
     if (!selectedQuizId || !defaultQuestions?.length) return;
 
     if (selectedQuiz) return;
-    const foundQuizQuestions = defaultQuestions.filter(
-      (q) => q.lesson_id === selectedQuizId,
-    );
+    const foundQuizQuestions = defaultQuestions
+      .filter((q) => q.lesson_id === selectedQuizId)
+      .sort(() => Math.random() - 0.5);
 
     const lessonName = foundQuizQuestions[0]?.lesson.lesson_name;
     const gradeName = foundQuizQuestions[0]?.lesson.grade.grade_name;
