@@ -4,7 +4,8 @@ import { QuizContext } from "@/context/AppContext";
 import { motion } from "motion/react";
 
 export default function CardScore({ lessonData }) {
-  const { setShowPopUpConfirmation, setSelectedQuizId } = QuizContext();
+  const { setShowPopUpConfirmation, setSelectedQuizId, gainedMedal } =
+    QuizContext();
 
   const quizCompleted = lessonData.score >= 60;
 
@@ -55,7 +56,13 @@ export default function CardScore({ lessonData }) {
           {lessonData.score >= 80 && (
             <div className={styles.medal}>
               <Image
-                src={`/images/${lessonData.score >= 100 ? "medal-one" : "medal-two"}.png`}
+                src={`/images/${
+                  lessonData.score >= 100 && lessonData.stars >= 1000
+                    ? "golden-ribbon"
+                    : lessonData.score >= 100
+                      ? "medal-one"
+                      : "medal-two"
+                }.png`}
                 alt="medal"
                 className={styles.medal}
                 width={50}
