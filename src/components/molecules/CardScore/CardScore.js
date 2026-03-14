@@ -17,7 +17,11 @@ export default function CardScore({ lessonData }) {
   return (
     <motion.div
       key={lessonData.lesson_id}
-      className={styles.scoreCard}
+      className={`${styles.scoreCard} ${
+        lessonData.score >= 100 && lessonData.stars >= 1000
+          ? styles.goldenRibbon
+          : ""
+      }`}
       initial={{ opacity: 0 }}
       animate={{ opacity: 1 }}
       exit={{ opacity: 0 }}

@@ -4,12 +4,19 @@ import styles from "./myScore.module.css";
 import { QuizContext } from "@/context/AppContext";
 import Image from "next/image";
 import PopUpConfirmation from "@/components/templates/PopUpConfirmation/PopUpConfirmation";
+import { motion } from "motion/react";
 
 export default function myScore() {
   const { userProgressData, showPopUpConfirmation } = QuizContext();
 
   return (
-    <div className={styles.scoreSection}>
+    <motion.div
+      className={styles.scoreSection}
+      initial={{ opacity: 0 }}
+      animate={{ opacity: 1 }}
+      exit={{ opacity: 0 }}
+      transition={{ duration: 0.3 }}
+    >
       {showPopUpConfirmation && <PopUpConfirmation />}
       <h1>Το σκορ μου</h1>
       {userProgressData.length !== 0 ? (
@@ -29,6 +36,6 @@ export default function myScore() {
           />
         </>
       )}
-    </div>
+    </motion.div>
   );
 }
