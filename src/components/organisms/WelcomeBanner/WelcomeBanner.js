@@ -13,7 +13,7 @@ export default function WelcomeBanner() {
       >
         <Image
           className={styles.quizakosLogo}
-          src="/images/logo/logo-5.png"
+          src="/images/logo/logo-5-shadow.png"
           width={350}
           height={281}
           alt="quizakos logo"

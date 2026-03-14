@@ -28,7 +28,7 @@ export default function myScore() {
           </div>
           <Image
             className={styles.noScoreIcon}
-            src="/images/quizakos/quizakos12.png"
+            src="/images/quizakos/quizakos12-shadow.png"
             alt="Quizakos"
             width={400}
             height={400}

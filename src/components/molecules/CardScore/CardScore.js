@@ -62,10 +62,10 @@ export default function CardScore({ lessonData }) {
               <Image
                 src={`/images/${
                   lessonData.score >= 100 && lessonData.stars >= 1000
-                    ? "golden-ribbon"
+                    ? "golden-ribbon-shadow"
                     : lessonData.score >= 100
-                      ? "medal-one"
-                      : "medal-two"
+                      ? "medal-one-shadow"
+                      : "medal-two-shadow"
                 }.png`}
                 alt="medal"
                 className={styles.medal}

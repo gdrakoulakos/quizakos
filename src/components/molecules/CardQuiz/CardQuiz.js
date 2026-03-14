@@ -28,12 +28,12 @@ export default function CardQuiz({
     setStarsCounter(lessonExistsInStoredResults.stars);
     if (lessonExistsInStoredResults.score === 100) {
       if (lessonExistsInStoredResults.stars >= 1000) {
-        setGainedMedal({ gained: true, medal: "golden-ribbon" });
+        setGainedMedal({ gained: true, medal: "golden-ribbon-shadow" });
       } else {
-        setGainedMedal({ gained: true, medal: "medal-one" });
+        setGainedMedal({ gained: true, medal: "medal-one-shadow" });
       }
     } else if (lessonExistsInStoredResults.score >= 80) {
-      setGainedMedal({ gained: true, medal: "medal-two" });
+      setGainedMedal({ gained: true, medal: "medal-two-shadow" });
     } else {
       setGainedMedal({ gained: true, medal: "medal-disabled-3" });
     }
@@ -47,11 +47,11 @@ export default function CardQuiz({
     <div
       key={id}
       className={`${styles.quizCardContainer} ${
-        gainedMedal.medal === "golden-ribbon" ? styles.goldenRibbon : ""
+        gainedMedal.medal === "golden-ribbon-shadow" ? styles.goldenRibbon : ""
       }`}
     >
       <Image
-        src={`/images/red-book-${completedQuiz ? "completed" : "completed-3"}.png`}
+        src={`/images/red-book-${completedQuiz ? "completed-shadow" : "completed-3"}.png`}
         alt="completed quiz"
         className={styles.completedQuiz}
         width={45}
@@ -75,7 +75,7 @@ export default function CardQuiz({
         <h3>{lesson}</h3>
         <div className={styles.starsContainer}>
           <Image
-            src={`/images/star${starsCounter ? "" : "-5"}.png`}
+            src={`/images/${starsCounter ? "star-shadow" : "star-5"}.png`}
             alt="star"
             className={styles.starIcon}
             width={20}
