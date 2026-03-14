@@ -8,19 +8,19 @@ export default function PopUpAwardsInfo() {
 
   const awardsData = [
     {
-      name: "red-book-completed",
+      name: "red-book-completed-shadow",
       text: "Αν απαντήσεις σωστά στο 60% των ερωτήσεων (3 στις 5 ή 6 στις 10), κερδίζεις ένα βιβλίο!",
     },
     {
-      name: "medal-two",
+      name: "medal-two-shadow",
       text: "Αν απαντήσεις σωστά στο 80% των ερωτήσεων (4 στις 5 ή 8 στις 10), κερδίζεις ένα ασημένιο μετάλλιο!",
     },
     {
-      name: "medal-one",
+      name: "medal-one-shadow",
       text: "Αν απαντήσεις σωστά στο 100% των ερωτήσεων (5 στις 5 ή 10 στις 10), κερδίζεις ένα χρυσό μετάλλιο!",
     },
     {
-      name: "golden-ribbon",
+      name: "golden-ribbon-shadow",
       text: "Αν μαζέψεις 1000 αστέρια και κερδίσεις 1 χρυσό μετάλιο, κερδίζεις την Χρυσή Ροζέτα!",
     },
   ];
@@ -51,9 +51,9 @@ export default function PopUpAwardsInfo() {
             </button>
             <h1>🏆 Βραβεία</h1>
             <h3>Απάντησε σωστά και κέρδισε βραβεία!</h3>
-            <div className={styles.awardsContainer}>
+            <div className={styles.allAwards}>
               {awardsData.map((award, index) => (
-                <div key={index} className={styles[`${award.name}-container`]}>
+                <div key={index} className={styles.awardContainer}>
                   <Image
                     src={`/images/${award.name}.png`}
                     alt={award.name}
@@ -66,7 +66,7 @@ export default function PopUpAwardsInfo() {
 
               <div className={styles.starContainer}>
                 <Image
-                  src={`/images/star.png`}
+                  src={`/images/star-shadow.png`}
                   alt="star"
                   className={styles.starIcon}
                   width={50}
