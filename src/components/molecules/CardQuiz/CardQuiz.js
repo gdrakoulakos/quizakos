@@ -26,19 +26,19 @@ export default function CardQuiz({
       return;
     }
     setStarsCounter(lessonExistsInStoredResults.stars);
-    if (lessonExistsInStoredResults.score === 100) {
+    if (lessonExistsInStoredResults.best_score === 100) {
       if (lessonExistsInStoredResults.stars >= 1000) {
         setGainedMedal({ gained: true, medal: "golden-ribbon-shadow" });
       } else {
         setGainedMedal({ gained: true, medal: "medal-one-shadow" });
       }
-    } else if (lessonExistsInStoredResults.score >= 80) {
+    } else if (lessonExistsInStoredResults.best_score >= 80) {
       setGainedMedal({ gained: true, medal: "medal-two-shadow" });
     } else {
       setGainedMedal({ gained: true, medal: "medal-disabled-3" });
     }
 
-    if (lessonExistsInStoredResults.score >= 60) {
+    if (lessonExistsInStoredResults.best_score >= 60) {
       setCompletedQuiz(true);
     }
   }, []);

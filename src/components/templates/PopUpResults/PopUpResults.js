@@ -24,7 +24,8 @@ export default function PopUpResults({ correctAnswers, lessonAndGrade }) {
   const lessonExistsInStoredResults = userProgressData.find(
     (lesson) => lesson.lesson_id === selectedQuizId,
   );
-  const scoreInStoredResults = lessonExistsInStoredResults?.score || null;
+  const bestScoreInStoredResults =
+    lessonExistsInStoredResults?.best_score || null;
 
   useEffect(() => {
     if (!selectedQuizId || hasStoredResult.current) return;
@@ -32,7 +33,7 @@ export default function PopUpResults({ correctAnswers, lessonAndGrade }) {
 
     const newResults = {
       lesson_id: selectedQuizId,
-      score: scorePercentage,
+      best_score: scorePercentage,
       stars: scorePercentage,
       lesson_and_grade: lessonAndGrade,
     };
@@ -43,13 +44,13 @@ export default function PopUpResults({ correctAnswers, lessonAndGrade }) {
       window.dispatchEvent(new Event("quiz_results_updated"));
     } else if (
       lessonExistsInStoredResults &&
-      lessonExistsInStoredResults.score < scorePercentage
+      lessonExistsInStoredResults.best_score < scorePercentage
     ) {
       const updatedResults = userProgressData.map((lesson) =>
         lesson.lesson_id === selectedQuizId
           ? {
               ...lesson,
-              score: scorePercentage,
+              best_score: scorePercentage,
               stars: Number(lesson.stars) + scorePercentage,
             }
           : lesson,
@@ -58,7 +59,7 @@ export default function PopUpResults({ correctAnswers, lessonAndGrade }) {
       window.dispatchEvent(new Event("quiz_results_updated"));
     } else if (
       lessonExistsInStoredResults &&
-      lessonExistsInStoredResults.score >= scorePercentage
+      lessonExistsInStoredResults.best_score >= scorePercentage
     ) {
       const updatedResults = userProgressData.map((lesson) =>
         lesson.lesson_id === selectedQuizId
@@ -97,14 +98,14 @@ export default function PopUpResults({ correctAnswers, lessonAndGrade }) {
   }, [scorePercentage]);
 
   useEffect(() => {
-    if (scorePercentage > (scoreInStoredResults ?? -1)) {
+    if (scorePercentage > (bestScoreInStoredResults ?? -1)) {
       if (scorePercentage === 100) {
         setMedal("/images/medal-one-shadow.png");
       } else if (scorePercentage >= 80) {
         setMedal("/images/medal-two-shadow.png");
       }
     }
-  }, [scoreInStoredResults, scorePercentage]);
+  }, [bestScoreInStoredResults, scorePercentage]);
 
   return (
     <motion.div
