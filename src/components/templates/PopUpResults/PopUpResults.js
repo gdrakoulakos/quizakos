@@ -99,9 +99,9 @@ export default function PopUpResults({ correctAnswers, lessonAndGrade }) {
   useEffect(() => {
     if (scorePercentage > (scoreInStoredResults ?? -1)) {
       if (scorePercentage === 100) {
-        setMedal("/images/medal-one.png");
+        setMedal("/images/medal-one-shadow.png");
       } else if (scorePercentage >= 80) {
-        setMedal("/images/medal-two.png");
+        setMedal("/images/medal-two-shadow.png");
       }
     }
   }, [scoreInStoredResults, scorePercentage]);

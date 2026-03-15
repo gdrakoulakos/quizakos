@@ -42,6 +42,7 @@
   width: 300px;
   height: auto;
   transform-origin: bottom center;
+  animation: fadeIn 0.7s ease-in-out;
 }
 
 .hopping {
@@ -53,6 +54,15 @@
   top: 5;
   left: -10;
   z-index: 1;
+}
+
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
 }
 
 @keyframes hop {
