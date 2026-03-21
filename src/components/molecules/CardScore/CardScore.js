@@ -4,10 +4,9 @@ import { QuizContext } from "@/context/AppContext";
 import { motion } from "motion/react";
 
 export default function CardScore({ lessonData }) {
-  const { setShowPopUpConfirmation, setSelectedQuizId, gainedMedal } =
-    QuizContext();
+  const { setShowPopUpConfirmation, setSelectedQuizId } = QuizContext();
 
-  const quizCompleted = lessonData.score >= 60;
+  const quizCompleted = lessonData.best_score >= 60;
 
   const handleDeleteClick = (lessonId) => {
     setShowPopUpConfirmation(true);
@@ -18,7 +17,7 @@ export default function CardScore({ lessonData }) {
     <motion.div
       key={lessonData.lesson_id}
       className={`${styles.scoreCard} ${
-        lessonData.score >= 100 && lessonData.stars >= 1000
+        lessonData.best_score >= 100 && lessonData.stars >= 1000
           ? styles.goldenRibbon
           : ""
       }`}
@@ -40,11 +39,11 @@ export default function CardScore({ lessonData }) {
         <div className={styles.status}>
           Κατάσταση:{" "}
           <div className={quizCompleted ? styles.statusCompleted : ""}>
-            {lessonData.score >= 60 ? "Ολοκληρώθηκε!" : "Σε εκκρεμότητα"}
+            {lessonData.best_score >= 60 ? "Ολοκληρώθηκε!" : "Σε εκκρεμότητα"}
           </div>
         </div>
         <div className={styles.score}>
-          Καλύτερη προσπάθεια: {lessonData.score}%
+          Καλύτερη προσπάθεια: {lessonData.best_score}%
         </div>
         <div className={styles.bodyBottom}>
           <div className={styles.starsContainer}>
@@ -57,13 +56,13 @@ export default function CardScore({ lessonData }) {
             />
             <div>{lessonData.stars}</div>
           </div>
-          {lessonData.score >= 80 && (
+          {lessonData.best_score >= 80 && (
             <div className={styles.medal}>
               <Image
                 src={`/images/${
-                  lessonData.score >= 100 && lessonData.stars >= 1000
+                  lessonData.best_score >= 100 && lessonData.stars >= 1000
                     ? "golden-ribbon-shadow"
-                    : lessonData.score >= 100
+                    : lessonData.best_score >= 100
                       ? "medal-one-shadow"
                       : "medal-two-shadow"
                 }.png`}
