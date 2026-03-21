@@ -14,8 +14,16 @@
   background: linear-gradient(135deg, #d84048, #f68c40);
 }
 
+.yes:hover {
+  background: linear-gradient(135deg, #c23b42, #e1803a);
+}
+
 .no {
   color: #f68c40;
   box-shadow: 0 0 3px 1px #f68c40;
   text-shadow: 1px 1px 1px #7a7a7a;
+}
+
+.no:hover {
+  background-color: rgb(221, 221, 221);
 }
