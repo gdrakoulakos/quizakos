@@ -24,8 +24,6 @@ export default function PopUpResults({ correctAnswers, lessonAndGrade }) {
   const lessonExistsInStoredResults = userProgressData.find(
     (lesson) => lesson.lesson_id === selectedQuizId,
   );
-  const bestScoreInStoredResults =
-    lessonExistsInStoredResults?.best_score || null;
 
   useEffect(() => {
     if (!selectedQuizId || hasStoredResult.current) return;
@@ -36,6 +34,10 @@ export default function PopUpResults({ correctAnswers, lessonAndGrade }) {
       best_score: scorePercentage,
       stars: scorePercentage,
       lesson_and_grade: lessonAndGrade,
+      gold_medals_counter: scorePercentage === 100 ? 1 : 0,
+      silver_medals_counter:
+        scorePercentage >= 80 && scorePercentage <= 90 ? 1 : 0,
+      golden_ribbon: false,
     };
 
     if (!lessonExistsInStoredResults) {
@@ -52,6 +54,14 @@ export default function PopUpResults({ correctAnswers, lessonAndGrade }) {
               ...lesson,
               best_score: scorePercentage,
               stars: Number(lesson.stars) + scorePercentage,
+              gold_medals_counter:
+                scorePercentage === 100
+                  ? (lesson.gold_medals_counter || 0) + 1
+                  : lesson.gold_medals_counter,
+              silver_medals_counter:
+                scorePercentage >= 80 && scorePercentage < 100
+                  ? (lesson.silver_medals_counter || 0) + 1
+                  : lesson.silver_medals_counter,
             }
           : lesson,
       );
@@ -66,6 +76,14 @@ export default function PopUpResults({ correctAnswers, lessonAndGrade }) {
           ? {
               ...lesson,
               stars: Number(lesson.stars) + scorePercentage,
+              gold_medals_counter:
+                scorePercentage === 100
+                  ? (lesson.gold_medals_counter || 0) + 1
+                  : lesson.gold_medals_counter,
+              silver_medals_counter:
+                scorePercentage >= 80 && scorePercentage < 100
+                  ? (lesson.silver_medals_counter || 0) + 1
+                  : lesson.silver_medals_counter,
             }
           : lesson,
       );
@@ -76,6 +94,7 @@ export default function PopUpResults({ correctAnswers, lessonAndGrade }) {
 
   useEffect(() => {
     if (scorePercentage === 100) {
+      setMedal("/images/medal-one-shadow.png");
       setResultImg("/images/quizakos/quizakos-with-friends-4.png");
       setCongratulationsMessage("ΜΠΡΑΒΟ! Τα κατάφερες τέλεια!");
       setHoppingEffect(true);
@@ -83,6 +102,7 @@ export default function PopUpResults({ correctAnswers, lessonAndGrade }) {
         launchConfetti();
       }, 500);
     } else if (scorePercentage >= 80) {
+      setMedal("/images/medal-two-shadow.png");
       setResultImg("/images/quizakos/quizakos4-shadow.png");
       setCongratulationsMessage("Μπράβο! Τα πήγες εξαιρετικά!");
     } else if (scorePercentage >= 60) {
@@ -98,14 +118,28 @@ export default function PopUpResults({ correctAnswers, lessonAndGrade }) {
   }, [scorePercentage]);
 
   useEffect(() => {
-    if (scorePercentage > (bestScoreInStoredResults ?? -1)) {
-      if (scorePercentage === 100) {
-        setMedal("/images/medal-one-shadow.png");
-      } else if (scorePercentage >= 80) {
-        setMedal("/images/medal-two-shadow.png");
+    if (!!lessonExistsInStoredResults) {
+      const goldMedalsGained = lessonExistsInStoredResults.gold_medals_counter;
+      const starsGained = lessonExistsInStoredResults.stars;
+      const goldenRibbonGained =
+        goldMedalsGained >= 1 && starsGained >= 1000 ? true : false;
+
+      if (goldenRibbonGained && !lessonExistsInStoredResults.golden_ribbon) {
+        setMedal("/images/golden-ribbon-shadow.png");
+        const updatedResults = userProgressData.map((lesson) =>
+          lesson.lesson_id === selectedQuizId
+            ? {
+                ...lesson,
+                golden_ribbon: true,
+              }
+            : lesson,
+        );
+        localStorage.setItem("quiz_results", JSON.stringify(updatedResults));
+        window.dispatchEvent(new Event("quiz_results_updated"));
       }
     }
-  }, [bestScoreInStoredResults, scorePercentage]);
+    [lessonExistsInStoredResults, scorePercentage];
+  });
 
   return (
     <motion.div
