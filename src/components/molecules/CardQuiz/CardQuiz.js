@@ -15,33 +15,82 @@ export default function CardQuiz({
   const { userProgressData, setShowPopUpAwardsInfo } = QuizContext();
   const [completedQuiz, setCompletedQuiz] = useState(false);
   const [starsCounter, setStarsCounter] = useState("");
-  const [gainedMedal, setGainedMedal] = useState({ gained: false, medal: "" });
+  const [gainedMedal, setGainedMedal] = useState({ medal: "medal-disabled-3" });
   const lessonExistsInStoredResults = userProgressData.find(
     (lesson) => lesson.lesson_id === id,
   );
+  const [awards, setAwards] = useState([
+    { awardName: "completed", status: false },
+    { awardName: "silverMedal", count: 0 },
+    { awardName: "goldMedal", count: 0 },
+    { awardName: "stars", count: "" },
+    { awardName: "goldenRibbon", status: false },
+  ]);
+
+  console.log(
+    "lessonExistsInStoredResults",
+    lessonExistsInStoredResults?.silver_medals_counter,
+  );
 
   useEffect(() => {
-    if (!lessonExistsInStoredResults?.lesson_id) {
-      setGainedMedal({ gained: true, medal: "medal-disabled-3" });
-      return;
-    }
-    setStarsCounter(lessonExistsInStoredResults.stars);
-    if (lessonExistsInStoredResults.best_score === 100) {
-      if (lessonExistsInStoredResults.stars >= 1000) {
-        setGainedMedal({ gained: true, medal: "golden-ribbon-shadow" });
-      } else {
-        setGainedMedal({ gained: true, medal: "medal-one-shadow" });
-      }
-    } else if (lessonExistsInStoredResults.best_score >= 80) {
-      setGainedMedal({ gained: true, medal: "medal-two-shadow" });
-    } else {
-      setGainedMedal({ gained: true, medal: "medal-disabled-3" });
-    }
+    if (!lessonExistsInStoredResults) return;
+    console.log(
+      "hellooooo",
+      lessonExistsInStoredResults?.silver_medals_counter,
+    );
 
-    if (lessonExistsInStoredResults.best_score >= 60) {
-      setCompletedQuiz(true);
-    }
+    setAwards([
+      {
+        awardName: "completedQuiz",
+        status: lessonExistsInStoredResults?.best_score >= 60 ? true : false,
+      },
+      {
+        awardName: "silverMedal",
+        count: lessonExistsInStoredResults?.silver_medals_counter,
+      },
+      {
+        awardName: "goldMedal",
+        count: lessonExistsInStoredResults?.gold_medals_counter,
+      },
+      {
+        awardName: "stars",
+        count: lessonExistsInStoredResults?.stars,
+      },
+      {
+        awardName: "goldenRibbon",
+        status:
+          lessonExistsInStoredResults?.gold_medals_counter >= 1 &&
+          lessonExistsInStoredResults?.stars >= 1000
+            ? true
+            : false,
+      },
+    ]);
   }, []);
+
+  useEffect(() => {
+    if (lessonExistsInStoredResults) {
+      console.log(awards);
+    }
+  }, [awards]);
+
+  // useEffect(() => {
+  //   if (!lessonExistsInStoredResults) return;
+  //   setStarsCounter(lessonExistsInStoredResults.stars);
+  //   if (lessonExistsInStoredResults.gold_medals_counter >= 1) {
+  //     if (lessonExistsInStoredResults.stars >= 1000) {
+  //       setGainedMedal({ medal: "golden-ribbon-shadow" });
+  //     } else {
+  //       setGainedMedal({ medal: "medal-one-shadow" });
+  //     }
+  //   } else if (lessonExistsInStoredResults.silver_medals_counter >= 1) {
+  //     setGainedMedal({ medal: "medal-two-shadow" });
+  //   } else {
+  //     setGainedMedal({ medal: "medal-disabled-3" });
+  //   }
+  //   if (lessonExistsInStoredResults.best_score >= 60) {
+  //     setCompletedQuiz(true);
+  //   }
+  // }, []);
 
   return (
     <div
@@ -58,7 +107,7 @@ export default function CardQuiz({
         height={45}
         onClick={() => setShowPopUpAwardsInfo((prev) => !prev)}
       />
-      {gainedMedal.gained && (
+      {gainedMedal.medal && (
         <Image
           src={`/images/${gainedMedal.medal}.png`}
           alt="medal"
