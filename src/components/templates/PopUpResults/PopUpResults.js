@@ -38,6 +38,7 @@ export default function PopUpResults({ correctAnswers, lessonAndGrade }) {
       silver_medals_counter:
         scorePercentage >= 80 && scorePercentage <= 90 ? 1 : 0,
       golden_ribbon: false,
+      quiz_completed: scorePercentage >= 60 ? true : false,
     };
 
     if (!lessonExistsInStoredResults) {
@@ -58,6 +59,7 @@ export default function PopUpResults({ correctAnswers, lessonAndGrade }) {
                 scorePercentage === 100
                   ? (lesson.gold_medals_counter || 0) + 1
                   : lesson.gold_medals_counter,
+              quiz_completed: true,
               silver_medals_counter:
                 scorePercentage >= 80 && scorePercentage < 100
                   ? (lesson.silver_medals_counter || 0) + 1
@@ -80,6 +82,7 @@ export default function PopUpResults({ correctAnswers, lessonAndGrade }) {
                 scorePercentage === 100
                   ? (lesson.gold_medals_counter || 0) + 1
                   : lesson.gold_medals_counter,
+              quiz_completed: true,
               silver_medals_counter:
                 scorePercentage >= 80 && scorePercentage < 100
                   ? (lesson.silver_medals_counter || 0) + 1

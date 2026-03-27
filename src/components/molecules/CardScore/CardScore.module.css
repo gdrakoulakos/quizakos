@@ -106,8 +106,22 @@
   align-items: center;
 }
 
-.medal {
-  position: absolute;
+.gainedMedalsContainer {
   bottom: 0px;
   right: 0px;
+  display: flex;
+  flex-direction: row;
+  gap: 5px;
+}
+
+.medal {
+  height: 45px;
+  width: auto;
+}
+
+.goldenRibbonAward {
+  height: 55px;
+  position: absolute;
+  top: -100px;
+  right: 290px;
 }

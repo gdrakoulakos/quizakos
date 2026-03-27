@@ -2,9 +2,22 @@ import styles from "./CardScore.module.css";
 import Image from "next/image";
 import { QuizContext } from "@/context/AppContext";
 import { motion } from "motion/react";
+import { useEffect, useState } from "react";
 
 export default function CardScore({ lessonData }) {
   const { setShowPopUpConfirmation, setSelectedQuizId } = QuizContext();
+  const [gainedAwards, setGainedAwards] = useState([]);
+
+  useEffect(() => {
+    setGainedAwards(
+      [
+        lessonData.quiz_completed && "red-book-completed-shadow",
+        lessonData.silver_medals_counter > 0 && "silver-medal",
+        lessonData.gold_medals_counter > 0 && "gold-medal",
+        lessonData.golden_ribbon && "golden-ribbon-2",
+      ].filter(Boolean),
+    );
+  }, []);
 
   const quizCompleted = lessonData.best_score >= 60;
 
@@ -56,23 +69,18 @@ export default function CardScore({ lessonData }) {
             />
             <div>{lessonData.stars}</div>
           </div>
-          {lessonData.best_score >= 80 && (
-            <div className={styles.medal}>
+          <div className={styles.gainedMedalsContainer}>
+            {gainedAwards.map((award) => (
               <Image
-                src={`/images/${
-                  lessonData.best_score >= 100 && lessonData.stars >= 1000
-                    ? "golden-ribbon-shadow"
-                    : lessonData.best_score >= 100
-                      ? "medal-one-shadow"
-                      : "medal-two-shadow"
-                }.png`}
+                key={award}
+                src={`/images/${award}.png`}
                 alt="medal"
-                className={styles.medal}
+                className={`${styles.medal} ${award === "golden-ribbon-2" ? styles.goldenRibbonAward : ""}`}
                 width={50}
                 height={50}
               />
-            </div>
-          )}
+            ))}
+          </div>
         </div>
       </div>
     </motion.div>
