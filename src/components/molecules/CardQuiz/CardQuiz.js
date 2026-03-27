@@ -2,7 +2,7 @@ import ButtonPlay from "@/components/atoms/ButtonPlay/ButtonPlay";
 import styles from "../CardQuiz/CardQuiz.module.css";
 import QuizImage from "@/components/atoms/QuizImage/QuizImage";
 import Image from "next/image";
-import { useEffect, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import { QuizContext } from "@/context/AppContext";
 
 export default function CardQuiz({
@@ -15,82 +15,116 @@ export default function CardQuiz({
   const { userProgressData, setShowPopUpAwardsInfo } = QuizContext();
   const [completedQuiz, setCompletedQuiz] = useState(false);
   const [starsCounter, setStarsCounter] = useState("");
-  const [gainedMedal, setGainedMedal] = useState({ medal: "medal-disabled-3" });
+  const [awards, setAwards] = useState([]);
+  const [gainedMedal, setGainedMedal] = useState({
+    awardName: "no-award",
+    medal: "medal-disabled-3",
+  });
   const lessonExistsInStoredResults = userProgressData.find(
     (lesson) => lesson.lesson_id === id,
   );
-  const [awards, setAwards] = useState([
-    { awardName: "completed", status: false },
-    { awardName: "silverMedal", count: 0 },
-    { awardName: "goldMedal", count: 0 },
-    { awardName: "stars", count: "" },
-    { awardName: "goldenRibbon", status: false },
-  ]);
 
-  console.log(
-    "lessonExistsInStoredResults",
-    lessonExistsInStoredResults?.silver_medals_counter,
-  );
+  const awardsRendered = useRef(false);
 
   useEffect(() => {
-    if (!lessonExistsInStoredResults) return;
-    console.log(
-      "hellooooo",
-      lessonExistsInStoredResults?.silver_medals_counter,
-    );
+    if (!lessonExistsInStoredResults || awardsRendered.current) return;
+    awardsRendered.current = true;
 
-    setAwards([
-      {
-        awardName: "completedQuiz",
-        status: lessonExistsInStoredResults?.best_score >= 60 ? true : false,
-      },
-      {
-        awardName: "silverMedal",
-        count: lessonExistsInStoredResults?.silver_medals_counter,
-      },
-      {
-        awardName: "goldMedal",
-        count: lessonExistsInStoredResults?.gold_medals_counter,
-      },
-      {
-        awardName: "stars",
-        count: lessonExistsInStoredResults?.stars,
-      },
-      {
-        awardName: "goldenRibbon",
-        status:
-          lessonExistsInStoredResults?.gold_medals_counter >= 1 &&
-          lessonExistsInStoredResults?.stars >= 1000
-            ? true
-            : false,
-      },
-    ]);
-  }, []);
-
-  useEffect(() => {
-    if (lessonExistsInStoredResults) {
-      console.log(awards);
+    if (lessonExistsInStoredResults.stars > 0) {
+      setStarsCounter(lessonExistsInStoredResults.stars);
     }
-  }, [awards]);
+    if (lessonExistsInStoredResults?.best_score >= 60) {
+      setCompletedQuiz(true);
+      setAwards((prev) => [
+        ...prev,
+        {
+          awardName: "completed",
+          img: "completed-shadow",
+        },
+      ]);
+    }
+    if (lessonExistsInStoredResults?.best_score >= 80) {
+      setAwards((prev) => [
+        ...prev,
+        {
+          awardName: "silverMedal",
+          img: "medal-two-shadow",
+          count: lessonExistsInStoredResults?.silver_medals_counter,
+        },
+      ]);
+    }
+
+    if (
+      lessonExistsInStoredResults?.best_score === 100 &&
+      lessonExistsInStoredResults?.stars >= 1000
+    ) {
+      setCompletedQuiz(true);
+      setAwards((prev) => [
+        ...prev,
+        {
+          awardName: "goldenRibbon",
+          img: "golden-ribbon-shadow",
+        },
+      ]);
+    } else if (lessonExistsInStoredResults?.best_score === 100) {
+      setCompletedQuiz(true);
+      setAwards((prev) => [
+        ...prev,
+        {
+          awardName: "goldMedal",
+          img: "medal-one-shadow",
+          count: lessonExistsInStoredResults?.gold_medals_counter,
+        },
+      ]);
+    }
+  }, []);
 
   // useEffect(() => {
   //   if (!lessonExistsInStoredResults) return;
-  //   setStarsCounter(lessonExistsInStoredResults.stars);
-  //   if (lessonExistsInStoredResults.gold_medals_counter >= 1) {
-  //     if (lessonExistsInStoredResults.stars >= 1000) {
-  //       setGainedMedal({ medal: "golden-ribbon-shadow" });
-  //     } else {
-  //       setGainedMedal({ medal: "medal-one-shadow" });
-  //     }
-  //   } else if (lessonExistsInStoredResults.silver_medals_counter >= 1) {
-  //     setGainedMedal({ medal: "medal-two-shadow" });
-  //   } else {
-  //     setGainedMedal({ medal: "medal-disabled-3" });
+
+  //   if (lessonExistsInStoredResults.stars > 0) {
+  //     setStarsCounter(lessonExistsInStoredResults.stars);
   //   }
-  //   if (lessonExistsInStoredResults.best_score >= 60) {
+  //   if (lessonExistsInStoredResults?.best_score >= 60) {
   //     setCompletedQuiz(true);
+  //     setAwards([
+  //       {
+  //         awardName: "completed",
+  //         img: "completed-shadow",
+  //         status: lessonExistsInStoredResults?.best_score >= 60 ? true : false,
+  //       },
+  //       {
+  //         awardName: "silverMedal",
+  //         img: "medal-two-shadow",
+  //         count: lessonExistsInStoredResults?.silver_medals_counter,
+  //         status:
+  //           lessonExistsInStoredResults?.silver_medals_counter > 0
+  //             ? true
+  //             : false,
+  //       },
+  //       {
+  //         awardName: "goldMedal",
+  //         img: "medal-one-shadow",
+  //         count: lessonExistsInStoredResults?.gold_medals_counter,
+  //         status:
+  //           lessonExistsInStoredResults?.gold_medals_counter > 0 ? true : false,
+  //       },
+  //       {
+  //         awardName: "goldenRibbon",
+  //         img: "golden-ribbon-shadow",
+  //         status:
+  //           lessonExistsInStoredResults?.gold_medals_counter >= 1 &&
+  //           lessonExistsInStoredResults?.stars >= 1000
+  //             ? true
+  //             : false,
+  //       },
+  //     ]);
   //   }
   // }, []);
+
+  if (awards.length > 0) {
+    console.log(id, awards);
+  }
 
   return (
     <div
