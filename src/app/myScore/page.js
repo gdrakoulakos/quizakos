@@ -5,9 +5,15 @@ import { QuizContext } from "@/context/AppContext";
 import Image from "next/image";
 import PopUpConfirmation from "@/components/templates/PopUpConfirmation/PopUpConfirmation";
 import { motion } from "motion/react";
+import { useEffect } from "react";
 
 export default function myScore() {
-  const { userProgressData, showPopUpConfirmation } = QuizContext();
+  const { userProgressData, showPopUpConfirmation, setDeleteAllScores } =
+    QuizContext();
+
+  useEffect(() => {
+    setDeleteAllScores(false);
+  }, []);
 
   return (
     <motion.div

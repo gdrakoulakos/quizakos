@@ -9,6 +9,7 @@ export default function PopUpConfirmation() {
     selectedQuizId,
     popUpMessage,
     deleteAllScores,
+    setDeleteAllScores,
   } = QuizContext();
 
   const buttonsData = [
@@ -19,6 +20,7 @@ export default function PopUpConfirmation() {
   const handleButtonClick = (action) => {
     if (action !== "yes") {
       setShowPopUpConfirmation(false);
+      setDeleteAllScores(false);
       return;
     }
     if (deleteAllScores) {
