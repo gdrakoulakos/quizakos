@@ -59,6 +59,7 @@
 
 .awardsContainer {
   display: flex;
+  height: 190px;
   flex-direction: column;
   position: absolute;
   top: -15px;
