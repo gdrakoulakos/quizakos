@@ -15,6 +15,8 @@ export const AppProvider = ({ children }) => {
   const [userProgressData, setUserProgressData] = useState([]);
   const [showPopUpAwardsInfo, setShowPopUpAwardsInfo] = useState(false);
   const [showPopUpConfirmation, setShowPopUpConfirmation] = useState(false);
+  const [popUpMessage, setPopUpMessage] = useState("");
+  const [deleteAllScores, setDeleteAllScores] = useState(false);
   const [clickedAnswersResults, setClickedAnswersResults] = useState({
     correctAnswers: 0,
     incorrectAnswers: 0,
@@ -105,6 +107,10 @@ export const AppProvider = ({ children }) => {
         setShowPopUpAwardsInfo,
         showPopUpConfirmation,
         setShowPopUpConfirmation,
+        popUpMessage,
+        setPopUpMessage,
+        deleteAllScores,
+        setDeleteAllScores,
       }}
     >
       {children}

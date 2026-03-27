@@ -5,7 +5,8 @@ import { motion } from "motion/react";
 import { useEffect, useState } from "react";
 
 export default function CardScore({ lessonData }) {
-  const { setShowPopUpConfirmation, setSelectedQuizId } = QuizContext();
+  const { setShowPopUpConfirmation, setSelectedQuizId, setPopUpMessage } =
+    QuizContext();
   const [gainedAwards, setGainedAwards] = useState([]);
 
   useEffect(() => {
@@ -24,6 +25,9 @@ export default function CardScore({ lessonData }) {
   const handleDeleteClick = (lessonId) => {
     setShowPopUpConfirmation(true);
     setSelectedQuizId(lessonId);
+    setPopUpMessage(
+      "Θες σίγουρα να διαγράψεις τα αποτελέσματα και τα βραβεία σου για το συγκεκριμένο μάθημα;",
+    );
   };
 
   return (

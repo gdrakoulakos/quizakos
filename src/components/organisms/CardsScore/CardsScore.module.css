@@ -5,3 +5,16 @@
   width: 100%;
   gap: 20px;
 }
+
+.deleteAllButton {
+  height: 40px;
+  min-width: 200px;
+  border-radius: 20px;
+  background: linear-gradient(135deg, #d84048, #f68c40);
+  box-shadow: 0 0 2px 1px #a63137;
+  color: white;
+  text-shadow: 1px 1px 2px #69452b;
+  border: none;
+  font-size: 15px;
+  font-weight: bold;
+}

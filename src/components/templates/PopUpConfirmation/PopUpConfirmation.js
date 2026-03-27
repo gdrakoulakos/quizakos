@@ -4,7 +4,12 @@ import { QuizContext } from "@/context/AppContext";
 import { motion } from "motion/react";
 
 export default function PopUpConfirmation() {
-  const { setShowPopUpConfirmation, selectedQuizId } = QuizContext();
+  const {
+    setShowPopUpConfirmation,
+    selectedQuizId,
+    popUpMessage,
+    deleteAllScores,
+  } = QuizContext();
 
   const buttonsData = [
     { name: "Ναι", action: "yes" },
@@ -14,6 +19,12 @@ export default function PopUpConfirmation() {
   const handleButtonClick = (action) => {
     if (action !== "yes") {
       setShowPopUpConfirmation(false);
+      return;
+    }
+    if (deleteAllScores) {
+      setShowPopUpConfirmation(false);
+      localStorage.removeItem("quiz_results");
+      window.dispatchEvent(new Event("quiz_results_updated"));
       return;
     }
     try {
@@ -39,10 +50,7 @@ export default function PopUpConfirmation() {
         animate={{ opacity: 1 }}
         transition={{ duration: 0.3 }}
       >
-        <h3>
-          Θες σίγουρα να διαγράψεις τα αποτελέσματα και τα βραβεία σου για το
-          συγκεκριμένο μάθημα;
-        </h3>
+        <h3>{popUpMessage}</h3>
         <div className={styles.buttonContainer}>
           {buttonsData.map((button, index) => (
             <ButtonYesNo

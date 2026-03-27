@@ -1,12 +1,13 @@
 .buttonYesNo {
-  height: 40px;
-  width: 100px;
+  height: auto;
+  min-width: 100px;
   border-radius: 20px;
   text-shadow: 1px 1px 2px black;
   border: none;
   font-size: 16px;
   font-weight: bold;
   color: white;
+  padding: 10px;
 }
 
 .yes {
