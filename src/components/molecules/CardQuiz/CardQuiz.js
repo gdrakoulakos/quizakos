@@ -37,7 +37,7 @@ export default function CardQuiz({
         ...prev,
         {
           awardName: "completed",
-          img: "completed-shadow",
+          img: "red-book-completed-shadow",
         },
       ]);
     }
@@ -46,12 +46,23 @@ export default function CardQuiz({
         ...prev,
         {
           awardName: "silverMedal",
-          img: "medal-two-shadow",
+          img: "silver-medal",
           count: lessonExistsInStoredResults?.silver_medals_counter,
         },
       ]);
     }
 
+    if (lessonExistsInStoredResults?.best_score === 100) {
+      setCompletedQuiz(true);
+      setAwards((prev) => [
+        ...prev,
+        {
+          awardName: "goldMedal",
+          img: "gold-medal",
+          count: lessonExistsInStoredResults?.gold_medals_counter,
+        },
+      ]);
+    }
     if (
       lessonExistsInStoredResults?.best_score === 100 &&
       lessonExistsInStoredResults?.stars >= 1000
@@ -61,21 +72,14 @@ export default function CardQuiz({
         ...prev,
         {
           awardName: "goldenRibbon",
-          img: "golden-ribbon-shadow",
-        },
-      ]);
-    } else if (lessonExistsInStoredResults?.best_score === 100) {
-      setCompletedQuiz(true);
-      setAwards((prev) => [
-        ...prev,
-        {
-          awardName: "goldMedal",
-          img: "medal-one-shadow",
-          count: lessonExistsInStoredResults?.gold_medals_counter,
+          img: "golden-ribbon-2",
         },
       ]);
     } else {
-      setAwards([{ awardName: "no-award", medal: "medal-disabled-3" }]);
+      setAwards([
+        { awardName: "uncompleted", img: "red-book-uncompleted" },
+        { awardName: "no-award", img: "medal-disabled-4" },
+      ]);
     }
   }, []);
 
@@ -135,17 +139,17 @@ export default function CardQuiz({
           : ""
       }`}
     >
-      <Image
+      {/* <Image
         src={`/images/red-book-${completedQuiz ? "completed-shadow" : "completed-3"}.png`}
         alt="completed quiz"
         className={styles.completedQuiz}
         width={45}
         height={45}
         onClick={() => setShowPopUpAwardsInfo((prev) => !prev)}
-      />
+      /> */}
       <div className={styles.awardsContainer}>
-        {awards.map((award, index) => (
-          <Award key={index} awardImg={award.img} />
+        {awards.map((awardData, index) => (
+          <Award key={index} awardData={awardData} />
         ))}
       </div>
       {/* {awards && (

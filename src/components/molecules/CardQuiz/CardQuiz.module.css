@@ -60,6 +60,11 @@
 .awardsContainer {
   display: flex;
   flex-direction: column;
+  position: absolute;
+  top: -15px;
+  left: -17px;
+  gap: 10px;
+  align-items: flex-start;
 }
 
 .completedQuiz {

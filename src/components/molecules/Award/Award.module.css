@@ -1,7 +1,10 @@
-.medal {
-  position: absolute;
-  top: 40px;
-  left: -25px;
+.award {
+  height: auto;
+  width: 40px;
   overflow: hidden;
   cursor: pointer;
+}
+
+.awardLarge {
+  width: 50px; /* or whatever bigger size you want */
 }
