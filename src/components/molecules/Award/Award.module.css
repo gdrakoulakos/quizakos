@@ -5,6 +5,9 @@
   cursor: pointer;
 }
 
-.awardLarge {
-  width: 50px; /* or whatever bigger size you want */
+.goldenRibbonAward {
+  width: 55px;
+  position: absolute;
+  top: 0px;
+  left: 100px;
 }

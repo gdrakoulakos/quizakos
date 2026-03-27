@@ -14,25 +14,29 @@ export default function CardQuiz({
   totalQuestions,
 }) {
   const { userProgressData, setShowPopUpAwardsInfo } = QuizContext();
-  const [completedQuiz, setCompletedQuiz] = useState(false);
   const [starsCounter, setStarsCounter] = useState("");
   const [awards, setAwards] = useState([]);
-
   const lessonExistsInStoredResults = userProgressData.find(
     (lesson) => lesson.lesson_id === id,
   );
-
   const awardsRendered = useRef(false);
 
   useEffect(() => {
-    if (!lessonExistsInStoredResults || awardsRendered.current) return;
+    if (!lessonExistsInStoredResults) {
+      setAwards([
+        { awardName: "uncompleted", img: "red-book-uncompleted-2" },
+        { awardName: "no-award", img: "medal-disabled-4" },
+      ]);
+      return;
+    }
+    if (awardsRendered.current) return;
+
     awardsRendered.current = true;
 
     if (lessonExistsInStoredResults.stars > 0) {
       setStarsCounter(lessonExistsInStoredResults.stars);
     }
     if (lessonExistsInStoredResults?.best_score >= 60) {
-      setCompletedQuiz(true);
       setAwards((prev) => [
         ...prev,
         {
@@ -41,7 +45,7 @@ export default function CardQuiz({
         },
       ]);
     }
-    if (lessonExistsInStoredResults?.best_score >= 80) {
+    if (lessonExistsInStoredResults?.silver_medals_counter >= 1) {
       setAwards((prev) => [
         ...prev,
         {
@@ -51,9 +55,7 @@ export default function CardQuiz({
         },
       ]);
     }
-
-    if (lessonExistsInStoredResults?.best_score === 100) {
-      setCompletedQuiz(true);
+    if (lessonExistsInStoredResults?.gold_medals_counter >= 1) {
       setAwards((prev) => [
         ...prev,
         {
@@ -64,10 +66,9 @@ export default function CardQuiz({
       ]);
     }
     if (
-      lessonExistsInStoredResults?.best_score === 100 &&
+      lessonExistsInStoredResults?.gold_medals_counter >= 1 &&
       lessonExistsInStoredResults?.stars >= 1000
     ) {
-      setCompletedQuiz(true);
       setAwards((prev) => [
         ...prev,
         {
@@ -75,60 +76,14 @@ export default function CardQuiz({
           img: "golden-ribbon-2",
         },
       ]);
-    } else {
+    }
+    if (lessonExistsInStoredResults.best_score < 60) {
       setAwards([
-        { awardName: "uncompleted", img: "red-book-uncompleted" },
+        { awardName: "uncompleted", img: "red-book-uncompleted-2" },
         { awardName: "no-award", img: "medal-disabled-4" },
       ]);
     }
   }, []);
-
-  // useEffect(() => {
-  //   if (!lessonExistsInStoredResults) return;
-
-  //   if (lessonExistsInStoredResults.stars > 0) {
-  //     setStarsCounter(lessonExistsInStoredResults.stars);
-  //   }
-  //   if (lessonExistsInStoredResults?.best_score >= 60) {
-  //     setCompletedQuiz(true);
-  //     setAwards([
-  //       {
-  //         awardName: "completed",
-  //         img: "completed-shadow",
-  //         status: lessonExistsInStoredResults?.best_score >= 60 ? true : false,
-  //       },
-  //       {
-  //         awardName: "silverMedal",
-  //         img: "medal-two-shadow",
-  //         count: lessonExistsInStoredResults?.silver_medals_counter,
-  //         status:
-  //           lessonExistsInStoredResults?.silver_medals_counter > 0
-  //             ? true
-  //             : false,
-  //       },
-  //       {
-  //         awardName: "goldMedal",
-  //         img: "medal-one-shadow",
-  //         count: lessonExistsInStoredResults?.gold_medals_counter,
-  //         status:
-  //           lessonExistsInStoredResults?.gold_medals_counter > 0 ? true : false,
-  //       },
-  //       {
-  //         awardName: "goldenRibbon",
-  //         img: "golden-ribbon-shadow",
-  //         status:
-  //           lessonExistsInStoredResults?.gold_medals_counter >= 1 &&
-  //           lessonExistsInStoredResults?.stars >= 1000
-  //             ? true
-  //             : false,
-  //       },
-  //     ]);
-  //   }
-  // }, []);
-
-  if (awards.length > 0) {
-    console.log(id, awards);
-  }
 
   return (
     <div
@@ -139,29 +94,11 @@ export default function CardQuiz({
           : ""
       }`}
     >
-      {/* <Image
-        src={`/images/red-book-${completedQuiz ? "completed-shadow" : "completed-3"}.png`}
-        alt="completed quiz"
-        className={styles.completedQuiz}
-        width={45}
-        height={45}
-        onClick={() => setShowPopUpAwardsInfo((prev) => !prev)}
-      /> */}
       <div className={styles.awardsContainer}>
         {awards.map((awardData, index) => (
           <Award key={index} awardData={awardData} />
         ))}
       </div>
-      {/* {awards && (
-        <Image
-          src={`/images/${awards.awardName}.png`}
-          alt="medal"
-          className={styles.medal}
-          width={60}
-          height={60}
-          onClick={() => setShowPopUpAwardsInfo((prev) => !prev)}
-        />
-      )} */}
       <div className={styles.cardTop}>
         <QuizImage imgSrc={imgQuiz} />
       </div>
