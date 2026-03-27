@@ -4,6 +4,7 @@ import QuizImage from "@/components/atoms/QuizImage/QuizImage";
 import Image from "next/image";
 import { useEffect, useRef, useState } from "react";
 import { QuizContext } from "@/context/AppContext";
+import Award from "../Award/Award";
 
 export default function CardQuiz({
   id,
@@ -16,10 +17,7 @@ export default function CardQuiz({
   const [completedQuiz, setCompletedQuiz] = useState(false);
   const [starsCounter, setStarsCounter] = useState("");
   const [awards, setAwards] = useState([]);
-  const [gainedMedal, setGainedMedal] = useState({
-    awardName: "no-award",
-    medal: "medal-disabled-3",
-  });
+
   const lessonExistsInStoredResults = userProgressData.find(
     (lesson) => lesson.lesson_id === id,
   );
@@ -76,6 +74,8 @@ export default function CardQuiz({
           count: lessonExistsInStoredResults?.gold_medals_counter,
         },
       ]);
+    } else {
+      setAwards([{ awardName: "no-award", medal: "medal-disabled-3" }]);
     }
   }, []);
 
@@ -130,7 +130,9 @@ export default function CardQuiz({
     <div
       key={id}
       className={`${styles.quizCardContainer} ${
-        gainedMedal.medal === "golden-ribbon-shadow" ? styles.goldenRibbon : ""
+        awards.some((award) => award.awardName === "goldenRibbon")
+          ? styles.goldenRibbon
+          : ""
       }`}
     >
       <Image
@@ -141,16 +143,21 @@ export default function CardQuiz({
         height={45}
         onClick={() => setShowPopUpAwardsInfo((prev) => !prev)}
       />
-      {gainedMedal.medal && (
+      <div className={styles.awardsContainer}>
+        {awards.map((award, index) => (
+          <Award key={index} awardImg={award.img} />
+        ))}
+      </div>
+      {/* {awards && (
         <Image
-          src={`/images/${gainedMedal.medal}.png`}
+          src={`/images/${awards.awardName}.png`}
           alt="medal"
           className={styles.medal}
           width={60}
           height={60}
           onClick={() => setShowPopUpAwardsInfo((prev) => !prev)}
         />
-      )}
+      )} */}
       <div className={styles.cardTop}>
         <QuizImage imgSrc={imgQuiz} />
       </div>

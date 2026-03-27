@@ -57,18 +57,15 @@
   }
 }
 
+.awardsContainer {
+  display: flex;
+  flex-direction: column;
+}
+
 .completedQuiz {
   position: absolute;
   top: -15px;
   left: -20px;
-  overflow: hidden;
-  cursor: pointer;
-}
-
-.medal {
-  position: absolute;
-  top: 40px;
-  left: -25px;
   overflow: hidden;
   cursor: pointer;
 }
