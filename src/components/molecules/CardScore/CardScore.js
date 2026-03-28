@@ -12,7 +12,7 @@ export default function CardScore({ lessonData }) {
   useEffect(() => {
     setGainedAwards(
       [
-        lessonData.quiz_completed && "red-book-completed-shadow",
+        lessonData.quiz_completed && "book-completed",
         lessonData.silver_medals_counter > 0 && "silver-medal",
         lessonData.gold_medals_counter > 0 && "gold-medal",
         lessonData.golden_ribbon && "golden-ribbon-2",
@@ -47,8 +47,8 @@ export default function CardScore({ lessonData }) {
         src={`/images/bin.svg`}
         alt="delete icon"
         className={styles.binIcon}
-        width={30}
-        height={30}
+        width={100}
+        height={60}
         onClick={() => handleDeleteClick(lessonData.lesson_id)}
       />
       <div className={styles.title}>{lessonData.lesson_and_grade}</div>

@@ -24,7 +24,7 @@ export default function CardQuiz({
   useEffect(() => {
     if (!lessonExistsInStoredResults) {
       setAwards([
-        { awardName: "uncompleted", img: "red-book-uncompleted-2" },
+        { awardName: "uncompleted", img: "book-uncompleted" },
         { awardName: "no-award", img: "medal-disabled-4" },
       ]);
       return;
@@ -41,9 +41,18 @@ export default function CardQuiz({
         ...prev,
         {
           awardName: "completed",
-          img: "red-book-completed-shadow",
+          img: "book-completed",
         },
       ]);
+      if (lessonExistsInStoredResults?.best_score < 80) {
+        setAwards((prev) => [
+          ...prev,
+          {
+            awardName: "no-award",
+            img: "medal-disabled-4",
+          },
+        ]);
+      }
     }
     if (lessonExistsInStoredResults?.silver_medals_counter >= 1) {
       setAwards((prev) => [
@@ -79,7 +88,7 @@ export default function CardQuiz({
     }
     if (lessonExistsInStoredResults.best_score < 60) {
       setAwards([
-        { awardName: "uncompleted", img: "red-book-uncompleted-2" },
+        { awardName: "uncompleted", img: "book-uncompleted" },
         { awardName: "no-award", img: "medal-disabled-4" },
       ]);
     }
