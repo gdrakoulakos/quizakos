@@ -108,6 +108,11 @@
   flex-direction: row;
   gap: 10px;
   align-items: center;
+  z-index: 1;
+}
+
+.starsContainer:hover {
+  cursor: pointer;
 }
 
 .gainedMedalsContainer {
@@ -126,9 +131,13 @@
   width: auto;
 }
 
+.medal:hover {
+  cursor: pointer;
+}
+
 .goldenRibbonAward {
   height: 55px;
   position: absolute;
   top: -100px;
-  left: 0px;
+  left: -25px;
 }

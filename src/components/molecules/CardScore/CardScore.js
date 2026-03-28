@@ -5,8 +5,12 @@ import { motion } from "motion/react";
 import { useEffect, useState } from "react";
 
 export default function CardScore({ lessonData }) {
-  const { setShowPopUpConfirmation, setSelectedQuizId, setPopUpMessage } =
-    QuizContext();
+  const {
+    setShowPopUpConfirmation,
+    setSelectedQuizId,
+    setPopUpMessage,
+    setShowPopUpAwardsInfo,
+  } = QuizContext();
   const [gainedAwards, setGainedAwards] = useState([]);
 
   useEffect(() => {
@@ -63,7 +67,10 @@ export default function CardScore({ lessonData }) {
           Καλύτερη προσπάθεια: {lessonData.best_score}%
         </div>
         <div className={styles.bodyBottom}>
-          <div className={styles.starsContainer}>
+          <div
+            className={styles.starsContainer}
+            onClick={() => setShowPopUpAwardsInfo((prev) => !prev)}
+          >
             <Image
               src={`/images/star.png`}
               alt="star"
@@ -82,6 +89,7 @@ export default function CardScore({ lessonData }) {
                 className={`${styles.medal} ${award === "golden-ribbon-2" ? styles.goldenRibbonAward : ""}`}
                 width={50}
                 height={50}
+                onClick={() => setShowPopUpAwardsInfo((prev) => !prev)}
               />
             ))}
           </div>

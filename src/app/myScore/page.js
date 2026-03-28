@@ -6,6 +6,7 @@ import Image from "next/image";
 import PopUpConfirmation from "@/components/templates/PopUpConfirmation/PopUpConfirmation";
 import { motion } from "motion/react";
 import { useEffect } from "react";
+import PopUpAwardsInfo from "@/components/templates/PopUpAwardsInfo/PopUpAwardsInfo";
 
 export default function myScore() {
   const { userProgressData, showPopUpConfirmation, setDeleteAllScores } =
@@ -23,6 +24,7 @@ export default function myScore() {
       exit={{ opacity: 0 }}
       transition={{ duration: 0.3 }}
     >
+      <PopUpAwardsInfo />
       {showPopUpConfirmation && <PopUpConfirmation />}
       <h1>Το σκορ μου</h1>
       {userProgressData.length !== 0 ? (
