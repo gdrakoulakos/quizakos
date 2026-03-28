@@ -16,10 +16,16 @@ export default function CardScore({ lessonData }) {
   useEffect(() => {
     setGainedAwards(
       [
-        lessonData.quiz_completed && "book-completed",
-        lessonData.silver_medals_counter > 0 && "silver-medal",
-        lessonData.gold_medals_counter > 0 && "gold-medal",
-        lessonData.golden_ribbon && "golden-ribbon-2",
+        lessonData.quiz_completed && { name: "book-completed" },
+        lessonData.silver_medals_counter > 0 && {
+          name: "silver-medal",
+          count: lessonData.silver_medals_counter,
+        },
+        lessonData.gold_medals_counter > 0 && {
+          name: "gold-medal",
+          count: lessonData.gold_medals_counter,
+        },
+        lessonData.golden_ribbon && { name: "golden-ribbon-2" },
       ].filter(Boolean),
     );
   }, []);
@@ -33,6 +39,8 @@ export default function CardScore({ lessonData }) {
       "Θες σίγουρα να διαγράψεις τα αποτελέσματα και τα βραβεία σου για το συγκεκριμένο μάθημα;",
     );
   };
+
+  console.log("gainedAwards", gainedAwards);
 
   return (
     <motion.div
@@ -64,7 +72,7 @@ export default function CardScore({ lessonData }) {
           </div>
         </div>
         <div className={styles.score}>
-          Καλύτερη προσπάθεια: {lessonData.best_score}%
+          Καλύτερο Σκορ: {lessonData.best_score}%
         </div>
         <div className={styles.bodyBottom}>
           <div
@@ -80,17 +88,22 @@ export default function CardScore({ lessonData }) {
             />
             <div>{lessonData.stars}</div>
           </div>
-          <div className={styles.gainedMedalsContainer}>
+          <div className={styles.gainedAwardContainer}>
             {gainedAwards.map((award) => (
-              <Image
-                key={award}
-                src={`/images/${award}.png`}
-                alt="medal"
-                className={`${styles.medal} ${award === "golden-ribbon-2" ? styles.goldenRibbonAward : ""}`}
-                width={50}
-                height={50}
-                onClick={() => setShowPopUpAwardsInfo((prev) => !prev)}
-              />
+              <div key={award.name} className={styles.awardContainer}>
+                {award.count > 1 && (
+                  <div className={styles.awardCounter}>{award.count}</div>
+                )}
+                <Image
+                  key={award.name}
+                  src={`/images/${award.name}.png`}
+                  alt="medal"
+                  className={`${styles.award} ${award.name === "golden-ribbon-2" ? styles.goldenRibbonAward : ""}`}
+                  width={50}
+                  height={50}
+                  onClick={() => setShowPopUpAwardsInfo((prev) => !prev)}
+                />
+              </div>
             ))}
           </div>
         </div>
