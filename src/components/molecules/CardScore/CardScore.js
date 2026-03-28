@@ -12,6 +12,7 @@ export default function CardScore({ lessonData }) {
     setShowPopUpAwardsInfo,
   } = QuizContext();
   const [gainedAwards, setGainedAwards] = useState([]);
+  const goldenRibbonGained = lessonData.golden_ribbon;
 
   useEffect(() => {
     setGainedAwards(
@@ -25,7 +26,6 @@ export default function CardScore({ lessonData }) {
           name: "gold-medal",
           count: lessonData.gold_medals_counter,
         },
-        lessonData.golden_ribbon && { name: "golden-ribbon-2" },
       ].filter(Boolean),
     );
   }, []);
@@ -40,8 +40,6 @@ export default function CardScore({ lessonData }) {
     );
   };
 
-  console.log("gainedAwards", gainedAwards);
-
   return (
     <motion.div
       key={lessonData.lesson_id}
@@ -55,6 +53,15 @@ export default function CardScore({ lessonData }) {
       exit={{ opacity: 0 }}
       transition={{ duration: 0.3 }}
     >
+      {goldenRibbonGained && (
+        <Image
+          src={`/images/golden-ribbon-2.png`}
+          alt="golden ribbon"
+          className={styles.goldenRibbonAward}
+          width={50}
+          height={50}
+        />
+      )}
       <Image
         src={`/images/bin.svg`}
         alt="delete icon"
@@ -80,13 +87,13 @@ export default function CardScore({ lessonData }) {
             onClick={() => setShowPopUpAwardsInfo((prev) => !prev)}
           >
             <Image
-              src={`/images/star.png`}
+              src={`/images/star-6.png`}
               alt="star"
               className={styles.starIcon}
-              width={30}
-              height={30}
+              width={20}
+              height={20}
             />
-            <div>{lessonData.stars}</div>
+            <div className={styles.starsCounter}>{lessonData.stars}</div>
           </div>
           <div className={styles.gainedAwardContainer}>
             {gainedAwards.map((award) => (

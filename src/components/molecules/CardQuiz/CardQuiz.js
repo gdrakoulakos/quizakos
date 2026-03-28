@@ -115,7 +115,7 @@ export default function CardQuiz({
         <h3>{lesson}</h3>
         <div className={styles.starsContainer}>
           <Image
-            src={`/images/${starsCounter ? "star-shadow" : "star-5"}.png`}
+            src={`/images/${starsCounter ? "star-6" : "star-disabled-3"}.png`}
             alt="star"
             className={styles.starIcon}
             width={20}
