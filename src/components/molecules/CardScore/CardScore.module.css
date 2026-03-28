@@ -65,6 +65,11 @@
   cursor: pointer;
 }
 
+.binIcon:hover {
+  background-color: #dddddd;
+  box-shadow: 0 0 2px 3px #dddddd;
+}
+
 .title {
   font-size: 18px;
   width: 100%;

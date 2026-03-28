@@ -18,3 +18,8 @@
   font-size: 15px;
   font-weight: bold;
 }
+
+.deleteAllButton:hover {
+  cursor: pointer;
+  background: linear-gradient(135deg, #bd383e, #d47938);
+}
