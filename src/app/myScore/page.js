@@ -25,7 +25,7 @@ export default function myScore() {
       transition={{ duration: 0.3 }}
     >
       <PopUpAwardsInfo />
-      {showPopUpConfirmation && <PopUpConfirmation />}
+      <PopUpConfirmation />
       <h1>Το σκορ μου</h1>
       {userProgressData.length !== 0 ? (
         <CardsScore />

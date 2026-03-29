@@ -10,6 +10,7 @@ export default function PopUpConfirmation() {
     popUpMessage,
     deleteAllScores,
     setDeleteAllScores,
+    showPopUpConfirmation,
   } = QuizContext();
 
   const buttonsData = [
@@ -45,25 +46,29 @@ export default function PopUpConfirmation() {
   };
 
   return (
-    <div className={styles.popUpConfirmationWrapper}>
-      <motion.div
-        className={styles.popUpConfirmationSection}
-        initial={{ opacity: 0 }}
-        animate={{ opacity: 1 }}
-        transition={{ duration: 0.3 }}
-      >
-        <h3>{popUpMessage}</h3>
-        <div className={styles.buttonContainer}>
-          {buttonsData.map((button, index) => (
-            <ButtonYesNo
-              key={index}
-              name={button.name}
-              handleButtonClick={() => handleButtonClick(button.action)}
-              action={button.action}
-            />
-          ))}
+    <>
+      {showPopUpConfirmation && (
+        <div className={styles.popUpConfirmationWrapper}>
+          <motion.div
+            className={styles.popUpConfirmationSection}
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            transition={{ duration: 0.3 }}
+          >
+            <h3>{popUpMessage}</h3>
+            <div className={styles.buttonContainer}>
+              {buttonsData.map((button, index) => (
+                <ButtonYesNo
+                  key={index}
+                  name={button.name}
+                  handleButtonClick={() => handleButtonClick(button.action)}
+                  action={button.action}
+                />
+              ))}
+            </div>
+          </motion.div>
         </div>
-      </motion.div>
-    </div>
+      )}
+    </>
   );
 }

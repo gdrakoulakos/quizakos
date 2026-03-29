@@ -25,18 +25,20 @@ export default function CardsScore({}) {
 
   return (
     <div className={styles.scoreCards}>
-      <AnimatePresence mode="wait">
+      <AnimatePresence>
         {sortedUserProgressData.map((lessonData) => (
           <CardScore lessonData={lessonData} key={lessonData.lesson_id} />
         ))}
+      </AnimatePresence>
 
+      {sortedUserProgressData.length > 1 && (
         <button
           className={styles.deleteAllButton}
           onClick={() => handleButtonClick()}
         >
           Διαγραφή Όλων
         </button>
-      </AnimatePresence>
+      )}
     </div>
   );
 }
