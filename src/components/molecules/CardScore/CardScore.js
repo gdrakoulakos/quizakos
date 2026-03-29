@@ -3,6 +3,7 @@ import Image from "next/image";
 import { QuizContext } from "@/context/AppContext";
 import { motion } from "motion/react";
 import { useEffect, useState } from "react";
+import Award from "../Award/Award";
 
 export default function CardScore({ lessonData }) {
   const {
@@ -17,13 +18,13 @@ export default function CardScore({ lessonData }) {
   useEffect(() => {
     setGainedAwards(
       [
-        lessonData.quiz_completed && { name: "book-completed" },
+        lessonData.quiz_completed && { img: "book-completed" },
         lessonData.silver_medals_counter > 0 && {
-          name: "silver-medal",
+          img: "silver-medal",
           count: lessonData.silver_medals_counter,
         },
         lessonData.gold_medals_counter > 0 && {
-          name: "gold-medal",
+          img: "gold-medal",
           count: lessonData.gold_medals_counter,
         },
       ].filter(Boolean),
@@ -101,15 +102,7 @@ export default function CardScore({ lessonData }) {
                 {award.count > 1 && (
                   <div className={styles.awardCounter}>{award.count}</div>
                 )}
-                <Image
-                  key={award.name}
-                  src={`/images/${award.name}.png`}
-                  alt="medal"
-                  className={`${styles.award} ${award.name === "golden-ribbon-2" ? styles.goldenRibbonAward : ""}`}
-                  width={50}
-                  height={50}
-                  onClick={() => setShowPopUpAwardsInfo((prev) => !prev)}
-                />
+                <Award key={award.name} awardData={award} />
               </div>
             ))}
           </div>

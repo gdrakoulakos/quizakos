@@ -132,6 +132,7 @@
   flex-direction: row;
   gap: 7px;
   justify-content: flex-end;
+  align-items: flex-end;
 }
 
 .awardContainer {
