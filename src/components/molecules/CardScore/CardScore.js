@@ -98,11 +98,11 @@ export default function CardScore({ lessonData }) {
           </div>
           <div className={styles.gainedAwardContainer}>
             {gainedAwards.map((award) => (
-              <div key={award.name} className={styles.awardContainer}>
+              <div key={award.img} className={styles.awardContainer}>
                 {award.count > 1 && (
                   <div className={styles.awardCounter}>{award.count}</div>
                 )}
-                <Award key={award.name} awardData={award} />
+                <Award awardData={award} />
               </div>
             ))}
           </div>
