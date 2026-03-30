@@ -3,7 +3,7 @@ import Image from "next/image";
 import { QuizContext } from "@/context/AppContext";
 import { motion } from "motion/react";
 import { useEffect, useState } from "react";
-import Award from "../Award/Award";
+import Award from "../../atoms/Award/Award";
 
 export default function CardScore({ lessonData }) {
   const {

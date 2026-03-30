@@ -1,7 +1,7 @@
 import styles from "./PopUpAwardsInfo.module.css";
 import { QuizContext } from "@/context/AppContext";
 import { motion, AnimatePresence } from "motion/react";
-import Award from "@/components/molecules/Award/Award";
+import Award from "@/components/atoms/Award/Award";
 
 export default function PopUpAwardsInfo() {
   const { showPopUpAwardsInfo, setShowPopUpAwardsInfo } = QuizContext();

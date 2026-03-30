@@ -4,7 +4,7 @@ import QuizImage from "@/components/atoms/QuizImage/QuizImage";
 import Image from "next/image";
 import { useEffect, useRef, useState } from "react";
 import { QuizContext } from "@/context/AppContext";
-import Award from "../Award/Award";
+import Award from "../../atoms/Award/Award";
 
 export default function CardQuiz({
   id,
