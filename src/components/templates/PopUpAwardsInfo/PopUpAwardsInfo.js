@@ -58,7 +58,10 @@ export default function PopUpAwardsInfo() {
             <div className={styles.allAwards}>
               {awardsData.map((awardData, index) => (
                 <div key={index} className={styles.awardContainer}>
-                  <Award awardData={awardData} />
+                  <Award
+                    awardData={awardData}
+                    width={awardData.img === "golden-ribbon-2" ? 50 : undefined}
+                  />
                   <p>{awardData.text}</p>
                 </div>
               ))}

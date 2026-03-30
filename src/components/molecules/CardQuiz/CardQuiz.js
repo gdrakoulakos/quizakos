@@ -105,7 +105,11 @@ export default function CardQuiz({
     >
       <div className={styles.awardsContainer}>
         {awards.map((awardData, index) => (
-          <Award key={index} awardData={awardData} />
+          <Award
+            key={index}
+            awardData={awardData}
+            width={awardData.awardName === "goldenRibbon" ? 45 : undefined}
+          />
         ))}
       </div>
       <div className={styles.cardTop}>

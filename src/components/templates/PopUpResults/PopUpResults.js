@@ -165,7 +165,10 @@ export default function PopUpResults({ correctAnswers, lessonAndGrade }) {
               {medal.img !== "golden-ribbon-2" && (
                 <div className={styles.congratulationsMessage}>+ 1</div>
               )}
-              <Award awardData={medal} />
+              <Award
+                awardData={medal}
+                width={medal.awardName === "goldenRibbon" ? 60 : undefined}
+              />
             </div>
           )}
           {correctAnswersLength > 0 && (
