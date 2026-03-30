@@ -10,7 +10,13 @@
   width: 90%;
   max-width: 900px;
   padding: 10px 0;
-  background-color: #402f67eb;
+  background: linear-gradient(
+    70deg,
+    #665980f3 0%,
+    #59428cf1 50%,
+    #50338ef5 100%
+  );
+
   border-radius: 10px;
 }
 
