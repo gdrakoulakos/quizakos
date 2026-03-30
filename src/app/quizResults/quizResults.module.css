@@ -4,6 +4,7 @@
   flex-direction: column;
   align-items: center;
   margin-bottom: 100px;
+  gap: 20px;
 }
 
 .questionsInfo {
@@ -11,10 +12,9 @@
   color: white;
   text-shadow: 1px 1px 5px #000000;
   background: #59428ce0;
-  padding: 10px 15px;
+  padding: 0 15px;
   border-radius: 20px;
   box-shadow: 0 0 5px 2px #d5d5d5;
-  margin-bottom: 30px;
 }
 
 .quizGradeAndLesson {
@@ -87,6 +87,6 @@
 
 .buttonOkContainer {
   position: fixed;
-  bottom: 70px;
+  bottom: 80px;
   text-decoration: none;
 }
