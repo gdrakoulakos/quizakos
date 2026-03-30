@@ -8,6 +8,10 @@ export default function PopUpAwardsInfo() {
 
   const awardsData = [
     {
+      img: "star-6",
+      text: "Για κάθε σωστή απάντηση, κερδίζεις 10 αστέρια!",
+    },
+    {
       img: "book-completed",
       text: "Αν απαντήσεις σωστά στο 60% των ερωτήσεων (3 στις 5 ή 6 στις 10), κερδίζεις ένα βιβλίο!",
     },
@@ -24,10 +28,6 @@ export default function PopUpAwardsInfo() {
       text: "Αν μαζέψεις 1000 αστέρια και κερδίσεις τουλάχιστον 1 χρυσό μετάλλιο, κερδίζεις την Χρυσή Ροζέτα!",
     },
   ];
-
-  const starData = {
-    img: "star-6",
-  };
 
   return (
     <AnimatePresence mode="wait">
@@ -56,22 +56,6 @@ export default function PopUpAwardsInfo() {
             <h1>🏆 Βραβεία</h1>
             <h3>Απάντησε σωστά και κέρδισε βραβεία!</h3>
             <div className={styles.allAwards}>
-              <div className={styles.starContainer}>
-                <Award awardData={starData} />
-                <div className={styles.starTextContainer}>
-                  <p>Κάθε σωστή απάντηση σε γεμίζει με αστέρια: </p>
-                  <ul>
-                    <li>
-                      Στα κουίζ με 10 ερωτήσεις, παίρνεις 10 αστέρια για κάθε
-                      σωστή απάντηση!{" "}
-                    </li>{" "}
-                    <li>
-                      Στα κουίζ με 5 ερωτήσεις, παίρνεις 20 αστέρια για κάθε
-                      σωστή απάντηση!
-                    </li>
-                  </ul>
-                </div>
-              </div>
               {awardsData.map((awardData, index) => (
                 <div key={index} className={styles.awardContainer}>
                   <Award awardData={awardData} />

@@ -32,7 +32,7 @@ export default function PopUpResults({ correctAnswers, lessonAndGrade }) {
     const newResults = {
       lesson_id: selectedQuizId,
       best_score: scorePercentage,
-      stars: scorePercentage,
+      stars: correctAnswersLength * 10,
       lesson_and_grade: lessonAndGrade,
       gold_medals_counter: scorePercentage === 100 ? 1 : 0,
       silver_medals_counter:
@@ -54,7 +54,7 @@ export default function PopUpResults({ correctAnswers, lessonAndGrade }) {
           ? {
               ...lesson,
               best_score: scorePercentage,
-              stars: Number(lesson.stars) + scorePercentage,
+              stars: Number(lesson.stars) + correctAnswersLength * 10,
               gold_medals_counter:
                 scorePercentage === 100
                   ? (lesson.gold_medals_counter || 0) + 1
@@ -77,7 +77,7 @@ export default function PopUpResults({ correctAnswers, lessonAndGrade }) {
         lesson.lesson_id === selectedQuizId
           ? {
               ...lesson,
-              stars: Number(lesson.stars) + scorePercentage,
+              stars: Number(lesson.stars) + correctAnswersLength * 10,
               gold_medals_counter:
                 scorePercentage === 100
                   ? (lesson.gold_medals_counter || 0) + 1
