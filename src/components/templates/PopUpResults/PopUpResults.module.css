@@ -49,6 +49,18 @@
   animation: hop 1.2s ease-in-out infinite;
 }
 
+.awardContainer {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  gap: 20px;
+}
+
+.awardEarned {
+  display: flex;
+  align-items: center;
+}
+
 .medal {
   position: absolute;
   top: 5;
@@ -109,20 +121,23 @@
   padding: 0 10px 10px 10px;
 }
 
-.resultMessage {
+.awardsGainedMessage {
   font-size: medium;
   color: #333;
   text-shadow: 1px 1px 5px #0000004d;
 }
 
 .correctAnswers {
-  width: 70px;
-  height: 70px;
+  position: absolute;
+  top: 10px;
+  left: 10px;
+  width: 60px;
+  height: 60px;
   display: flex;
   justify-content: center;
   align-items: center;
   background: linear-gradient(135deg, rgb(210, 61, 236), #6f0c81);
-  font-size: 20px;
+  font-size: 16px;
   text-shadow: 1px 1px 5px #000000a9;
   color: white;
   border: solid #d5e6ea;

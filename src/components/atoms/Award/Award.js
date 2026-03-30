@@ -4,7 +4,6 @@ import { QuizContext } from "@/context/AppContext";
 
 export default function Award({ awardData }) {
   const { setShowPopUpAwardsInfo } = QuizContext();
-  const goldenRibbon = awardData.awardName === "goldenRibbon";
 
   return (
     <div className={styles.awardContainer}>
@@ -14,7 +13,7 @@ export default function Award({ awardData }) {
       <Image
         src={`/images/${awardData.img}.png`}
         alt="medal"
-        className={`${styles.award} ${goldenRibbon ? styles.goldenRibbonAward : ""}`}
+        className={styles.award}
         width={100}
         height={60}
         onClick={() => setShowPopUpAwardsInfo((prev) => !prev)}
