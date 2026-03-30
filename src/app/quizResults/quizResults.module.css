@@ -31,32 +31,41 @@
 .questionBlock {
   text-align: center;
   margin-bottom: 40px;
-  gap: 10px;
+  display: flex;
+  flex-direction: column;
+  gap: 25px;
   background: #ffffffe8;
-  padding: 10px 15px;
+  padding: 20px 15px;
   border-radius: 20px;
   box-shadow: 0 0 5px 2px #d5d5d5;
+  align-items: center;
+  max-width: 340px;
 }
 
 .questionBlock h3 {
   text-shadow: 1px 1px 4px #a7a7a7;
   max-width: 300px;
+  margin: 0;
 }
 
 .questionImage {
   border-radius: 20px;
   box-shadow: 0 0 5px 2px #d5d5d5;
-  margin-top: 5px;
   width: auto;
-  max-height: 35%;
+  height: 120px;
+}
+
+.answersContainer {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 8px;
 }
 
 .answersContainer button {
-  margin: 5px;
   border-radius: 30px;
   width: 300px;
   height: 63px;
-  padding: 0 10px;
   font-size: 14px;
   background-color: white;
   border: 1px solid #d5d5d59e;

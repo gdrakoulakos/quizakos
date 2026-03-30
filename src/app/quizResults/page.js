@@ -36,14 +36,14 @@ export default function quizResults() {
                     src={`/images/questions/${question.question_img}`}
                     alt="question image"
                     className={styles.questionImage}
-                    width={240}
+                    width={120}
                     height={120}
                   />
                 )}
-
-                {question.availableAnswers.map((answer, answerIndex) => (
-                  <div key={answerIndex} className={styles.answersContainer}>
+                <div className={styles.answersContainer}>
+                  {question.availableAnswers.map((answer, answerIndex) => (
                     <button
+                      key={answerIndex}
                       className={
                         clickedAnswersResults.incorrectAnswersData.some(
                           (item) =>
@@ -58,8 +58,8 @@ export default function quizResults() {
                     >
                       {answer}
                     </button>
-                  </div>
-                ))}
+                  ))}
+                </div>
               </div>
             ))}
           </div>
