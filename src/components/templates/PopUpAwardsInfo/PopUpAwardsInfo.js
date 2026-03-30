@@ -1,29 +1,33 @@
-import Image from "next/image";
 import styles from "./PopUpAwardsInfo.module.css";
 import { QuizContext } from "@/context/AppContext";
 import { motion, AnimatePresence } from "motion/react";
+import Award from "@/components/molecules/Award/Award";
 
 export default function PopUpAwardsInfo() {
   const { showPopUpAwardsInfo, setShowPopUpAwardsInfo } = QuizContext();
 
   const awardsData = [
     {
-      name: "red-book-completed-shadow",
+      img: "book-completed",
       text: "Αν απαντήσεις σωστά στο 60% των ερωτήσεων (3 στις 5 ή 6 στις 10), κερδίζεις ένα βιβλίο!",
     },
     {
-      name: "medal-two-shadow",
+      img: "silver-medal",
       text: "Αν απαντήσεις σωστά στο 80% των ερωτήσεων (4 στις 5 ή 8 στις 10), κερδίζεις ένα ασημένιο μετάλλιο!",
     },
     {
-      name: "medal-one-shadow",
+      img: "gold-medal",
       text: "Αν απαντήσεις σωστά στο 100% των ερωτήσεων (5 στις 5 ή 10 στις 10), κερδίζεις ένα χρυσό μετάλλιο!",
     },
     {
-      name: "golden-ribbon-shadow",
+      img: "golden-ribbon-2",
       text: "Αν μαζέψεις 1000 αστέρια και κερδίσεις τουλάχιστον 1 χρυσό μετάλλιο, κερδίζεις την Χρυσή Ροζέτα!",
     },
   ];
+
+  const starData = {
+    img: "star-6",
+  };
 
   return (
     <AnimatePresence mode="wait">
@@ -52,26 +56,8 @@ export default function PopUpAwardsInfo() {
             <h1>🏆 Βραβεία</h1>
             <h3>Απάντησε σωστά και κέρδισε βραβεία!</h3>
             <div className={styles.allAwards}>
-              {awardsData.map((award, index) => (
-                <div key={index} className={styles.awardContainer}>
-                  <Image
-                    src={`/images/${award.name}.png`}
-                    alt={award.name}
-                    width={50}
-                    height={50}
-                  />
-                  <p>{award.text}</p>
-                </div>
-              ))}
-
               <div className={styles.starContainer}>
-                <Image
-                  src={`/images/star-shadow.png`}
-                  alt="star"
-                  className={styles.starIcon}
-                  width={50}
-                  height={50}
-                />
+                <Award awardData={starData} />
                 <div className={styles.starTextContainer}>
                   <p>Κάθε σωστή απάντηση σε γεμίζει με αστέρια: </p>
                   <ul>
@@ -86,6 +72,12 @@ export default function PopUpAwardsInfo() {
                   </ul>
                 </div>
               </div>
+              {awardsData.map((awardData, index) => (
+                <div key={index} className={styles.awardContainer}>
+                  <Award awardData={awardData} />
+                  <p>{awardData.text}</p>
+                </div>
+              ))}
             </div>
             <h4 className={styles.collectThemAll}>Κέρδισέ τα όλα! </h4>
           </motion.div>
