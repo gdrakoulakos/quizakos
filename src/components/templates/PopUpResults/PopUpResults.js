@@ -6,6 +6,7 @@ import { motion } from "motion/react";
 import { useEffect, useRef, useState } from "react";
 import { QuizContext } from "@/context/AppContext";
 import { useLaunchConfetti } from "@/customHooks";
+import Award from "@/components/atoms/Award/Award";
 
 export default function PopUpResults({ correctAnswers, lessonAndGrade }) {
   const { clickedAnswersResults, selectedQuizId, userProgressData } =
@@ -180,6 +181,14 @@ export default function PopUpResults({ correctAnswers, lessonAndGrade }) {
         </div>
         <div className={styles.resultMessage}>{"Το σκορ σου είναι:"}</div>
         <div className={styles.correctAnswers}>{correctAnswers}</div>
+        {correctAnswersLength > 0 && (
+          <div className={styles.starsEarned}>
+            <div className={styles.congratulationsMessage}>
+              {`+ ${correctAnswersLength * 10} `}
+            </div>
+            <Award awardData={{ img: "star-6" }} />
+          </div>
+        )}
         <Link href="/quizResults">
           <button className={styles.seeResultsButton}>
             Δες τα αποτελέσματα
