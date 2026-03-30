@@ -1,22 +1,53 @@
 import CardQuiz from "@/components/molecules/CardQuiz/CardQuiz";
 import styles from "../CardQuizzes/CardQuizzes.module.css";
-import { useRef, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import { AnimatePresence } from "motion/react";
 import ButtonSwiper from "@/components/atoms/ButtonSwiper/ButtonSwiper";
-import { useIsDesktop } from "@/customHooks";
-
 export default function CardQuizzes({ grades }) {
   const ref = useRef(null);
   const [showSwiper, setShowSwiper] = useState({ left: false, right: true });
+  const [containerClass, setContainerClass] = useState("");
   const sortedLessons = grades?.lessons.sort((a, b) => a.id - b.id);
-  const lessThanThreeLessons = sortedLessons.length < 3;
-  const isDesktop = useIsDesktop();
 
-  const containerClass = !isDesktop
-    ? lessThanThreeLessons
-      ? styles.mobileAndLessThanThreeLessons
-      : styles.mobileAndMoreThanTwoLessons
-    : styles.desktop;
+  useEffect(() => {
+    if (!ref.current) return;
+    const cardsFitInContainer =
+      ref.current.scrollWidth - ref.current.clientWidth === 0;
+
+    if (cardsFitInContainer) {
+      setShowSwiper({ left: false, right: false });
+      setContainerClass(styles.alignCenter);
+    }
+  }, [ref]);
+
+  useEffect(() => {
+    if (!ref.current) return;
+
+    const container = ref.current;
+
+    const handleScroll = () => {
+      const current = container.scrollLeft;
+      const max = container.scrollWidth - container.clientWidth;
+
+      if (current <= 0) {
+        setTimeout(() => {
+          setShowSwiper({ left: false, right: true });
+        }, 200);
+      } else if (Math.ceil(current) >= max) {
+        setTimeout(() => {
+          setShowSwiper({ left: true, right: false });
+        }, 200);
+      } else {
+        setTimeout(() => {
+          setShowSwiper({ left: true, right: true });
+        }, 200);
+      }
+    };
+
+    container.addEventListener("scroll", handleScroll);
+
+    return () => container.removeEventListener("scroll", handleScroll);
+  }, []);
 
   return (
     <>

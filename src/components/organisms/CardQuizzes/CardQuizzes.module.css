@@ -10,15 +10,7 @@
   box-sizing: border-box;
 }
 
-.cardsContainer.mobileAndLessThanThreeLessons {
-  justify-content: center;
-}
-
-.cardsContainer.mobileAndMoreThanTwoLessons {
-  justify-content: flex-start;
-}
-
-.cardsContainer.desktop {
+.cardsContainer.alignCenter {
   justify-content: center;
 }
 
