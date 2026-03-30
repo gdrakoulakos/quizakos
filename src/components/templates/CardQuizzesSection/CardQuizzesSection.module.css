@@ -5,11 +5,13 @@
   text-align: center;
   margin-top: 20px;
   position: sticky;
-  top: 0;
+  top: 10px;
   z-index: 1;
-  width: 100%;
+  width: 90%;
+  max-width: 800px;
   padding: 10px 0;
   background-color: #402f67eb;
+  border-radius: 10px;
 }
 
 .cardQuizzesSection {
@@ -31,6 +33,6 @@
 
 @media (min-width: 1000px) {
   .levelName {
-    top: 60px;
+    top: 70px;
   }
 }

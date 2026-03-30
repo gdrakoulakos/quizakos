@@ -21,6 +21,7 @@ export default function RootLayout({ children }) {
         />
       </head>
       <body className={commissioner.className}>
+        <div className="background" />
         <Providers>
           <TabBar />
           {children}
