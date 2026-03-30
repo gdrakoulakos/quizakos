@@ -7,7 +7,7 @@
   position: sticky;
   top: 10px;
   z-index: 1;
-  width: 90%;
+  width: 100%;
   max-width: 900px;
   padding: 10px 0;
   background: linear-gradient(
@@ -17,7 +17,6 @@
     #50338ef5 100%
   );
 
-  border-radius: 10px;
   box-shadow: 0 0 12px 0px #2f175ff3;
 }
 
