@@ -98,7 +98,7 @@ export default function PopUpResults({ correctAnswers, lessonAndGrade }) {
 
   useEffect(() => {
     if (scorePercentage === 100) {
-      setMedal("/images/medal-one-shadow.png");
+      setMedal("/images/gold-medal.png");
       setResultImg("/images/quizakos/quizakos-with-friends-4.png");
       setCongratulationsMessage("ΜΠΡΑΒΟ! Τα κατάφερες τέλεια!");
       setHoppingEffect(true);
@@ -106,7 +106,7 @@ export default function PopUpResults({ correctAnswers, lessonAndGrade }) {
         launchConfetti();
       }, 500);
     } else if (scorePercentage >= 80) {
-      setMedal("/images/medal-two-shadow.png");
+      setMedal("/images/silver-medal.png");
       setResultImg("/images/quizakos/quizakos4-shadow.png");
       setCongratulationsMessage("Μπράβο! Τα πήγες εξαιρετικά!");
     } else if (scorePercentage >= 60) {
@@ -129,7 +129,7 @@ export default function PopUpResults({ correctAnswers, lessonAndGrade }) {
         goldMedalsGained >= 1 && starsGained >= 1000 ? true : false;
 
       if (goldenRibbonGained && !lessonExistsInStoredResults.golden_ribbon) {
-        setMedal("/images/golden-ribbon-shadow.png");
+        setMedal("/images/golden-ribbon-2.png");
         const updatedResults = userProgressData.map((lesson) =>
           lesson.lesson_id === selectedQuizId
             ? {
