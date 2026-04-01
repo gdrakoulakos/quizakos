@@ -16,6 +16,7 @@ export default function CardQuiz({
   const { userProgressData, setShowPopUpAwardsInfo } = QuizContext();
   const [starsCounter, setStarsCounter] = useState("");
   const [awards, setAwards] = useState([]);
+  const [goldenRibbonAward, setGoldenRibbonAward] = useState(false);
   const lessonExistsInStoredResults = userProgressData.find(
     (lesson) => lesson.lesson_id === id,
   );
@@ -78,13 +79,7 @@ export default function CardQuiz({
       lessonExistsInStoredResults?.gold_medals_counter >= 1 &&
       lessonExistsInStoredResults?.stars >= 1000
     ) {
-      setAwards((prev) => [
-        ...prev,
-        {
-          awardName: "goldenRibbon",
-          img: "golden-ribbon-2",
-        },
-      ]);
+      setGoldenRibbonAward(true);
     }
     if (lessonExistsInStoredResults.best_score < 60) {
       setAwards([
@@ -98,19 +93,21 @@ export default function CardQuiz({
     <div
       key={id}
       className={`${styles.quizCardContainer} ${
-        awards.some((award) => award.awardName === "goldenRibbon")
-          ? styles.goldenRibbon
-          : ""
+        goldenRibbonAward ? styles.goldenRibbonBorder : ""
       }`}
     >
       <div className={styles.awardsContainer}>
         {awards.map((awardData, index) => (
-          <Award
-            key={index}
-            awardData={awardData}
-            width={awardData.awardName === "goldenRibbon" ? 45 : undefined}
-          />
+          <Award key={index} awardData={awardData} />
         ))}
+      </div>
+      <div className={styles.goldenRibbonContainer}>
+        {goldenRibbonAward && (
+          <Award
+            awardData={{ awardName: "goldenRibbon", img: "golden-ribbon-2" }}
+            width={55}
+          />
+        )}
       </div>
       <div className={styles.cardTop}>
         <QuizImage imgSrc={imgQuiz} />

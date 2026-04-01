@@ -19,7 +19,7 @@ export default function PopUpResults({ correctAnswers, lessonAndGrade }) {
   const hasAwardedRibbon = useRef(false);
   const totalAnswersLength = clickedAnswersResults.totalAnswers;
   const correctAnswersLength = clickedAnswersResults.correctAnswers;
-  const scorePercentage = (correctAnswersLength / totalAnswersLength) * 100;
+  const scorePercentage = (correctAnswersLength / totalAnswersLength) * 10;
 
   const hasStoredResult = useRef(false);
   const lessonExistsInStoredResults = userProgressData.find(
@@ -106,7 +106,14 @@ export default function PopUpResults({ correctAnswers, lessonAndGrade }) {
   }, [selectedQuizId, scorePercentage]);
 
   useEffect(() => {
-    if (scorePercentage === 100) {
+    if ((hasAwardedRibbon.current = true)) {
+      setResultImg("/images/quizakos/quizakos-with-friends-4.png");
+      setCongratulationsMessage("Συγγχαρητήρια! Κέρδισες την Χρυσή Ροζέτα!");
+      setHoppingEffect(true);
+      setTimeout(() => {
+        launchConfetti();
+      }, 500);
+    } else if (scorePercentage === 100) {
       setMedal({ img: "gold-medal" });
       setResultImg("/images/quizakos/quizakos-with-friends-4.png");
       setCongratulationsMessage("ΜΠΡΑΒΟ! Τα κατάφερες τέλεια!");
@@ -128,7 +135,7 @@ export default function PopUpResults({ correctAnswers, lessonAndGrade }) {
       setResultImg("/images/quizakos/quizakos1-shadow.png");
       setCongratulationsMessage("Μην τα παρατάς! Κάθε προσπάθεια μετράει!");
     }
-  }, [scorePercentage]);
+  }, [scorePercentage, medal]);
 
   return (
     <motion.div
