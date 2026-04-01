@@ -8,7 +8,11 @@ import { QuizContext } from "@/context/AppContext";
 import { useLaunchConfetti } from "@/customHooks";
 import Award from "@/components/atoms/Award/Award";
 
-export default function PopUpResults({ correctAnswers, lessonAndGrade }) {
+export default function PopUpResults({
+  correctAnswers,
+  lessonAndGrade,
+  goldenRibbonAlreadyAwarded,
+}) {
   const { clickedAnswersResults, selectedQuizId, userProgressData } =
     QuizContext();
   const [congratulationsMessage, setCongratulationsMessage] = useState(null);
@@ -19,8 +23,7 @@ export default function PopUpResults({ correctAnswers, lessonAndGrade }) {
   const hasAwardedRibbon = useRef(false);
   const totalAnswersLength = clickedAnswersResults.totalAnswers;
   const correctAnswersLength = clickedAnswersResults.correctAnswers;
-  const scorePercentage = (correctAnswersLength / totalAnswersLength) * 10;
-
+  const scorePercentage = (correctAnswersLength / totalAnswersLength) * 100;
   const hasStoredResult = useRef(false);
   const lessonExistsInStoredResults = userProgressData.find(
     (lesson) => lesson.lesson_id === selectedQuizId,
@@ -106,7 +109,7 @@ export default function PopUpResults({ correctAnswers, lessonAndGrade }) {
   }, [selectedQuizId, scorePercentage]);
 
   useEffect(() => {
-    if ((hasAwardedRibbon.current = true)) {
+    if ((hasAwardedRibbon.current = true && !goldenRibbonAlreadyAwarded)) {
       setResultImg("/images/quizakos/quizakos-with-friends-4.png");
       setCongratulationsMessage("Συγγχαρητήρια! Κέρδισες την Χρυσή Ροζέτα!");
       setHoppingEffect(true);
@@ -135,7 +138,7 @@ export default function PopUpResults({ correctAnswers, lessonAndGrade }) {
       setResultImg("/images/quizakos/quizakos1-shadow.png");
       setCongratulationsMessage("Μην τα παρατάς! Κάθε προσπάθεια μετράει!");
     }
-  }, [scorePercentage, medal]);
+  }, [scorePercentage]);
 
   return (
     <motion.div
