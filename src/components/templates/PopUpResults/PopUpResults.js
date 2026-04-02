@@ -109,7 +109,10 @@ export default function PopUpResults({
   }, [selectedQuizId, scorePercentage]);
 
   useEffect(() => {
-    if ((hasAwardedRibbon.current = true && !goldenRibbonAlreadyAwarded)) {
+    if (
+      !goldenRibbonAlreadyAwarded &&
+      lessonExistsInStoredResults?.stars >= 1000
+    ) {
       setResultImg("/images/quizakos/quizakos-with-friends-4.png");
       setCongratulationsMessage("Συγγχαρητήρια! Κέρδισες την Χρυσή Ροζέτα!");
       setHoppingEffect(true);
