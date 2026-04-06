@@ -107,7 +107,6 @@ export default function PopUpResults({ correctAnswers, lessonAndGrade }) {
     const lessonResults = storedResults.find(
       (lesson) => lesson.lesson_id === selectedQuizId,
     );
-    console.log("Stored results for the lesson:", lessonResults);
 
     const goldenRibbonAlreadyAwardedForThisLesson = localStorage.getItem(
       "golden_ribbon_awarded",
@@ -129,7 +128,6 @@ export default function PopUpResults({ correctAnswers, lessonAndGrade }) {
           selectedQuizId,
         ]),
       );
-      console.log("lessonResults?.stars >= 1000");
       setResultImg("/images/quizakos/quizakos-with-friends-4.png");
       setCongratulationsMessage("Συγγχαρητήρια! Κέρδισες την Χρυσή Ροζέτα!");
       setHoppingEffect(true);
@@ -137,7 +135,6 @@ export default function PopUpResults({ correctAnswers, lessonAndGrade }) {
         launchConfetti();
       }, 500);
     } else if (scorePercentage === 100) {
-      console.log("scorePercentage === 100");
       setMedal({ img: "gold-medal" });
       setResultImg("/images/quizakos/quizakos-with-friends-4.png");
       setCongratulationsMessage("ΜΠΡΑΒΟ! Τα κατάφερες τέλεια!");
@@ -146,20 +143,16 @@ export default function PopUpResults({ correctAnswers, lessonAndGrade }) {
         launchConfetti();
       }, 500);
     } else if (scorePercentage >= 80) {
-      console.log("scorePercentage >= 80");
       setMedal({ img: "silver-medal" });
       setResultImg("/images/quizakos/quizakos4-shadow.png");
       setCongratulationsMessage("Μπράβο! Τα πήγες εξαιρετικά!");
     } else if (scorePercentage >= 60) {
-      console.log("scorePercentage >= 60");
       setResultImg("/images/quizakos/quizakos3-shadow.png");
       setCongratulationsMessage("Τα πήγες πολύ καλά! Συνέχισε έτσι!");
     } else if (scorePercentage >= 40) {
-      console.log("scorePercentage >= 40");
       setResultImg("/images/quizakos/quizakos2-shadow.png");
       setCongratulationsMessage("Ωραία προσπάθεια! Μπορείς και καλύτερα!");
     } else {
-      console.log("scorePercentage < 40");
       setResultImg("/images/quizakos/quizakos1-shadow.png");
       setCongratulationsMessage("Μην τα παρατάς! Κάθε προσπάθεια μετράει!");
     }
