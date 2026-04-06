@@ -10,8 +10,6 @@ import PopUpResults from "../../templates/PopUpResults/PopUpResults";
 export default function QuestionAndAnswersCard() {
   const {
     selectedQuiz,
-    selectedQuizId,
-    userProgressData,
     setDisplayedQuestionIndex,
     displayedQuestionIndex,
     clickedAnswersResults,
@@ -20,10 +18,6 @@ export default function QuestionAndAnswersCard() {
     setShowPopUpResults,
     numberOfQuestions,
   } = QuizContext();
-
-  const goldenRibbonAlreadyAwarded = userProgressData.some(
-    (lesson) => lesson.lesson_id === selectedQuizId && lesson.golden_ribbon,
-  );
 
   const [currentClickedAnswerData, setCurrentClickedAnswerData] = useState({
     result: "",
@@ -88,7 +82,6 @@ export default function QuestionAndAnswersCard() {
           correctAnswers={`${clickedAnswersResults.correctAnswers} /
                     ${clickedAnswersResults.totalAnswers}`}
           lessonAndGrade={lessonAndGrade}
-          goldenRibbonAlreadyAwarded={goldenRibbonAlreadyAwarded}
         />
       )}
       <div className={styles.questionContainer}>

@@ -8,11 +8,7 @@ import { QuizContext } from "@/context/AppContext";
 import { useLaunchConfetti } from "@/customHooks";
 import Award from "@/components/atoms/Award/Award";
 
-export default function PopUpResults({
-  correctAnswers,
-  lessonAndGrade,
-  goldenRibbonAlreadyAwarded,
-}) {
+export default function PopUpResults({ correctAnswers, lessonAndGrade }) {
   const { clickedAnswersResults, selectedQuizId, userProgressData } =
     QuizContext();
   const [congratulationsMessage, setCongratulationsMessage] = useState(null);
@@ -106,13 +102,34 @@ export default function PopUpResults({
 
     localStorage.setItem("quiz_results", JSON.stringify(updatedResults));
     window.dispatchEvent(new Event("quiz_results_updated"));
-  }, [selectedQuizId, scorePercentage]);
 
-  useEffect(() => {
+    const storedResults = JSON.parse(localStorage.getItem("quiz_results"));
+    const lessonResults = storedResults.find(
+      (lesson) => lesson.lesson_id === selectedQuizId,
+    );
+    console.log("Stored results for the lesson:", lessonResults);
+
+    const goldenRibbonAlreadyAwardedForThisLesson = localStorage.getItem(
+      "golden_ribbon_awarded",
+    )
+      ? JSON.parse(localStorage.getItem("golden_ribbon_awarded")).includes(
+          selectedQuizId,
+        )
+      : false;
+
     if (
-      !goldenRibbonAlreadyAwarded &&
-      lessonExistsInStoredResults?.stars >= 1000
+      lessonResults?.stars >= 1000 &&
+      !goldenRibbonAlreadyAwardedForThisLesson &&
+      lessonResults.gold_medals_counter >= 1
     ) {
+      localStorage.setItem(
+        "golden_ribbon_awarded",
+        JSON.stringify([
+          ...(JSON.parse(localStorage.getItem("golden_ribbon_awarded")) || []),
+          selectedQuizId,
+        ]),
+      );
+      console.log("lessonResults?.stars >= 1000");
       setResultImg("/images/quizakos/quizakos-with-friends-4.png");
       setCongratulationsMessage("Συγγχαρητήρια! Κέρδισες την Χρυσή Ροζέτα!");
       setHoppingEffect(true);
@@ -120,6 +137,7 @@ export default function PopUpResults({
         launchConfetti();
       }, 500);
     } else if (scorePercentage === 100) {
+      console.log("scorePercentage === 100");
       setMedal({ img: "gold-medal" });
       setResultImg("/images/quizakos/quizakos-with-friends-4.png");
       setCongratulationsMessage("ΜΠΡΑΒΟ! Τα κατάφερες τέλεια!");
@@ -128,20 +146,24 @@ export default function PopUpResults({
         launchConfetti();
       }, 500);
     } else if (scorePercentage >= 80) {
+      console.log("scorePercentage >= 80");
       setMedal({ img: "silver-medal" });
       setResultImg("/images/quizakos/quizakos4-shadow.png");
       setCongratulationsMessage("Μπράβο! Τα πήγες εξαιρετικά!");
     } else if (scorePercentage >= 60) {
+      console.log("scorePercentage >= 60");
       setResultImg("/images/quizakos/quizakos3-shadow.png");
       setCongratulationsMessage("Τα πήγες πολύ καλά! Συνέχισε έτσι!");
     } else if (scorePercentage >= 40) {
+      console.log("scorePercentage >= 40");
       setResultImg("/images/quizakos/quizakos2-shadow.png");
       setCongratulationsMessage("Ωραία προσπάθεια! Μπορείς και καλύτερα!");
     } else {
+      console.log("scorePercentage < 40");
       setResultImg("/images/quizakos/quizakos1-shadow.png");
       setCongratulationsMessage("Μην τα παρατάς! Κάθε προσπάθεια μετράει!");
     }
-  }, [scorePercentage]);
+  }, [selectedQuizId, scorePercentage]);
 
   return (
     <motion.div
