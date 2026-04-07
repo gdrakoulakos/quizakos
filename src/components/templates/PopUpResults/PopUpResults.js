@@ -158,6 +158,8 @@ export default function PopUpResults({ correctAnswers, lessonAndGrade }) {
     }
   }, [selectedQuizId, scorePercentage]);
 
+  console.log("medal", medal);
+
   return (
     <motion.div
       className={styles.blurBackground}
@@ -182,10 +184,23 @@ export default function PopUpResults({ correctAnswers, lessonAndGrade }) {
           <div className={styles.awardsGainedMessage}>{"Κέρδισες:"}</div>
         )}
         <motion.div
+          key={medal?.awardName}
           className={styles.awardContainer}
-          initial={{ opacity: 0 }}
-          animate={{ opacity: 1 }}
-          transition={{ duration: 0.6, delay: 1 }}
+          initial={
+            medal?.awardName === "goldenRibbon"
+              ? { scale: 0, opacity: 0 }
+              : { opacity: 0 }
+          }
+          animate={
+            medal?.awardName === "goldenRibbon"
+              ? { scale: 1, opacity: 1 }
+              : { opacity: 1 }
+          }
+          transition={
+            medal?.awardName === "goldenRibbon"
+              ? { type: "spring", stiffness: 300, damping: 15, delay: 0.5 }
+              : { duration: 0.6, delay: 1 }
+          }
         >
           {" "}
           {medal && (
