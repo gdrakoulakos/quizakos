@@ -164,10 +164,17 @@ export default function PopUpResults({ correctAnswers, lessonAndGrade }) {
       className={styles.blurBackground}
       initial={{ opacity: 0 }}
       animate={{ opacity: 1 }}
-      transition={{ duration: 0.3 }}
+      transition={{ duration: 0.6 }}
     >
       <div className={styles.popUpResultsContainer}>
-        <div className={styles.correctAnswers}>{correctAnswers}</div>
+        <motion.div
+          initial={{ opacity: 0 }}
+          animate={{ opacity: 1 }}
+          transition={{ duration: 0.6, delay: 0.5 }}
+          className={styles.correctAnswers}
+        >
+          {correctAnswers}
+        </motion.div>
 
         <Image
           className={`${styles.resultImage} ${hoppingEffect ? styles.hopping : ""}`}
