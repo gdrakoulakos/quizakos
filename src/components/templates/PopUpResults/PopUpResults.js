@@ -7,6 +7,7 @@ import { useEffect, useRef, useState } from "react";
 import { QuizContext } from "@/context/AppContext";
 import { useLaunchConfetti } from "@/customHooks";
 import Award from "@/components/atoms/Award/Award";
+import ReplayIcon from "@mui/icons-material/Replay";
 
 export default function PopUpResults({ correctAnswers, lessonAndGrade }) {
   const { clickedAnswersResults, selectedQuizId, userProgressData } =
@@ -158,8 +159,6 @@ export default function PopUpResults({ correctAnswers, lessonAndGrade }) {
     }
   }, [selectedQuizId, scorePercentage]);
 
-  console.log("medal", medal);
-
   return (
     <motion.div
       className={styles.blurBackground}
@@ -223,13 +222,19 @@ export default function PopUpResults({ correctAnswers, lessonAndGrade }) {
             </div>
           )}
         </motion.div>
+        <div className={styles.actionButtonsContainer}>
+          <Link href="/quizResults">
+            <button className={styles.seeResultsButton}>Αποτελέσματα</button>
+          </Link>
 
-        <Link href="/quizResults">
-          <button className={styles.seeResultsButton}>
-            Δες τα αποτελέσματα
-          </button>
-        </Link>
-        <ButtonOk buttonText={"OK"} />
+          <ButtonOk buttonText={"Επιστροφή"} />
+        </div>
+        <button
+          className={styles.playAgainButton}
+          onClick={() => window.location.reload()}
+        >
+          <ReplayIcon /> Παίξε ξανά!
+        </button>
       </div>
     </motion.div>
   );
