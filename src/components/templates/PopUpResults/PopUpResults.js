@@ -8,10 +8,15 @@ import { QuizContext } from "@/context/AppContext";
 import { useLaunchConfetti } from "@/customHooks";
 import Award from "@/components/atoms/Award/Award";
 import ReplayIcon from "@mui/icons-material/Replay";
+import PopUpAwardsInfo from "../PopUpAwardsInfo/PopUpAwardsInfo";
 
 export default function PopUpResults({ correctAnswers, lessonAndGrade }) {
-  const { clickedAnswersResults, selectedQuizId, userProgressData } =
-    QuizContext();
+  const {
+    clickedAnswersResults,
+    selectedQuizId,
+    userProgressData,
+    setShowPopUpAwardsInfo,
+  } = QuizContext();
   const [congratulationsMessage, setCongratulationsMessage] = useState(null);
   const [resultImg, setResultImg] = useState("/images/quizakos/guizakos1.png");
   const [medal, setMedal] = useState(null);
@@ -52,7 +57,10 @@ export default function PopUpResults({ correctAnswers, lessonAndGrade }) {
           ? {
               ...lesson,
               best_score: scorePercentage,
-              stars: Number(lesson.stars) + correctAnswersLength * 10,
+              stars:
+                Number(lesson.stars) +
+                correctAnswersLength * 10 +
+                (scorePercentage === 100 ? 50 : 0),
               gold_medals_counter:
                 scorePercentage === 100
                   ? (lesson.gold_medals_counter || 0) + 1
@@ -70,7 +78,10 @@ export default function PopUpResults({ correctAnswers, lessonAndGrade }) {
         lesson.lesson_id === selectedQuizId
           ? {
               ...lesson,
-              stars: Number(lesson.stars) + correctAnswersLength * 10,
+              stars:
+                Number(lesson.stars) +
+                correctAnswersLength * 10 +
+                (scorePercentage === 100 ? 50 : 0),
               gold_medals_counter:
                 scorePercentage === 100
                   ? (lesson.gold_medals_counter || 0) + 1
@@ -166,6 +177,7 @@ export default function PopUpResults({ correctAnswers, lessonAndGrade }) {
       animate={{ opacity: 1 }}
       transition={{ duration: 0.6 }}
     >
+      <PopUpAwardsInfo />
       <div className={styles.popUpResultsContainer}>
         <motion.div
           initial={{ opacity: 0 }}
@@ -221,9 +233,12 @@ export default function PopUpResults({ correctAnswers, lessonAndGrade }) {
             </div>
           )}
           {correctAnswersLength > 0 && (
-            <div className={styles.starsEarned}>
+            <div
+              className={styles.starsEarned}
+              onClick={() => setShowPopUpAwardsInfo(true)}
+            >
               <div className={styles.congratulationsMessage}>
-                {`+ ${correctAnswersLength * 10} `}
+                {`+ ${correctAnswersLength * 10 + (scorePercentage === 100 ? 50 : 0)} `}
               </div>
               <Award awardData={{ img: "star-6" }} />
             </div>
