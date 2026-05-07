@@ -17,10 +17,10 @@
     "@supabase/supabase-js": "^2.90.1",
     "canvas-confetti": "^1.9.3",
     "motion": "^12.23.26",
-    "next": "^16.1.6",
-    "react": "19.2.3",
+    "next": "^16.2.5",
+    "react": "19.2.6",
     "react-cookie": "^8.0.1",
-    "react-dom": "19.2.3",
+    "react-dom": "19.2.6",
     "stable": "^0.1.8"
   },
   "devDependencies": {
