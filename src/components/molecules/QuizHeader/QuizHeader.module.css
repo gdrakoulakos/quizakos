@@ -6,9 +6,29 @@
   box-sizing: border-box;
 }
 
-.questionCounter {
+.leftHeader {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
   width: 15%;
+  justify-content: center;
+}
+
+.questionCounter {
+  color: white;
   text-shadow: 1px 1px 6px #a7a7a7;
+  position: absolute;
+  top: -25px;
+  left: -25px;
+  width: 40px;
+  height: 40px;
+  box-shadow: 1px 1px 7px 2px white;
+  border-radius: 50%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background-color: #543d80;
 }
 
 .quizHeader p {
@@ -29,8 +49,8 @@
   width: 70%;
   text-align: center;
   font-size: 18px;
-  /* box-shadow: 0 0 11px 1px #662f8e8c; */
   border-radius: 20px;
+  height: 100%;
 }
 
 .lesson {
@@ -44,7 +64,6 @@
 }
 
 .correctInfoContainer {
-  width: 15%;
   height: 60px;
   display: flex;
   align-items: center;
@@ -60,4 +79,27 @@
 .correctAnswers {
   display: flex;
   text-shadow: 1px 1px 6px #a7a7a7;
+}
+
+.rightHeader {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  align-items: center;
+  font-size: 14px;
+  color: #555555;
+  text-align: center;
+  margin: 0;
+  padding: 0;
+  border-radius: 50%;
+}
+
+.referralIcon {
+  font-size: 24px;
+  color: #543d80;
+}
+
+.referralText {
+  font-size: 12px;
 }

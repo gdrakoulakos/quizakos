@@ -15,6 +15,8 @@ export const AppProvider = ({ children }) => {
   const [userProgressData, setUserProgressData] = useState([]);
   const [showPopUpAwardsInfo, setShowPopUpAwardsInfo] = useState(false);
   const [showPopUpConfirmation, setShowPopUpConfirmation] = useState(false);
+  const [showPopUpInfoMessage, setShowPopUpInfoMessage] = useState(false);
+  const [displayedQuestionId, setDisplayedQuestionId] = useState(null);
   const [popUpMessage, setPopUpMessage] = useState("");
   const [deleteAllScores, setDeleteAllScores] = useState(false);
   const [clickedAnswersResults, setClickedAnswersResults] = useState({
@@ -111,6 +113,10 @@ export const AppProvider = ({ children }) => {
         setPopUpMessage,
         deleteAllScores,
         setDeleteAllScores,
+        showPopUpInfoMessage,
+        setShowPopUpInfoMessage,
+        displayedQuestionId,
+        setDisplayedQuestionId,
       }}
     >
       {children}
