@@ -112,8 +112,15 @@ export default function quiz() {
       };
       setSelectedQuiz(quizTest);
     }
-    setDisplayedQuestionId(defaultQuestions[displayedQuestionIndex]?.id);
   }, [defaultQuestions, selectedQuizId]);
+
+  useEffect(() => {
+    if (selectedQuiz) {
+      setDisplayedQuestionId(
+        selectedQuiz.questions[displayedQuestionIndex]?.id,
+      );
+    }
+  }, [displayedQuestionIndex, selectedQuiz]);
 
   return (
     <>

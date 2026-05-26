@@ -19,11 +19,11 @@
   color: white;
   text-shadow: 1px 1px 6px #a7a7a7;
   position: absolute;
-  top: -25px;
-  left: -25px;
-  width: 40px;
-  height: 40px;
-  box-shadow: 1px 1px 7px 2px white;
+  top: -30px;
+  left: -30px;
+  width: 50px;
+  height: 50px;
+  box-shadow: 0 0 5px 2px #d5d5d5;
   border-radius: 50%;
   display: flex;
   justify-content: center;
