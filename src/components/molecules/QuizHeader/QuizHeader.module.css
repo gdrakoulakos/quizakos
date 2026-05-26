@@ -72,6 +72,10 @@
   border-radius: 50px;
 }
 
+.correctIcon {
+  color: #4caf50;
+}
+
 .correctInfoContainer p {
   margin: 0;
 }

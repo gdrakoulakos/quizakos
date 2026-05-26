@@ -1,7 +1,7 @@
 import styles from "./QuizHeader.module.css";
 import { QuizContext } from "@/context/AppContext";
-import Image from "next/image";
 import ErrorIcon from "@mui/icons-material/Error";
+import VerifiedIcon from "@mui/icons-material/Verified";
 
 export default function QuizHeader() {
   const {
@@ -28,13 +28,7 @@ export default function QuizHeader() {
           {quizQuestionCurrentNum}/{quizQuestionCounter}
         </p>
         <div className={styles.correctInfoContainer}>
-          <Image
-            className={styles.correctIcon}
-            src={"/images/correct.png"}
-            alt="correct answers icon"
-            width={20}
-            height={20}
-          />
+          <VerifiedIcon className={styles.correctIcon} fontSize="medium" />
           <div className={styles.correctAnswers}>{clickedCorrectAnswers}</div>
         </div>
       </div>
