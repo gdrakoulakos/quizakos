@@ -22,6 +22,7 @@ export default function PopUpInfoMessage({ message, action }) {
           <CopyToClipboard
             text={displayedQuestionId}
             onCopy={() => setIsIdCopied(true)}
+            style={{ cursor: "pointer" }}
           >
             <ContentCopyIcon fontSize="small" />
           </CopyToClipboard>
