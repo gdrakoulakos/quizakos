@@ -30,11 +30,27 @@
   text-align: center;
 }
 
+.questionIdContainer {
+  display: flex;
+  width: 100%;
+  justify-content: space-around;
+  align-items: center;
+}
+
 .questionId {
   color: white;
-  font-size: 15px;
+  font-size: 13px;
   text-align: center;
   margin-top: 10px;
+}
+
+.copiedText {
+  width: 100%;
+  color: white;
+  font-size: 13px;
+  display: flex;
+  justify-content: flex-end;
+  text-align: center;
 }
 
 .buttonContainer {
