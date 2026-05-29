@@ -5,7 +5,7 @@
   cursor: pointer;
   position: absolute;
   top: 120px;
-  right: -10px;
+  right: -20px;
   gap: 5px;
 }
 
@@ -15,10 +15,10 @@
   display: flex;
   justify-content: center;
   background-color: #ffffff9b;
-  box-shadow: 0 0 3px 2px #dfdfdf;
   color: black;
   transform: scale(1.7);
   padding: 5px;
+  filter: drop-shadow(0 0 2px #d1d1d1);
 }
 
 .buttonImage:hover {
