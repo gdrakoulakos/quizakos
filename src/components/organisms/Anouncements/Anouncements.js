@@ -39,7 +39,7 @@ export default function Anouncements() {
             </button>
             <p className={styles.announcementText}>
               Ο Quizakos μας βρίσκεται σε στάδιο ανάπτυξης και οι ερωτήσεις του
-              μπορεί να περιέχουν λάθη. Λίγη υπομονή...
+              μπορεί να περιέχουν λάθη.
             </p>
           </div>
         </motion.div>
