@@ -4,6 +4,8 @@ import { supabase } from "@/lib/supabase";
 const AppContext = createContext();
 
 export const AppProvider = ({ children }) => {
+  const [isLoggedIn, setIsLoggedIn] = useState(false);
+  const [loggedInUserName, setLoggedInUserName] = useState("");
   const [currentInstitution, setCurrentInstitution] = useState(null);
   const [defaultQuizData, setDefaultQuizData] = useState([]);
   const [defaultQuestions, setDefaultQuestions] = useState([]);
@@ -25,6 +27,27 @@ export const AppProvider = ({ children }) => {
     totalAnswers: 0,
     incorrectAnswersData: [],
   });
+
+  useEffect(() => {
+    async function checkSession() {
+      try {
+        const {
+          data: { user },
+        } = await supabase.auth.getUser();
+
+        setIsLoggedIn(!!user);
+
+        if (user) {
+          setLoggedInUserName(user.user_metadata.name.split(" ")[0]);
+        }
+      } catch (error) {
+        setIsLoggedIn(false);
+        setLoggedInUserName("");
+      }
+    }
+
+    checkSession();
+  }, [supabase]);
 
   useEffect(() => {
     const loadProgress = () => {
@@ -87,6 +110,8 @@ export const AppProvider = ({ children }) => {
   return (
     <AppContext.Provider
       value={{
+        isLoggedIn,
+        loggedInUserName,
         defaultQuestions,
         setDefaultQuestions,
         currentInstitutionData,

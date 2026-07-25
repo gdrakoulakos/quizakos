@@ -6,8 +6,11 @@ import HomeIcon from "@mui/icons-material/Home";
 import EmojiEventsIcon from "@mui/icons-material/EmojiEvents";
 import SentimentSatisfiedAltIcon from "@mui/icons-material/SentimentSatisfiedAlt";
 import InfoIcon from "@mui/icons-material/Info";
+import { QuizContext } from "@/context/AppContext";
 
 export default function TabBar() {
+  const { isLoggedIn, loggedInUserName } = QuizContext();
+
   const tabBarMenuItems = [
     {
       name: "Αρχική",
@@ -24,11 +27,11 @@ export default function TabBar() {
       href: "/info",
       icon: <InfoIcon fontSize="medium" />,
     },
-    {
-      name: "Προφίλ",
-      href: "/comingSoon",
-      icon: <SentimentSatisfiedAltIcon fontSize="medium" />,
-    },
+    // {
+    //   name: isLoggedIn ? loggedInUserName : "Σύνδεση",
+    //   href: "/login",
+    //   icon: <SentimentSatisfiedAltIcon fontSize="medium" />,
+    // },
   ];
 
   return (
