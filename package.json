@@ -16,15 +16,16 @@
     "@mui/material": "^7.3.7",
     "@supabase/ssr": "^0.12.3",
     "@supabase/supabase-js": "^2.110.8",
+    "autoprefixer": "^10.5.4",
     "canvas-confetti": "^1.9.3",
     "motion": "^12.23.26",
-    "next": "^16.2.11",
+    "next": "^16.2.12",
     "postcss": "^8.5.23",
     "react": "19.2.6",
     "react-cookie": "^8.0.1",
     "react-copy-to-clipboard": "^5.1.1",
     "react-dom": "19.2.6",
-    "stable": "^0.1.8"
+    "tailwindcss": "^4.3.3"
   },
   "devDependencies": {
     "baseline-browser-mapping": "^2.9.19"
