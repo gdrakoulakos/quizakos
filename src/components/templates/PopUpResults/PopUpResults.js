@@ -11,6 +11,7 @@ import ReplayIcon from "@mui/icons-material/Replay";
 import PopUpAwardsInfo from "../PopUpAwardsInfo/PopUpAwardsInfo";
 import Typography from "@/components/atoms/Typography/Typography";
 import { useRouter } from "next/navigation";
+import { supabase } from "@/lib/supabase";
 
 export default function PopUpResults({ correctAnswers, lessonAndGrade }) {
   const {
@@ -19,6 +20,8 @@ export default function PopUpResults({ correctAnswers, lessonAndGrade }) {
     userProgressData,
     setShowPopUpAwardsInfo,
     isLoggedIn,
+    loggedInUserQuizProgress,
+    loggedInUserName,
   } = QuizContext();
   const [congratulationsMessage, setCongratulationsMessage] = useState(null);
   const [resultImg, setResultImg] = useState("/images/quizakos/guizakos1.png");
@@ -26,14 +29,81 @@ export default function PopUpResults({ correctAnswers, lessonAndGrade }) {
   const [hoppingEffect, setHoppingEffect] = useState(false);
   const launchConfetti = useLaunchConfetti;
   const hasAwardedRibbon = useRef(false);
+  const [alreadyPlayedQuizData, setAlreadyPlayedQuizData] = useState({
+    isAlreadyPlayed: null,
+    data: null,
+  });
+  const [isUserDataFetched, setIsUserDataFetched] = useState(false);
   const totalAnswersLength = clickedAnswersResults.totalAnswers;
   const correctAnswersLength = clickedAnswersResults.correctAnswers;
   const scorePercentage = (correctAnswersLength / totalAnswersLength) * 100;
   const hasStoredResult = useRef(false);
+  const hasSavedToSupabase = useRef(false);
   const lessonExistsInStoredResults = userProgressData.find(
     (lesson) => lesson.lesson_id === selectedQuizId,
   );
   const router = useRouter();
+
+  async function saveQuizProgress() {
+    if (!isLoggedIn || hasSavedToSupabase.current) return;
+
+    hasSavedToSupabase.current = true;
+
+    const {
+      data: { user },
+    } = await supabase.auth.getUser();
+
+    if (!user) return;
+
+    // Get existing progress from state
+    const existing = loggedInUserQuizProgress.find(
+      (item) => item.lesson_id === selectedQuizId,
+    );
+
+    const starsEarned =
+      correctAnswersLength * 10 + (scorePercentage === 100 ? 50 : 0);
+
+    const newData = {
+      user_id: user.id,
+      lesson_id: selectedQuizId,
+      username: loggedInUserName,
+
+      best_score: existing
+        ? Math.max(scorePercentage, existing.best_score)
+        : scorePercentage,
+
+      stars: existing ? Number(existing.stars) + starsEarned : starsEarned,
+
+      gold_medals_counter:
+        scorePercentage === 100
+          ? (existing?.gold_medals_counter || 0) + 1
+          : existing?.gold_medals_counter || 0,
+
+      silver_medals_counter:
+        scorePercentage >= 80 && scorePercentage < 100
+          ? (existing?.silver_medals_counter || 0) + 1
+          : existing?.silver_medals_counter || 0,
+
+      golden_ribbon: existing?.golden_ribbon || false,
+
+      quiz_completed: scorePercentage >= 60 || existing?.best_score >= 60,
+    };
+
+    const { error } = await supabase
+      .from("user_lesson_progress")
+      .upsert(newData, {
+        onConflict: "user_id,lesson_id",
+      });
+
+    if (error) {
+      console.error(error);
+      return;
+    }
+  }
+
+  useEffect(() => {
+    saveQuizProgress();
+  }, [loggedInUserQuizProgress]);
 
   useEffect(() => {
     if (!selectedQuizId || hasStoredResult.current) return;
