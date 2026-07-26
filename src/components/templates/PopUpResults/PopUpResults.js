@@ -252,7 +252,7 @@ export default function PopUpResults({ correctAnswers, lessonAndGrade }) {
             )}
           </div>
         </motion.div>
-        {!isLoggedIn && correctAnswersLength > 0 && (
+        {isLoggedIn && correctAnswersLength > 0 && (
           <div className={styles.loginPrompt}>
             <button
               className={styles.loginButton}
