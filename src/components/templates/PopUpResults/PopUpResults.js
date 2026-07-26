@@ -9,6 +9,8 @@ import { useLaunchConfetti } from "@/customHooks";
 import Award from "@/components/atoms/Award/Award";
 import ReplayIcon from "@mui/icons-material/Replay";
 import PopUpAwardsInfo from "../PopUpAwardsInfo/PopUpAwardsInfo";
+import Typography from "@/components/atoms/Typography/Typography";
+import { useRouter } from "next/navigation";
 
 export default function PopUpResults({ correctAnswers, lessonAndGrade }) {
   const {
@@ -16,6 +18,7 @@ export default function PopUpResults({ correctAnswers, lessonAndGrade }) {
     selectedQuizId,
     userProgressData,
     setShowPopUpAwardsInfo,
+    isLoggedIn,
   } = QuizContext();
   const [congratulationsMessage, setCongratulationsMessage] = useState(null);
   const [resultImg, setResultImg] = useState("/images/quizakos/guizakos1.png");
@@ -30,6 +33,7 @@ export default function PopUpResults({ correctAnswers, lessonAndGrade }) {
   const lessonExistsInStoredResults = userProgressData.find(
     (lesson) => lesson.lesson_id === selectedQuizId,
   );
+  const router = useRouter();
 
   useEffect(() => {
     if (!selectedQuizId || hasStoredResult.current) return;
@@ -221,29 +225,49 @@ export default function PopUpResults({ correctAnswers, lessonAndGrade }) {
           }
         >
           {" "}
-          {medal && (
-            <div className={styles.awardEarned}>
-              {medal.img !== "golden-ribbon-2" && (
-                <div className={styles.congratulationsMessage}>+ 1</div>
-              )}
-              <Award
-                awardData={medal}
-                width={medal.awardName === "goldenRibbon" ? 60 : undefined}
-              />
-            </div>
-          )}
-          {correctAnswersLength > 0 && (
-            <div
-              className={styles.starsEarned}
-              onClick={() => setShowPopUpAwardsInfo(true)}
-            >
-              <div className={styles.congratulationsMessage}>
-                {`+ ${correctAnswersLength * 10 + (scorePercentage === 100 ? 50 : 0)} `}
+          <div className={styles.awards}>
+            {medal && (
+              <div className={styles.awardEarned}>
+                {medal.img !== "golden-ribbon-2" && (
+                  <div className={styles.awardCounter}>+ 1</div>
+                )}
+                <Award
+                  awardData={medal}
+                  width={medal.awardName === "goldenRibbon" ? 60 : undefined}
+                />
               </div>
-              <Award awardData={{ img: "star-6" }} />
-            </div>
-          )}
+            )}
+            {correctAnswersLength > 0 && (
+              <div
+                className={styles.starsEarnedWrapper}
+                onClick={() => setShowPopUpAwardsInfo(true)}
+              >
+                <div className={styles.awardEarned}>
+                  <div className={styles.congratulationsMessage}>
+                    {`+ ${correctAnswersLength * 10 + (scorePercentage === 100 ? 50 : 0)} `}
+                  </div>
+                  <Award awardData={{ img: "star-6" }} />
+                </div>
+              </div>
+            )}
+          </div>
         </motion.div>
+        {!isLoggedIn && correctAnswersLength > 0 && (
+          <div className={styles.loginPrompt}>
+            <button
+              className={styles.loginButton}
+              onClick={() => router.push("/login")}
+            >
+              Σύνδεση
+            </button>
+            <Typography
+              text={
+                "Κάνε σύνδεση για να έχεις τα βραβεία σου παντού, σε κάθε συσκευή!"
+              }
+              size={"small"}
+            />
+          </div>
+        )}
         <div className={styles.actionButtonsContainer}>
           <Link href="/quizResults">
             <button className={styles.seeResultsButton}>Αποτελέσματα</button>
