@@ -322,7 +322,7 @@ export default function PopUpResults({ correctAnswers, lessonAndGrade }) {
             )}
           </div>
         </motion.div>
-        {isLoggedIn && correctAnswersLength > 0 && (
+        {!isLoggedIn && correctAnswersLength > 0 && (
           <div className={styles.loginPrompt}>
             <button
               className={styles.loginButton}
@@ -343,7 +343,7 @@ export default function PopUpResults({ correctAnswers, lessonAndGrade }) {
             <button className={styles.seeResultsButton}>Αποτελέσματα</button>
           </Link>
 
-          <ButtonOk buttonText={"Επιστροφή"} />
+          <ButtonOk buttonText={"Επιστροφή"} onClick={() => router.push("/")} />
         </div>
         <button
           className={styles.playAgainButton}

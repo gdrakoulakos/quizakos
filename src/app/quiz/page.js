@@ -131,7 +131,7 @@ export default function quiz() {
               <PopUpInfoMessage
                 message="Εντόπισες κάποιο λάθος στη συγκεκριμένη ερώτηση; Στείλε email στο quizakos@gmail.com αναφέροντας το ID της ερώτησης:"
                 questionId={displayedQuestionId}
-                action={"yes"}
+                action={"report-question"}
               />
             )}
             <motion.div

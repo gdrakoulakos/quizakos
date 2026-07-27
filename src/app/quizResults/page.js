@@ -5,9 +5,11 @@ import styles from "./quizResults.module.css";
 import { QuizContext } from "@/context/AppContext";
 import { motion } from "motion/react";
 import ButtonOk from "@/components/atoms/ButtonOk/ButtonOk";
+import { useRouter } from "next/navigation";
 
 export default function quizResults() {
   const { selectedQuiz, clickedAnswersResults } = QuizContext();
+  const router = useRouter();
 
   return (
     <>
@@ -64,7 +66,7 @@ export default function quizResults() {
             ))}
           </div>
           <div className={styles.buttonOkContainer}>
-            <ButtonOk buttonText="Επιστροφή" />
+            <ButtonOk buttonText="Επιστροφή" onClick={() => router.push("/")} />
           </div>
         </motion.div>
       )}

@@ -6,6 +6,7 @@ const AppContext = createContext();
 export const AppProvider = ({ children }) => {
   const [isLoggedIn, setIsLoggedIn] = useState(false);
   const [loggedInUserName, setLoggedInUserName] = useState("");
+  const [loggedInUserData, setLoggedInUserData] = useState("");
   const [loggedInUserQuizProgress, setLoggedInUserQuizProgress] = useState([]);
   const [currentInstitution, setCurrentInstitution] = useState(null);
   const [defaultQuizData, setDefaultQuizData] = useState([]);
@@ -40,6 +41,7 @@ export const AppProvider = ({ children }) => {
 
         if (user) {
           setLoggedInUserName(user.user_metadata.name.split(" ")[0]);
+          setLoggedInUserData(user);
         }
       } catch (error) {
         setIsLoggedIn(false);
@@ -130,6 +132,7 @@ export const AppProvider = ({ children }) => {
       value={{
         isLoggedIn,
         loggedInUserName,
+        loggedInUserData,
         loggedInUserQuizProgress,
         defaultQuestions,
         setDefaultQuestions,

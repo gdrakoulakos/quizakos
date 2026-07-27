@@ -27,11 +27,11 @@ export default function TabBar() {
       href: "/info",
       icon: <InfoIcon fontSize="medium" />,
     },
-    // {
-    //   name: isLoggedIn ? loggedInUserName : "Σύνδεση",
-    //   href: "/login",
-    //   icon: <SentimentSatisfiedAltIcon fontSize="medium" />,
-    // },
+    {
+      name: isLoggedIn ? loggedInUserName : "Σύνδεση",
+      href: "/login-register",
+      icon: <SentimentSatisfiedAltIcon fontSize="medium" />,
+    },
   ];
 
   return (
