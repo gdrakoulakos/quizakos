@@ -83,7 +83,7 @@ export default function LoginPage() {
       return;
     }
 
-    router.push("/");
+    window.location.href = "/";
   };
 
   const logout = async () => {
@@ -123,7 +123,7 @@ export default function LoginPage() {
     if (response.ok) {
       await supabase.auth.signOut();
 
-      router.push("/");
+      window.location.href = "/";
     } else {
       console.error(result.error);
     }
@@ -131,7 +131,7 @@ export default function LoginPage() {
 
   const confirmDelete = () => {
     const ok = window.confirm(
-      "Are you sure you want to permanently delete your account?",
+      "Θες σίγουρα να διαγράψεις τον λογαριασμό σου μαζί με τα βραβεία σου?",
     );
 
     if (ok) {
