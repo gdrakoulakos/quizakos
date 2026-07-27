@@ -73,15 +73,17 @@ export default function LoginPage() {
       email,
       password,
     });
+
     setIsLoading(false);
+
     if (error) {
       console.error("Login error:", error.message);
       setValidationMessage("Το email ή ο κωδικός είναι λάθος");
       setShowPopUpInfoMessage(true);
       return;
-    } else {
-      router.push("/");
     }
+
+    router.push("/");
   };
 
   const logout = async () => {

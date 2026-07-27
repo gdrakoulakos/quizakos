@@ -343,7 +343,10 @@ export default function PopUpResults({ correctAnswers, lessonAndGrade }) {
             <button className={styles.seeResultsButton}>Αποτελέσματα</button>
           </Link>
 
-          <ButtonOk buttonText={"Επιστροφή"} onClick={() => router.push("/")} />
+          <ButtonOk
+            buttonText={"Επιστροφή"}
+            onClick={() => (window.location.href = "/")}
+          />
         </div>
         <button
           className={styles.playAgainButton}

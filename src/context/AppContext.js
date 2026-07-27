@@ -31,26 +31,31 @@ export const AppProvider = ({ children }) => {
   });
 
   useEffect(() => {
-    async function checkSession() {
-      try {
-        const {
-          data: { user },
-        } = await supabase.auth.getUser();
+    const {
+      data: { subscription },
+    } = supabase.auth.onAuthStateChange((_event, session) => {
+      const user = session?.user;
 
-        setIsLoggedIn(!!user);
+      setIsLoggedIn(!!user);
 
-        if (user) {
-          setLoggedInUserName(user.user_metadata.name.split(" ")[0]);
-          setLoggedInUserData(user);
-        }
-      } catch (error) {
-        setIsLoggedIn(false);
+      if (user) {
+        setLoggedInUserName(
+          user.user_metadata?.name?.split(" ")[0] ||
+            user.user_metadata?.full_name?.split(" ")[0] ||
+            "",
+        );
+
+        setLoggedInUserData(user);
+      } else {
         setLoggedInUserName("");
+        setLoggedInUserData(null);
       }
-    }
+    });
 
-    checkSession();
-  }, [supabase]);
+    return () => {
+      subscription.unsubscribe();
+    };
+  }, []);
 
   useEffect(() => {
     async function fetchUserQuizProgress() {

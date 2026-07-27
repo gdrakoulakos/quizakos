@@ -30,7 +30,7 @@ export default function myScore() {
     } else {
       setUserQuizData(userProgressData);
     }
-  }, [supabase]);
+  }, [supabase, userProgressData, isLoggedIn, loggedInUserQuizProgress]);
 
   return (
     <motion.div
@@ -43,7 +43,7 @@ export default function myScore() {
       <PopUpAwardsInfo />
       <PopUpConfirmation />
       <h1>Το σκορ μου</h1>
-      {userProgressData.length !== 0 ? (
+      {userQuizData.length !== 0 ? (
         <CardsScore />
       ) : (
         <>
