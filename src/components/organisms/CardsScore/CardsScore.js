@@ -2,6 +2,8 @@ import CardScore from "@/components/molecules/CardScore/CardScore";
 import styles from "./CardsScore.module.css";
 import { QuizContext } from "@/context/AppContext";
 import { AnimatePresence } from "motion/react";
+import { useEffect, useState } from "react";
+import { supabase } from "@/lib/supabase";
 
 export default function CardsScore({}) {
   const {
@@ -9,9 +11,20 @@ export default function CardsScore({}) {
     setShowPopUpConfirmation,
     setPopUpMessage,
     setDeleteAllScores,
+    isLoggedIn,
+    loggedInUserQuizProgress,
   } = QuizContext();
+  const [userQuizData, setUserQuizData] = useState([]);
 
-  const sortedUserProgressData = userProgressData.sort(
+  useEffect(() => {
+    if (isLoggedIn) {
+      setUserQuizData(loggedInUserQuizProgress);
+    } else {
+      setUserQuizData(userProgressData);
+    }
+  }, [supabase]);
+
+  const sortedUserProgressData = userQuizData.sort(
     (a, b) => a.lesson_id - b.lesson_id,
   );
 

@@ -5,16 +5,32 @@ import { QuizContext } from "@/context/AppContext";
 import Image from "next/image";
 import PopUpConfirmation from "@/components/templates/PopUpConfirmation/PopUpConfirmation";
 import { motion } from "motion/react";
-import { useEffect } from "react";
+import { useEffect, useState } from "react";
 import PopUpAwardsInfo from "@/components/templates/PopUpAwardsInfo/PopUpAwardsInfo";
+import { supabase } from "@/lib/supabase";
 
 export default function myScore() {
-  const { userProgressData, showPopUpConfirmation, setDeleteAllScores } =
-    QuizContext();
+  const {
+    userProgressData,
+    showPopUpConfirmation,
+    setDeleteAllScores,
+    isLoggedIn,
+    loggedInUserQuizProgress,
+  } = QuizContext();
+
+  const [userQuizData, setUserQuizData] = useState([]);
 
   useEffect(() => {
     setDeleteAllScores(false);
   }, []);
+
+  useEffect(() => {
+    if (isLoggedIn) {
+      setUserQuizData(loggedInUserQuizProgress);
+    } else {
+      setUserQuizData(userProgressData);
+    }
+  }, [supabase]);
 
   return (
     <motion.div
