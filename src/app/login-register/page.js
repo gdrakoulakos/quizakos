@@ -2,12 +2,18 @@
 
 import { useEffect, useState } from "react";
 import { supabase } from "@/lib/supabase";
+import { useRouter } from "next/navigation";
+import styles from "./login-register.module.css";
+import EyeIcon from "@/components/atoms/Icons/EyeIcon";
+import GoogleIcon from "@/components/atoms/Icons/GoogleIcon";
 
 export default function LoginPage() {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [name, setName] = useState("");
   const [loggedUserName, setLoggedUserName] = useState(null);
+  const [isSignUpClicked, setIsSignUpClicked] = useState(false);
+  const router = useRouter();
 
   useEffect(() => {
     async function checkSession() {
@@ -62,6 +68,8 @@ export default function LoginPage() {
     if (error) {
       console.error("Login error:", error.message);
       return;
+    } else {
+      window.location.href = "/";
     }
   };
 
@@ -71,7 +79,7 @@ export default function LoginPage() {
     if (error) {
       console.error(error.message);
     } else {
-      window.location.href = "/login";
+      window.location.href = "/";
     }
   };
 
@@ -114,39 +122,62 @@ export default function LoginPage() {
   };
 
   return (
-    <main>
-      <h1>Login to Quizakos</h1>
-      <div>
-        <input
-          placeholder="Name"
-          value={name}
-          onChange={(e) => setName(e.target.value)}
-        />
-        <input
-          type="email"
-          placeholder="Email"
-          value={email}
-          onChange={(e) => setEmail(e.target.value)}
-        />
-
-        <input
-          type="password"
-          placeholder="Password"
-          value={password}
-          onChange={(e) => setPassword(e.target.value)}
-        />
-
-        <button onClick={() => signIn(email, password)}>Login</button>
-
-        <button onClick={() => signUp(email, password, name)}>Sign Up</button>
-        <button onClick={confirmDelete}>Delete Account</button>
+    <main className={styles.signInSignUpSection}>
+      <h1>Σύνδεση/Εγγραφή</h1>
+      <div className={styles.signInSignUpContainer}>
+        <div className={styles.inputContainer}>
+          {isSignUpClicked && (
+            <label className={styles.label}>
+              <span className={styles.icon}>
+                <UserIcon />
+              </span>
+              <input
+                placeholder="Name"
+                value={name}
+                onChange={(e) => setName(e.target.value)}
+                className={styles.name}
+              />
+            </label>
+          )}
+          <label className={styles.label}>
+            <input
+              type="email"
+              placeholder="Email"
+              value={email}
+              onChange={(e) => setEmail(e.target.value)}
+            />
+          </label>
+          <label className={styles.label}>
+            <span className={styles.icon}>
+              <EyeIcon />
+            </span>
+            <input
+              type="password"
+              placeholder="Password"
+              value={password}
+              onChange={(e) => setPassword(e.target.value)}
+            />
+          </label>
+          <p onClick={() => setIsSignUpClicked((prev) => !prev)}>
+            {isSignUpClicked
+              ? "Εχω λογαριασμό"
+              : "Δεν έχεις λογαριασμό; Κάνε Εγγραφή!"}
+          </p>
+        </div>
+        {!isSignUpClicked && (
+          <button onClick={() => signIn(email, password)}>Login</button>
+        )}
+        {isSignUpClicked && (
+          <button onClick={() => signUp(email, password, name)}>Sign Up</button>
+        )}
       </div>
-      {!loggedUserName && (
-        <button onClick={loginWithGoogle}>Σύνδεση με Google</button>
-      )}
+
+      <p>Διαφορετικά κάνε σύνδεση ή εγγραφή με:</p>
+      {!loggedUserName && <GoogleIcon onClick={loginWithGoogle} />}
 
       {loggedUserName && (
         <>
+          <button onClick={confirmDelete}>Delete Account</button>
           <button onClick={logout}>Logout</button>
           <p style={{ color: "white" }}>Καλωσήρθες {loggedUserName}</p>
         </>
