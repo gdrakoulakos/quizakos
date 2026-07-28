@@ -15,6 +15,7 @@ import LoadingSpinner from "@/components/organisms/LoadingSpinner/LoadingSpinner
 export default function LoginPage() {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
+  const [showPassword, setShowPassword] = useState(false);
   const [confirmationPassword, setConfirmationPassword] = useState("");
   const [validationMessage, setValidationMessage] = useState("");
   const [name, setName] = useState("");
@@ -205,10 +206,12 @@ export default function LoginPage() {
             </label>
             <label className={styles.label}>
               <span className={styles.icon}>
-                <EyeIcon />
+                <EyeIcon
+                  onClick={() => setShowPassword((prev) => !prev)}
+                />{" "}
               </span>
               <input
-                type="password"
+                type={showPassword ? "text" : "password"}
                 placeholder="Κωδικός"
                 value={password}
                 onChange={(e) => setPassword(e.target.value)}
@@ -217,10 +220,12 @@ export default function LoginPage() {
             {isSignUpClicked && (
               <label className={styles.label}>
                 <span className={styles.icon}>
-                  <EyeIcon />
+                  <EyeIcon
+                    onClick={() => setShowPassword((prev) => !prev)}
+                  />{" "}
                 </span>
                 <input
-                  type="password"
+                  type={showPassword ? "text" : "password"}
                   placeholder="Επιβεβαίωση Κωδικού"
                   value={confirmationPassword}
                   onChange={(e) => setConfirmationPassword(e.target.value)}
