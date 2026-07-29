@@ -326,7 +326,7 @@ export default function PopUpResults({ correctAnswers, lessonAndGrade }) {
           <div className={styles.loginPrompt}>
             <button
               className={styles.loginButton}
-              onClick={() => router.push("/login")}
+              onClick={() => router.push("/login-register")}
             >
               Σύνδεση
             </button>
