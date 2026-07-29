@@ -58,6 +58,7 @@
   padding: 10px;
   text-align: left;
   background-color: white;
+  animation: fadeIn 0.7s ease-in-out;
 
   .icon {
     position: absolute;
@@ -66,6 +67,10 @@
     transform: translate(-50%, -50%);
     transition: all 0.3s ease;
     color: #c5c5c5;
+  }
+
+  .icon:hover {
+    cursor: pointer;
   }
 
   input {
@@ -117,4 +122,13 @@
   font-size: 14px;
   margin: 0;
   text-align: center;
+}
+
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
 }

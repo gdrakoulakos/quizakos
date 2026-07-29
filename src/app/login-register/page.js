@@ -16,6 +16,8 @@ export default function LoginPage() {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [showPassword, setShowPassword] = useState(false);
+  const [showConfirmationPassword, setShowConfirmationPassword] =
+    useState(false);
   const [confirmationPassword, setConfirmationPassword] = useState("");
   const [validationMessage, setValidationMessage] = useState("");
   const [name, setName] = useState("");
@@ -167,7 +169,7 @@ export default function LoginPage() {
     <main className={styles.signInSignUpSection}>
       {isLoading && <LoadingSpinner message="Φόρτωση" isFullScreen={true} />}
       {showPopUpInfoMessage && <PopUpInfoMessage message={validationMessage} />}
-      <h1>{isLoggedIn ? "Προφίλ" : "Σύνδεση/Εγγραφή"}</h1>
+      <h1>{isLoggedIn ? "Προφίλ" : isSignUpClicked ? "Εγγραφή" : "Σύνδεση"}</h1>
       {isLoggedIn && (
         <div className={styles.userProfile}>
           <ButtonOk onClick={logout} buttonText="Αποσύνδεση" />
@@ -221,11 +223,11 @@ export default function LoginPage() {
               <label className={styles.label}>
                 <span className={styles.icon}>
                   <EyeIcon
-                    onClick={() => setShowPassword((prev) => !prev)}
+                    onClick={() => setShowConfirmationPassword((prev) => !prev)}
                   />{" "}
                 </span>
                 <input
-                  type={showPassword ? "text" : "password"}
+                  type={showConfirmationPassword ? "text" : "password"}
                   placeholder="Επιβεβαίωση Κωδικού"
                   value={confirmationPassword}
                   onChange={(e) => setConfirmationPassword(e.target.value)}
