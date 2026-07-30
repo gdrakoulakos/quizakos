@@ -278,15 +278,6 @@ export default function LoginPage() {
                         εδώ
                       </a>
                     </p>
-                    <p>
-                      Δεν έχεις λογαριασμό;{" "}
-                      <a
-                        onClick={() => setIsSignUpClicked((prev) => !prev)}
-                        className={styles.clickableText}
-                      >
-                        Κάνε εγγραφή
-                      </a>
-                    </p>
                   </div>
                 )
               )}
@@ -295,10 +286,21 @@ export default function LoginPage() {
           {!isSignUpClicked && (
             <>
               {!isForgotPasswordClicked ? (
-                <ButtonOk
-                  onClick={() => signIn(email, password)}
-                  buttonText="Σύνδεση"
-                />
+                <>
+                  <ButtonOk
+                    onClick={() => signIn(email, password)}
+                    buttonText="Σύνδεση"
+                  />
+                  <p>
+                    Δεν έχεις λογαριασμό;{" "}
+                    <a
+                      onClick={() => setIsSignUpClicked((prev) => !prev)}
+                      className={styles.clickableText}
+                    >
+                      Κάνε εγγραφή
+                    </a>
+                  </p>
+                </>
               ) : (
                 <ButtonOk
                   onClick={resetPassword}
