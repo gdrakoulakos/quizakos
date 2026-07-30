@@ -4,18 +4,19 @@
   width: 100%;
   display: flex;
   justify-content: center;
-  align-items: center;
+  align-items: flex-start;
   z-index: 1000;
 }
 
 .container {
   display: flex;
+  align-items: center;
   justify-content: center;
 }
 
 .closeButton {
   position: relative;
-  top: 165px;
+  top: 65px;
   right: -170;
   z-index: 1;
   border-radius: 50%;
@@ -39,7 +40,7 @@
 
 .announcementText {
   position: fixed;
-  top: 160px;
+  top: 60px;
   width: 90%;
   max-width: 340px;
   border-radius: 10px;

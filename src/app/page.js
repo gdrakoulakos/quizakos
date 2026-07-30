@@ -2,7 +2,7 @@
 import styles from "./page.module.css";
 import WelcomeBanner from "@/components/organisms/WelcomeBanner/WelcomeBanner";
 import { QuizContext } from "../context/AppContext";
-import { useEffect } from "react";
+import { useEffect, useState } from "react";
 import { motion } from "motion/react";
 import CardQuizzesSection from "@/components/templates/CardQuizzesSection/CardQuizzesSection";
 import LoadingSpinner from "@/components/organisms/LoadingSpinner/LoadingSpinner";
@@ -19,6 +19,11 @@ export default function Home() {
     setSelectedQuiz,
   } = QuizContext();
 
+  const [announcement, setAnnouncement] = useState({
+    display: false,
+    message: "",
+  });
+
   useEffect(() => {
     setCurrentInstitution("default");
     setDisplayedQuestionIndex(0);
@@ -32,10 +37,51 @@ export default function Home() {
     setSelectedQuiz(null);
   }, []);
 
+  useEffect(() => {
+    const params = new URLSearchParams(window.location.search);
+
+    let message = "";
+
+    if (params.get("loginSuccess")) {
+      message = "Επιτυχής σύνδεση";
+    }
+
+    if (params.get("signupSuccess")) {
+      message =
+        "Έλεγξε το email σου και πάτησε το link επιβεβαίωσης για να ενεργοποιήσεις τον λογαριασμό σου!";
+    }
+
+    if (!message) return;
+
+    const showTimer = setTimeout(() => {
+      setAnnouncement({
+        display: true,
+        message,
+      });
+
+      window.history.replaceState({}, "", "/");
+    }, 1500);
+
+    const hideTimer = setTimeout(() => {
+      setAnnouncement({
+        display: false,
+        message: "",
+      });
+    }, 10000);
+
+    return () => {
+      clearTimeout(showTimer);
+      clearTimeout(hideTimer);
+    };
+  }, []);
+
   return (
     <>
       <PopUpAwardsInfo />
-      <Anouncements />
+      <Anouncements
+        announcement={announcement}
+        setAnnouncement={setAnnouncement}
+      />
       <motion.div
         className={styles.homePage}
         initial={{ opacity: 0 }}

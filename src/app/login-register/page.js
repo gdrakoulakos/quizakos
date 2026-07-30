@@ -23,6 +23,7 @@ export default function LoginPage() {
   const [name, setName] = useState("");
   const [isSignUpClicked, setIsSignUpClicked] = useState(false);
   const [isLoading, setIsLoading] = useState(false);
+  const [isForgotPasswordClicked, setIsForgotPasswordClicked] = useState(false);
   const router = useRouter();
   const {
     isLoggedIn,
@@ -66,7 +67,7 @@ export default function LoginPage() {
       setShowPopUpInfoMessage(true);
       return;
     }
-    window.location.href = "/";
+    window.location.href = "/?signupSuccess=true";
   };
 
   const signIn = async (email, password) => {
@@ -86,7 +87,7 @@ export default function LoginPage() {
       return;
     }
 
-    window.location.href = "/";
+    window.location.href = "/?loginSuccess=true";
   };
 
   const logout = async () => {
@@ -140,6 +141,27 @@ export default function LoginPage() {
     if (ok) {
       deleteAccount();
     }
+  };
+
+  const resetPassword = async () => {
+    setIsLoading(true);
+
+    const { error } = await supabase.auth.resetPasswordForEmail(email, {
+      redirectTo: `${window.location.origin}/reset-password`,
+    });
+
+    setIsLoading(false);
+
+    if (error) {
+      setValidationMessage(error.message);
+      setShowPopUpInfoMessage(true);
+      return;
+    }
+
+    setValidationMessage(
+      "Σχεδόν έτοιμο! 🎉 Πάτησε το link που σου στείλαμε στο email σου για να αλλάξεις τον κωδικό σου.",
+    );
+    setShowPopUpInfoMessage(true);
   };
 
   const handleSignUp = () => {
@@ -206,19 +228,21 @@ export default function LoginPage() {
                 onChange={(e) => setEmail(e.target.value)}
               />
             </label>
-            <label className={styles.label}>
-              <span className={styles.icon}>
-                <EyeIcon
-                  onClick={() => setShowPassword((prev) => !prev)}
-                />{" "}
-              </span>
-              <input
-                type={showPassword ? "text" : "password"}
-                placeholder="Κωδικός"
-                value={password}
-                onChange={(e) => setPassword(e.target.value)}
-              />
-            </label>
+            {!isForgotPasswordClicked && (
+              <label className={styles.label}>
+                <span className={styles.icon}>
+                  <EyeIcon
+                    onClick={() => setShowPassword((prev) => !prev)}
+                  />{" "}
+                </span>
+                <input
+                  type={showPassword ? "text" : "password"}
+                  placeholder="Κωδικός"
+                  value={password}
+                  onChange={(e) => setPassword(e.target.value)}
+                />
+              </label>
+            )}
             {isSignUpClicked && (
               <label className={styles.label}>
                 <span className={styles.icon}>
@@ -243,25 +267,45 @@ export default function LoginPage() {
                   Εχω λογαριασμό
                 </p>
               ) : (
-                <div className={styles.signUpPromptContainer}>
-                  <p>
-                    Δεν έχεις λογαριασμό;{" "}
-                    <a
-                      onClick={() => setIsSignUpClicked((prev) => !prev)}
-                      className={styles.clickableText}
-                    >
-                      Κάνε εγγραφή
-                    </a>
-                  </p>
-                </div>
+                !isForgotPasswordClicked && (
+                  <div className={styles.signUpPromptContainer}>
+                    <p>
+                      Ξέχασες τον κωδικό σου; Κάνε κλικ{" "}
+                      <a
+                        onClick={() => setIsForgotPasswordClicked(true)}
+                        className={styles.clickableText}
+                      >
+                        εδώ
+                      </a>
+                    </p>
+                    <p>
+                      Δεν έχεις λογαριασμό;{" "}
+                      <a
+                        onClick={() => setIsSignUpClicked((prev) => !prev)}
+                        className={styles.clickableText}
+                      >
+                        Κάνε εγγραφή
+                      </a>
+                    </p>
+                  </div>
+                )
               )}
             </div>
           </div>
           {!isSignUpClicked && (
-            <ButtonOk
-              onClick={() => signIn(email, password)}
-              buttonText="Συνδεση"
-            />
+            <>
+              {!isForgotPasswordClicked ? (
+                <ButtonOk
+                  onClick={() => signIn(email, password)}
+                  buttonText="Σύνδεση"
+                />
+              ) : (
+                <ButtonOk
+                  onClick={resetPassword}
+                  buttonText="Αποστολή email αλλαγής κωδικού"
+                />
+              )}
+            </>
           )}
           {isSignUpClicked && (
             <ButtonOk onClick={handleSignUp} buttonText="Εγγραφή" />

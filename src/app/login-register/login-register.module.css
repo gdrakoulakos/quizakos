@@ -20,7 +20,7 @@
 
 .signUpPromptContainer {
   display: flex;
-  flex-direction: row;
+  flex-direction: column;
   gap: 5px;
 }
 

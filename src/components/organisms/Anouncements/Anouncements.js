@@ -4,9 +4,7 @@ import { useEffect, useState } from "react";
 import styles from "./Anouncements.module.css";
 import { AnimatePresence, motion } from "motion/react";
 
-export default function Anouncements() {
-  const [showAnnouncement, setShowAnnouncement] = useState(false);
-
+export default function Anouncements({ announcement, setAnnouncement }) {
   const motionProps = {
     initial: { opacity: 0 },
     animate: { opacity: 1 },
@@ -14,17 +12,9 @@ export default function Anouncements() {
     transition: { duration: 0.2 },
   };
 
-  useEffect(() => {
-    const timer = setTimeout(() => {
-      setShowAnnouncement(true);
-    }, 3000);
-
-    return () => clearTimeout(timer);
-  }, []);
-
   return (
     <AnimatePresence mode="wait">
-      {showAnnouncement && (
+      {announcement.display && (
         <motion.div
           className={styles.announcementsContainer}
           {...motionProps}
@@ -33,14 +23,11 @@ export default function Anouncements() {
           <div className={styles.container}>
             <button
               className={styles.closeButton}
-              onClick={() => setShowAnnouncement(false)}
+              onClick={() => setAnnouncement({ display: false, message: "" })}
             >
               ×
             </button>
-            <p className={styles.announcementText}>
-              Ο Quizakos μας βρίσκεται σε στάδιο ανάπτυξης και οι ερωτήσεις του
-              μπορεί να περιέχουν λάθη.
-            </p>
+            <p className={styles.announcementText}>{announcement.message}</p>
           </div>
         </motion.div>
       )}
