@@ -7,7 +7,7 @@ const AppContext = createContext();
 export const AppProvider = ({ children }) => {
   const [isLoggedIn, setIsLoggedIn] = useState(false);
   const [loggedInUserName, setLoggedInUserName] = useState("");
-  const [loggedInUserData, setLoggedInUserData] = useState("");
+  const [loggedInUserData, setLoggedInUserData] = useState(null);
   const [loggedInUserQuizProgress, setLoggedInUserQuizProgress] = useState([]);
   const [currentInstitution, setCurrentInstitution] = useState(null);
   const [defaultQuizData, setDefaultQuizData] = useState([]);
@@ -62,21 +62,24 @@ export const AppProvider = ({ children }) => {
   }, []);
 
   useEffect(() => {
-    async function fetchUserQuizProgress() {
-      const { data, error } = await supabase
-        .from("user_lesson_progress")
-        .select("*");
+    fetchUserQuizProgress();
+  }, [loggedInUserData]);
 
-      if (error) {
-        console.error("Error fetching quiz progress:", error);
-        return;
-      }
+  const fetchUserQuizProgress = async () => {
+    if (!loggedInUserData?.id) return;
 
-      setLoggedInUserQuizProgress(data);
+    const { data, error } = await supabase
+      .from("user_lesson_progress")
+      .select("*")
+      .eq("user_id", loggedInUserData.id);
+
+    if (error) {
+      console.error("Error fetching quiz progress:", error);
+      return;
     }
 
-    fetchUserQuizProgress();
-  }, [supabase]);
+    setLoggedInUserQuizProgress(data);
+  };
 
   useEffect(() => {
     const loadProgress = () => {
@@ -143,6 +146,7 @@ export const AppProvider = ({ children }) => {
         loggedInUserName,
         loggedInUserData,
         loggedInUserQuizProgress,
+        fetchUserQuizProgress,
         defaultQuestions,
         setDefaultQuestions,
         currentInstitutionData,

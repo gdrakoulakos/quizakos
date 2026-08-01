@@ -66,6 +66,7 @@ export default function PopUpResults({ correctAnswers, lessonAndGrade }) {
     const newData = {
       user_id: user.id,
       lesson_id: selectedQuizId,
+      lesson_and_grade: lessonAndGrade,
       username: loggedInUserName,
 
       best_score: existing

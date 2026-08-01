@@ -5,7 +5,7 @@ import { AnimatePresence } from "motion/react";
 import { useEffect, useState } from "react";
 import { supabase } from "@/lib/supabase";
 
-export default function CardsScore({}) {
+export default function CardsScore({ userQuizData }) {
   const {
     userProgressData,
     setShowPopUpConfirmation,
@@ -14,15 +14,6 @@ export default function CardsScore({}) {
     isLoggedIn,
     loggedInUserQuizProgress,
   } = QuizContext();
-  const [userQuizData, setUserQuizData] = useState([]);
-
-  useEffect(() => {
-    if (isLoggedIn) {
-      setUserQuizData(loggedInUserQuizProgress);
-    } else {
-      setUserQuizData(userProgressData);
-    }
-  }, [supabase]);
 
   const sortedUserProgressData = userQuizData.sort(
     (a, b) => a.lesson_id - b.lesson_id,

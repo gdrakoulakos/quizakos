@@ -44,7 +44,7 @@ export default function myScore() {
       <PopUpConfirmation />
       <h1>Το σκορ μου</h1>
       {userQuizData.length !== 0 ? (
-        <CardsScore />
+        <CardsScore userQuizData={userQuizData} />
       ) : (
         <>
           <div className={styles.noScore}>

@@ -40,7 +40,7 @@ export default function TabBar() {
       animate={{ opacity: 1 }}
       transition={{ duration: 0.5, delay: 1.5 }}
     >
-      {isDesktop && <Logo link="/" />}
+      {isDesktop && <Logo link="/" width={135} height={40} />}
       <div className={styles.menuOptionsContainer}>
         {tabBarMenuItems.map((item) => (
           <Link key={item.name} href={item.href} className={styles.menuOption}>

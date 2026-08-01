@@ -129,11 +129,10 @@ export default function quiz() {
       {selectedQuiz ? (
         <AnimatePresence mode="wait">
           <div className={styles.quizSection}>
-            {!isDesktop && (
-              <div className={styles.logoWrapper}>
-                <Logo link="/" />{" "}
-              </div>
-            )}
+            <div className={styles.logoWrapper}>
+              <Logo link="/" width={190} height={55} />{" "}
+            </div>
+
             {showPopUpInfoMessage && (
               <PopUpInfoMessage
                 message="Εντόπισες κάποιο λάθος στη συγκεκριμένη ερώτηση; Στείλε email στο quizakos@gmail.com αναφέροντας το ID της ερώτησης:"

@@ -20,7 +20,10 @@ export default function RootLayout({ children }) {
           dangerouslySetInnerHTML={{ __html: JSON.stringify(structuredData) }}
         />
       </head>
-      <body className={commissioner.className}>
+      <body
+        className={commissioner.className}
+        style={{ boxSizing: "border-box" }}
+      >
         <div className="background" />
         <Providers>
           <TabBar />

@@ -2,20 +2,18 @@
   width: 100%;
   height: 90dvh;
   display: flex;
-  justify-content: center;
   align-items: center;
   box-sizing: border-box;
   position: relative;
+  flex-direction: column;
+  gap: 10px;
+  margin-top: 15px;
 }
 
 .logoWrapper {
-  position: absolute;
-  top: 10px;
-  left: 10px;
   z-index: 10;
   display: flex;
   align-items: center;
-  width: 95%;
 }
 
 .logoWrapper a {
