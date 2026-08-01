@@ -11,42 +11,71 @@ export default function CardQuizzes({ grades }) {
 
   useEffect(() => {
     if (!ref.current) return;
-    const cardsFitInContainer =
-      ref.current.scrollWidth - ref.current.clientWidth === 0;
 
-    if (cardsFitInContainer) {
-      setShowSwiper({ left: false, right: false });
-      setContainerClass(styles.alignCenter);
-    }
-  }, [ref]);
+    const container = ref.current;
+
+    const checkIfCardsFit = () => {
+      const cardsFitInContainer =
+        container.scrollWidth <= container.clientWidth;
+
+      if (cardsFitInContainer) {
+        setShowSwiper({ left: false, right: false });
+        setContainerClass(styles.alignCenter);
+      } else {
+        setContainerClass("");
+        setShowSwiper({ left: false, right: true });
+      }
+    };
+
+    checkIfCardsFit();
+
+    const resizeObserver = new ResizeObserver(() => {
+      checkIfCardsFit();
+    });
+
+    resizeObserver.observe(container);
+
+    return () => resizeObserver.disconnect();
+  }, []);
 
   useEffect(() => {
     if (!ref.current) return;
 
     const container = ref.current;
 
-    const handleScroll = () => {
-      const current = container.scrollLeft;
-      const max = container.scrollWidth - container.clientWidth;
+    const updateSwiper = () => {
+      const fits = container.scrollWidth <= container.clientWidth;
 
-      if (current <= 0) {
-        setTimeout(() => {
-          setShowSwiper({ left: false, right: true });
-        }, 200);
-      } else if (Math.ceil(current) >= max) {
-        setTimeout(() => {
-          setShowSwiper({ left: true, right: false });
-        }, 200);
+      if (fits) {
+        setContainerClass(styles.alignCenter);
+        setShowSwiper({ left: false, right: false });
       } else {
-        setTimeout(() => {
+        setContainerClass("");
+
+        const current = container.scrollLeft;
+        const max = container.scrollWidth - container.clientWidth;
+
+        if (current <= 0) {
+          setShowSwiper({ left: false, right: true });
+        } else if (Math.ceil(current) >= max) {
+          setShowSwiper({ left: true, right: false });
+        } else {
           setShowSwiper({ left: true, right: true });
-        }, 200);
+        }
       }
     };
 
-    container.addEventListener("scroll", handleScroll);
+    updateSwiper();
 
-    return () => container.removeEventListener("scroll", handleScroll);
+    const resizeObserver = new ResizeObserver(updateSwiper);
+    resizeObserver.observe(container);
+
+    container.addEventListener("scroll", updateSwiper);
+
+    return () => {
+      resizeObserver.disconnect();
+      container.removeEventListener("scroll", updateSwiper);
+    };
   }, []);
 
   return (
