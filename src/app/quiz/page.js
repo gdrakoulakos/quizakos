@@ -9,6 +9,7 @@ import { supabase } from "@/lib/supabase";
 import { useCookies } from "react-cookie";
 import { useRouter } from "next/navigation";
 import PopUpInfoMessage from "@/components/templates/PopUpInfoMessage/PopUpInfoMessage";
+import Logo from "@/components/atoms/Icons/Logo/Logo";
 
 export default function quiz() {
   const {
@@ -24,6 +25,7 @@ export default function quiz() {
     showPopUpInfoMessage,
     displayedQuestionId,
     setDisplayedQuestionId,
+    isDesktop,
   } = QuizContext();
 
   const [cookies, ,] = useCookies(["quiz_id"]);
@@ -127,6 +129,11 @@ export default function quiz() {
       {selectedQuiz ? (
         <AnimatePresence mode="wait">
           <div className={styles.quizSection}>
+            {!isDesktop && (
+              <div className={styles.logoWrapper}>
+                <Logo link="/" />{" "}
+              </div>
+            )}
             {showPopUpInfoMessage && (
               <PopUpInfoMessage
                 message="Εντόπισες κάποιο λάθος στη συγκεκριμένη ερώτηση; Στείλε email στο quizakos@gmail.com αναφέροντας το ID της ερώτησης:"

@@ -1,14 +1,36 @@
-.menuContainer {
-  width: 100vw;
+.menuSection {
+  width: 100%;
   height: 60px;
+  box-sizing: border-box;
   display: flex;
   position: fixed;
   background-color: #ffffffa8;
   backdrop-filter: blur(2px);
-  justify-content: space-around;
+  justify-content: space-between;
   z-index: 10;
-  align-content: center;
   align-items: center;
+  padding: 0 20px;
+}
+
+.menuDesktop {
+  top: 0;
+}
+
+.menuMobile {
+  bottom: 0;
+  padding: 0 10px;
+}
+
+.menuMobile .menuOptionsContainer {
+  justify-content: flex-end;
+}
+
+.menuOptionsContainer {
+  display: flex;
+  flex: 2;
+  justify-content: space-evenly;
+  align-items: center;
+  gap: 30px;
 }
 
 .myQuizzes {
@@ -19,31 +41,61 @@
   text-decoration: none;
 }
 
-.logoIcon {
-  margin-left: 10px;
-  height: auto;
-}
-
 .menuOption {
   display: flex;
   flex-direction: column;
   align-items: center;
   text-decoration: none;
   color: #695597;
+  min-width: 55px;
 }
 
 .menuOptionText {
   font-size: small;
 }
 
-@media (max-width: 1000px) {
-  .menuContainer {
-    bottom: 0;
-  }
+.accountContainer {
+  flex: 1;
+  display: flex;
+  align-items: center;
+  justify-content: flex-end;
 }
 
-@media (min-width: 1000px) {
-  .menuContainer {
-    top: 0;
-  }
+.accountButton {
+  border-radius: 20px;
+  display: flex;
+  text-align: center;
+  align-items: center;
+  justify-content: center;
+  background: linear-gradient(135deg, #ffb077, #ff7d1e);
+  box-shadow: 0 0 2px 1px #ffad72;
+  color: white;
+  cursor: pointer;
+  text-decoration: none;
+  border: none;
+  font-weight: bold;
+  min-width: 80px;
+}
+
+.accountButton:hover {
+  background: linear-gradient(135deg, #e19c6b, #d16518);
+}
+
+.accountButton span {
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.accountButtonSmall {
+  max-width: 80px;
+  height: 40px;
+  padding: 5px 10px;
+  font-size: 13px;
+}
+
+.accountButtonLarge {
+  max-width: 150px;
+  padding: 10px 20px;
+  font-size: large;
 }

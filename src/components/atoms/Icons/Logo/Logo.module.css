@@ -1,0 +1,6 @@
+.logoContainer {
+  flex: 1;
+  display: flex;
+  align-items: center;
+  z-index: 10;
+}

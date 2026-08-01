@@ -1,5 +1,6 @@
 const { createContext, useContext, useState, useEffect } = require("react");
 import { supabase } from "@/lib/supabase";
+import { useMediaQuery } from "react-responsive";
 
 const AppContext = createContext();
 
@@ -29,6 +30,9 @@ export const AppProvider = ({ children }) => {
     totalAnswers: 0,
     incorrectAnswersData: [],
   });
+  const isMobile = useMediaQuery({ maxWidth: 767 });
+  const isTablet = useMediaQuery({ minWidth: 768, maxWidth: 1023 });
+  const isDesktop = useMediaQuery({ minWidth: 1024 });
 
   useEffect(() => {
     const {
@@ -169,6 +173,9 @@ export const AppProvider = ({ children }) => {
         setShowPopUpInfoMessage,
         displayedQuestionId,
         setDisplayedQuestionId,
+        isMobile,
+        isTablet,
+        isDesktop,
       }}
     >
       {children}

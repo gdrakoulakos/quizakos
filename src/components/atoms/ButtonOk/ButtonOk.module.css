@@ -1,6 +1,4 @@
 .okButton {
-  width: 150px;
-  height: 40px;
   border-radius: 20px;
   display: flex;
   text-align: center;
@@ -11,6 +9,17 @@
   color: white;
   cursor: pointer;
   text-decoration: none;
+  border: none;
+  font-weight: bold;
+  padding: 10px 20px;
+}
+
+.small {
+  font-size: medium;
+}
+
+.large {
+  font-size: large;
 }
 
 .okButton:hover {
