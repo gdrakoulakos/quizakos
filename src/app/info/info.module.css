@@ -3,6 +3,7 @@
   flex-direction: column;
   align-items: center;
   margin-bottom: 60px;
+  padding: 0 20px;
 }
 
 .infoBody {
@@ -15,12 +16,18 @@
   box-shadow: 0 0 2px 3px #d5d5d5;
   padding: 0 20px;
   border-radius: 20px;
-  max-width: 310px;
+  max-width: 510px;
 }
 
 .infoBody p {
   color: white;
   font-size: 15px;
+}
+
+.faqContainer {
+  display: flex;
+  flex-direction: column;
+  gap: 5px;
 }
 
 .copyRights {
