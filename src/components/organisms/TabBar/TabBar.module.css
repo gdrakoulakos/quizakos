@@ -12,13 +12,9 @@
   padding: 0 20px;
 }
 
-.menuDesktop {
-  top: 0;
-}
-
-.menuMobile {
-  bottom: 0;
-  padding: 0 10px;
+.logoWrapper {
+  display: flex;
+  flex: 1;
 }
 
 .menuMobile .menuOptionsContainer {
@@ -74,7 +70,9 @@
   text-decoration: none;
   border: none;
   font-weight: bold;
-  min-width: 80px;
+  min-width: 120px;
+  height: 40px;
+  font-size: 16px;
 }
 
 .accountButton:hover {
@@ -98,4 +96,34 @@
   max-width: 190px;
   padding: 10px 20px;
   font-size: large;
+}
+
+@media (min-width: 1024px) {
+  .menuSection {
+    top: 0;
+  }
+}
+
+@media (max-width: 1024px) {
+  .menuSection {
+    bottom: 0;
+    padding: 0 10px;
+  }
+
+  .menuOptionsContainer {
+    justify-content: flex-start;
+    gap: 20px;
+  }
+
+  .logoWrapper {
+    display: none;
+  }
+
+  .accountButton {
+    max-width: 95px;
+    min-width: 80px;
+    height: 45px;
+    padding: 5px 10px;
+    font-size: 13px;
+  }
 }

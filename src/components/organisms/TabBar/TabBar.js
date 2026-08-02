@@ -33,14 +33,15 @@ export default function TabBar() {
 
   return (
     <motion.div
-      className={`${styles.menuSection} ${
-        isDesktop ? styles.menuDesktop : styles.menuMobile
-      }`}
+      className={styles.menuSection}
       initial={{ opacity: 0 }}
       animate={{ opacity: 1 }}
       transition={{ duration: 0.5, delay: 1.5 }}
     >
-      {isDesktop && <Logo link="/" width={135} height={40} />}
+      <div className={styles.logoWrapper}>
+        <Logo link="/" width={135} height={40} />
+      </div>
+
       <div className={styles.menuOptionsContainer}>
         {tabBarMenuItems.map((item) => (
           <Link key={item.name} href={item.href} className={styles.menuOption}>
@@ -49,13 +50,10 @@ export default function TabBar() {
           </Link>
         ))}
       </div>
+
       <div className={styles.accountContainer}>
         <Link href={"/login-register"} className={styles.menuOption}>
-          <button
-            className={`${styles.accountButton} ${
-              isDesktop ? styles.accountButtonLarge : styles.accountButtonSmall
-            }`}
-          >
+          <button className={styles.accountButton}>
             <span>{isLoggedIn ? loggedInUserName : "Σύνδεση"}</span>
           </button>
         </Link>
