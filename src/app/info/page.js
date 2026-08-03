@@ -15,8 +15,8 @@ export default function info() {
     >
       <h1>Πληροφορίες</h1>
       <p className={styles.infoIntro}>
-        Εδώ απαντάμε στις πιο συχνές ερωτήσεις για να γνωρίσεις καλύτερα το
-        Quizakos.
+        Εδώ απαντάμε στις πιο συχνές ερωτήσεις για να γνωρίσεις καλύτερα τον
+        Quizako.
       </p>
       <div className={styles.infoBody}>
         <div className={styles.faqContainer}>

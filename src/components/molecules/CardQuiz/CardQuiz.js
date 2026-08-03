@@ -2,7 +2,7 @@ import ButtonPlay from "@/components/atoms/ButtonPlay/ButtonPlay";
 import styles from "../CardQuiz/CardQuiz.module.css";
 import QuizImage from "@/components/atoms/QuizImage/QuizImage";
 import Image from "next/image";
-import { useEffect, useRef, useState } from "react";
+import { useEffect, useState } from "react";
 import { QuizContext } from "@/context/AppContext";
 import Award from "../../atoms/Award/Award";
 
@@ -23,105 +23,68 @@ export default function CardQuiz({
   const [awards, setAwards] = useState([]);
   const [goldenRibbonAward, setGoldenRibbonAward] = useState(false);
   const [userQuizProgress, setUserQuizProgress] = useState(null);
-  const lessonExistsInStoredResults = userProgressData.find(
+  const allLessonsResults = isLoggedIn
+    ? loggedInUserQuizProgress
+    : userProgressData;
+  const lessonsResults = allLessonsResults.find(
     (lesson) => lesson.lesson_id === id,
   );
-  const awardsRendered = useRef(false);
 
   useEffect(() => {
-    let currentProgress = null;
-
-    if (isLoggedIn) {
-      if (loggedInUserQuizProgress) {
-        currentProgress = loggedInUserQuizProgress.find(
-          (progress) => progress.lesson_id === id,
-        );
-
-        setUserQuizProgress(currentProgress);
-      } else {
-        setAwards([
-          { awardName: "uncompleted", img: "book-uncompleted" },
-          { awardName: "no-award", img: "medal-disabled-4" },
-        ]);
-        return;
-      }
-    } else if (!isLoggedIn && !lessonExistsInStoredResults) {
+    if (!lessonsResults) {
       setAwards([
         { awardName: "uncompleted", img: "book-uncompleted" },
         { awardName: "no-award", img: "medal-disabled-4" },
       ]);
       return;
-    } else {
-      currentProgress = lessonExistsInStoredResults;
-      setUserQuizProgress(currentProgress);
     }
-
-    if (!currentProgress) return;
-
-    if (awardsRendered.current) return;
-
-    awardsRendered.current = true;
-
-    if (currentProgress.stars > 0) {
-      setStarsCounter(currentProgress.stars);
-    }
-
-    if (currentProgress.best_score >= 60) {
-      setAwards((prev) => [
-        ...prev,
-        {
-          awardName: "completed",
-          img: "book-completed",
-        },
-      ]);
-
-      if (currentProgress.best_score < 80) {
-        setAwards((prev) => [
-          ...prev,
-          {
-            awardName: "no-award",
-            img: "medal-disabled-4",
-          },
-        ]);
-      }
-    }
-
-    if (currentProgress.silver_medals_counter >= 1) {
-      setAwards((prev) => [
-        ...prev,
-        {
-          awardName: "silverMedal",
-          img: "silver-medal",
-          count: currentProgress.silver_medals_counter,
-        },
-      ]);
-    }
-
-    if (currentProgress.gold_medals_counter >= 1) {
-      setAwards((prev) => [
-        ...prev,
-        {
-          awardName: "goldMedal",
-          img: "gold-medal",
-          count: currentProgress.gold_medals_counter,
-        },
-      ]);
-    }
-
-    if (
-      currentProgress.gold_medals_counter >= 1 &&
-      currentProgress.stars >= 1000
-    ) {
-      setGoldenRibbonAward(true);
-    }
-
-    if (currentProgress.best_score < 60) {
+    if (lessonsResults.quiz_completed === false) {
       setAwards([
         { awardName: "uncompleted", img: "book-uncompleted" },
         { awardName: "no-award", img: "medal-disabled-4" },
       ]);
     }
-  }, [loggedInUserQuizProgress, isLoggedIn, lessonExistsInStoredResults]);
+    if (lessonsResults.quiz_completed) {
+      setAwards([
+        {
+          awardName: "completed",
+          img: "book-completed",
+        },
+      ]);
+    }
+    if (lessonsResults.quiz_completed && lessonsResults.best_score < 80) {
+      setAwards((prev) => [
+        ...prev,
+        { awardName: "no-award", img: "medal-disabled-4" },
+      ]);
+    }
+    if (lessonsResults.stars > 0) {
+      setStarsCounter(lessonsResults.stars);
+    }
+    if (lessonsResults.gold_medals_counter > 0) {
+      setAwards((prev) => [
+        ...prev,
+        {
+          awardName: "goldMedal",
+          img: "gold-medal",
+          count: lessonsResults.gold_medals_counter,
+        },
+      ]);
+    }
+    if (lessonsResults.silver_medals_counter > 0) {
+      setAwards((prev) => [
+        ...prev,
+        {
+          awardName: "silverMedal",
+          img: "silver-medal",
+          count: lessonsResults.silver_medals_counter,
+        },
+      ]);
+    }
+    if (lessonsResults.golden_ribbon) {
+      setGoldenRibbonAward(true);
+    }
+  }, [isLoggedIn, lessonsResults]);
 
   return (
     <div
