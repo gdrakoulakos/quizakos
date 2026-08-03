@@ -5,7 +5,7 @@ import { motion, AnimatePresence } from "motion/react";
 import KeyboardArrowDownIcon from "@mui/icons-material/KeyboardArrowDown";
 import KeyboardArrowUpIcon from "@mui/icons-material/KeyboardArrowUp";
 
-export default function Accordion({ question, answer }) {
+export default function Accordion({ question, answer, id }) {
   const [showAnswer, setShowAnswer] = useState(false);
 
   const toggleAccordion = () => {
@@ -15,7 +15,9 @@ export default function Accordion({ question, answer }) {
   return (
     <div className={styles.accordionContainer}>
       <div className={styles.questionContainer} onClick={toggleAccordion}>
-        <div className={styles.question}>{question}</div>
+        <div className={styles.question}>
+          {id}. {question}
+        </div>
         {showAnswer ? <KeyboardArrowUpIcon /> : <KeyboardArrowDownIcon />}
       </div>
       <AnimatePresence>
