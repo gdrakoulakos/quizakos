@@ -5,13 +5,13 @@ import Link from "next/link";
 import { motion } from "motion/react";
 import { useEffect, useRef, useState } from "react";
 import { QuizContext } from "@/context/AppContext";
-import { useLaunchConfetti } from "@/customHooks";
 import Award from "@/components/atoms/Award/Award";
 import ReplayIcon from "@mui/icons-material/Replay";
 import PopUpAwardsInfo from "../PopUpAwardsInfo/PopUpAwardsInfo";
 import Typography from "@/components/atoms/Typography/Typography";
 import { useRouter } from "next/navigation";
 import { supabase } from "@/lib/supabase";
+import { getQuizResultPresentation } from "@/utils/getQuizResultPresentation";
 
 export default function PopUpResults({ correctAnswers, lessonAndGrade }) {
   const {
@@ -27,22 +27,58 @@ export default function PopUpResults({ correctAnswers, lessonAndGrade }) {
   const [resultImg, setResultImg] = useState("/images/quizakos/guizakos1.png");
   const [medal, setMedal] = useState(null);
   const [hoppingEffect, setHoppingEffect] = useState(false);
-  const launchConfetti = useLaunchConfetti;
-  const hasAwardedRibbon = useRef(false);
   const [alreadyPlayedQuizData, setAlreadyPlayedQuizData] = useState({
     isAlreadyPlayed: null,
     data: null,
   });
+  const [goldenRibbon, setGoldenRibbon] = useState({
+    isAlreadyAwarded: false,
+    awardedNow: false,
+  });
   const [isUserDataFetched, setIsUserDataFetched] = useState(false);
+  const [quizProgressData, setQuizProgressData] = useState(null);
   const totalAnswersLength = clickedAnswersResults.totalAnswers;
   const correctAnswersLength = clickedAnswersResults.correctAnswers;
   const scorePercentage = (correctAnswersLength / totalAnswersLength) * 100;
   const hasStoredResult = useRef(false);
   const hasSavedToSupabase = useRef(false);
-  const lessonExistsInStoredResults = userProgressData.find(
-    (lesson) => lesson.lesson_id === selectedQuizId,
+  const currentUserQuizProgress = isLoggedIn
+    ? loggedInUserQuizProgress
+    : userProgressData;
+
+  const savedCurrentQuizProgress = currentUserQuizProgress.find(
+    (quiz) => quiz.lesson_id === selectedQuizId,
   );
   const router = useRouter();
+
+  useEffect(() => {
+    const starsEarned =
+      correctAnswersLength * 10 + (scorePercentage === 100 ? 50 : 0);
+    setQuizProgressData({
+      lesson_id: selectedQuizId,
+      lesson_and_grade: lessonAndGrade,
+      best_score: savedCurrentQuizProgress
+        ? Math.max(scorePercentage, savedCurrentQuizProgress.best_score)
+        : scorePercentage,
+      stars: savedCurrentQuizProgress
+        ? Number(savedCurrentQuizProgress.stars) + starsEarned
+        : starsEarned,
+      gold_medals_counter:
+        scorePercentage === 100
+          ? (savedCurrentQuizProgress?.gold_medals_counter || 0) + 1
+          : savedCurrentQuizProgress?.gold_medals_counter || 0,
+      silver_medals_counter:
+        scorePercentage >= 80 && scorePercentage < 100
+          ? (savedCurrentQuizProgress?.silver_medals_counter || 0) + 1
+          : savedCurrentQuizProgress?.silver_medals_counter || 0,
+      quiz_completed:
+        scorePercentage >= 60 || savedCurrentQuizProgress?.best_score >= 60,
+    });
+  }, [scorePercentage]);
+
+  useEffect(() => {
+    let goldenRibbonData;
+  }, []);
 
   async function saveQuizProgress() {
     if (!isLoggedIn || hasSavedToSupabase.current) return;
@@ -53,46 +89,17 @@ export default function PopUpResults({ correctAnswers, lessonAndGrade }) {
       data: { user },
     } = await supabase.auth.getUser();
 
-    if (!user) return;
+    if (!user || !quizProgressData) return;
 
-    // Get existing progress from state
-    const existing = loggedInUserQuizProgress.find(
-      (item) => item.lesson_id === selectedQuizId,
-    );
-
-    const starsEarned =
-      correctAnswersLength * 10 + (scorePercentage === 100 ? 50 : 0);
-
-    const newData = {
+    const databaseQuizProgress = {
+      ...quizProgressData,
       user_id: user.id,
-      lesson_id: selectedQuizId,
-      lesson_and_grade: lessonAndGrade,
       username: loggedInUserName,
-
-      best_score: existing
-        ? Math.max(scorePercentage, existing.best_score)
-        : scorePercentage,
-
-      stars: existing ? Number(existing.stars) + starsEarned : starsEarned,
-
-      gold_medals_counter:
-        scorePercentage === 100
-          ? (existing?.gold_medals_counter || 0) + 1
-          : existing?.gold_medals_counter || 0,
-
-      silver_medals_counter:
-        scorePercentage >= 80 && scorePercentage < 100
-          ? (existing?.silver_medals_counter || 0) + 1
-          : existing?.silver_medals_counter || 0,
-
-      golden_ribbon: existing?.golden_ribbon || false,
-
-      quiz_completed: scorePercentage >= 60 || existing?.best_score >= 60,
     };
 
     const { error } = await supabase
       .from("user_lesson_progress")
-      .upsert(newData, {
+      .upsert(databaseQuizProgress, {
         onConflict: "user_id,lesson_id",
       });
 
@@ -103,88 +110,29 @@ export default function PopUpResults({ correctAnswers, lessonAndGrade }) {
   }
 
   useEffect(() => {
+    if (!quizProgressData) return;
+
     saveQuizProgress();
-  }, [loggedInUserQuizProgress]);
+  }, [quizProgressData]);
 
   useEffect(() => {
-    if (!selectedQuizId || hasStoredResult.current) return;
+    if (
+      !selectedQuizId ||
+      hasStoredResult.current ||
+      isLoggedIn ||
+      !quizProgressData
+    )
+      return;
     hasStoredResult.current = true;
-
-    const newResults = {
-      lesson_id: selectedQuizId,
-      best_score: scorePercentage,
-      stars: correctAnswersLength * 10,
-      lesson_and_grade: lessonAndGrade,
-      gold_medals_counter: scorePercentage === 100 ? 1 : 0,
-      silver_medals_counter:
-        scorePercentage >= 80 && scorePercentage <= 90 ? 1 : 0,
-      golden_ribbon: false,
-      quiz_completed: scorePercentage >= 60,
-    };
 
     let updatedResults;
 
-    if (!lessonExistsInStoredResults) {
-      updatedResults = [...userProgressData, newResults];
-    } else if (lessonExistsInStoredResults.best_score < scorePercentage) {
+    if (!savedCurrentQuizProgress) {
+      updatedResults = [...userProgressData, quizProgressData];
+    } else if (savedCurrentQuizProgress) {
       updatedResults = userProgressData.map((lesson) =>
-        lesson.lesson_id === selectedQuizId
-          ? {
-              ...lesson,
-              best_score: scorePercentage,
-              stars:
-                Number(lesson.stars) +
-                correctAnswersLength * 10 +
-                (scorePercentage === 100 ? 50 : 0),
-              gold_medals_counter:
-                scorePercentage === 100
-                  ? (lesson.gold_medals_counter || 0) + 1
-                  : lesson.gold_medals_counter,
-              quiz_completed: true,
-              silver_medals_counter:
-                scorePercentage >= 80 && scorePercentage < 100
-                  ? (lesson.silver_medals_counter || 0) + 1
-                  : lesson.silver_medals_counter,
-            }
-          : lesson,
+        lesson.lesson_id === selectedQuizId ? quizProgressData : lesson,
       );
-    } else {
-      updatedResults = userProgressData.map((lesson) =>
-        lesson.lesson_id === selectedQuizId
-          ? {
-              ...lesson,
-              stars:
-                Number(lesson.stars) +
-                correctAnswersLength * 10 +
-                (scorePercentage === 100 ? 50 : 0),
-              gold_medals_counter:
-                scorePercentage === 100
-                  ? (lesson.gold_medals_counter || 0) + 1
-                  : lesson.gold_medals_counter,
-              quiz_completed: true,
-              silver_medals_counter:
-                scorePercentage >= 80 && scorePercentage < 100
-                  ? (lesson.silver_medals_counter || 0) + 1
-                  : lesson.silver_medals_counter,
-            }
-          : lesson,
-      );
-    }
-
-    const updatedLesson = updatedResults.find(
-      (l) => l.lesson_id === selectedQuizId,
-    );
-
-    if (
-      updatedLesson &&
-      !hasAwardedRibbon.current &&
-      updatedLesson.gold_medals_counter >= 1 &&
-      updatedLesson.stars >= 1000 &&
-      !updatedLesson.golden_ribbon
-    ) {
-      hasAwardedRibbon.current = true;
-      updatedLesson.golden_ribbon = true;
-      setMedal({ awardName: "goldenRibbon", img: "golden-ribbon-2" });
     }
 
     localStorage.setItem("quiz_results", JSON.stringify(updatedResults));
@@ -194,56 +142,17 @@ export default function PopUpResults({ correctAnswers, lessonAndGrade }) {
     const lessonResults = storedResults.find(
       (lesson) => lesson.lesson_id === selectedQuizId,
     );
+  }, [selectedQuizId, scorePercentage, quizProgressData]);
 
-    const goldenRibbonAlreadyAwardedForThisLesson = localStorage.getItem(
-      "golden_ribbon_awarded",
-    )
-      ? JSON.parse(localStorage.getItem("golden_ribbon_awarded")).includes(
-          selectedQuizId,
-        )
-      : false;
-
-    if (
-      lessonResults?.stars >= 1000 &&
-      !goldenRibbonAlreadyAwardedForThisLesson &&
-      lessonResults.gold_medals_counter >= 1
-    ) {
-      localStorage.setItem(
-        "golden_ribbon_awarded",
-        JSON.stringify([
-          ...(JSON.parse(localStorage.getItem("golden_ribbon_awarded")) || []),
-          selectedQuizId,
-        ]),
-      );
-      setResultImg("/images/quizakos/quizakos-with-friends-4.png");
-      setCongratulationsMessage("Συγγχαρητήρια! Κέρδισες την Χρυσή Ροζέτα!");
-      setHoppingEffect(true);
-      setTimeout(() => {
-        launchConfetti();
-      }, 500);
-    } else if (scorePercentage === 100) {
-      setMedal({ img: "gold-medal" });
-      setResultImg("/images/quizakos/quizakos-with-friends-4.png");
-      setCongratulationsMessage("ΜΠΡΑΒΟ! Τα κατάφερες τέλεια!");
-      setHoppingEffect(true);
-      setTimeout(() => {
-        launchConfetti();
-      }, 500);
-    } else if (scorePercentage >= 80) {
-      setMedal({ img: "silver-medal" });
-      setResultImg("/images/quizakos/quizakos4-shadow.png");
-      setCongratulationsMessage("Μπράβο! Τα πήγες εξαιρετικά!");
-    } else if (scorePercentage >= 60) {
-      setResultImg("/images/quizakos/quizakos3-shadow.png");
-      setCongratulationsMessage("Τα πήγες πολύ καλά! Συνέχισε έτσι!");
-    } else if (scorePercentage >= 40) {
-      setResultImg("/images/quizakos/quizakos2-shadow.png");
-      setCongratulationsMessage("Ωραία προσπάθεια! Μπορείς και καλύτερα!");
-    } else {
-      setResultImg("/images/quizakos/quizakos1-shadow.png");
-      setCongratulationsMessage("Μην τα παρατάς! Κάθε προσπάθεια μετράει!");
-    }
-  }, [selectedQuizId, scorePercentage]);
+  useEffect(() => {
+    getQuizResultPresentation(
+      scorePercentage,
+      setMedal,
+      setResultImg,
+      setCongratulationsMessage,
+      setHoppingEffect,
+    );
+  }, [scorePercentage]);
 
   return (
     <motion.div
@@ -279,33 +188,15 @@ export default function PopUpResults({ correctAnswers, lessonAndGrade }) {
         <motion.div
           key={medal?.awardName}
           className={styles.awardContainer}
-          initial={
-            medal?.awardName === "goldenRibbon"
-              ? { scale: 0, opacity: 0 }
-              : { opacity: 0 }
-          }
-          animate={
-            medal?.awardName === "goldenRibbon"
-              ? { scale: 1, opacity: 1 }
-              : { opacity: 1 }
-          }
-          transition={
-            medal?.awardName === "goldenRibbon"
-              ? { type: "spring", stiffness: 300, damping: 15, delay: 0.5 }
-              : { duration: 0.6, delay: 1 }
-          }
+          initial={{ opacity: 0 }}
+          animate={{ opacity: 1 }}
+          transition={{ duration: 0.6, delay: 1 }}
         >
-          {" "}
           <div className={styles.awards}>
             {medal && (
               <div className={styles.awardEarned}>
-                {medal.img !== "golden-ribbon-2" && (
-                  <div className={styles.awardCounter}>+ 1</div>
-                )}
-                <Award
-                  awardData={medal}
-                  width={medal.awardName === "goldenRibbon" ? 60 : undefined}
-                />
+                <div className={styles.awardCounter}>+ 1</div>
+                <Award awardData={medal} />
               </div>
             )}
             {correctAnswersLength > 0 && (
