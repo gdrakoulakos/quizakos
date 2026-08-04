@@ -44,10 +44,10 @@
 @media (min-width: 1024px) {
   .quizakosWondering {
     display: block;
-    width: 315px;
-    height: 501px;
+    width: 250px;
+    height: 400px;
     position: fixed;
-    right: 0;
+    right: 50;
     bottom: 0;
   }
 }
