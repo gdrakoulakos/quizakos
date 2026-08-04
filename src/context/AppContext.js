@@ -1,6 +1,7 @@
 const { createContext, useContext, useState, useEffect } = require("react");
 import { supabase } from "@/lib/supabase";
-import { useMediaQuery } from "react-responsive";
+import { useTheme } from "@mui/material/styles";
+import useMediaQuery from "@mui/material/useMediaQuery";
 
 const AppContext = createContext();
 
@@ -30,9 +31,10 @@ export const AppProvider = ({ children }) => {
     totalAnswers: 0,
     incorrectAnswersData: [],
   });
-  const isMobile = useMediaQuery({ maxWidth: 767 });
-  const isTablet = useMediaQuery({ minWidth: 768, maxWidth: 1023 });
-  const isDesktop = useMediaQuery({ minWidth: 1024 });
+  const theme = useTheme();
+  const isMobile = useMediaQuery(theme.breakpoints.down(600));
+  const isTablet = useMediaQuery(theme.breakpoints.between(600, 1024));
+  const isDesktop = useMediaQuery(theme.breakpoints.up(1024));
 
   useEffect(() => {
     const {
@@ -180,6 +182,7 @@ export const AppProvider = ({ children }) => {
         isMobile,
         isTablet,
         isDesktop,
+        theme,
       }}
     >
       {children}

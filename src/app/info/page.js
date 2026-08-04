@@ -35,6 +35,7 @@ export default function info() {
           alt="Coming Soon"
           width={200}
           height={318}
+          loading="eager"
         />
       </div>
       <p className={styles.copyRights}>

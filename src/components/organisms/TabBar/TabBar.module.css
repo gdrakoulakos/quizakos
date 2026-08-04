@@ -98,20 +98,20 @@
   font-size: large;
 }
 
-@media (min-width: 768px) {
+@media (min-width: 600px) {
   .menuSection {
     top: 0;
   }
 }
 
-@media (max-width: 767px) {
+@media (max-width: 599px) {
   .menuSection {
     bottom: 0;
     padding: 0 10px;
   }
 
   .menuOptionsContainer {
-    justify-content: flex-start;
+    flex: 3;
     gap: 20px;
   }
 
