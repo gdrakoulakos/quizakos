@@ -12,6 +12,7 @@ import Typography from "@/components/atoms/Typography/Typography";
 import { useRouter } from "next/navigation";
 import { supabase } from "@/lib/supabase";
 import { getQuizResultPresentation } from "@/utils/getQuizResultPresentation";
+import PopUpGoldenRibbon from "../PopUpGoldenRibbon/PopUpGoldenRibbon";
 
 export default function PopUpResults({ correctAnswers, lessonAndGrade }) {
   const {
@@ -31,10 +32,7 @@ export default function PopUpResults({ correctAnswers, lessonAndGrade }) {
     isAlreadyPlayed: null,
     data: null,
   });
-  const [goldenRibbon, setGoldenRibbon] = useState({
-    isAlreadyAwarded: false,
-    awardedNow: false,
-  });
+  const [showPopUpGoldenRibbon, setShowPopUpGoldenRibbon] = useState(false);
   const [isUserDataFetched, setIsUserDataFetched] = useState(false);
   const [quizProgressData, setQuizProgressData] = useState(null);
   const totalAnswersLength = clickedAnswersResults.totalAnswers;
@@ -49,36 +47,46 @@ export default function PopUpResults({ correctAnswers, lessonAndGrade }) {
   const savedCurrentQuizProgress = currentUserQuizProgress.find(
     (quiz) => quiz.lesson_id === selectedQuizId,
   );
+
+  const goldenRibbonAlertShown = useRef(false);
   const router = useRouter();
 
   useEffect(() => {
+    if (!savedCurrentQuizProgress) return;
+
     const starsEarned =
       correctAnswersLength * 10 + (scorePercentage === 100 ? 50 : 0);
+
+    const newStars = Number(savedCurrentQuizProgress.stars) + starsEarned;
+
+    const newGoldMedals =
+      savedCurrentQuizProgress.gold_medals_counter +
+      (scorePercentage === 100 ? 1 : 0);
+
+    const hasWonGoldenRibbon =
+      newStars >= 1000 &&
+      newGoldMedals >= 1 &&
+      !savedCurrentQuizProgress.golden_ribbon;
+
     setQuizProgressData({
       lesson_id: selectedQuizId,
       lesson_and_grade: lessonAndGrade,
-      best_score: savedCurrentQuizProgress
-        ? Math.max(scorePercentage, savedCurrentQuizProgress.best_score)
-        : scorePercentage,
-      stars: savedCurrentQuizProgress
-        ? Number(savedCurrentQuizProgress.stars) + starsEarned
-        : starsEarned,
-      gold_medals_counter:
-        scorePercentage === 100
-          ? (savedCurrentQuizProgress?.gold_medals_counter || 0) + 1
-          : savedCurrentQuizProgress?.gold_medals_counter || 0,
-      silver_medals_counter:
-        scorePercentage >= 80 && scorePercentage < 100
-          ? (savedCurrentQuizProgress?.silver_medals_counter || 0) + 1
-          : savedCurrentQuizProgress?.silver_medals_counter || 0,
-      quiz_completed:
-        scorePercentage >= 60 || savedCurrentQuizProgress?.best_score >= 60,
+      best_score: Math.max(
+        scorePercentage,
+        savedCurrentQuizProgress.best_score,
+      ),
+      stars: newStars,
+      gold_medals_counter: newGoldMedals,
+      golden_ribbon:
+        savedCurrentQuizProgress.golden_ribbon || hasWonGoldenRibbon,
     });
-  }, [scorePercentage]);
 
-  useEffect(() => {
-    let goldenRibbonData;
-  }, []);
+    if (hasWonGoldenRibbon && !goldenRibbonAlertShown.current) {
+      goldenRibbonAlertShown.current = true;
+
+      setShowPopUpGoldenRibbon(true);
+    }
+  }, [scorePercentage, savedCurrentQuizProgress]);
 
   async function saveQuizProgress() {
     if (!isLoggedIn || hasSavedToSupabase.current) return;
@@ -161,6 +169,11 @@ export default function PopUpResults({ correctAnswers, lessonAndGrade }) {
       animate={{ opacity: 1 }}
       transition={{ duration: 0.6 }}
     >
+      {showPopUpGoldenRibbon && (
+        <PopUpGoldenRibbon
+          setShowPopUpGoldenRibbon={setShowPopUpGoldenRibbon}
+        />
+      )}
       <PopUpAwardsInfo />
       <div className={styles.popUpResultsContainer}>
         <motion.div

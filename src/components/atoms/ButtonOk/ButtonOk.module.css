@@ -12,6 +12,7 @@
   border: none;
   font-weight: bold;
   padding: 10px 20px;
+  min-width: 120px;
 }
 
 .small {
