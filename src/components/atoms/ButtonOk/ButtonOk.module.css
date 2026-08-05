@@ -12,7 +12,8 @@
   border: none;
   font-weight: bold;
   padding: 10px 20px;
-  min-width: 120px;
+  min-width: 130px;
+  min-height: 40px;
   font-size: 16px;
 }
 

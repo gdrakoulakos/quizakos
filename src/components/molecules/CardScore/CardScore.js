@@ -62,6 +62,7 @@ export default function CardScore({ lessonData }) {
           width={80}
           height={80}
           loading="eager"
+          onClick={() => setShowPopUpAwardsInfo((prev) => !prev)}
         />
       )}
       <Image
