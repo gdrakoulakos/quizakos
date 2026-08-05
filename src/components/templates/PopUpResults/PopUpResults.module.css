@@ -263,7 +263,7 @@
   border-radius: 20px;
   background: linear-gradient(135deg, rgb(210, 61, 236), #6f0c81);
   color: white;
-  font-size: 15px;
+  font-size: 16px;
   text-shadow: 1px 1px 15px #000000;
   box-shadow: 0 0 4px 1px #ffffff;
   cursor: pointer;
@@ -293,5 +293,5 @@
 }
 
 .playAgainButton:hover {
-  background: rgba(234, 234, 234, 0.914);
+  background: rgba(220, 220, 220, 0.914);
 }
