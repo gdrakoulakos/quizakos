@@ -5,7 +5,7 @@ body {
 .background {
   position: fixed;
   inset: 0;
-  background-image: url("/images/background-mobile.png");
+  background-image: url("/images/background-mobile-tinypng.png");
   background-size: cover;
   background-position: center;
   z-index: -1;

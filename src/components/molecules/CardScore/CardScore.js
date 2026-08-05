@@ -18,13 +18,13 @@ export default function CardScore({ lessonData }) {
   useEffect(() => {
     setGainedAwards(
       [
-        lessonData.quiz_completed && { img: "book-completed" },
+        lessonData.quiz_completed && { img: "book-completed-tinypng" },
         lessonData.silver_medals_counter > 0 && {
-          img: "silver-medal",
+          img: "silver-medal-tinypng",
           count: lessonData.silver_medals_counter,
         },
         lessonData.gold_medals_counter > 0 && {
-          img: "gold-medal",
+          img: "gold-medal-tinypng",
           count: lessonData.gold_medals_counter,
         },
       ].filter(Boolean),
@@ -56,7 +56,7 @@ export default function CardScore({ lessonData }) {
     >
       {goldenRibbonGained && (
         <Image
-          src={`/images/golden-ribbon-3.png`}
+          src={`/images/golden-ribbon-3-tinypng.png`}
           alt="golden ribbon"
           className={styles.goldenRibbonAward}
           width={80}
@@ -90,7 +90,7 @@ export default function CardScore({ lessonData }) {
             onClick={() => setShowPopUpAwardsInfo((prev) => !prev)}
           >
             <Image
-              src={`/images/star-6.png`}
+              src={`/images/star-6-tinypng.png`}
               alt="star"
               className={styles.starIcon}
               width={20}

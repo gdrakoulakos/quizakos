@@ -12,7 +12,7 @@ export default function WelcomeBanner() {
         transition={{ duration: 0.5, delay: 0.3 }}
       >
         <Image
-          src="/images/logo/logo-5-shadow.png"
+          src="/images/logo/logo-5-shadow-2.png"
           width={320}
           height={101}
           alt="quizakos logo"

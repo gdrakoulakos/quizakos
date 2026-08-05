@@ -10,25 +10,25 @@ export function getQuizResultPresentation(
   setHoppingEffect,
 ) {
   if (scorePercentage === 100) {
-    setMedal({ img: "gold-medal" });
-    setResultImg("/images/quizakos/quizakos-with-friends-4.png");
+    setMedal({ img: "gold-medal-tinypng" });
+    setResultImg("/images/quizakos/quizakos-with-friends-4-tinypng.png");
     setCongratulationsMessage("ΜΠΡΑΒΟ! Τα κατάφερες τέλεια!");
     setHoppingEffect(true);
     setTimeout(() => {
       launchConfetti();
     }, 500);
   } else if (scorePercentage >= 80) {
-    setMedal({ img: "silver-medal" });
-    setResultImg("/images/quizakos/quizakos4-shadow.png");
+    setMedal({ img: "silver-medal-tinypng" });
+    setResultImg("/images/quizakos/quizakos4-shadow-tinypng.png");
     setCongratulationsMessage("Μπράβο! Τα πήγες εξαιρετικά!");
   } else if (scorePercentage >= 60) {
-    setResultImg("/images/quizakos/quizakos3-shadow.png");
+    setResultImg("/images/quizakos/quizakos3-shadow-tinypng.png");
     setCongratulationsMessage("Τα πήγες πολύ καλά! Συνέχισε έτσι!");
   } else if (scorePercentage >= 40) {
-    setResultImg("/images/quizakos/quizakos2-shadow.png");
+    setResultImg("/images/quizakos/quizakos2-tinypng-shadow.png");
     setCongratulationsMessage("Ωραία προσπάθεια! Μπορείς και καλύτερα!");
   } else {
-    setResultImg("/images/quizakos/quizakos1-shadow.png");
+    setResultImg("/images/quizakos/quizakos1-tinypng-shadow.png");
     setCongratulationsMessage("Μην τα παρατάς! Κάθε προσπάθεια μετράει!");
   }
 }

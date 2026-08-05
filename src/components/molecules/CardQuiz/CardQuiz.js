@@ -33,29 +33,29 @@ export default function CardQuiz({
   useEffect(() => {
     if (!lessonsResults) {
       setAwards([
-        { awardName: "uncompleted", img: "book-uncompleted" },
-        { awardName: "no-award", img: "medal-disabled-4" },
+        { awardName: "uncompleted", img: "book-uncompleted-tinypng" },
+        { awardName: "no-award", img: "medal-disabled-4-tinypng" },
       ]);
       return;
     }
     if (lessonsResults.quiz_completed === false) {
       setAwards([
-        { awardName: "uncompleted", img: "book-uncompleted" },
-        { awardName: "no-award", img: "medal-disabled-4" },
+        { awardName: "uncompleted", img: "book-uncompleted-tinypng" },
+        { awardName: "no-award", img: "medal-disabled-4-tinypng" },
       ]);
     }
     if (lessonsResults.quiz_completed) {
       setAwards([
         {
           awardName: "completed",
-          img: "book-completed",
+          img: "book-completed-tinypng",
         },
       ]);
     }
     if (lessonsResults.quiz_completed && lessonsResults.best_score < 80) {
       setAwards((prev) => [
         ...prev,
-        { awardName: "no-award", img: "medal-disabled-4" },
+        { awardName: "no-award", img: "medal-disabled-4-tinypng" },
       ]);
     }
     if (lessonsResults.stars > 0) {
@@ -66,7 +66,7 @@ export default function CardQuiz({
         ...prev,
         {
           awardName: "goldMedal",
-          img: "gold-medal",
+          img: "gold-medal-tinypng",
           count: lessonsResults.gold_medals_counter,
         },
       ]);
@@ -76,7 +76,7 @@ export default function CardQuiz({
         ...prev,
         {
           awardName: "silverMedal",
-          img: "silver-medal",
+          img: "silver-medal-tinypng",
           count: lessonsResults.silver_medals_counter,
         },
       ]);
@@ -101,7 +101,10 @@ export default function CardQuiz({
       <div className={styles.goldenRibbonContainer}>
         {goldenRibbonAward && (
           <Award
-            awardData={{ awardName: "goldenRibbon", img: "golden-ribbon-3" }}
+            awardData={{
+              awardName: "goldenRibbon",
+              img: "golden-ribbon-3-tinypng",
+            }}
             width={65}
           />
         )}
@@ -113,7 +116,7 @@ export default function CardQuiz({
         <h3>{lesson}</h3>
         <div className={styles.starsContainer}>
           <Image
-            src={`/images/${starsCounter ? "star-6" : "star-disabled-3"}.png`}
+            src={`/images/${starsCounter ? "star-6-tinypng" : "star-disabled-3-tinypng"}.png`}
             alt="star"
             className={styles.starIcon}
             width={20}

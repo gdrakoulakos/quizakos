@@ -254,7 +254,7 @@ export default function PopUpResults({ correctAnswers, lessonAndGrade }) {
                   <div className={styles.congratulationsMessage}>
                     {`+ ${correctAnswersLength * 10 + (scorePercentage === 100 ? 50 : 0)} `}
                   </div>
-                  <Award awardData={{ img: "star-6" }} />
+                  <Award awardData={{ img: "star-6-tinypng" }} />
                 </div>
               </div>
             )}
