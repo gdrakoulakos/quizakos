@@ -30,6 +30,7 @@ export default function ButtonSwiper({ direction, ref }) {
         alt={`scroll to ${direction}`}
         width={30}
         height={30}
+        loading="eager"
       />
     </motion.div>
   );

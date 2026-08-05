@@ -61,6 +61,7 @@ export default function CardScore({ lessonData }) {
           className={styles.goldenRibbonAward}
           width={80}
           height={80}
+          loading="eager"
         />
       )}
       <Image
@@ -70,6 +71,7 @@ export default function CardScore({ lessonData }) {
         width={100}
         height={60}
         onClick={() => handleDeleteClick(lessonData.lesson_id)}
+        loading="eager"
       />
       <div className={styles.title}>{lessonData.lesson_and_grade}</div>
       <div className={styles.scoreCardBody}>
@@ -93,6 +95,7 @@ export default function CardScore({ lessonData }) {
               className={styles.starIcon}
               width={20}
               height={20}
+              loading="eager"
             />
             <div className={styles.starsCounter}>{lessonData.stars}</div>
           </div>

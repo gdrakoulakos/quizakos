@@ -38,6 +38,7 @@ export default function quizResults() {
                     className={styles.questionImage}
                     width={120}
                     height={120}
+                    loading="eager"
                   />
                 )}
                 <div className={styles.answersContainer}>

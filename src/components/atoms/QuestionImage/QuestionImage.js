@@ -18,6 +18,7 @@ export default function QuestionImage() {
       className={styles.questionImage}
       width={240}
       height={120}
+      loading="eager"
     />
   );
 }

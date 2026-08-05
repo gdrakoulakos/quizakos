@@ -119,6 +119,7 @@ export default function CardQuiz({
             width={20}
             height={20}
             onClick={() => setShowPopUpAwardsInfo((prev) => !prev)}
+            loading="eager"
           />
           <div>{starsCounter}</div>
         </div>

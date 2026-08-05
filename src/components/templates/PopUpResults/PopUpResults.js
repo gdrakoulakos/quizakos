@@ -210,6 +210,7 @@ export default function PopUpResults({ correctAnswers, lessonAndGrade }) {
               width={150}
               height={182}
               alt="Bravo icon"
+              loading="eager"
             />
           </motion.div>
         ) : (

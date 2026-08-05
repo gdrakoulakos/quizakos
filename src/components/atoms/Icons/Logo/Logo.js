@@ -11,6 +11,7 @@ export default function Logo({ link, width, height, image = "5-shadow" }) {
         width={width}
         height={height}
         className={styles.logo}
+        loading="eager"
       />
     </Link>
   );

@@ -13,6 +13,7 @@ export default function QuizImage({ imgSrc }) {
       className={styles.quizImage}
       width={60}
       height={60}
+      loading="eager"
     />
   );
 }

@@ -18,6 +18,7 @@ export default function Award({ awardData, width, isGoldenRibbon }) {
         width={100}
         height={60}
         onClick={() => setShowPopUpAwardsInfo((prev) => !prev)}
+        loading="eager"
       />
     </div>
   );

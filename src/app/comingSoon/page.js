@@ -29,6 +29,7 @@ export default function commingSoon() {
           alt="Coming Soon"
           width={400}
           height={400}
+          loading="eager"
         />
       </motion.div>
     </AnimatePresence>
