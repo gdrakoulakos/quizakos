@@ -35,7 +35,7 @@ export default function PopUpGoldenRibbon({ setShowPopUpGoldenRibbon }) {
           transition={{ duration: 2.5, delay: 0.5 }}
         >
           <Image
-            className={styles.comingSoonImage}
+            className={styles.awardIcon}
             src="/images/golden-ribbon-2.png"
             alt="Coming Soon"
             width={136}
