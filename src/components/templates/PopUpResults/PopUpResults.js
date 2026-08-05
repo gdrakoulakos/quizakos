@@ -49,7 +49,7 @@ export default function PopUpResults({ correctAnswers, lessonAndGrade }) {
   );
 
   const goldenRibbonAlertShown = useRef(false);
-  const goldenRibbonIcon = "/images/golden-ribbon-2.png";
+  const goldenRibbonIcon = "/images/golden-ribbon-3.png";
   const goldenRibbonCongratsMessage =
     "Καταπληκτικό! Κέρδισες τη Χρυσή Ροζέτα! Συγχαρητήρια!";
   const router = useRouter();
@@ -207,8 +207,8 @@ export default function PopUpResults({ correctAnswers, lessonAndGrade }) {
             <Image
               className={styles.goldenRibbonIcon}
               src={goldenRibbonIcon}
-              width={136}
-              height={167}
+              width={150}
+              height={182}
               alt="Bravo icon"
             />
           </motion.div>

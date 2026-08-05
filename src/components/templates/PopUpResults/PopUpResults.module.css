@@ -39,18 +39,17 @@
   border: 5px solid transparent;
   border-radius: 20px;
   background:
-    linear-gradient(70deg, #665980f3 0%, #59428cf1 50%, #50338ef5 100%)
-      padding-box,
+    linear-gradient(to bottom, rgba(255, 255, 255, 0), #00000091) padding-box,
     conic-gradient(
-        from var(--angle),
-        red,
-        orange,
-        yellow,
-        lime,
-        cyan,
-        blue,
-        violet,
-        red
+        from var(--angle) at 50% 120px,
+        rgba(255, 0, 0, 0.5),
+        rgba(255, 165, 0, 0.5),
+        rgba(255, 255, 0, 0.5),
+        rgba(0, 255, 0, 0.5),
+        rgba(0, 255, 255, 0.5),
+        rgba(0, 0, 255, 0.5),
+        rgba(238, 130, 238, 0.5),
+        rgba(255, 0, 0, 0.5)
       )
       border-box;
   animation: rotateBorder 4s linear infinite;
@@ -69,7 +68,8 @@
 }
 
 .goldenRibbonAwared div {
-  color: white;
+  color: #ffffff;
+  text-shadow: 0 2px 8px rgba(0, 0, 0, 0.65);
 }
 
 .popUpResultsContainer::before {
@@ -91,10 +91,6 @@
   height: auto;
   transform-origin: bottom center;
   animation: fadeIn 0.7s ease-in-out;
-}
-
-.goldenRibbonIcon {
-  margin-top: 10px;
 }
 
 .hopping {
@@ -240,16 +236,16 @@
   border: none;
   font-weight: bold;
   border-radius: 20px;
-  background: #fcfcfcd4;
+  background: linear-gradient(135deg, #fffaf7, #ffeadb);
   color: #6f0c81;
   font-size: 15px;
   text-shadow: 1px 1px 15px #8f8f8f;
-  box-shadow: 0 0 5px 4px #d5d5d5;
+  box-shadow: 0 0 5px 1px #ffd1b1;
   cursor: pointer;
 }
 
 .loginButton:hover {
-  background: #fff1e7;
+  background: #ffe8d7;
 }
 
 .actionButtonsContainer {
@@ -269,7 +265,7 @@
   color: white;
   font-size: 15px;
   text-shadow: 1px 1px 15px #000000;
-  box-shadow: 0 0 5px 4px #d5d5d5;
+  box-shadow: 0 0 4px 1px #ffffff;
   cursor: pointer;
 }
 

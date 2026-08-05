@@ -5,7 +5,7 @@
   align-items: center;
   justify-content: center;
   background: linear-gradient(135deg, #ffb077, #ff7d1e);
-  box-shadow: 0 0 5px 4px #d5d5d5;
+  box-shadow: 0 0 4px 1px #ffffff;
   color: white;
   cursor: pointer;
   text-decoration: none;
@@ -18,5 +18,4 @@
 
 .okButton:hover {
   background: linear-gradient(135deg, #e19c6b, #d16518);
-  box-shadow: 0 0 5px 4px #b6b6b6;
 }
