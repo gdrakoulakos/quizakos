@@ -31,6 +31,7 @@
 
 .clickableText:hover {
   cursor: pointer;
+  color: #c4885e !important;
 }
 
 .inputContainer {

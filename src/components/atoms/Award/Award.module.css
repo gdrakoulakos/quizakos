@@ -6,6 +6,12 @@
   cursor: pointer;
 }
 
+.award:hover {
+  box-shadow: 0 0 18px 0px #ffffff4d;
+  background-color: #ffffff23;
+  border-radius: 50%;
+}
+
 .awardCounter {
   position: absolute;
   box-shadow: 0 0 2px 3px #fff;

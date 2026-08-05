@@ -56,11 +56,11 @@ export default function CardScore({ lessonData }) {
     >
       {goldenRibbonGained && (
         <Image
-          src={`/images/golden-ribbon-2.png`}
+          src={`/images/golden-ribbon-3.png`}
           alt="golden ribbon"
           className={styles.goldenRibbonAward}
-          width={50}
-          height={50}
+          width={80}
+          height={80}
         />
       )}
       <Image

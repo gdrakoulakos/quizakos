@@ -46,6 +46,10 @@
   min-width: 55px;
 }
 
+.menuOption:hover {
+  color: #4e4070;
+}
+
 .menuOptionText {
   font-size: small;
 }

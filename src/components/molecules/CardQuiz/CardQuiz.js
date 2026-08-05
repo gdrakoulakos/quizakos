@@ -101,8 +101,8 @@ export default function CardQuiz({
       <div className={styles.goldenRibbonContainer}>
         {goldenRibbonAward && (
           <Award
-            awardData={{ awardName: "goldenRibbon", img: "golden-ribbon-2" }}
-            width={55}
+            awardData={{ awardName: "goldenRibbon", img: "golden-ribbon-3" }}
+            width={65}
           />
         )}
       </div>
