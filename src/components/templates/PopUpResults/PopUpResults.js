@@ -178,7 +178,7 @@ export default function PopUpResults({ correctAnswers, lessonAndGrade }) {
       animate={{ opacity: 1 }}
       transition={{ duration: 0.6 }}
     >
-      {!showPopUpGoldenRibbon && (
+      {showPopUpGoldenRibbon && (
         <PopUpGoldenRibbon
           setShowPopUpGoldenRibbon={setShowPopUpGoldenRibbon}
         />
