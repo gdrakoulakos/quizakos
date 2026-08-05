@@ -18,14 +18,13 @@
   background: #ffffff23
     conic-gradient(
       from var(--angle) at 50% 120px,
-      rgba(255, 0, 0, 0.2),
-      rgba(255, 165, 0, 0.2),
-      rgba(255, 255, 0, 0.2),
-      rgba(0, 255, 0, 0.2),
-      rgba(0, 255, 255, 0.2),
-      rgba(0, 0, 255, 0.2),
-      rgba(238, 130, 238, 0.2),
-      rgba(255, 0, 0, 0.2)
+      rgba(255, 0, 0, 0.1),
+      rgba(255, 165, 0, 0.1),
+      rgba(255, 255, 0, 0.1),
+      rgba(0, 255, 0, 0.1),
+      rgba(0, 255, 255, 0.1),
+      rgba(238, 130, 238, 0.1),
+      rgba(255, 0, 0, 0.1)
     )
     border-box;
   animation: rotateBorder 4s linear infinite;
