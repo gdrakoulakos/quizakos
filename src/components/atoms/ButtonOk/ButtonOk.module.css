@@ -5,7 +5,7 @@
   align-items: center;
   justify-content: center;
   background: linear-gradient(135deg, #ffb077, #ff7d1e);
-  box-shadow: 0 0 2px 1px #ffad72;
+  box-shadow: 0 0 5px 4px #d5d5d5;
   color: white;
   cursor: pointer;
   text-decoration: none;
@@ -13,16 +13,10 @@
   font-weight: bold;
   padding: 10px 20px;
   min-width: 120px;
-}
-
-.small {
-  font-size: medium;
-}
-
-.large {
-  font-size: large;
+  font-size: 16px;
 }
 
 .okButton:hover {
   background: linear-gradient(135deg, #e19c6b, #d16518);
+  box-shadow: 0 0 5px 4px #b6b6b6;
 }

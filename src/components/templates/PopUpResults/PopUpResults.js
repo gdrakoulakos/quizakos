@@ -12,7 +12,7 @@ import Typography from "@/components/atoms/Typography/Typography";
 import { useRouter } from "next/navigation";
 import { supabase } from "@/lib/supabase";
 import { getQuizResultPresentation } from "@/utils/getQuizResultPresentation";
-import PopUpGoldenRibbon from "../PopUpGoldenRibbon/PopUpGoldenRibbon";
+import { useLaunchConfetti } from "@/customHooks";
 
 export default function PopUpResults({ correctAnswers, lessonAndGrade }) {
   const {
@@ -32,7 +32,7 @@ export default function PopUpResults({ correctAnswers, lessonAndGrade }) {
     isAlreadyPlayed: null,
     data: null,
   });
-  const [showPopUpGoldenRibbon, setShowPopUpGoldenRibbon] = useState(false);
+  const [isGoldenRibbonAwared, setIsGoldenRibbonAwared] = useState(false);
   const [isUserDataFetched, setIsUserDataFetched] = useState(false);
   const [quizProgressData, setQuizProgressData] = useState(null);
   const totalAnswersLength = clickedAnswersResults.totalAnswers;
@@ -49,7 +49,11 @@ export default function PopUpResults({ correctAnswers, lessonAndGrade }) {
   );
 
   const goldenRibbonAlertShown = useRef(false);
+  const goldenRibbonIcon = "/images/golden-ribbon-2.png";
+  const goldenRibbonCongratsMessage =
+    "Καταπληκτικό! Κέρδισες τη Χρυσή Ροζέτα! Συγχαρητήρια!";
   const router = useRouter();
+  const launchConfetti = useLaunchConfetti;
 
   useEffect(() => {
     const starsEarned =
@@ -93,7 +97,10 @@ export default function PopUpResults({ correctAnswers, lessonAndGrade }) {
     if (hasWonGoldenRibbon && !goldenRibbonAlertShown.current) {
       goldenRibbonAlertShown.current = true;
 
-      setShowPopUpGoldenRibbon(true);
+      setIsGoldenRibbonAwared(true);
+      setTimeout(() => {
+        launchConfetti();
+      }, 1000);
     }
   }, [scorePercentage, savedCurrentQuizProgress]);
 
@@ -178,13 +185,10 @@ export default function PopUpResults({ correctAnswers, lessonAndGrade }) {
       animate={{ opacity: 1 }}
       transition={{ duration: 0.6 }}
     >
-      {showPopUpGoldenRibbon && (
-        <PopUpGoldenRibbon
-          setShowPopUpGoldenRibbon={setShowPopUpGoldenRibbon}
-        />
-      )}
       <PopUpAwardsInfo />
-      <div className={styles.popUpResultsContainer}>
+      <div
+        className={`${styles.popUpResultsContainer} ${isGoldenRibbonAwared ? styles.goldenRibbonAwared : ""} `}
+      >
         <motion.div
           initial={{ opacity: 0 }}
           animate={{ opacity: 1 }}
@@ -194,15 +198,34 @@ export default function PopUpResults({ correctAnswers, lessonAndGrade }) {
           {correctAnswers}
         </motion.div>
 
-        <Image
-          className={`${styles.resultImage} ${hoppingEffect ? styles.hopping : ""}`}
-          src={resultImg}
-          width={500}
-          height={500}
-          alt="Bravo icon"
-        />
+        {isGoldenRibbonAwared ? (
+          <motion.div
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            transition={{ duration: 2.5, delay: 0.5 }}
+          >
+            <Image
+              className={styles.goldenRibbonIcon}
+              src={goldenRibbonIcon}
+              width={136}
+              height={167}
+              alt="Bravo icon"
+            />
+          </motion.div>
+        ) : (
+          <Image
+            className={`${styles.resultImage} ${hoppingEffect ? styles.hopping : ""}`}
+            src={resultImg}
+            width={500}
+            height={500}
+            alt="Bravo icon"
+          />
+        )}
+
         <div className={styles.congratulationsMessage}>
-          {congratulationsMessage}
+          {isGoldenRibbonAwared
+            ? goldenRibbonCongratsMessage
+            : congratulationsMessage}
         </div>
         {scorePercentage > 0 && (
           <div className={styles.awardsGainedMessage}>{"Κέρδισες:"}</div>

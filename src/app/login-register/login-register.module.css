@@ -102,6 +102,8 @@
 
 .googleIcon:hover {
   cursor: pointer;
+  box-shadow: 0 0 10px 1px #fcfcfc;
+  border-radius: 50%;
 }
 
 .userProfile {
