@@ -8,23 +8,23 @@ export default function PopUpAwardsInfo() {
 
   const awardsData = [
     {
-      img: "star-6",
+      img: "star-6-tinypng",
       text: "Για κάθε σωστή απάντηση, κερδίζεις 10 αστέρια!",
     },
     {
-      img: "book-completed",
+      img: "book-completed-tinypng",
       text: "Αν απαντήσεις σωστά στο 60% των ερωτήσεων (3 στις 5 ή 6 στις 10), κερδίζεις ένα βιβλίο!",
     },
     {
-      img: "silver-medal",
+      img: "silver-medal-tinypng",
       text: "Αν απαντήσεις σωστά στο 80% των ερωτήσεων (4 στις 5 ή 8 στις 10), κερδίζεις ένα ασημένιο μετάλλιο!",
     },
     {
-      img: "gold-medal",
+      img: "gold-medal-tinypng",
       text: "Αν απαντήσεις σωστά σε όλες τις ερωτήσεις, κερδίζεις ένα χρυσό μετάλλιο και παίρνεις επιπλέον 50 αστέρια!",
     },
     {
-      img: "golden-ribbon-3",
+      img: "golden-ribbon-3-tinypng",
       text: "Συγκέντρωσε 1000 αστέρια και κέρδισε τουλάχιστον 1 χρυσό μετάλλιο για να ξεκλειδώσεις τη Χρυσή Ροζέτα!",
     },
   ];
@@ -60,8 +60,12 @@ export default function PopUpAwardsInfo() {
                 <div key={index} className={styles.awardContainer}>
                   <Award
                     awardData={awardData}
-                    width={awardData.img === "golden-ribbon-3" ? 60 : undefined}
-                    isGoldenRibbon={awardData.img === "golden-ribbon-3"}
+                    width={
+                      awardData.img === "golden-ribbon-3-tinypng"
+                        ? 60
+                        : undefined
+                    }
+                    isGoldenRibbon={awardData.img === "golden-ribbon-3-tinypng"}
                   />
                   <p>{awardData.text}</p>
                 </div>

@@ -49,7 +49,7 @@ export default function PopUpResults({ correctAnswers, lessonAndGrade }) {
   );
 
   const goldenRibbonAlertShown = useRef(false);
-  const goldenRibbonIcon = "/images/golden-ribbon-3.png";
+  const goldenRibbonIcon = "/images/golden-ribbon-3-tinypng.png";
   const goldenRibbonCongratsMessage =
     "Καταπληκτικό! Κέρδισες τη Χρυσή Ροζέτα! Συγχαρητήρια!";
   const router = useRouter();
