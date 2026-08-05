@@ -11,14 +11,14 @@ export default function PopUpGoldenRibbon({ setShowPopUpGoldenRibbon }) {
   useEffect(() => {
     setTimeout(() => {
       launchConfetti();
-    }, 500);
+    }, 1000);
   }, []);
   return (
     <motion.div
       className={styles.popupWrapper}
       initial={{ opacity: 0 }}
       animate={{ opacity: 1 }}
-      transition={{ duration: 0.5, delay: 0.5 }}
+      transition={{ duration: 0.3 }}
     >
       <div className={styles.popupContent}>
         <motion.p
@@ -32,7 +32,7 @@ export default function PopUpGoldenRibbon({ setShowPopUpGoldenRibbon }) {
         <motion.div
           initial={{ opacity: 0 }}
           animate={{ opacity: 1 }}
-          transition={{ duration: 3, delay: 1.5 }}
+          transition={{ duration: 2.5, delay: 0.5 }}
         >
           <Image
             className={styles.comingSoonImage}

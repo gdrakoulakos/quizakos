@@ -4,7 +4,7 @@
   display: flex;
   justify-content: center;
   align-items: center;
-  backdrop-filter: blur(3px);
+  backdrop-filter: blur(100px);
   position: fixed;
   top: 0;
   z-index: 100;
@@ -12,12 +12,6 @@
 
 .popupContent {
   margin: 20px;
-  background: linear-gradient(
-    70deg,
-    #665980f3 0%,
-    #59428cf1 50%,
-    #50338ef5 100%
-  );
   padding: 20px;
   border-radius: 5px;
   box-shadow: 0 0 5px 10px #d5d5d5;
