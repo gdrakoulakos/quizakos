@@ -28,7 +28,7 @@ export function getQuizResultPresentation(
     setResultImg("/images/quizakos/quizakos2-tinypng-shadow.png");
     setCongratulationsMessage("Ωραία προσπάθεια! Μπορείς και καλύτερα!");
   } else {
-    setResultImg("/images/quizakos/quizakos1-tinypng-shadow.png");
+    setResultImg("/images/quizakos/quizakos1-shadow-tinypng.png");
     setCongratulationsMessage("Μην τα παρατάς! Κάθε προσπάθεια μετράει!");
   }
 }
