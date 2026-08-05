@@ -7,16 +7,5 @@
   position: relative;
   flex-direction: column;
   gap: 10px;
-  padding-top: 15px;
-}
-
-.logoWrapper {
-  z-index: 10;
-  display: flex;
-  align-items: center;
-}
-
-.logoWrapper a {
-  display: flex;
-  justify-content: center;
+  padding-top: 50px;
 }
