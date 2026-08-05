@@ -31,7 +31,7 @@
   max-width: 510px;
 }
 
-.quizakosWondering {
+.quizakosThinking {
   display: none;
 }
 
@@ -42,12 +42,12 @@
 }
 
 @media (min-width: 1024px) {
-  .quizakosWondering {
+  .quizakosThinking {
     display: block;
+    position: fixed;
     width: 250px;
     height: 400px;
-    position: fixed;
-    right: 50;
     bottom: 0;
+    right: 70%;
   }
 }

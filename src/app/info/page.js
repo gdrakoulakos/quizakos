@@ -19,6 +19,14 @@ export default function info() {
         Quizako.
       </p>
       <div className={styles.infoBody}>
+        <Image
+          className={styles.quizakosThinking}
+          src="/images/quizakos/quizakos-wondering-2.png"
+          alt="Coming Soon"
+          width={200}
+          height={318}
+          loading="eager"
+        />
         <div className={styles.faqContainer}>
           {faqs.map((faq) => (
             <Accordion
@@ -29,14 +37,6 @@ export default function info() {
             />
           ))}
         </div>
-        <Image
-          className={styles.quizakosWondering}
-          src="/images/quizakos/quizakos-wondering.png"
-          alt="Coming Soon"
-          width={200}
-          height={318}
-          loading="eager"
-        />
       </div>
       <p className={styles.copyRights}>
         {new Date().getFullYear()} George Drakoulakos <br /> All Rights Reserved

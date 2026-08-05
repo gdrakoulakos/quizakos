@@ -15,7 +15,7 @@ export default function QuizCardQuestion() {
   return (
     <div className={styles.quizCard}>
       <div className={styles.logoWrapper}>
-        <Logo link="/" width={190} height={55} />{" "}
+        <Logo link="/" width={190} height={55} />
       </div>
       <QuizHeader />
       <CompletionStatus />
