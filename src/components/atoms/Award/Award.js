@@ -2,7 +2,7 @@ import Image from "next/image";
 import styles from "./Award.module.css";
 import { QuizContext } from "@/context/AppContext";
 
-export default function Award({ awardData, width }) {
+export default function Award({ awardData, width, isGoldenRibbon }) {
   const { setShowPopUpAwardsInfo } = QuizContext();
 
   return (
@@ -13,7 +13,7 @@ export default function Award({ awardData, width }) {
       <Image
         src={`/images/${awardData.img}.png`}
         alt="medal"
-        className={styles.award}
+        className={`${styles.award} ${isGoldenRibbon ? styles.goldenRibbon : ""}`}
         style={width ? { width: width } : null}
         width={100}
         height={60}

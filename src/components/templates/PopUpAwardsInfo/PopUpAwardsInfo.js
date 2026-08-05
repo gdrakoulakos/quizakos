@@ -21,11 +21,11 @@ export default function PopUpAwardsInfo() {
     },
     {
       img: "gold-medal",
-      text: "Αν απαντήσεις σωστά στο 100% των ερωτήσεων (5 στις 5 ή 10 στις 10), κερδίζεις ένα χρυσό μετάλλιο και παίρνεις επιπλέον 50 αστέρια!",
+      text: "Αν απαντήσεις σωστά σε όλες τις ερωτήσεις, κερδίζεις ένα χρυσό μετάλλιο και παίρνεις επιπλέον 50 αστέρια!",
     },
     {
       img: "golden-ribbon-3",
-      text: "Αν μαζέψεις 1000 αστέρια και κερδίσεις τουλάχιστον 1 χρυσό μετάλλιο, κερδίζεις την Χρυσή Ροζέτα!",
+      text: "Συγκέντρωσε 1000 αστέρια και κέρδισε τουλάχιστον 1 χρυσό μετάλλιο για να ξεκλειδώσεις τη Χρυσή Ροζέτα!",
     },
   ];
 
@@ -53,14 +53,15 @@ export default function PopUpAwardsInfo() {
             >
               ×
             </button>
-            <h1>🏆 Βραβεία</h1>
-            <h3>Απάντησε σωστά και κέρδισε βραβεία!</h3>
+            <h1>Βραβεία</h1>
+            <h3>Απάντησε σωστά και κέρδισε:</h3>
             <div className={styles.allAwards}>
               {awardsData.map((awardData, index) => (
                 <div key={index} className={styles.awardContainer}>
                   <Award
                     awardData={awardData}
-                    width={awardData.img === "golden-ribbon-2" ? 50 : undefined}
+                    width={awardData.img === "golden-ribbon-3" ? 60 : undefined}
+                    isGoldenRibbon={awardData.img === "golden-ribbon-3"}
                   />
                   <p>{awardData.text}</p>
                 </div>
