@@ -10,9 +10,10 @@
   max-width: 340px;
   box-sizing: border-box;
   align-items: center;
+  position: relative;
 }
 
 .logoWrapper {
   position: absolute;
-  top: 15;
+  top: -35;
 }
