@@ -197,6 +197,10 @@
   cursor: pointer;
 }
 
+.loginButton:hover {
+  background: #fff1e7;
+}
+
 .actionButtonsContainer {
   display: flex;
   flex-direction: row;

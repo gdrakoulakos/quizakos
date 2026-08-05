@@ -52,33 +52,42 @@ export default function PopUpResults({ correctAnswers, lessonAndGrade }) {
   const router = useRouter();
 
   useEffect(() => {
-    if (!savedCurrentQuizProgress) return;
-
     const starsEarned =
       correctAnswersLength * 10 + (scorePercentage === 100 ? 50 : 0);
 
-    const newStars = Number(savedCurrentQuizProgress.stars) + starsEarned;
+    const newStars =
+      Number(savedCurrentQuizProgress?.stars) + starsEarned || starsEarned;
 
     const newGoldMedals =
-      savedCurrentQuizProgress.gold_medals_counter +
-      (scorePercentage === 100 ? 1 : 0);
+      scorePercentage === 100
+        ? (savedCurrentQuizProgress?.gold_medals_counter || 0) + 1
+        : savedCurrentQuizProgress?.gold_medals_counter || 0;
+
+    const newSilverMedals =
+      scorePercentage >= 80 && scorePercentage < 100
+        ? (savedCurrentQuizProgress?.silver_medals_counter || 0) + 1
+        : savedCurrentQuizProgress?.silver_medals_counter || 0;
 
     const hasWonGoldenRibbon =
-      newStars >= 1000 &&
-      newGoldMedals >= 1 &&
-      !savedCurrentQuizProgress.golden_ribbon;
+      (newStars >= 1000 &&
+        newGoldMedals >= 1 &&
+        !savedCurrentQuizProgress?.golden_ribbon) ||
+      false;
 
     setQuizProgressData({
       lesson_id: selectedQuizId,
       lesson_and_grade: lessonAndGrade,
-      best_score: Math.max(
+      best_score:
+        Math.max(scorePercentage, savedCurrentQuizProgress?.best_score) ||
         scorePercentage,
-        savedCurrentQuizProgress.best_score,
-      ),
+      quiz_completed:
+        savedCurrentQuizProgress?.quiz_completed === true ||
+        scorePercentage >= 60,
       stars: newStars,
       gold_medals_counter: newGoldMedals,
+      silver_medals_counter: newSilverMedals,
       golden_ribbon:
-        savedCurrentQuizProgress.golden_ribbon || hasWonGoldenRibbon,
+        savedCurrentQuizProgress?.golden_ribbon || hasWonGoldenRibbon,
     });
 
     if (hasWonGoldenRibbon && !goldenRibbonAlertShown.current) {
@@ -169,7 +178,7 @@ export default function PopUpResults({ correctAnswers, lessonAndGrade }) {
       animate={{ opacity: 1 }}
       transition={{ duration: 0.6 }}
     >
-      {showPopUpGoldenRibbon && (
+      {!showPopUpGoldenRibbon && (
         <PopUpGoldenRibbon
           setShowPopUpGoldenRibbon={setShowPopUpGoldenRibbon}
         />

@@ -14,15 +14,25 @@ export default function PopUpGoldenRibbon({ setShowPopUpGoldenRibbon }) {
     }, 500);
   }, []);
   return (
-    <div className={styles.popupWrapper}>
+    <motion.div
+      className={styles.popupWrapper}
+      initial={{ opacity: 0 }}
+      animate={{ opacity: 1 }}
+      transition={{ duration: 0.5, delay: 0.5 }}
+    >
       <div className={styles.popupContent}>
-        <p className={styles.message}>
+        <motion.p
+          className={styles.message}
+          initial={{ opacity: 0 }}
+          animate={{ opacity: 1 }}
+          transition={{ duration: 0.5, delay: 0.1 }}
+        >
           Καταπληκτικό! Κέρδισες τη Χρυσή Ροζέτα! Συγχαρητήρια!
-        </p>
+        </motion.p>
         <motion.div
           initial={{ opacity: 0 }}
           animate={{ opacity: 1 }}
-          transition={{ duration: 0.5, delay: 1 }}
+          transition={{ duration: 3, delay: 1.5 }}
         >
           <Image
             className={styles.comingSoonImage}
@@ -40,6 +50,6 @@ export default function PopUpGoldenRibbon({ setShowPopUpGoldenRibbon }) {
           />
         </div>
       </div>
-    </div>
+    </motion.div>
   );
 }
