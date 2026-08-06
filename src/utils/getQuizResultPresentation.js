@@ -25,7 +25,7 @@ export function getQuizResultPresentation(
     setResultImg("/images/quizakos/quizakos3-shadow-tinypng.png");
     setCongratulationsMessage("Τα πήγες πολύ καλά! Συνέχισε έτσι!");
   } else if (scorePercentage >= 40) {
-    setResultImg("/images/quizakos/quizakos2-tinypng-shadow.png");
+    setResultImg("/images/quizakos/quizakos2-shadow-tinypng.png");
     setCongratulationsMessage("Ωραία προσπάθεια! Μπορείς και καλύτερα!");
   } else {
     setResultImg("/images/quizakos/quizakos1-shadow-tinypng.png");
