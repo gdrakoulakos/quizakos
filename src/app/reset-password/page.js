@@ -12,6 +12,7 @@ export default function ResetPasswordPage() {
   const { ShowPopUpConfirmation, setShowPopUpConfirmation } = QuizContext();
   const [password, setPassword] = useState("");
   const [confirmationPassword, setConfirmationPassword] = useState("");
+  const [showPassword, setShowPassword] = useState(false);
   const [showConfirmationPassword, setShowConfirmationPassword] =
     useState(false);
 
