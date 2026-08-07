@@ -61,13 +61,13 @@
   background-color: white;
   animation: fadeIn 0.7s ease-in-out;
 
-  .icon {
+  .eyeIcon {
     position: absolute;
     top: 53%;
     right: 0;
     transform: translate(-50%, -50%);
     transition: all 0.3s ease;
-    color: #c5c5c5;
+    color: #695597;
   }
 
   .icon:hover {

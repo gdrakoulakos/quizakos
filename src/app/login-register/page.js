@@ -4,7 +4,8 @@ import { useEffect, useState } from "react";
 import { supabase } from "@/lib/supabase";
 import { useRouter } from "next/navigation";
 import styles from "./login-register.module.css";
-import EyeIcon from "@/components/atoms/Icons/EyeIcon";
+import VisibilityIcon from "@mui/icons-material/Visibility";
+import VisibilityOffIcon from "@mui/icons-material/VisibilityOff";
 import GoogleIcon from "@/components/atoms/Icons/GoogleIcon";
 import ButtonOk from "@/components/atoms/ButtonOk/ButtonOk";
 import { QuizContext } from "@/context/AppContext";
@@ -101,8 +102,6 @@ export default function LoginPage() {
     }
   };
 
-  console.log("email", email);
-
   const handleSignUp = () => {
     const validationErrors = validateSignUp({
       nickname: name,
@@ -175,10 +174,11 @@ export default function LoginPage() {
             </label>
             {!isForgotPasswordClicked && (
               <label className={styles.label}>
-                <span className={styles.icon}>
-                  <EyeIcon
-                    onClick={() => setShowPassword((prev) => !prev)}
-                  />{" "}
+                <span
+                  className={styles.eyeIcon}
+                  onClick={() => setShowPassword((prev) => !prev)}
+                >
+                  {showPassword ? <VisibilityOffIcon /> : <VisibilityIcon />}
                 </span>
                 <input
                   type={showPassword ? "text" : "password"}
@@ -190,10 +190,15 @@ export default function LoginPage() {
             )}
             {isSignUpClicked && (
               <label className={styles.label}>
-                <span className={styles.icon}>
-                  <EyeIcon
-                    onClick={() => setShowConfirmationPassword((prev) => !prev)}
-                  />{" "}
+                <span
+                  className={styles.eyeIcon}
+                  onClick={() => setShowConfirmationPassword((prev) => !prev)}
+                >
+                  {showConfirmationPassword ? (
+                    <VisibilityOffIcon />
+                  ) : (
+                    <VisibilityIcon />
+                  )}
                 </span>
                 <input
                   type={showConfirmationPassword ? "text" : "password"}
