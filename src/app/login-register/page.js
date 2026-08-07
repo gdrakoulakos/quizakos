@@ -11,7 +11,7 @@ import { QuizContext } from "@/context/AppContext";
 import PopUpInfoMessage from "@/components/templates/PopUpInfoMessage/PopUpInfoMessage";
 import { validateSignUp } from "@/utils/validation";
 import LoadingSpinner from "@/components/organisms/LoadingSpinner/LoadingSpinner";
-import { loginWithGoogle } from "@/services/authService";
+import { loginWithGoogle, logout } from "@/services/authService";
 
 export default function LoginPage() {
   const [email, setEmail] = useState("");
@@ -87,18 +87,18 @@ export default function LoginPage() {
     window.location.href = "/?loginSuccess=true";
   };
 
-  const logout = async () => {
-    setIsLoading(true);
-
-    const { error } = await supabase.auth.signOut();
-    setIsLoading(false);
-
-    if (error) {
+  const handleLogout () => {
+    
+    try {
+      setIsLoading(true);
+      await logout();
+    } catch (error) {
       console.error(error.message);
-    } else {
-      window.location.href = "/";
+    } finally {
+      setIsLoading(false);
     }
-  };
+  }
+
 
   const deleteAccount = async () => {
     setIsLoading(true);
