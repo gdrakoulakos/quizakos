@@ -149,7 +149,6 @@ export default function LoginPage() {
                 εδώ
               </a>{" "}
             </p>{" "}
-            <p></p>
           </div>
         </div>
       )}
@@ -212,20 +211,25 @@ export default function LoginPage() {
                 >
                   Εχω λογαριασμό
                 </p>
+              ) : !isForgotPasswordClicked ? (
+                <div className={styles.signUpPromptContainer}>
+                  <p>
+                    Ξέχασες τον κωδικό σου; Κάνε κλικ{" "}
+                    <a
+                      onClick={() => setIsForgotPasswordClicked(true)}
+                      className={styles.clickableText}
+                    >
+                      εδώ
+                    </a>
+                  </p>
+                </div>
               ) : (
-                !isForgotPasswordClicked && (
-                  <div className={styles.signUpPromptContainer}>
-                    <p>
-                      Ξέχασες τον κωδικό σου; Κάνε κλικ{" "}
-                      <a
-                        onClick={() => setIsForgotPasswordClicked(true)}
-                        className={styles.clickableText}
-                      >
-                        εδώ
-                      </a>
-                    </p>
-                  </div>
-                )
+                <p
+                  onClick={() => (window.location.href = "/login-register")}
+                  className={styles.clickableText}
+                >
+                  Επιστροφή
+                </p>
               )}
             </div>
           </div>
