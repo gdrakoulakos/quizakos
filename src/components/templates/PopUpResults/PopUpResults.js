@@ -10,9 +10,9 @@ import ReplayIcon from "@mui/icons-material/Replay";
 import PopUpAwardsInfo from "../PopUpAwardsInfo/PopUpAwardsInfo";
 import Typography from "@/components/atoms/Typography/Typography";
 import { useRouter } from "next/navigation";
-import { supabase } from "@/lib/supabase";
 import { getQuizResultPresentation } from "@/utils/getQuizResultPresentation";
 import { useLaunchConfetti } from "@/customHooks";
+import { saveQuizProgress } from "@/services/authService";
 
 export default function PopUpResults({ correctAnswers, lessonAndGrade }) {
   const {
@@ -104,39 +104,15 @@ export default function PopUpResults({ correctAnswers, lessonAndGrade }) {
     }
   }, [scorePercentage, savedCurrentQuizProgress]);
 
-  async function saveQuizProgress() {
-    if (!isLoggedIn || hasSavedToSupabase.current) return;
-
-    hasSavedToSupabase.current = true;
-
-    const {
-      data: { user },
-    } = await supabase.auth.getUser();
-
-    if (!user || !quizProgressData) return;
-
-    const databaseQuizProgress = {
-      ...quizProgressData,
-      user_id: user.id,
-      username: loggedInUserName,
-    };
-
-    const { error } = await supabase
-      .from("user_lesson_progress")
-      .upsert(databaseQuizProgress, {
-        onConflict: "user_id,lesson_id",
-      });
-
-    if (error) {
-      console.error(error);
-      return;
-    }
-  }
-
   useEffect(() => {
     if (!quizProgressData) return;
 
-    saveQuizProgress();
+    saveQuizProgress(
+      isLoggedIn,
+      hasSavedToSupabase,
+      quizProgressData,
+      loggedInUserName,
+    );
   }, [quizProgressData]);
 
   useEffect(() => {
@@ -161,11 +137,6 @@ export default function PopUpResults({ correctAnswers, lessonAndGrade }) {
 
     localStorage.setItem("quiz_results", JSON.stringify(updatedResults));
     window.dispatchEvent(new Event("quiz_results_updated"));
-
-    const storedResults = JSON.parse(localStorage.getItem("quiz_results"));
-    const lessonResults = storedResults.find(
-      (lesson) => lesson.lesson_id === selectedQuizId,
-    );
   }, [selectedQuizId, scorePercentage, quizProgressData]);
 
   useEffect(() => {
