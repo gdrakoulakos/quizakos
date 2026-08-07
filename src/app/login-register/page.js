@@ -11,6 +11,7 @@ import { QuizContext } from "@/context/AppContext";
 import PopUpInfoMessage from "@/components/templates/PopUpInfoMessage/PopUpInfoMessage";
 import { validateSignUp } from "@/utils/validation";
 import LoadingSpinner from "@/components/organisms/LoadingSpinner/LoadingSpinner";
+import { loginWithGoogle } from "@/services/authService";
 
 export default function LoginPage() {
   const [email, setEmail] = useState("");
@@ -32,18 +33,14 @@ export default function LoginPage() {
     setShowPopUpInfoMessage,
   } = QuizContext();
 
-  const loginWithGoogle = async () => {
-    setIsLoading(true);
-    const { error } = await supabase.auth.signInWithOAuth({
-      provider: "google",
-      options: {
-        redirectTo: `${window.location.origin}/auth/callback`,
-      },
-    });
-    setIsLoading(false);
-
-    if (error) {
-      alert(error.message);
+  const handleGoogleLogin = async () => {
+    try {
+      setIsLoading(true);
+      await loginWithGoogle();
+    } catch (error) {
+      console.error(error.message);
+    } finally {
+      setIsLoading(false);
     }
   };
 
@@ -319,7 +316,10 @@ export default function LoginPage() {
         <div className={styles.socialLoginContainer}>
           <hr className={styles.seperator} />
           <p>Διαφορετικά κάνε σύνδεση ή εγγραφή με:</p>
-          <GoogleIcon onClick={loginWithGoogle} className={styles.googleIcon} />
+          <GoogleIcon
+            onClick={handleGoogleLogin}
+            className={styles.googleIcon}
+          />
         </div>
       )}
     </main>
