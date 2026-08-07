@@ -1,6 +1,23 @@
 import { supabase } from "@/lib/supabase";
 
-export async function loginWithGoogle() {
+export async function signUp(email, password, name) {
+  const { data, error } = await supabase.auth.signUp({
+    email,
+    password,
+    options: {
+      data: {
+        name: name,
+      },
+    },
+  });
+
+  if (error) {
+    console.error(error.message);
+    throw error;
+  }
+}
+
+export async function signInWithGoogle() {
   const { error } = await supabase.auth.signInWithOAuth({
     provider: "google",
     options: {
@@ -13,7 +30,7 @@ export async function loginWithGoogle() {
   }
 }
 
-export async function signIn(email, password) {
+export async function signInWithPassword(email, password) {
   const { data, error } = await supabase.auth.signInWithPassword({
     email,
     password,
@@ -21,19 +38,29 @@ export async function signIn(email, password) {
 
   if (error) {
     console.error("Login error:", error.message);
-
-    return;
+    throw error;
   }
 
   window.location.href = "/?loginSuccess=true";
 }
 
-export async function logout() {
+export async function signOut() {
   const { error } = await supabase.auth.signOut();
   if (error) {
     console.error(error.message);
   } else {
     window.location.href = "/";
+  }
+}
+
+export async function resetPassword(email) {
+  const { error } = await supabase.auth.resetPasswordForEmail(email, {
+    redirectTo: `${window.location.origin}/reset-password`,
+  });
+
+  if (error) {
+    console.error(error.message);
+    throw error;
   }
 }
 
@@ -62,33 +89,5 @@ export async function deleteAccount() {
     window.location.href = "/";
   } else {
     console.error(result.error);
-  }
-}
-
-export async function signUp(email, password, name) {
-  const { data, error } = await supabase.auth.signUp({
-    email,
-    password,
-    options: {
-      data: {
-        name: name,
-      },
-    },
-  });
-
-  if (error) {
-    console.error(error.message);
-    throw error;
-  }
-}
-
-export async function resetPassword(email) {
-  const { error } = await supabase.auth.resetPasswordForEmail(email, {
-    redirectTo: `${window.location.origin}/reset-password`,
-  });
-
-  if (error) {
-    console.error(error.message);
-    throw error;
   }
 }

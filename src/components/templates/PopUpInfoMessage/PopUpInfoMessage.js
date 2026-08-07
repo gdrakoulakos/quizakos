@@ -5,9 +5,20 @@ import { CopyToClipboard } from "react-copy-to-clipboard";
 import ContentCopyIcon from "@mui/icons-material/ContentCopy";
 import { useState } from "react";
 
-export default function PopUpInfoMessage({ message, action }) {
+export default function PopUpInfoMessage({
+  message,
+  action,
+  redirectToHome = false,
+}) {
   const { setShowPopUpInfoMessage, displayedQuestionId } = QuizContext();
   const [isIdCopied, setIsIdCopied] = useState(false);
+
+  const handleClick = () => {
+    setShowPopUpInfoMessage(false);
+    if (redirectToHome) {
+      window.location.href = "/";
+    }
+  };
 
   return (
     <div className={styles.popupWrapper}>
@@ -29,10 +40,7 @@ export default function PopUpInfoMessage({ message, action }) {
           <span className={styles.copiedText}>Το ID αντιγράφηκε!</span>
         )}
         <div className={styles.buttonContainer}>
-          <ButtonOk
-            onClick={() => setShowPopUpInfoMessage(false)}
-            buttonText="ΟΚ"
-          />
+          <ButtonOk onClick={handleClick} buttonText="ΟΚ" />
         </div>
       </div>
     </div>

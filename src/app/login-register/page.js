@@ -12,9 +12,9 @@ import PopUpInfoMessage from "@/components/templates/PopUpInfoMessage/PopUpInfoM
 import { validateSignUp } from "@/utils/validation";
 import LoadingSpinner from "@/components/organisms/LoadingSpinner/LoadingSpinner";
 import {
-  loginWithGoogle,
-  signIn,
-  logout,
+  signInWithGoogle,
+  signInWithPassword,
+  signOut,
   deleteAccount,
   resetPassword,
   signUp,
@@ -40,10 +40,10 @@ export default function LoginPage() {
     setShowPopUpInfoMessage,
   } = QuizContext();
 
-  const handleGoogleLogin = async () => {
+  const handleGoogleSignIn = async () => {
     try {
       setIsLoading(true);
-      await loginWithGoogle();
+      await signInWithGoogle();
     } catch (error) {
       console.error(error.message);
     } finally {
@@ -51,10 +51,10 @@ export default function LoginPage() {
     }
   };
 
-  const handleSignIn = async (email, password) => {
+  const handleSignInWithPassword = async (email, password) => {
     try {
       setIsLoading(true);
-      await signIn(email, password);
+      await signInWithPassword(email, password);
     } catch (error) {
       console.error(error.message);
       setValidationMessage("Το email ή ο κωδικός είναι λάθος");
@@ -64,10 +64,10 @@ export default function LoginPage() {
     }
   };
 
-  const handleLogout = async () => {
+  const handleSignOut = async () => {
     try {
       setIsLoading(true);
-      await logout();
+      await signOut();
     } catch (error) {
       console.error(error.message);
     } finally {
@@ -140,7 +140,7 @@ export default function LoginPage() {
       <h1>{isLoggedIn ? "Προφίλ" : isSignUpClicked ? "Εγγραφή" : "Σύνδεση"}</h1>
       {isLoggedIn && (
         <div className={styles.userProfile}>
-          <ButtonOk onClick={handleLogout} buttonText="Αποσύνδεση" />
+          <ButtonOk onClick={handleSignOut} buttonText="Αποσύνδεση" />
           <hr className={styles.seperator} />
           <div className={styles.deleteAccountContainer}>
             <p>
@@ -234,7 +234,7 @@ export default function LoginPage() {
               {!isForgotPasswordClicked ? (
                 <>
                   <ButtonOk
-                    onClick={() => handleSignIn(email, password)}
+                    onClick={() => handleSignInWithPassword(email, password)}
                     buttonText="Σύνδεση"
                   />
                   <p>
@@ -266,7 +266,7 @@ export default function LoginPage() {
           <hr className={styles.seperator} />
           <p>Διαφορετικά κάνε σύνδεση ή εγγραφή με:</p>
           <GoogleIcon
-            onClick={handleGoogleLogin}
+            onClick={handleGoogleSignIn}
             className={styles.googleIcon}
           />
         </div>
