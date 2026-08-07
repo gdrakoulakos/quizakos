@@ -11,7 +11,14 @@ import { QuizContext } from "@/context/AppContext";
 import PopUpInfoMessage from "@/components/templates/PopUpInfoMessage/PopUpInfoMessage";
 import { validateSignUp } from "@/utils/validation";
 import LoadingSpinner from "@/components/organisms/LoadingSpinner/LoadingSpinner";
-import { loginWithGoogle, logout } from "@/services/authService";
+import {
+  loginWithGoogle,
+  signIn,
+  logout,
+  deleteAccount,
+  resetPassword,
+  signUp,
+} from "@/services/authService";
 
 export default function LoginPage() {
   const [email, setEmail] = useState("");
@@ -44,47 +51,17 @@ export default function LoginPage() {
     }
   };
 
-  const signUp = async (email, password, name) => {
-    setIsLoading(true);
-    const { data, error } = await supabase.auth.signUp({
-      email,
-      password,
-      options: {
-        data: {
-          name: name,
-        },
-      },
-    });
-
-    setIsLoading(false);
-
-    if (error) {
-      console.error("Signup error:", error.message);
-      setValidationMessage(error.message);
-      setShowPopUpInfoMessage(true);
-      return;
-    }
-    window.location.href = "/?signupSuccess=true";
-  };
-
-  const signIn = async (email, password) => {
-    setIsLoading(true);
-
-    const { data, error } = await supabase.auth.signInWithPassword({
-      email,
-      password,
-    });
-
-    setIsLoading(false);
-
-    if (error) {
-      console.error("Login error:", error.message);
+  const handleSignIn = async (email, password) => {
+    try {
+      setIsLoading(true);
+      await signIn(email, password);
+    } catch (error) {
+      console.error(error.message);
       setValidationMessage("Το email ή ο κωδικός είναι λάθος");
       setShowPopUpInfoMessage(true);
-      return;
+    } finally {
+      setIsLoading(false);
     }
-
-    window.location.href = "/?loginSuccess=true";
   };
 
   const handleLogout = async () => {
@@ -98,37 +75,7 @@ export default function LoginPage() {
     }
   };
 
-  const deleteAccount = async () => {
-    setIsLoading(true);
-    const {
-      data: { user },
-    } = await supabase.auth.getUser();
-
-    if (!user) {
-      console.error("No user logged in");
-      return;
-    }
-
-    const response = await fetch("/api/delete-account", {
-      method: "DELETE",
-      body: JSON.stringify({
-        userId: user.id,
-      }),
-    });
-
-    const result = await response.json();
-    setIsLoading(false);
-
-    if (response.ok) {
-      await supabase.auth.signOut();
-
-      window.location.href = "/";
-    } else {
-      console.error(result.error);
-    }
-  };
-
-  const confirmDelete = () => {
+  const handleDeleteAccount = () => {
     const ok = window.confirm(
       "Θες σίγουρα να διαγράψεις τον λογαριασμό σου μαζί με τα βραβεία σου?",
     );
@@ -138,26 +85,23 @@ export default function LoginPage() {
     }
   };
 
-  const resetPassword = async () => {
-    setIsLoading(true);
-
-    const { error } = await supabase.auth.resetPasswordForEmail(email, {
-      redirectTo: `${window.location.origin}/reset-password`,
-    });
-
-    setIsLoading(false);
-
-    if (error) {
+  const handleResetPassword = async () => {
+    try {
+      setIsLoading(true);
+      await resetPassword(email);
+      setValidationMessage(
+        "Σχεδόν έτοιμο! 🎉 Πάτησε το link που σου στείλαμε στο email σου για να αλλάξεις τον κωδικό σου.",
+      );
+      setShowPopUpInfoMessage(true);
+    } catch (error) {
       setValidationMessage(error.message);
       setShowPopUpInfoMessage(true);
-      return;
+    } finally {
+      setIsLoading(false);
     }
-
-    setValidationMessage(
-      "Σχεδόν έτοιμο! 🎉 Πάτησε το link που σου στείλαμε στο email σου για να αλλάξεις τον κωδικό σου.",
-    );
-    setShowPopUpInfoMessage(true);
   };
+
+  console.log("email", email);
 
   const handleSignUp = () => {
     const validationErrors = validateSignUp({
@@ -180,6 +124,13 @@ export default function LoginPage() {
     }
 
     signUp(email, password, name);
+    if (error) {
+      console.error("Signup error:", error.message);
+      setValidationMessage(error.message);
+      setShowPopUpInfoMessage(true);
+      return;
+    }
+    window.location.href = "/?signupSuccess=true";
   };
 
   return (
@@ -194,7 +145,7 @@ export default function LoginPage() {
           <div className={styles.deleteAccountContainer}>
             <p>
               Για την διαγραφή του λογαριασμού σου, πάτησε{" "}
-              <a className={styles.clickableText} onClick={confirmDelete}>
+              <a className={styles.clickableText} onClick={handleDeleteAccount}>
                 εδώ
               </a>{" "}
             </p>{" "}
@@ -283,7 +234,7 @@ export default function LoginPage() {
               {!isForgotPasswordClicked ? (
                 <>
                   <ButtonOk
-                    onClick={() => signIn(email, password)}
+                    onClick={() => handleSignIn(email, password)}
                     buttonText="Σύνδεση"
                   />
                   <p>
@@ -298,7 +249,7 @@ export default function LoginPage() {
                 </>
               ) : (
                 <ButtonOk
-                  onClick={resetPassword}
+                  onClick={handleResetPassword}
                   buttonText="Αποστολή email αλλαγής κωδικού"
                 />
               )}
