@@ -87,8 +87,7 @@ export default function LoginPage() {
     window.location.href = "/?loginSuccess=true";
   };
 
-  const handleLogout () => {
-    
+  const handleLogout = async () => {
     try {
       setIsLoading(true);
       await logout();
@@ -97,8 +96,7 @@ export default function LoginPage() {
     } finally {
       setIsLoading(false);
     }
-  }
-
+  };
 
   const deleteAccount = async () => {
     setIsLoading(true);
@@ -191,7 +189,7 @@ export default function LoginPage() {
       <h1>{isLoggedIn ? "Προφίλ" : isSignUpClicked ? "Εγγραφή" : "Σύνδεση"}</h1>
       {isLoggedIn && (
         <div className={styles.userProfile}>
-          <ButtonOk onClick={logout} buttonText="Αποσύνδεση" />
+          <ButtonOk onClick={handleLogout} buttonText="Αποσύνδεση" />
           <hr className={styles.seperator} />
           <div className={styles.deleteAccountContainer}>
             <p>
