@@ -12,3 +12,12 @@ export async function loginWithGoogle() {
     alert(error.message);
   }
 }
+
+export async function logout() {
+  const { error } = await supabase.auth.signOut();
+  if (error) {
+    console.error(error.message);
+  } else {
+    window.location.href = "/";
+  }
+}
