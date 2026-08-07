@@ -12,7 +12,7 @@ import Typography from "@/components/atoms/Typography/Typography";
 import { useRouter } from "next/navigation";
 import { getQuizResultPresentation } from "@/utils/getQuizResultPresentation";
 import { useLaunchConfetti } from "@/customHooks";
-import { saveQuizProgress } from "@/services/authService";
+import { saveQuizProgress } from "@/services/quizServices";
 
 export default function PopUpResults({ correctAnswers, lessonAndGrade }) {
   const {
