@@ -6,15 +6,12 @@ export async function signUp(email, password, name) {
     password,
     options: {
       data: {
-        name: name,
+        name,
       },
     },
   });
 
-  if (error) {
-    console.error(error.message);
-    throw error;
-  }
+  return { data, error };
 }
 
 export async function signInWithGoogle() {

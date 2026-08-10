@@ -9,7 +9,7 @@ import PopUpInfoMessage from "@/components/templates/PopUpInfoMessage/PopUpInfoM
 import { QuizContext } from "@/context/AppContext";
 
 export default function ResetPasswordPage() {
-  const { ShowPopUpConfirmation, setShowPopUpConfirmation } = QuizContext();
+  const { showPopUpConfirmation, setShowPopUpConfirmation } = QuizContext();
   const [password, setPassword] = useState("");
   const [confirmationPassword, setConfirmationPassword] = useState("");
   const [showPassword, setShowPassword] = useState(false);
@@ -30,7 +30,7 @@ export default function ResetPasswordPage() {
 
   return (
     <main className={styles.resetPasswordSection}>
-      {ShowPopUpConfirmation && (
+      {showPopUpConfirmation && (
         <PopUpInfoMessage
           message="Ο κωδικός σου άλλαξε επιτυχώς!"
           redirectToHome

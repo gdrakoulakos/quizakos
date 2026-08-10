@@ -1,86 +1,18 @@
-.signInSignUpSection {
+.loginOrRegisterSection {
   display: flex;
   flex-direction: column;
   align-items: center;
   gap: 15px;
+  animation: fadeIn 0.4s ease-in-out;
 }
 
-.signInSignUpContainer {
-  display: flex;
-  flex-direction: column;
-  gap: 20px;
-  align-items: center;
-}
-
-.signInSignUpContainer p {
-  color: white;
-  font-size: 14px;
-  margin: 0;
-}
-
-.signUpPromptContainer {
-  display: flex;
-  flex-direction: column;
-  gap: 5px;
-}
-
-.clickableText {
-  color: #ffb077 !important;
-  text-decoration: underline;
-}
-
-.clickableText:hover {
-  cursor: pointer;
-  color: #c4885e !important;
-}
-
-.inputContainer {
-  display: flex;
-  flex-direction: column;
-  gap: 15px;
-}
-
-.container {
-  margin: 0;
-  padding: 0;
-  box-sizing: border-box;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-}
-
-.label {
-  position: relative;
-  display: block;
-  width: 250px;
-  display: flex;
-  border-radius: 6px;
-  box-shadow: 0 0 2px 3px #fff;
-  padding: 10px;
-  text-align: left;
-  background-color: white;
-  animation: fadeIn 0.7s ease-in-out;
-
-  .eyeIcon {
-    position: absolute;
-    top: 53%;
-    right: 0;
-    transform: translate(-50%, -50%);
-    transition: all 0.3s ease;
-    color: #695597;
+@keyframes fadeIn {
+  from {
+    opacity: 0;
   }
 
-  .icon:hover {
-    cursor: pointer;
-  }
-
-  input {
-    background-color: white;
-    outline: none;
-    border: none;
-    color: black;
-    font-size: 16px;
-    width: 90%;
+  to {
+    opacity: 1;
   }
 }
 
@@ -105,34 +37,4 @@
   cursor: pointer;
   box-shadow: 0 0 10px 1px #fcfcfc;
   border-radius: 50%;
-}
-
-.userProfile {
-  display: flex;
-  flex-direction: column;
-  gap: 20px;
-  align-items: center;
-}
-
-.deleteAccountContainer {
-  display: flex;
-  flex-direction: row;
-  gap: 5px;
-  max-width: 300px;
-}
-
-.deleteAccountContainer p {
-  color: white;
-  font-size: 14px;
-  margin: 0;
-  text-align: center;
-}
-
-@keyframes fadeIn {
-  from {
-    opacity: 0;
-  }
-  to {
-    opacity: 1;
-  }
 }
