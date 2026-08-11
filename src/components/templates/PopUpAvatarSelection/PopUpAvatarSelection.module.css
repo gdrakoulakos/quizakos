@@ -74,14 +74,12 @@
 
 .avatarIcon:hover {
   cursor: pointer;
-  box-shadow: 0 0 4px 4px #fff;
+  box-shadow: 0 0 4px 4px white;
 }
 
 .selected {
-  box-shadow:
-    0 0 0 3px #fff,
-    0 0 0 5px #7c3aed;
-  transform: scale(1.1);
+  box-shadow: 0 0 4px 4px #ff7d1e !important;
+  transform: scale(1.11);
 }
 
 .buttonContainer {
