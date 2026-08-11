@@ -7,9 +7,15 @@ import EyeIcon from "@/components/atoms/Icons/EyeIcon";
 import ButtonOk from "@/components/atoms/ButtonOk/ButtonOk";
 import PopUpInfoMessage from "@/components/templates/PopUpInfoMessage/PopUpInfoMessage";
 import { QuizContext } from "@/context/AppContext";
+import { validateSignUp } from "@/utils/validation";
 
 export default function ResetPasswordPage() {
-  const { showPopUpConfirmation, setShowPopUpConfirmation } = QuizContext();
+  const {
+    validationMessage,
+    setValidationMessage,
+    showPopUpInfoMessage,
+    setShowPopUpInfoMessage,
+  } = QuizContext();
   const [password, setPassword] = useState("");
   const [confirmationPassword, setConfirmationPassword] = useState("");
   const [showPassword, setShowPassword] = useState(false);
@@ -17,23 +23,37 @@ export default function ResetPasswordPage() {
     useState(false);
 
   const updatePassword = async () => {
-    const { error } = await supabase.auth.updateUser({
-      password,
-    });
+    const validationErrors = validateSignUp({ password });
+    const firstError = Object.values(validationErrors)[1];
 
-    if (error) {
-      alert(error.message);
+    if (firstError) {
+      setValidationMessage(firstError);
+      setShowPopUpInfoMessage(true);
       return;
     }
-    setShowPopUpConfirmation(true);
+    if (password !== confirmationPassword) {
+      setValidationMessage("Οι κωδικοί δεν ταιριάζουν.");
+      setShowPopUpInfoMessage(true);
+      return;
+    }
+    const { error } = await supabase.auth.updateUser({ password });
+    if (error) {
+      setValidationMessage(error.message);
+      setShowPopUpInfoMessage(true);
+      return;
+    }
+    setValidationMessage("Ο κωδικός σου άλλαξε με επιτυχία! 🎉");
+    setShowPopUpInfoMessage(true);
   };
 
   return (
     <main className={styles.resetPasswordSection}>
-      {showPopUpConfirmation && (
+      {showPopUpInfoMessage && (
         <PopUpInfoMessage
-          message="Ο κωδικός σου άλλαξε επιτυχώς!"
-          redirectToHome
+          message={validationMessage}
+          redirectToHome={
+            validationMessage === "Ο κωδικός σου άλλαξε με επιτυχία! 🎉"
+          }
         />
       )}
       <h1>Νέος κωδικός</h1>

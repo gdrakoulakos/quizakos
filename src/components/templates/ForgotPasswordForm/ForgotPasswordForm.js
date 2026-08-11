@@ -1,23 +1,32 @@
 import ButtonOk from "@/components/atoms/ButtonOk/ButtonOk";
 import styles from "./ForgotPasswordForm.module.css";
 import { resetPassword } from "@/services/authService";
+import { useState } from "react";
 
 export default function ForgotPasswordForm({
-  email,
-  setEmail,
   setIsLoading,
   setValidationMessage,
   setShowPopUpInfoMessage,
+  setIsForgotPasswordClicked,
 }) {
+  const [email, setEmail] = useState("");
+
   const handleResetPassword = async () => {
     try {
       setIsLoading(true);
       await resetPassword(email);
       setValidationMessage(
-        "Σχεδόν έτοιμο! 🎉 Πάτησε το link που σου στείλαμε στο email σου για να αλλάξεις τον κωδικό σου.",
+        "Σχεδόν έτοιμο! 🎉 Αν το email είναι καταχωρημένο, θα σου στείλουμε ένα link για να αλλάξεις τον κωδικό σου. Έλεγξε τα εισερχόμενά σου!",
       );
       setShowPopUpInfoMessage(true);
     } catch (error) {
+      if (error?.message === "email rate limit exceeded") {
+        setValidationMessage(
+          "Δεν ήταν δυνατή η αποστολή του email αυτή τη στιγμή, επειδή έχει προσωρινά περιοριστεί η αποστολή email. Παρακαλώ δοκίμασε ξανά αργότερα.",
+        );
+        setShowPopUpInfoMessage(true);
+        return;
+      }
       setValidationMessage(error.message);
       setShowPopUpInfoMessage(true);
     } finally {
@@ -41,7 +50,7 @@ export default function ForgotPasswordForm({
         buttonText="Αποστολή email αλλαγής κωδικού"
       />
       <p
-        onClick={() => (window.location.href = "/login-register")}
+        onClick={() => setIsForgotPasswordClicked(false)}
         className={styles.clickableText}
       >
         Επιστροφή

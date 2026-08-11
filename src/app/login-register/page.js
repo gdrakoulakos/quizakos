@@ -32,8 +32,6 @@ export default function LoginPage() {
   const [showConfirmationPassword, setShowConfirmationPassword] =
     useState(false);
   const [confirmationPassword, setConfirmationPassword] = useState("");
-  const [validationMessage, setValidationMessage] = useState("");
-
   const [isSignUpClicked, setIsSignUpClicked] = useState(false);
   const [isLoading, setIsLoading] = useState(false);
   const [isForgotPasswordClicked, setIsForgotPasswordClicked] = useState(false);
@@ -43,46 +41,36 @@ export default function LoginPage() {
     loggedInUserData,
     showPopUpInfoMessage,
     setShowPopUpInfoMessage,
+    validationMessage,
+    setValidationMessage,
   } = QuizContext();
 
   const handleGoogleSignIn = async () => {
     try {
       setIsLoading(true);
-      await signInWithGoogle();
+      await signInWithGoogle(setIsLoading);
     } catch (error) {
       console.error(error.message);
-    } finally {
       setIsLoading(false);
     }
   };
 
   return (
     <main className={styles.loginOrRegisterSection}>
-      {isLoading && <LoadingSpinner message="Φόρτωση" isFullScreen={true} />}
+      {isLoading && <LoadingSpinner message="Φόρτωση..." isFullScreen={true} />}
       {showPopUpInfoMessage && <PopUpInfoMessage message={validationMessage} />}
 
       {isLoggedIn ? (
         <UserProfile setIsLoading={setIsLoading} />
       ) : isForgotPasswordClicked ? (
         <ForgotPasswordForm
-          email={email}
-          setEmail={setEmail}
           setIsLoading={setIsLoading}
           setValidationMessage={setValidationMessage}
           setShowPopUpInfoMessage={setShowPopUpInfoMessage}
+          setIsForgotPasswordClicked={setIsForgotPasswordClicked}
         />
       ) : isSignUpClicked ? (
         <SignUpForm
-          email={email}
-          setEmail={setEmail}
-          password={password}
-          setPassword={setPassword}
-          showPassword={showPassword}
-          setShowPassword={setShowPassword}
-          confirmationPassword={confirmationPassword}
-          setConfirmationPassword={setConfirmationPassword}
-          showConfirmationPassword={showConfirmationPassword}
-          setShowConfirmationPassword={setShowConfirmationPassword}
           setIsSignUpClicked={setIsSignUpClicked}
           setShowPopUpInfoMessage={setShowPopUpInfoMessage}
           validationMessage={validationMessage}
@@ -92,12 +80,6 @@ export default function LoginPage() {
         <SignInForm
           isForgotPasswordClicked={isForgotPasswordClicked}
           setIsForgotPasswordClicked={setIsForgotPasswordClicked}
-          email={email}
-          setEmail={setEmail}
-          password={password}
-          setPassword={setPassword}
-          showPassword={showPassword}
-          setShowPassword={setShowPassword}
           setIsSignUpClicked={setIsSignUpClicked}
           setIsLoading={setIsLoading}
           setValidationMessage={setValidationMessage}

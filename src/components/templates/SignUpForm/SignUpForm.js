@@ -10,22 +10,18 @@ import { signUp } from "@/services/authService";
 export default function SignUpForm({
   isForgotPasswordClicked,
   setIsForgotPasswordClicked,
-  email,
-  setEmail,
-  password,
-  setPassword,
-  showPassword,
-  setShowPassword,
-  confirmationPassword,
-  setConfirmationPassword,
-  showConfirmationPassword,
-  setShowConfirmationPassword,
   setIsSignUpClicked,
   setShowPopUpInfoMessage,
   validationMessage,
   setValidationMessage,
 }) {
   const [name, setName] = useState("");
+  const [email, setEmail] = useState("");
+  const [password, setPassword] = useState("");
+  const [showPassword, setShowPassword] = useState(false);
+  const [showConfirmationPassword, setShowConfirmationPassword] =
+    useState(false);
+  const [confirmationPassword, setConfirmationPassword] = useState("");
 
   const handleSignUp = async () => {
     const validationErrors = validateSignUp({

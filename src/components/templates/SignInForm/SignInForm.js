@@ -9,17 +9,14 @@ import { signInWithGoogle, signInWithPassword } from "@/services/authService";
 export default function SignInForm({
   isForgotPasswordClicked,
   setIsForgotPasswordClicked,
-  email,
-  setEmail,
-  password,
-  setPassword,
-  showPassword,
-  setShowPassword,
   setIsSignUpClicked,
   setIsLoading,
   setValidationMessage,
   setShowPopUpInfoMessage,
 }) {
+  const [email, setEmail] = useState("");
+  const [password, setPassword] = useState("");
+  const [showPassword, setShowPassword] = useState(false);
   const handleSignInWithPassword = async (email, password) => {
     try {
       setIsLoading(true);

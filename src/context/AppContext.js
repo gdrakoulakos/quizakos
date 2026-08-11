@@ -10,6 +10,7 @@ export const AppProvider = ({ children }) => {
   const [loggedInUserName, setLoggedInUserName] = useState("");
   const [loggedInUserData, setLoggedInUserData] = useState(null);
   const [loggedInUserQuizProgress, setLoggedInUserQuizProgress] = useState([]);
+  const [validationMessage, setValidationMessage] = useState("");
   const [currentInstitution, setCurrentInstitution] = useState(null);
   const [defaultQuizData, setDefaultQuizData] = useState([]);
   const [defaultQuestions, setDefaultQuestions] = useState([]);
@@ -148,6 +149,8 @@ export const AppProvider = ({ children }) => {
         loggedInUserName,
         loggedInUserData,
         loggedInUserQuizProgress,
+        validationMessage,
+        setValidationMessage,
         fetchUserQuizProgress,
         defaultQuestions,
         setDefaultQuestions,
