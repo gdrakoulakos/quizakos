@@ -29,9 +29,10 @@ export default function UserProfile({ setIsLoading }) {
       (lesson) => lesson.quiz_completed === true,
     );
 
-    const bestScore = Math.max(
-      ...loggedInUserQuizProgress.map((quiz) => quiz.best_score),
-    );
+    const bestScore =
+      loggedInUserQuizProgress.length > 0
+        ? Math.max(...loggedInUserQuizProgress.map((quiz) => quiz.best_score))
+        : null;
 
     const goldenRibbons = loggedInUserQuizProgress.filter(
       (lesson) => lesson.golden_ribbon === true,
@@ -131,7 +132,10 @@ export default function UserProfile({ setIsLoading }) {
             </div>
             <div className={styles.achievementsSummary}>
               <p>Καλύτερο Σκορ:</p>
-              <p>{userAchievements?.bestScore}%</p>
+              <p>
+                {userAchievements?.bestScore ? userAchievements?.bestScore : ""}
+                {userAchievements?.bestScore ? "%" : "—"}
+              </p>
             </div>
           </div>
           <div className={styles.awardsContainer}>
