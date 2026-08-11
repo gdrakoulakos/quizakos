@@ -88,3 +88,17 @@ export async function deleteAccount() {
     console.error(result.error);
   }
 }
+
+export async function updateUserAvatar(avatar) {
+  const { data, error } = await supabase.auth.updateUser({
+    data: {
+      avatar: avatar,
+    },
+  });
+
+  if (error) {
+    throw error;
+  }
+
+  return data;
+}

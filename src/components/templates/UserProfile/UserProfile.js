@@ -5,12 +5,14 @@ import Image from "next/image";
 import { QuizContext } from "@/context/AppContext";
 import Award from "@/components/atoms/Award/Award";
 import { useEffect, useState } from "react";
+import PopUpAvatarSelection from "../PopUpAvatarSelection/PopUpAvatarSelection";
 
 export default function UserProfile({ setIsLoading }) {
   const { awardsData, loggedInUserData, loggedInUserQuizProgress, isLoggedIn } =
     QuizContext();
   const [userFullName, setUserFullName] = useState(null);
   const [userEmail, setUserEmail] = useState(null);
+  const [userAvatar, setUserAvatar] = useState("avatar-1");
   const [userAchievements, setUserAchievements] = useState({
     completedQuizzes: null,
     bestScore: null,
@@ -21,6 +23,8 @@ export default function UserProfile({ setIsLoading }) {
     goldenRibbons: null,
   });
   const [awardsWithAchievements, setAwardsWithAchievements] = useState(null);
+  const [showPopUpAvatarSelection, setShowPopUpAvatarSelection] =
+    useState(false);
 
   useEffect(() => {
     if (!loggedInUserData || !loggedInUserQuizProgress || !isLoggedIn) return;
@@ -64,6 +68,10 @@ export default function UserProfile({ setIsLoading }) {
       silverMedals: silverMedals,
       goldenRibbons: goldenRibbons.length,
     });
+    const selectedAvatar = loggedInUserData?.user_metadata?.avatar;
+    if (selectedAvatar) {
+      setUserAvatar(loggedInUserData?.user_metadata?.avatar);
+    }
   }, [loggedInUserData, loggedInUserQuizProgress, isLoggedIn]);
 
   const handleSignOut = async () => {
@@ -105,24 +113,37 @@ export default function UserProfile({ setIsLoading }) {
 
   return (
     <div className={styles.userProfileSection}>
+      {showPopUpAvatarSelection && (
+        <PopUpAvatarSelection
+          setShowPopUpAvatarSelection={setShowPopUpAvatarSelection}
+        />
+      )}
       <h1> Προφίλ</h1>
-
       <div className={styles.userProfile}>
         <div className={styles.userProfileInfo}>
-          <Image
-            className={styles.userIcon}
-            src="/images/quizakos/quizakos-coding-3.png"
-            alt="Coming Soon"
-            width={70}
-            height={70}
-            loading="eager"
-          />
+          <div className={styles.userIconContainer}>
+            <Image
+              className={styles.userIcon}
+              src={`/images/avatars/${userAvatar}.png`}
+              alt="Avatar"
+              width={70}
+              height={70}
+              loading="eager"
+            />
+            <button
+              className={styles.buttonIcon}
+              onClick={() => setShowPopUpAvatarSelection(true)}
+            >
+              Αλλαγή Avatar
+            </button>
+          </div>
           <div className={styles.userProfileDetails}>
             <p className={styles.userFullName}>{userFullName}</p>
             <p className={styles.userEmail}>{userEmail}</p>
           </div>
         </div>
         <hr className={styles.seperator} />
+
         <h2 className={styles.achievementsTitle}>Τα επιτεύγματά μου</h2>
         <div className={styles.achievementsContainer}>
           <div className={styles.achievementsHeaderContainer}>
