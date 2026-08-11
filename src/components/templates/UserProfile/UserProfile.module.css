@@ -4,6 +4,8 @@
   align-items: center;
   gap: 15px;
   animation: fadeIn 0.4s ease-in-out;
+  padding: 0 20px;
+  margin-bottom: 70px;
 }
 
 @keyframes fadeIn {
@@ -21,6 +23,106 @@
   flex-direction: column;
   gap: 20px;
   align-items: center;
+}
+
+.userProfileInfo {
+  display: flex;
+  gap: 20px;
+  align-items: center;
+}
+
+.userProfileDetails {
+  display: flex;
+  flex-direction: column;
+  gap: 5px;
+}
+
+.userProfileDetails p {
+  margin: 0;
+}
+
+.userFullName {
+  color: white;
+}
+
+.userEmail {
+  color: #ffb077;
+  font-size: 14px;
+}
+
+.userIcon {
+  box-shadow: 0 0 2px 2px #fff;
+  border-radius: 50%;
+}
+
+.achievementsTitle {
+  margin: 0;
+  font-size: 20x;
+  color: white;
+}
+
+.achievementsContainer {
+  background-color: #00000017;
+  border-radius: 20px;
+  padding: 0 10px 20px 10px;
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+  box-sizing: border-box;
+  box-shadow: 0 0 2px 1px #fff;
+}
+
+.achievementsHeaderContainer {
+  display: flex;
+  flex-direction: column;
+}
+
+.achievementsSummary {
+  display: flex;
+  gap: 5px;
+  border-bottom: solid 1px rgba(255, 255, 255, 0.377);
+  justify-content: center;
+}
+
+.achievementsSummary p {
+  margin: 0;
+  color: white;
+  padding: 10px 0;
+  text-shadow: 1px 1px 5px #000000;
+}
+
+.awardsContainer {
+  display: flex;
+  width: 100%;
+  gap: 15px;
+  flex-wrap: wrap;
+  justify-content: center;
+  box-sizing: border-box;
+}
+
+.awardContainer {
+  box-shadow: 0 0 3px 2px #ffffff6e;
+  border-radius: 10px;
+  width: 90px;
+  height: 120px;
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  padding: 5px;
+  box-sizing: border-box;
+  background-color: rgba(255, 255, 255, 0.663);
+  flex-direction: column;
+  align-items: center;
+  gap: 2px;
+}
+
+.awardContainer p {
+  margin: 0;
+}
+
+.awardName {
+  font-size: 12px;
+  text-align: center;
 }
 
 .seperator {

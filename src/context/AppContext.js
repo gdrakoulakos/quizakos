@@ -37,6 +37,44 @@ export const AppProvider = ({ children }) => {
   const isTablet = useMediaQuery(theme.breakpoints.between(600, 1024));
   const isDesktop = useMediaQuery(theme.breakpoints.up(1024));
 
+  const awardsData = [
+    {
+      name: "star",
+      nameSingular: "Αστέρι",
+      namePlural: "Αστέρια",
+      img: "star-6-tinypng",
+      text: "Για κάθε σωστή απάντηση, κερδίζεις 10 αστέρια!",
+    },
+    {
+      name: "book",
+      nameSingular: "Βιβλίο",
+      namePlural: "Βιβλία",
+      img: "book-completed-tinypng",
+      text: "Αν απαντήσεις σωστά στο 60% των ερωτήσεων (3 στις 5 ή 6 στις 10), κερδίζεις ένα βιβλίο!",
+    },
+    {
+      name: "silverMedal",
+      nameSingular: "Ασημένιο Μετάλλιο",
+      namePlural: "Ασημένια Μετάλλια",
+      img: "silver-medal-tinypng",
+      text: "Αν απαντήσεις σωστά στο 80% των ερωτήσεων (4 στις 5 ή 8 στις 10), κερδίζεις ένα ασημένιο μετάλλιο!",
+    },
+    {
+      name: "goldMedal",
+      nameSingular: "Χρυσό Μετάλλιο",
+      namePlural: "Χρυσά Μετάλλια",
+      img: "gold-medal-tinypng",
+      text: "Αν απαντήσεις σωστά σε όλες τις ερωτήσεις, κερδίζεις ένα χρυσό μετάλλιο και παίρνεις επιπλέον 50 αστέρια!",
+    },
+    {
+      name: "goldenRibbon",
+      nameSingular: "Χρυσή Ροζέτα",
+      namePlural: "Χρυσές Ροζέτες",
+      img: "golden-ribbon-3-tinypng",
+      text: "Συγκέντρωσε 1000 αστέρια και κέρδισε τουλάχιστον 1 χρυσό μετάλλιο για να ξεκλειδώσεις τη Χρυσή Ροζέτα!",
+    },
+  ];
+
   useEffect(() => {
     const {
       data: { subscription },
@@ -152,6 +190,7 @@ export const AppProvider = ({ children }) => {
         validationMessage,
         setValidationMessage,
         fetchUserQuizProgress,
+        awardsData,
         defaultQuestions,
         setDefaultQuestions,
         currentInstitutionData,
