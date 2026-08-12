@@ -11,7 +11,7 @@ import { QuizContext } from "@/context/AppContext";
 import Logo from "@/components/atoms/Icons/Logo/Logo";
 
 export default function TabBar() {
-  const { isLoggedIn, loggedInUserName, isDesktop } = QuizContext();
+  const { isLoggedIn, loggedInUserName, isDesktop, userAvatar } = QuizContext();
 
   const tabBarMenuItems = [
     {
@@ -52,11 +52,24 @@ export default function TabBar() {
       </div>
 
       <div className={styles.accountContainer}>
-        <Link href={"/login-register"} className={styles.menuOption}>
-          <button className={styles.accountButton}>
-            <span>{isLoggedIn ? loggedInUserName : "Σύνδεση"}</span>
-          </button>
-        </Link>
+        {isLoggedIn ? (
+          <Link href={"/login-register"}>
+            <Image
+              className={styles.userIcon}
+              src={userAvatar}
+              alt="Avatar"
+              width={45}
+              height={45}
+              loading="eager"
+            />
+          </Link>
+        ) : (
+          <Link href={"/login-register"} className={styles.menuOption}>
+            <button className={styles.accountButton}>
+              <span>{"Σύνδεση"}</span>
+            </button>
+          </Link>
+        )}
       </div>
     </motion.div>
   );

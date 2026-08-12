@@ -8,13 +8,17 @@ import { useEffect, useState } from "react";
 import PopUpAvatarSelection from "../PopUpAvatarSelection/PopUpAvatarSelection";
 
 export default function UserProfile({ setIsLoading }) {
-  const { awardsData, loggedInUserData, loggedInUserQuizProgress, isLoggedIn } =
-    QuizContext();
+  const {
+    awardsData,
+    loggedInUserData,
+    loggedInUserQuizProgress,
+    isLoggedIn,
+    userAvatar,
+    setUserAvatar,
+  } = QuizContext();
   const [userFullName, setUserFullName] = useState(null);
   const [userEmail, setUserEmail] = useState(null);
-  const [userAvatar, setUserAvatar] = useState(
-    "/images/avatars/default/avatar-1.png",
-  );
+
   const [userAchievements, setUserAchievements] = useState({
     completedQuizzes: null,
     bestScore: null,
@@ -127,7 +131,7 @@ export default function UserProfile({ setIsLoading }) {
           <div className={styles.userIconContainer}>
             <Image
               className={styles.userIcon}
-              src={`${userAvatar}`}
+              src={userAvatar}
               alt="Avatar"
               width={70}
               height={70}

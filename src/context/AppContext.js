@@ -8,6 +8,9 @@ const AppContext = createContext();
 export const AppProvider = ({ children }) => {
   const [isLoggedIn, setIsLoggedIn] = useState(false);
   const [loggedInUserName, setLoggedInUserName] = useState("");
+  const [userAvatar, setUserAvatar] = useState(
+    "/images/avatars/default/avatar-1.png",
+  );
   const [loggedInUserData, setLoggedInUserData] = useState(null);
   const [loggedInUserQuizProgress, setLoggedInUserQuizProgress] = useState([]);
   const [validationMessage, setValidationMessage] = useState("");
@@ -89,6 +92,7 @@ export const AppProvider = ({ children }) => {
             user.user_metadata?.full_name?.split(" ")[0] ||
             "",
         );
+        setUserAvatar(user?.user_metadata?.avatar);
 
         setLoggedInUserData(user);
       } else {
@@ -185,6 +189,8 @@ export const AppProvider = ({ children }) => {
       value={{
         isLoggedIn,
         loggedInUserName,
+        userAvatar,
+        setUserAvatar,
         loggedInUserData,
         loggedInUserQuizProgress,
         validationMessage,
