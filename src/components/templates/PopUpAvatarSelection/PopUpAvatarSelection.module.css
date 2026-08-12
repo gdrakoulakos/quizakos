@@ -14,7 +14,7 @@
 .popupContent {
   position: relative;
   top: 50px;
-  margin: 10px;
+  margin: 30px 10px;
   background: linear-gradient(
     70deg,
     #665980f3 0%,
@@ -22,15 +22,35 @@
     #50338ef5 100%
   );
   padding: 10px;
-  border-radius: 5px;
+  border-radius: 20px;
   box-shadow: 0 0 5px 2px #d5d5d5;
-  max-width: 350px;
+  max-width: 320px;
 }
 
-.message {
+.closeButton {
+  position: absolute;
+  top: -10;
+  right: -10;
+  z-index: 1;
+  border-radius: 50%;
+  box-shadow: 0 0 2px 3px #ffffff;
+  width: 25px;
+  height: 25px;
+  color: #f68c40f2;
+  font-size: 20px;
+  font-weight: bold;
+  margin: 0;
+  padding: 0;
+  border: none;
+  background-color: #ffffff;
+  box-sizing: border-box;
+}
+
+.title {
   color: white;
-  font-size: 18px;
+  font-size: 20px;
   text-align: center;
+  margin: 5px 0 10px 0;
 }
 
 .avatarsContainer {
@@ -39,11 +59,12 @@
   gap: 15px;
   justify-content: center;
   background-color: #fdfdfd1d;
-  padding: 10px 0;
-  border-radius: 20px;
+  padding: 15px 0;
+  border-radius: 5px;
   max-height: 300px;
   overflow-y: auto;
   overflow-x: hidden;
+  box-shadow: 0 0 1px 1px #ffffff;
 }
 
 .avatarsContainer::-webkit-scrollbar {

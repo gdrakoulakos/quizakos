@@ -4,41 +4,19 @@ import Image from "next/image";
 import { useState } from "react";
 import { updateUserAvatar } from "@/services/authService";
 
-export default function PopUpAvatarSelection({ setShowPopUpAvatarSelection }) {
+export default function PopUpAvatarSelection({
+  setShowPopUpAvatarSelection,
+  setIsLoading,
+}) {
   const [avatarSelected, setAvatarSelected] = useState(null);
-  const avatars = [
-    "avatar-1",
-    "avatar-2",
-    "avatar-3",
-    "avatar-4",
-    "avatar-5",
-    "avatar-6",
-    "avatar-7",
-    "avatar-8",
-    "avatar-9",
-    "avatar-10",
-    "avatar-11",
-    "avatar-12",
-    "avatar-13",
-    "avatar-14",
-    "avatar-15",
-    "avatar-16",
-    "avatar-17",
-    "avatar-18",
-    "avatar-19",
-    "avatar-20",
-    "avatar-21",
-    "avatar-22",
-    "avatar-23",
-    "avatar-24",
-    "avatar-25",
-    "avatar-26",
-    "avatar-27",
-    "avatar-28",
-  ];
+  const avatars = Array.from(
+    { length: 29 },
+    (_, index) => `/images/avatars/default/avatar-${index + 1}.png`,
+  );
 
   const handleAvatarSave = async () => {
     if (!avatarSelected) return;
+    setIsLoading(true);
 
     try {
       await updateUserAvatar(avatarSelected);
@@ -46,18 +24,25 @@ export default function PopUpAvatarSelection({ setShowPopUpAvatarSelection }) {
     } catch (error) {
       console.error("Error saving avatar:", error);
     }
+    setIsLoading(false);
   };
 
   return (
     <div className={styles.popupWrapper}>
       <div className={styles.popupContent}>
-        <p className={styles.message}>Διάλεξε το avatar που σου ταιριάζει:</p>
+        <button
+          className={styles.closeButton}
+          onClick={() => setShowPopUpAvatarSelection(false)}
+        >
+          ×
+        </button>
+        <p className={styles.title}>Διάλεξε το avatar που σου ταιριάζει:</p>
         <div className={styles.avatarsContainer}>
           {avatars.map((avatar) => (
             <Image
               key={avatar}
               className={`${styles.avatarIcon} ${avatarSelected === avatar ? styles.selected : ""}`}
-              src={`/images/avatars/${avatar}.png`}
+              src={`${avatar}`}
               alt="Coming Soon"
               width={80}
               height={80}

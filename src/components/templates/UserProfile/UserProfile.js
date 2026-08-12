@@ -12,7 +12,9 @@ export default function UserProfile({ setIsLoading }) {
     QuizContext();
   const [userFullName, setUserFullName] = useState(null);
   const [userEmail, setUserEmail] = useState(null);
-  const [userAvatar, setUserAvatar] = useState("avatar-1");
+  const [userAvatar, setUserAvatar] = useState(
+    "/images/avatars/default/avatar-1.png",
+  );
   const [userAchievements, setUserAchievements] = useState({
     completedQuizzes: null,
     bestScore: null,
@@ -116,6 +118,7 @@ export default function UserProfile({ setIsLoading }) {
       {showPopUpAvatarSelection && (
         <PopUpAvatarSelection
           setShowPopUpAvatarSelection={setShowPopUpAvatarSelection}
+          setIsLoading={setIsLoading}
         />
       )}
       <h1> Προφίλ</h1>
@@ -124,7 +127,7 @@ export default function UserProfile({ setIsLoading }) {
           <div className={styles.userIconContainer}>
             <Image
               className={styles.userIcon}
-              src={`/images/avatars/${userAvatar}.png`}
+              src={`${userAvatar}`}
               alt="Avatar"
               width={70}
               height={70}
