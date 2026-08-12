@@ -10,10 +10,18 @@ export default function ButtonAnswer({
   correctAnswer,
 }) {
   const [additionalButtonStyle, setAdditionalButtonStyle] = useState("");
+  const isCorrectAnswerClicked =
+    currentClickedAnswerData.answer === correctAnswer;
 
   useEffect(() => {
     if (currentClickedAnswerData.result === "") return;
-    if (children === correctAnswer) {
+    if (
+      children === currentClickedAnswerData.answer &&
+      isCorrectAnswerClicked
+    ) {
+      setAdditionalButtonStyle("userClickedCorrectAnswer");
+      return;
+    } else if (children === correctAnswer) {
       setAdditionalButtonStyle("correctAnswer");
     }
     if (
@@ -29,7 +37,7 @@ export default function ButtonAnswer({
     return () => {
       setAdditionalButtonStyle("");
     };
-  }, [currentClickedAnswerData]);
+  }, [currentClickedAnswerData, children]);
 
   return (
     <button
