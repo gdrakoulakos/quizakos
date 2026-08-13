@@ -123,6 +123,7 @@ export default function UserProfile({ setIsLoading }) {
         <PopUpAvatarSelection
           setShowPopUpAvatarSelection={setShowPopUpAvatarSelection}
           setIsLoading={setIsLoading}
+          hasAtLeastTwoGoldenRibbons={userAchievements?.goldenRibbons >= 2}
         />
       )}
       <h1> Προφίλ</h1>

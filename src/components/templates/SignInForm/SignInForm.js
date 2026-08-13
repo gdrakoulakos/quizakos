@@ -48,7 +48,7 @@ export default function SignInForm({
               className={styles.eyeIcon}
               onClick={() => setShowPassword((prev) => !prev)}
             >
-              {showPassword ? <VisibilityOffIcon /> : <VisibilityIcon />}
+              {showPassword ? <VisibilityIcon /> : <VisibilityOffIcon />}
             </span>
             <input
               type={showPassword ? "text" : "password"}

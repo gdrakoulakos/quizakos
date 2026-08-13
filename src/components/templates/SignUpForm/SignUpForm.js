@@ -80,7 +80,7 @@ export default function SignUpForm({
               className={styles.eyeIcon}
               onClick={() => setShowPassword((prev) => !prev)}
             >
-              {showPassword ? <VisibilityOffIcon /> : <VisibilityIcon />}
+              {showPassword ? <VisibilityIcon /> : <VisibilityOffIcon />}
             </span>
             <input
               type={showPassword ? "text" : "password"}
@@ -95,9 +95,9 @@ export default function SignUpForm({
               onClick={() => setShowConfirmationPassword((prev) => !prev)}
             >
               {showConfirmationPassword ? (
-                <VisibilityOffIcon />
-              ) : (
                 <VisibilityIcon />
+              ) : (
+                <VisibilityOffIcon />
               )}
             </span>
             <input

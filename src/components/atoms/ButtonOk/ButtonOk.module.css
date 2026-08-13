@@ -20,3 +20,9 @@
 .okButton:hover {
   background: linear-gradient(135deg, #e19c6b, #d16518);
 }
+
+.okButton:disabled {
+  opacity: 0.5;
+  transform: none;
+  box-shadow: none;
+}
