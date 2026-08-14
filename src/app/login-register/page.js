@@ -33,7 +33,6 @@ export default function LoginPage() {
     useState(false);
   const [confirmationPassword, setConfirmationPassword] = useState("");
   const [isSignUpClicked, setIsSignUpClicked] = useState(false);
-  const [isLoading, setIsLoading] = useState(false);
   const [isForgotPasswordClicked, setIsForgotPasswordClicked] = useState(false);
   const router = useRouter();
   const {
@@ -43,28 +42,31 @@ export default function LoginPage() {
     setShowPopUpInfoMessage,
     validationMessage,
     setValidationMessage,
+    setLoadingSpinner,
   } = QuizContext();
 
   const handleGoogleSignIn = async () => {
     try {
-      setIsLoading(true);
-      await signInWithGoogle(setIsLoading);
+      setLoadingSpinner({
+        show: true,
+        isFullScreen: true,
+        message: "Φόρτωση...",
+      });
+      await signInWithGoogle();
     } catch (error) {
       console.error(error.message);
-      setIsLoading(false);
+      setLoadingSpinner({ show: false });
     }
   };
 
   return (
     <main className={styles.loginOrRegisterSection}>
-      {isLoading && <LoadingSpinner message="Φόρτωση..." isFullScreen={true} />}
       {showPopUpInfoMessage && <PopUpInfoMessage message={validationMessage} />}
 
       {isLoggedIn ? (
-        <UserProfile setIsLoading={setIsLoading} />
+        <UserProfile />
       ) : isForgotPasswordClicked ? (
         <ForgotPasswordForm
-          setIsLoading={setIsLoading}
           setValidationMessage={setValidationMessage}
           setShowPopUpInfoMessage={setShowPopUpInfoMessage}
           setIsForgotPasswordClicked={setIsForgotPasswordClicked}
@@ -81,7 +83,6 @@ export default function LoginPage() {
           isForgotPasswordClicked={isForgotPasswordClicked}
           setIsForgotPasswordClicked={setIsForgotPasswordClicked}
           setIsSignUpClicked={setIsSignUpClicked}
-          setIsLoading={setIsLoading}
           setValidationMessage={setValidationMessage}
           setShowPopUpInfoMessage={setShowPopUpInfoMessage}
         />

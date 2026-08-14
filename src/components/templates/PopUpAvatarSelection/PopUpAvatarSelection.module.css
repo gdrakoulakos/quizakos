@@ -65,7 +65,7 @@
   display: flex;
   justify-content: center;
   align-items: center;
-  color: #f68c40f2;
+  color: #fbae77f2;
   background-color: #fdfdfd46;
   border: none;
   font-size: 18px;
@@ -87,6 +87,7 @@
 
 .selectedCategory {
   background: #fdfdfd1d !important;
+  color: #ff9244f2 !important;
 }
 
 .avatarsContainer {

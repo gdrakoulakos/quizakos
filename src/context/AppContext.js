@@ -1,3 +1,5 @@
+"use client";
+
 const { createContext, useContext, useState, useEffect } = require("react");
 import { supabase } from "@/lib/supabase";
 import { useTheme } from "@mui/material/styles";
@@ -22,6 +24,11 @@ export const AppProvider = ({ children }) => {
   const [selectedQuiz, setSelectedQuiz] = useState(null);
   const [displayedQuestionIndex, setDisplayedQuestionIndex] = useState(0);
   const [showPopUpResults, setShowPopUpResults] = useState(false);
+  const [loadingSpinner, setLoadingSpinner] = useState({
+    show: false,
+    isFullScreen: false,
+    message: "Φόρτωση...",
+  });
   const [userProgressData, setUserProgressData] = useState([]);
   const [showPopUpAwardsInfo, setShowPopUpAwardsInfo] = useState(false);
   const [showPopUpConfirmation, setShowPopUpConfirmation] = useState(false);
@@ -225,6 +232,8 @@ export const AppProvider = ({ children }) => {
         setDeleteAllScores,
         showPopUpInfoMessage,
         setShowPopUpInfoMessage,
+        loadingSpinner,
+        setLoadingSpinner,
         displayedQuestionId,
         setDisplayedQuestionId,
         isMobile,

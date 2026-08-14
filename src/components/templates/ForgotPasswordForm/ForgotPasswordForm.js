@@ -2,18 +2,19 @@ import ButtonOk from "@/components/atoms/ButtonOk/ButtonOk";
 import styles from "./ForgotPasswordForm.module.css";
 import { resetPassword } from "@/services/authService";
 import { useState } from "react";
+import { QuizContext } from "@/context/AppContext";
 
 export default function ForgotPasswordForm({
-  setIsLoading,
   setValidationMessage,
   setShowPopUpInfoMessage,
   setIsForgotPasswordClicked,
 }) {
+  const { setLoadingSpinner } = QuizContext();
   const [email, setEmail] = useState("");
 
   const handleResetPassword = async () => {
     try {
-      setIsLoading(true);
+      setLoadingSpinner({ show: true, isFullScreen: true });
       await resetPassword(email);
       setValidationMessage(
         "Σχεδόν έτοιμο! 🎉 Αν το email είναι καταχωρημένο, θα σου στείλουμε ένα link για να αλλάξεις τον κωδικό σου. Έλεγξε τα εισερχόμενά σου!",
@@ -30,7 +31,7 @@ export default function ForgotPasswordForm({
       setValidationMessage(error.message);
       setShowPopUpInfoMessage(true);
     } finally {
-      setIsLoading(false);
+      setLoadingSpinner({ show: false });
     }
   };
 

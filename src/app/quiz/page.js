@@ -3,14 +3,13 @@ import styles from "./quiz.module.css";
 import QuizCardQuestion from "@/components/organisms/QuizCardQuestion/QuizCardQuestion";
 import { QuizContext } from "../../context/AppContext";
 import { AnimatePresence, motion } from "motion/react";
-import LoadingSpinner from "@/components/organisms/LoadingSpinner/LoadingSpinner";
 import { useEffect } from "react";
 import { supabase } from "@/lib/supabase";
 import { useCookies } from "react-cookie";
 import { useRouter } from "next/navigation";
 import PopUpInfoMessage from "@/components/templates/PopUpInfoMessage/PopUpInfoMessage";
 
-export default function quiz() {
+export default function Quiz() {
   const {
     selectedQuiz,
     setDefaultQuestions,
@@ -24,10 +23,10 @@ export default function quiz() {
     showPopUpInfoMessage,
     displayedQuestionId,
     setDisplayedQuestionId,
-    isDesktop,
+    setLoadingSpinner,
   } = QuizContext();
 
-  const [cookies, ,] = useCookies(["quiz_id"]);
+  const [cookies] = useCookies(["quiz_id", "total_questions"]);
   const router = useRouter();
 
   const motionProps = {
@@ -38,32 +37,59 @@ export default function quiz() {
   };
 
   useEffect(() => {
-    if (!selectedQuizId || !numberOfQuestions) return;
+    const activeQuizId = selectedQuizId || cookies.quiz_id;
+    const activeQuestionsCount = numberOfQuestions || cookies.total_questions;
+
+    if (!activeQuizId) {
+      setLoadingSpinner({ show: false });
+      router.push("/");
+      return;
+    }
+
+    if (!selectedQuizId) setSelectedQuizId(activeQuizId);
+    if (!numberOfQuestions) setNumberOfQuestions(activeQuestionsCount);
+  }, [selectedQuizId, numberOfQuestions, cookies]);
+
+  useEffect(() => {
+    const currentQuizId = selectedQuizId || cookies.quiz_id;
+    const count = numberOfQuestions || cookies.total_questions;
+
+    if (!currentQuizId || !count) return;
 
     const fetchData = async () => {
-      const { data, error } = await supabase
-        .from("default_questions")
-        .select(
-          `
-        *,
-        lesson:default_lessons!lesson_id (
-          id,
-          lesson_name,
-          grade:default_grades!grade_id (
-            id,
-            grade_name
-          )
-        )
-      `,
-        )
-        .eq("lesson_id", selectedQuizId);
+      setLoadingSpinner({
+        show: true,
+        isFullScreen: true,
+        message: "Φόρτωση Quiz...",
+      });
 
-      if (error) {
-        console.error(error);
-      } else {
-        const shuffled = [...data].sort(() => Math.random() - 0.5);
-        const pickedQuestions = shuffled.slice(0, numberOfQuestions);
-        setDefaultQuestions(pickedQuestions);
+      try {
+        const { data, error } = await supabase
+          .from("default_questions")
+          .select(
+            `
+            *,
+            lesson:default_lessons!lesson_id (
+              id,
+              lesson_name,
+              grade:default_grades!grade_id (
+                id,
+                grade_name
+              )
+            )
+          `,
+          )
+          .eq("lesson_id", currentQuizId);
+
+        if (error) {
+          console.error("Supabase Error:", error);
+        } else if (data) {
+          const shuffled = [...data].sort(() => Math.random() - 0.5);
+          const pickedQuestions = shuffled.slice(0, Number(count));
+          setDefaultQuestions(pickedQuestions);
+        }
+      } catch (err) {
+        console.error("Fetch Error:", err);
       }
     };
 
@@ -71,49 +97,40 @@ export default function quiz() {
   }, [selectedQuizId, numberOfQuestions]);
 
   useEffect(() => {
-    if (!selectedQuizId) {
-      setSelectedQuizId(cookies.quiz_id);
+    if (!defaultQuestions || defaultQuestions.length === 0) return;
+
+    if (!selectedQuiz) {
+      const foundQuizQuestions = defaultQuestions
+        .filter((q) => q.lesson_id === (selectedQuizId || cookies.quiz_id))
+        .sort(() => Math.random() - 0.5);
+
+      if (foundQuizQuestions.length > 0) {
+        const lessonName = foundQuizQuestions[0]?.lesson?.lesson_name;
+        const gradeName = foundQuizQuestions[0]?.lesson?.grade?.grade_name;
+
+        const quizTest = {
+          quiz_id: selectedQuizId || cookies.quiz_id,
+          grade: gradeName,
+          lesson: lessonName,
+          questions: foundQuizQuestions.map((q) => ({
+            id: q.id,
+            title: q.question,
+            question_img: q.question_img,
+            availableAnswers: [
+              q.answer_1,
+              q.answer_2,
+              q.answer_3,
+              q.answer_4,
+            ].sort(() => Math.random() - 0.5),
+            correctAnswer: q.correct_answer,
+          })),
+        };
+        setSelectedQuiz(quizTest);
+      }
     }
 
-    if (!numberOfQuestions) {
-      setNumberOfQuestions(cookies.total_questions);
-    }
-
-    if (!cookies.quiz_id && !selectedQuizId) {
-      router.push("/");
-    }
-
-    if (!selectedQuizId || !defaultQuestions?.length) return;
-
-    if (selectedQuiz) return;
-    const foundQuizQuestions = defaultQuestions
-      .filter((q) => q.lesson_id === selectedQuizId)
-      .sort(() => Math.random() - 0.5);
-
-    const lessonName = foundQuizQuestions[0]?.lesson.lesson_name;
-    const gradeName = foundQuizQuestions[0]?.lesson.grade.grade_name;
-
-    if (foundQuizQuestions.length !== 0) {
-      const quizTest = {
-        quiz_id: selectedQuizId,
-        grade: gradeName,
-        lesson: lessonName,
-        questions: foundQuizQuestions.map((q) => ({
-          id: q.id,
-          title: q.question,
-          question_img: q.question_img,
-          availableAnswers: [
-            q.answer_1,
-            q.answer_2,
-            q.answer_3,
-            q.answer_4,
-          ].sort(() => Math.random() - 0.5),
-          correctAnswer: q.correct_answer,
-        })),
-      };
-      setSelectedQuiz(quizTest);
-    }
-  }, [defaultQuestions, selectedQuizId]);
+    setLoadingSpinner({ show: false });
+  }, [defaultQuestions]);
 
   useEffect(() => {
     if (selectedQuiz) {
@@ -125,7 +142,7 @@ export default function quiz() {
 
   return (
     <>
-      {selectedQuiz ? (
+      {selectedQuiz && (
         <AnimatePresence mode="wait">
           <div className={styles.quizSection}>
             {showPopUpInfoMessage && (
@@ -144,8 +161,6 @@ export default function quiz() {
             </motion.div>
           </div>
         </AnimatePresence>
-      ) : (
-        <LoadingSpinner message="Φόρτωση quiz..." />
       )}
     </>
   );

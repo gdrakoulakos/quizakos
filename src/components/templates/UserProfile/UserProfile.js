@@ -7,7 +7,7 @@ import Award from "@/components/atoms/Award/Award";
 import { useEffect, useState } from "react";
 import PopUpAvatarSelection from "../PopUpAvatarSelection/PopUpAvatarSelection";
 
-export default function UserProfile({ setIsLoading }) {
+export default function UserProfile({}) {
   const {
     awardsData,
     loggedInUserData,
@@ -15,6 +15,7 @@ export default function UserProfile({ setIsLoading }) {
     isLoggedIn,
     userAvatar,
     setUserAvatar,
+    setLoadingSpinner,
   } = QuizContext();
   const [userFullName, setUserFullName] = useState(null);
   const [userEmail, setUserEmail] = useState(null);
@@ -82,12 +83,16 @@ export default function UserProfile({ setIsLoading }) {
 
   const handleSignOut = async () => {
     try {
-      setIsLoading(true);
+      setLoadingSpinner({
+        show: true,
+        isFullScreen: true,
+        message: "Φόρτωση...",
+      });
       await signOut();
     } catch (error) {
       console.error(error.message);
     } finally {
-      setIsLoading(false);
+      setLoadingSpinner({ show: false });
     }
   };
 
@@ -122,7 +127,6 @@ export default function UserProfile({ setIsLoading }) {
       {showPopUpAvatarSelection && (
         <PopUpAvatarSelection
           setShowPopUpAvatarSelection={setShowPopUpAvatarSelection}
-          setIsLoading={setIsLoading}
           hasAtLeastTwoGoldenRibbons={userAchievements?.goldenRibbons >= 2}
         />
       )}

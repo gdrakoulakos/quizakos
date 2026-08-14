@@ -2,6 +2,7 @@ import { commissioner } from "./fonts";
 import "./globals.css";
 import TabBar from "@/components/organisms/TabBar/TabBar";
 import { Providers } from "./providers";
+import LoadingSpinner from "@/components/organisms/LoadingSpinner/LoadingSpinner";
 
 export default function RootLayout({ children }) {
   const structuredData = {
@@ -17,16 +18,22 @@ export default function RootLayout({ children }) {
       <head>
         <script
           type="application/ld+json"
-          dangerouslySetInnerHTML={{ __html: JSON.stringify(structuredData) }}
+          dangerouslySetInnerHTML={{
+            __html: JSON.stringify(structuredData),
+          }}
         />
       </head>
+
       <body
         className={commissioner.className}
         style={{ boxSizing: "border-box" }}
       >
         <div className="background" />
         <Providers>
+          <LoadingSpinner />
+
           <TabBar />
+
           {children}
         </Providers>
       </body>
@@ -36,10 +43,12 @@ export default function RootLayout({ children }) {
 
 export const metadata = {
   metadataBase: new URL("https://www.quizakos.gr"),
+
   title: {
     default: "Quizakos",
     template: "%s | Quizakos",
   },
+
   description:
     "Το Quizakos είναι μια διασκεδαστική πλατφόρμα κουίζ όπου μπορείς να δοκιμάσεις τις γνώσεις σου στα βασικά μαθήματα του Δημοτικού και στη θεωρία μουσικής των Ωδείων.",
 

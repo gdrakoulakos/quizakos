@@ -5,28 +5,29 @@ import VisibilityOffIcon from "@mui/icons-material/VisibilityOff";
 import ButtonOk from "@/components/atoms/ButtonOk/ButtonOk";
 import GoogleIcon from "@/components/atoms/Icons/GoogleIcon";
 import { signInWithGoogle, signInWithPassword } from "@/services/authService";
+import { QuizContext } from "@/context/AppContext";
 
 export default function SignInForm({
   isForgotPasswordClicked,
   setIsForgotPasswordClicked,
   setIsSignUpClicked,
-  setIsLoading,
   setValidationMessage,
   setShowPopUpInfoMessage,
 }) {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [showPassword, setShowPassword] = useState(false);
+  const { setLoadingSpinner } = QuizContext();
   const handleSignInWithPassword = async (email, password) => {
     try {
-      setIsLoading(true);
+      setLoadingSpinner({ show: true, isFullScreen: true, message: "Φόρτωση" });
       await signInWithPassword(email, password);
     } catch (error) {
       console.error(error.message);
       setValidationMessage("Το email ή ο κωδικός είναι λάθος");
       setShowPopUpInfoMessage(true);
     } finally {
-      setIsLoading(false);
+      setLoadingSpinner({ show: false });
     }
   };
 

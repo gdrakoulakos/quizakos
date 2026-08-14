@@ -3,12 +3,13 @@ import styles from "./PopUpAvatarSelection.module.css";
 import Image from "next/image";
 import { useEffect, useState } from "react";
 import { updateUserAvatar } from "@/services/authService";
+import { QuizContext } from "@/context/AppContext";
 
 export default function PopUpAvatarSelection({
   setShowPopUpAvatarSelection,
-  setIsLoading,
   hasAtLeastTwoGoldenRibbons,
 }) {
+  const { setLoadingSpinner } = QuizContext();
   const [avatarCategoryClicked, setAvatarCategoryClicked] =
     useState("classicAvatars");
   const [avatarSelected, setAvatarSelected] = useState(null);
@@ -24,7 +25,7 @@ export default function PopUpAvatarSelection({
 
   const handleAvatarSave = async () => {
     if (!avatarSelected) return;
-    setIsLoading(true);
+    setLoadingSpinner({ show: true, isFullScreen: true });
 
     try {
       await updateUserAvatar(avatarSelected);
@@ -32,7 +33,7 @@ export default function PopUpAvatarSelection({
     } catch (error) {
       console.error("Error saving avatar:", error);
     }
-    setIsLoading(false);
+    setLoadingSpinner({ show: false });
   };
 
   useEffect(() => {
