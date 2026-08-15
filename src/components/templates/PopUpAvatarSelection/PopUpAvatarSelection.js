@@ -5,12 +5,14 @@ import { useEffect, useState } from "react";
 import { updateUserAvatar } from "@/services/authService";
 import { QuizContext } from "@/context/AppContext";
 import LockRoundedIcon from "@mui/icons-material/LockRounded";
+import PopUpInfoMessage from "../PopUpInfoMessage/PopUpInfoMessage";
 
 export default function PopUpAvatarSelection({
   setShowPopUpAvatarSelection,
   hasAtLeastTwoGoldenRibbons,
 }) {
-  const { setLoadingSpinner } = QuizContext();
+  const { setLoadingSpinner, showPopUpInfoMessage, setShowPopUpInfoMessage } =
+    QuizContext();
   const [avatarCategoryClicked, setAvatarCategoryClicked] =
     useState("classicAvatars");
   const [avatarSelected, setAvatarSelected] = useState(null);
@@ -45,6 +47,12 @@ export default function PopUpAvatarSelection({
       hasAtLeastTwoGoldenRibbons
     ) {
       setDisplayedAvatars(specialAvatars);
+    } else if (
+      avatarCategoryClicked === "specialAvatars" &&
+      !hasAtLeastTwoGoldenRibbons
+    ) {
+      setShowPopUpInfoMessage(true);
+      setAvatarCategoryClicked("classicAvatars");
     } else {
       setDisplayedAvatars(classicAvatars);
     }
@@ -52,6 +60,9 @@ export default function PopUpAvatarSelection({
 
   return (
     <div className={styles.popupWrapper}>
+      {showPopUpInfoMessage && (
+        <PopUpInfoMessage message="Για να ξεκλειδώσεις τα special avatars πρέπει πρώτα να έχεις κερδίσει τουλάχιστον δύο Χρυσές Ροζέτες." />
+      )}
       <div className={styles.popupContent}>
         <button
           className={styles.closeButton}
@@ -73,10 +84,7 @@ export default function PopUpAvatarSelection({
                 ? styles.selectedCategory
                 : ""
             } ${!hasAtLeastTwoGoldenRibbons ? styles.disabledCategory : ""}`}
-            onClick={() => {
-              if (!hasAtLeastTwoGoldenRibbons) return;
-              setAvatarCategoryClicked("specialAvatars");
-            }}
+            onClick={() => setAvatarCategoryClicked("specialAvatars")}
           >
             Special
             {!hasAtLeastTwoGoldenRibbons && <LockRoundedIcon />}

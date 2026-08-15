@@ -76,7 +76,6 @@
 
 .avatarsContainerHeader label:hover {
   cursor: pointer;
-  background-color: #fdfdfd34 !important;
 }
 
 .selectedCategory {
@@ -86,7 +85,6 @@
 
 .disabledCategory {
   color: #bcbcbc !important;
-  cursor: not-allowed !important;
 }
 
 .avatarsContainer {
