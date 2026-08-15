@@ -58,11 +58,13 @@ export default function PopUpAvatarSelection({
 
   useEffect(() => {
     if (avatarCategoryClicked === "classicAvatars") {
+      setAvatarSelected(null);
       setDisplayedAvatars(classicAvatars);
     } else if (
       avatarCategoryClicked === "specialAvatars" &&
       hasAtLeastTwoGoldenRibbons
     ) {
+      setAvatarSelected(null);
       setDisplayedAvatars(specialAvatars);
     } else if (
       avatarCategoryClicked === "specialAvatars" &&
