@@ -2,7 +2,8 @@ export default function manifest() {
   return {
     name: "Quizakos",
     short_name: "Quizakos",
-    description: "Quizakos",
+    description:
+      "Διαδραστικά κουίζ για παιδιά του Δημοτικού και μαθητές Ωδείων.",
     start_url: "/",
     display: "standalone",
     background_color: "#4c347c",
