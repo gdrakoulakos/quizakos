@@ -6,6 +6,6 @@
   box-sizing: border-box;
   position: relative;
   flex-direction: column;
+  justify-content: center;
   gap: 10px;
-  padding-top: 50px;
 }
