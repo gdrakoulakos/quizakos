@@ -97,7 +97,7 @@ export default function Home() {
         animate={{ opacity: 1, y: 0 }}
         transition={{ duration: 0.5, delay: 1 }}
       >
-        {currentInstitutionData?.length !== 0 ? (
+        {currentInstitutionData?.length === 0 ? (
           <LoadingSpinner />
         ) : (
           <CardQuizzesSection currentInstitutionData={currentInstitutionData} />
