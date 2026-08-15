@@ -22,20 +22,21 @@
 
 .specialAvatar {
   box-shadow: 0 0 4px 4px #ffc80099;
-
   background: conic-gradient(
       from var(--angle) at 50% 80px,
-      rgba(255, 0, 0, 0.75),
-      rgba(255, 165, 0, 0.75),
-      rgba(255, 255, 0, 0.75),
-      rgba(0, 255, 0, 0.75),
-      rgba(0, 255, 255, 0.75),
-      rgba(0, 0, 255, 0.75),
-      rgba(238, 130, 238, 0.75),
-      rgba(255, 0, 0, 0.75)
+      rgba(255, 0, 0, 0.34),
+      rgba(255, 165, 0, 0.34),
+      rgba(255, 255, 0, 0.94),
+      rgba(0, 255, 0, 0.34),
+      rgba(171, 45, 213, 0.94),
+      rgba(0, 255, 255, 0.34),
+      rgba(0, 0, 255, 0.94),
+      rgba(76, 52, 124, 0.34),
+      rgba(171, 45, 213, 0.94),
+      rgba(255, 0, 0, 0.34)
     )
     border-box;
-  animation: rotateBorder 4s linear infinite;
+  animation: rotateBorder 8s linear infinite;
 }
 
 @property --angle {
