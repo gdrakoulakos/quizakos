@@ -59,7 +59,7 @@
   justify-content: space-around;
 }
 
-.avatarsContainerHeader button {
+.avatarsContainerHeader label {
   width: 100%;
   height: 50px;
   display: flex;
@@ -71,18 +71,12 @@
   font-size: 18px;
   font-weight: bold;
   border-radius: 20px 20px 0 0;
+  gap: 10px;
 }
 
-.avatarsContainerHeader div:hover {
+.avatarsContainerHeader label:hover {
   cursor: pointer;
   background-color: #fdfdfd34 !important;
-}
-
-.avatarsContainerHeader button:disabled {
-  opacity: 0.5;
-  transform: none;
-  box-shadow: none;
-  cursor: not-allowed;
 }
 
 .selectedCategory {
@@ -145,6 +139,7 @@
   display: flex;
   justify-content: center;
   margin-top: 20px;
+  animation: fadeIn 0.3s ease-in-out;
 }
 
 @keyframes fadeIn {

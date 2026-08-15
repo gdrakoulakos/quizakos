@@ -4,6 +4,7 @@ import Image from "next/image";
 import { useEffect, useState } from "react";
 import { updateUserAvatar } from "@/services/authService";
 import { QuizContext } from "@/context/AppContext";
+import LockRoundedIcon from "@mui/icons-material/LockRounded";
 
 export default function PopUpAvatarSelection({
   setShowPopUpAvatarSelection,
@@ -60,19 +61,19 @@ export default function PopUpAvatarSelection({
         </button>
         <p className={styles.title}>Διάλεξε το avatar που σου ταιριάζει:</p>
         <div className={styles.avatarsContainerHeader}>
-          <button
+          <label
             className={`${styles.classicAvatarsHeader} ${avatarCategoryClicked === "classicAvatars" ? styles.selectedCategory : ""}`}
             onClick={() => setAvatarCategoryClicked("classicAvatars")}
           >
             Κλασικά
-          </button>
-          <button
+          </label>
+          <label
             className={`${styles.specialAvatarsHeader} ${avatarCategoryClicked === "specialAvatars" ? styles.selectedCategory : ""}`}
             onClick={() => setAvatarCategoryClicked("specialAvatars")}
-            disabled={!hasAtLeastTwoGoldenRibbons}
           >
             Special
-          </button>
+            {!hasAtLeastTwoGoldenRibbons && <LockRoundedIcon />}
+          </label>
         </div>
         <div className={styles.avatarsContainer}>
           {displayedAvatars &&
@@ -89,13 +90,11 @@ export default function PopUpAvatarSelection({
               />
             ))}
         </div>
-        <div className={styles.buttonContainer}>
-          <ButtonOk
-            buttonText="ΟΚ"
-            onClick={handleAvatarSave}
-            isDisabled={!avatarSelected}
-          />
-        </div>
+        {avatarSelected && (
+          <div className={styles.buttonContainer}>
+            <ButtonOk buttonText="ΟΚ" onClick={handleAvatarSave} />
+          </div>
+        )}
       </div>
     </div>
   );
