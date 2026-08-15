@@ -19,7 +19,7 @@ export default function UserAvatar({ size }) {
         />
       ) : (
         <div className={defaultAvatar} style={{ width: size, height: size }}>
-          Q
+          {loggedInUserName?.charAt(0).toUpperCase()}
         </div>
       )}
     </>
