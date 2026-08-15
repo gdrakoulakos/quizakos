@@ -84,6 +84,11 @@
   color: #ff9244f2 !important;
 }
 
+.disabledCategory {
+  color: #bcbcbc !important;
+  cursor: not-allowed !important;
+}
+
 .avatarsContainer {
   display: flex;
   flex-wrap: wrap;

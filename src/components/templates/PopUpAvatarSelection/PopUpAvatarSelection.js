@@ -68,8 +68,15 @@ export default function PopUpAvatarSelection({
             Κλασικά
           </label>
           <label
-            className={`${styles.specialAvatarsHeader} ${avatarCategoryClicked === "specialAvatars" ? styles.selectedCategory : ""}`}
-            onClick={() => setAvatarCategoryClicked("specialAvatars")}
+            className={`${styles.specialAvatarsHeader} ${
+              avatarCategoryClicked === "specialAvatars"
+                ? styles.selectedCategory
+                : ""
+            } ${!hasAtLeastTwoGoldenRibbons ? styles.disabledCategory : ""}`}
+            onClick={() => {
+              if (!hasAtLeastTwoGoldenRibbons) return;
+              setAvatarCategoryClicked("specialAvatars");
+            }}
           >
             Special
             {!hasAtLeastTwoGoldenRibbons && <LockRoundedIcon />}
