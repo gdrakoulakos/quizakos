@@ -5,8 +5,8 @@ export default function manifest() {
     description: "Quizakos",
     start_url: "/",
     display: "standalone",
-    background_color: "#ffffff",
-    theme_color: "#ffffff",
+    background_color: "#4c347c",
+    theme_color: "#4c347c",
     icons: [
       {
         src: "/icon-192.png",
