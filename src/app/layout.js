@@ -57,6 +57,11 @@ export const metadata = {
     follow: true,
   },
 
+  icons: {
+    icon: "/favicon.ico",
+    apple: "/apple-touch-icon.png",
+  },
+
   openGraph: {
     title: "Quizakos",
     description:
