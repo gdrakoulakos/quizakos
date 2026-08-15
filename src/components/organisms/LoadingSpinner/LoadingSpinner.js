@@ -3,25 +3,26 @@
 import { QuizContext } from "@/context/AppContext";
 import styles from "./LoadingSpinner.module.css";
 
-export default function LoadingSpinner() {
+export default function LoadingSpinner({ show, message }) {
   const { loadingSpinner } = QuizContext();
 
-  if (!loadingSpinner.show) {
+  if (!loadingSpinner.show && !show) {
     return null;
   }
 
   return (
     <div className={styles.loadingSpinnerWrapper}>
-      <div
-        className={
-          loadingSpinner.isFullScreen
-            ? styles.fullScreenLoadingSpinnerContainer
-            : styles.loadingSpinnerContainer
-        }
-      >
-        <div className={styles.loader} />
-        <p className={styles.loaderMessage}>{loadingSpinner.message}</p>
-      </div>
+      {loadingSpinner.isFullScreen ? (
+        <div className={styles.fullScreenLoadingSpinnerContainer}>
+          <div className={styles.loader} />
+          <p className={styles.loaderMessage}>{loadingSpinner.message}</p>
+        </div>
+      ) : (
+        <div className={styles.loadingSpinnerContainer}>
+          <div className={styles.loader} />
+          <p className={styles.loaderMessage}>{message}</p>
+        </div>
+      )}
     </div>
   );
 }

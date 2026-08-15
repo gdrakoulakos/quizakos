@@ -3,8 +3,6 @@ import styles from "./UserAvatar.module.css";
 import Image from "next/image";
 
 export default function UserAvatar({ size }) {
-  console.log("size", size);
-
   const { loggedInUserName, userAvatar } = QuizContext();
   const { loggedInUserInfo, userIcon, defaultAvatar } = styles;
 
