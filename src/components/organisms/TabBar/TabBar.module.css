@@ -62,6 +62,29 @@
   display: flex;
   align-items: center;
   justify-content: flex-end;
+  text-decoration: none;
+  flex-direction: column;
+  color: #695597;
+  font-size: small;
+}
+
+.accountContainer:hover {
+  color: #d16518;
+}
+
+.avatarContainer {
+  display: flex;
+  flex-direction: column;
+  text-decoration: none;
+  font-size: small;
+  align-items: center;
+}
+
+.userName {
+  text-overflow: ellipsis;
+  overflow: hidden;
+  max-width: 150px;
+  color: #695597;
 }
 
 .accountButton {
@@ -84,44 +107,6 @@
 
 .accountButton:hover {
   background: linear-gradient(135deg, #e19c6b, #d16518);
-}
-
-.userIcon {
-  box-shadow: 0 0 2px 2px #fff;
-  border-radius: 50%;
-  background: linear-gradient(
-    120deg,
-    #6656a5 0%,
-    #8b4f8f 25%,
-    #c75b3e 48%,
-    #e38b3f 72%,
-    #e5c15c 100%
-  );
-}
-
-.userIcon:hover {
-  cursor: pointer;
-  box-shadow: 0 0 3px 2px #695597;
-  border-radius: 50%;
-}
-
-.loggedInUserInfo {
-  display: flex;
-  flex-direction: column;
-  text-decoration: none;
-  font-size: small;
-  align-items: center;
-}
-
-.userName {
-  text-overflow: ellipsis;
-  overflow: hidden;
-  max-width: 150px;
-  color: #695597;
-}
-
-.userName:hover {
-  color: #4e4070;
 }
 
 @media (min-width: 600px) {

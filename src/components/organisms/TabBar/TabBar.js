@@ -10,6 +10,7 @@ import InfoIcon from "@mui/icons-material/Info";
 import AccountCircleIcon from "@mui/icons-material/AccountCircle";
 import { QuizContext } from "@/context/AppContext";
 import Logo from "@/components/atoms/Icons/Logo/Logo";
+import UserAvatar from "@/components/atoms/UserAvatar/UserAvatar";
 
 export default function TabBar() {
   const { isLoggedIn, loggedInUserName, isMobile, userAvatar } = QuizContext();
@@ -50,29 +51,22 @@ export default function TabBar() {
             <span className={styles.menuOptionText}>{item.name}</span>
           </Link>
         ))}
-        <div className={styles.accountContainer}>
+        <Link href={"/login-register"} className={styles.accountContainer}>
           {isLoggedIn ? (
-            <Link href={"/login-register"} className={styles.loggedInUserInfo}>
-              <Image
-                className={styles.userIcon}
-                src={userAvatar}
-                alt="Avatar"
-                width={35}
-                height={35}
-                loading="eager"
-              />
+            <div className={styles.avatarContainer}>
+              <UserAvatar size={35} />
               <span className={styles.userName}>{loggedInUserName}</span>
-            </Link>
+            </div>
           ) : (
-            <Link href={"/login-register"} className={styles.menuOption}>
+            <>
               <AccountCircleIcon
                 className={styles.loginIcon}
                 fontSize={isMobile ? "medium" : "large"}
               />
               <span>{"Σύνδεση"}</span>
-            </Link>
+            </>
           )}
-        </div>
+        </Link>
       </div>
     </motion.div>
   );

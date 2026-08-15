@@ -1,0 +1,38 @@
+.userIcon {
+  box-shadow: 0 0 2px 2px #fff;
+  border-radius: 50%;
+  background: linear-gradient(
+    120deg,
+    #6656a5 0%,
+    #8b4f8f 25%,
+    #c75b3e 48%,
+    #e38b3f 72%,
+    #e5c15c 100%
+  );
+}
+
+.userIcon:hover {
+  cursor: pointer;
+  box-shadow: 0 0 3px 2px #695597;
+  border-radius: 50%;
+}
+
+.defaultAvatar {
+  box-shadow: 0 0 2px 2px #fff;
+
+  background: linear-gradient(
+    120deg,
+    #6656a5 0%,
+    #8b4f8f 25%,
+    #c75b3e 48%,
+    #e38b3f 72%,
+    #e5c15c 100%
+  );
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  font-size: 20px;
+  border-radius: 50%;
+  color: white;
+  text-shadow: 2px 2px 10px #000;
+}
