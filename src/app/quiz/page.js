@@ -37,11 +37,16 @@ export default function Quiz() {
   };
 
   useEffect(() => {
+    setLoadingSpinner({
+      show: true,
+      message: "Φόρτωση ερωτήσεων...",
+      isFullScreen: true,
+    });
+
     const activeQuizId = selectedQuizId || cookies.quiz_id;
     const activeQuestionsCount = numberOfQuestions || cookies.total_questions;
 
     if (!activeQuizId) {
-      setLoadingSpinner({ show: false });
       router.push("/");
       return;
     }
@@ -57,12 +62,6 @@ export default function Quiz() {
     if (!currentQuizId || !count) return;
 
     const fetchData = async () => {
-      setLoadingSpinner({
-        show: true,
-        isFullScreen: true,
-        message: "Φόρτωση Quiz...",
-      });
-
       try {
         const { data, error } = await supabase
           .from("default_questions")
@@ -128,8 +127,6 @@ export default function Quiz() {
         setSelectedQuiz(quizTest);
       }
     }
-
-    setLoadingSpinner({ show: false });
   }, [defaultQuestions]);
 
   useEffect(() => {
@@ -137,6 +134,7 @@ export default function Quiz() {
       setDisplayedQuestionId(
         selectedQuiz.questions[displayedQuestionIndex]?.id,
       );
+      setLoadingSpinner({ show: false });
     }
   }, [displayedQuestionIndex, selectedQuiz]);
 
