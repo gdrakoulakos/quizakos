@@ -33,7 +33,7 @@
   box-sizing: border-box;
   display: flex;
   border-radius: 20px;
-  gap: 10px;
+  gap: 20px;
   align-items: center;
   justify-content: center;
 }
@@ -66,7 +66,7 @@
   display: flex;
   flex-direction: column;
   align-items: center;
-  gap: 10px;
+  gap: 20px;
 }
 
 .userIcon {
@@ -80,18 +80,6 @@
     #e38b3f 72%,
     #e5c15c 100%
   );
-}
-
-.buttonIcon {
-  border: none;
-  border-radius: 10px;
-  background: linear-gradient(135deg, #ffb077, #ff7d1e);
-  color: white;
-  padding: 5px;
-  box-shadow: 0 0 2px 1px #fff;
-  font-size: 13px;
-  font-weight: bold;
-  width: 120px;
 }
 
 .achievementsTitle {

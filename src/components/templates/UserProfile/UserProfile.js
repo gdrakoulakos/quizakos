@@ -7,6 +7,7 @@ import Award from "@/components/atoms/Award/Award";
 import { useEffect, useState } from "react";
 import PopUpAvatarSelection from "../PopUpAvatarSelection/PopUpAvatarSelection";
 import UserAvatar from "@/components/atoms/UserAvatar/UserAvatar";
+import PopUpAwardsInfo from "../PopUpAwardsInfo/PopUpAwardsInfo";
 
 export default function UserProfile({}) {
   const {
@@ -17,6 +18,7 @@ export default function UserProfile({}) {
     userAvatar,
     setUserAvatar,
     setLoadingSpinner,
+    showPopUpAwardsInfo,
   } = QuizContext();
   const [userFullName, setUserFullName] = useState(null);
   const [userEmail, setUserEmail] = useState(null);
@@ -125,6 +127,8 @@ export default function UserProfile({}) {
 
   return (
     <div className={styles.userProfileSection}>
+      {showPopUpAwardsInfo && <PopUpAwardsInfo />}
+
       {showPopUpAvatarSelection && (
         <PopUpAvatarSelection
           setShowPopUpAvatarSelection={setShowPopUpAvatarSelection}
@@ -134,14 +138,11 @@ export default function UserProfile({}) {
       <h1> Προφίλ</h1>
       <div className={styles.userProfile}>
         <div className={styles.userProfileInfo}>
-          <div className={styles.userIconContainer}>
+          <div
+            className={styles.userIconContainer}
+            onClick={() => setShowPopUpAvatarSelection(true)}
+          >
             <UserAvatar size={70} />
-            <button
-              className={styles.buttonIcon}
-              onClick={() => setShowPopUpAvatarSelection(true)}
-            >
-              Αλλαγή Avatar
-            </button>
           </div>
           <div className={styles.userProfileDetails}>
             <p className={styles.userFullName}>{userFullName}</p>
