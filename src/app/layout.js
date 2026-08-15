@@ -74,3 +74,10 @@ export const metadata = {
     type: "website",
   },
 };
+
+export const viewport = {
+  width: "device-width",
+  initialScale: 1,
+  viewportFit: "cover",
+  themeColor: "#4c347c",
+};
