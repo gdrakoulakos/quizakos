@@ -100,7 +100,7 @@ export default function PopUpAvatarSelection({
           <label
             className={`${specialAvatarsHeader} ${
               avatarCategoryClicked === "specialAvatars" ? selectedCategory : ""
-            } ${!hasAtLeastTwoGoldenRibbons ? disabledCategory : ""}`}
+            } `}
             onClick={() => setAvatarCategoryClicked("specialAvatars")}
           >
             Special
