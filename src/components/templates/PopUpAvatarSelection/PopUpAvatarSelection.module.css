@@ -114,8 +114,17 @@
 }
 
 .avatarIcon {
-  box-shadow: 0 0 2px 2px #fff;
   border-radius: 50%;
+  animation: fadeIn 0.3s ease-in-out;
+}
+
+.avatarIcon:hover {
+  cursor: pointer;
+  box-shadow: 0 0 4px 4px white;
+}
+
+.classicAvatar {
+  box-shadow: 0 0 2px 2px #fff;
   background: linear-gradient(
     120deg,
     #6656a5 0%,
@@ -124,12 +133,35 @@
     #e38b3f 72%,
     #e5c15c 100%
   );
-  animation: fadeIn 0.3s ease-in-out;
 }
 
-.avatarIcon:hover {
-  cursor: pointer;
-  box-shadow: 0 0 4px 4px white;
+.specialAvatar {
+  box-shadow: 0 0 4px 4px #ffc80099;
+  background: conic-gradient(
+      from var(--angle) at 50% 80px,
+      rgba(255, 0, 0, 0.5),
+      rgba(255, 165, 0, 0.5),
+      rgba(255, 255, 0, 0.5),
+      rgba(0, 255, 0, 0.5),
+      rgba(0, 255, 255, 0.5),
+      rgba(0, 0, 255, 0.5),
+      rgba(238, 130, 238, 0.5),
+      rgba(255, 0, 0, 0.5)
+    )
+    border-box;
+  animation: rotateBorder 4s linear infinite;
+}
+
+@property --angle {
+  syntax: "<angle>";
+  initial-value: 0deg;
+  inherits: false;
+}
+
+@keyframes rotateBorder {
+  to {
+    --angle: 360deg;
+  }
 }
 
 .selected {

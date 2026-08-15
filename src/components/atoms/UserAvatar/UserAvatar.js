@@ -4,13 +4,21 @@ import Image from "next/image";
 
 export default function UserAvatar({ size }) {
   const { loggedInUserName, userAvatar } = QuizContext();
-  const { loggedInUserInfo, userIcon, defaultAvatar } = styles;
+  const {
+    loggedInUserInfo,
+    userIcon,
+    defaultAvatar,
+    classicAvatar,
+    specialAvatar,
+  } = styles;
 
   return (
     <>
       {userAvatar && size ? (
         <Image
-          className={userIcon}
+          className={`${userIcon} ${
+            userAvatar?.includes("/special/") ? specialAvatar : classicAvatar
+          } `}
           src={userAvatar}
           alt="Avatar"
           width={size}

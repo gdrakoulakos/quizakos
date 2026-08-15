@@ -17,6 +17,23 @@ export default function PopUpAvatarSelection({
     useState("classicAvatars");
   const [avatarSelected, setAvatarSelected] = useState(null);
   const [displayedAvatars, setDisplayedAvatars] = useState([]);
+  const {
+    popupWrapper,
+    popupContent,
+    closeButton,
+    title,
+    avatarsContainerHeader,
+    classicAvatarsHeader,
+    selectedCategory,
+    specialAvatarsHeader,
+    avatarsContainer,
+    avatarIcon,
+    classicAvatar,
+    specialAvatar,
+    selected,
+    buttonContainer,
+  } = styles;
+
   const classicAvatars = Array.from(
     { length: 29 },
     (_, index) => `/images/avatars/default/avatar-${index + 1}.png`,
@@ -59,44 +76,44 @@ export default function PopUpAvatarSelection({
   }, [avatarCategoryClicked]);
 
   return (
-    <div className={styles.popupWrapper}>
+    <div className={popupWrapper}>
       {showPopUpInfoMessage && (
         <PopUpInfoMessage message="Για να ξεκλειδώσεις τα special avatars πρέπει πρώτα να έχεις κερδίσει τουλάχιστον δύο Χρυσές Ροζέτες." />
       )}
-      <div className={styles.popupContent}>
+      <div className={popupContent}>
         <button
-          className={styles.closeButton}
+          className={closeButton}
           onClick={() => setShowPopUpAvatarSelection(false)}
         >
           ×
         </button>
-        <p className={styles.title}>Διάλεξε το avatar που σου ταιριάζει:</p>
-        <div className={styles.avatarsContainerHeader}>
+        <p className={title}>Διάλεξε το avatar που σου ταιριάζει:</p>
+        <div className={avatarsContainerHeader}>
           <label
-            className={`${styles.classicAvatarsHeader} ${avatarCategoryClicked === "classicAvatars" ? styles.selectedCategory : ""}`}
+            className={`${classicAvatarsHeader} ${avatarCategoryClicked === "classicAvatars" ? selectedCategory : ""}`}
             onClick={() => setAvatarCategoryClicked("classicAvatars")}
           >
             Κλασικά
           </label>
           <label
-            className={`${styles.specialAvatarsHeader} ${
-              avatarCategoryClicked === "specialAvatars"
-                ? styles.selectedCategory
-                : ""
-            } ${!hasAtLeastTwoGoldenRibbons ? styles.disabledCategory : ""}`}
+            className={`${specialAvatarsHeader} ${
+              avatarCategoryClicked === "specialAvatars" ? selectedCategory : ""
+            } ${!hasAtLeastTwoGoldenRibbons ? disabledCategory : ""}`}
             onClick={() => setAvatarCategoryClicked("specialAvatars")}
           >
             Special
             {!hasAtLeastTwoGoldenRibbons && <LockRoundedIcon />}
           </label>
         </div>
-        <div className={styles.avatarsContainer}>
+        <div className={avatarsContainer}>
           {displayedAvatars &&
             displayedAvatars.map((avatar) => (
               <Image
                 key={avatar}
-                className={`${styles.avatarIcon} ${avatarSelected === avatar ? styles.selected : ""}`}
-                src={`${avatar}`}
+                className={`${avatarIcon} ${
+                  avatar.includes("/special/") ? specialAvatar : classicAvatar
+                } ${avatarSelected === avatar ? selected : ""}`}
+                src={avatar}
                 alt="Coming Soon"
                 width={80}
                 height={80}
@@ -106,7 +123,7 @@ export default function PopUpAvatarSelection({
             ))}
         </div>
         {avatarSelected && (
-          <div className={styles.buttonContainer}>
+          <div className={buttonContainer}>
             <ButtonOk buttonText="ΟΚ" onClick={handleAvatarSave} />
           </div>
         )}
