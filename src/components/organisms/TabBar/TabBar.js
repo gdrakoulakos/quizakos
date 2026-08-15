@@ -54,8 +54,7 @@ export default function TabBar() {
         <Link href={"/login-register"} className={styles.accountContainer}>
           {isLoggedIn ? (
             <div className={styles.avatarContainer}>
-              <UserAvatar size={35} />
-              <span className={styles.userName}>{loggedInUserName}</span>
+              <UserAvatar size={45} />
             </div>
           ) : (
             <>
