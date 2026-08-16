@@ -85,7 +85,7 @@ export default function Home() {
         <WelcomeBanner />
       </div>
       <div key={"all-quizzes"} className={styles.allQuizzes}>
-        {currentInstitutionData?.length === 0 ? (
+        {!currentInstitutionData ? (
           <LoadingSpinner />
         ) : (
           <CardQuizzesSection currentInstitutionData={currentInstitutionData} />

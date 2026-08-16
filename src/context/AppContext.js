@@ -14,7 +14,8 @@ export const AppProvider = ({ children }) => {
     "/images/avatars/default/avatar-1.png",
   );
   const [loggedInUserData, setLoggedInUserData] = useState(null);
-  const [loggedInUserQuizProgress, setLoggedInUserQuizProgress] = useState([]);
+  const [loggedInUserQuizProgress, setLoggedInUserQuizProgress] =
+    useState(null);
   const [validationMessage, setValidationMessage] = useState("");
   const [currentInstitution, setCurrentInstitution] = useState(null);
   const [defaultQuizData, setDefaultQuizData] = useState([]);
@@ -130,7 +131,7 @@ export const AppProvider = ({ children }) => {
       return;
     }
 
-    setLoggedInUserQuizProgress(data);
+    setLoggedInUserQuizProgress(data ?? []);
   };
 
   useEffect(() => {

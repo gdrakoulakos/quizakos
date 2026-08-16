@@ -8,6 +8,7 @@ import { motion } from "motion/react";
 import { useEffect, useState } from "react";
 import PopUpAwardsInfo from "@/components/templates/PopUpAwardsInfo/PopUpAwardsInfo";
 import { supabase } from "@/lib/supabase";
+import LoadingSpinner from "@/components/organisms/LoadingSpinner/LoadingSpinner";
 
 export default function myScore() {
   const {
@@ -18,19 +19,14 @@ export default function myScore() {
     loggedInUserQuizProgress,
   } = QuizContext();
 
-  const [userQuizData, setUserQuizData] = useState([]);
+  const userQuizData =
+    loggedInUserQuizProgress === null
+      ? null
+      : loggedInUserQuizProgress || userProgressData;
 
   useEffect(() => {
     setDeleteAllScores(false);
   }, []);
-
-  useEffect(() => {
-    if (isLoggedIn) {
-      setUserQuizData(loggedInUserQuizProgress);
-    } else {
-      setUserQuizData(userProgressData);
-    }
-  }, [supabase, userProgressData, isLoggedIn, loggedInUserQuizProgress]);
 
   return (
     <motion.div
@@ -43,7 +39,9 @@ export default function myScore() {
       <PopUpAwardsInfo />
       <PopUpConfirmation />
       <h1>Το σκορ μου</h1>
-      {userQuizData.length !== 0 ? (
+      {!userQuizData ? (
+        <LoadingSpinner show={true} message={"Φόρτωση σκορ..."} />
+      ) : userQuizData.length > 0 ? (
         <CardsScore userQuizData={userQuizData} />
       ) : (
         <>
