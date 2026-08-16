@@ -4,7 +4,7 @@
   box-sizing: border-box;
   display: flex;
   position: fixed;
-  background-color: #ffffffa8;
+  background-color: #4c347c;
   backdrop-filter: blur(2px);
   justify-content: space-between;
   z-index: 20;
@@ -45,13 +45,14 @@
   flex-direction: column;
   align-items: center;
   text-decoration: none;
-  color: #695597;
+  color: #f0f8ff;
+  text-shadow: 2px 2px 10px #000;
   font-size: small;
   min-width: 50px;
 }
 
 .menuOption:hover {
-  color: #4e4070;
+  color: #b1b7bd;
 }
 
 .menuOptionText {
@@ -66,13 +67,14 @@
   justify-content: flex-end;
   text-decoration: none;
   flex-direction: column;
-  color: #695597;
+  color: #ffb22e;
+  text-shadow: 2px 2px 10px #000;
   font-size: small;
   min-width: 50px;
 }
 
 .accountContainer:hover {
-  color: #d16518;
+  color: #d67f41;
 }
 
 .avatarContainer {
@@ -81,13 +83,6 @@
   text-decoration: none;
   font-size: small;
   align-items: center;
-}
-
-.userName {
-  text-overflow: ellipsis;
-  overflow: hidden;
-  max-width: 150px;
-  color: #695597;
 }
 
 .accountButton {
@@ -130,13 +125,10 @@
 
   .accountContainer {
     position: relative;
+    font-size: 15px;
   }
 
   .logoWrapper {
     display: none;
-  }
-
-  .userName {
-    max-width: 90px;
   }
 }
