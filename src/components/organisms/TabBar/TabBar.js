@@ -2,7 +2,6 @@
 import Link from "next/link";
 import styles from "../TabBar/TabBar.module.css";
 import Image from "next/image";
-import { motion } from "motion/react";
 import HomeRoundedIcon from "@mui/icons-material/HomeRounded";
 import EmojiEventsRoundedIcon from "@mui/icons-material/EmojiEventsRounded";
 import SentimentSatisfiedAltIcon from "@mui/icons-material/SentimentSatisfiedAlt";
@@ -38,12 +37,7 @@ export default function TabBar() {
   ];
 
   return (
-    <motion.div
-      className={styles.menuSection}
-      initial={{ opacity: 0 }}
-      animate={{ opacity: 1 }}
-      transition={{ duration: 0.5, delay: 1.5 }}
-    >
+    <div className={styles.menuSection}>
       <div className={styles.logoWrapper}>
         <Logo link="/" width={135} height={40} />
       </div>
@@ -80,6 +74,6 @@ export default function TabBar() {
           )}
         </Link>
       </div>
-    </motion.div>
+    </div>
   );
 }

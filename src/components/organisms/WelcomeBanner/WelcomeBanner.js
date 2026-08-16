@@ -1,16 +1,11 @@
 import Image from "next/image";
 import styles from "../WelcomeBanner/WelcomeBanner.module.css";
-import { motion } from "motion/react";
 
 export default function WelcomeBanner() {
   return (
     <div className={styles.welcomeBanner}>
       <h3 className={styles.welcomeText}>Καλώς ήρθες στο</h3>
-      <motion.div
-        initial={{ opacity: 0 }}
-        animate={{ opacity: 1 }}
-        transition={{ duration: 0.5, delay: 0.3 }}
-      >
+      <div>
         <Image
           src="/images/logo/logo-5-shadow-2.png"
           width={320}
@@ -18,15 +13,10 @@ export default function WelcomeBanner() {
           alt="quizakos logo"
           loading="eager"
         />
-      </motion.div>
-      <motion.div
-        className={styles.welcomeText}
-        initial={{ opacity: 0 }}
-        animate={{ opacity: 1 }}
-        transition={{ duration: 0.5, delay: 0.6 }}
-      >
+      </div>
+      <div className={styles.welcomeText}>
         Παίξε και δοκίμασε τις γνώσεις σου!
-      </motion.div>
+      </div>
     </div>
   );
 }

@@ -1,3 +1,30 @@
+.cardQuizzesSection {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  min-height: 300px;
+  animation: fadeIn 0.4s ease-in-out;
+}
+
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+  }
+
+  to {
+    opacity: 1;
+  }
+}
+
+.section {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  align-items: center;
+  width: 100%;
+}
+
 .levelName {
   font-size: 30px;
   color: white;
@@ -16,22 +43,6 @@
     #50338ef5 100%
   );
   box-shadow: 0 0 12px 0px #2f175ff3;
-}
-
-.cardQuizzesSection {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  min-height: 300px;
-}
-
-.section {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  align-items: center;
-  width: 100%;
 }
 
 @media (min-width: 1024px) {
