@@ -19,10 +19,7 @@ export default function myScore() {
     loggedInUserQuizProgress,
   } = QuizContext();
 
-  const userQuizData =
-    loggedInUserQuizProgress === null
-      ? null
-      : loggedInUserQuizProgress || userProgressData;
+  const userQuizData = loggedInUserQuizProgress || userProgressData;
 
   useEffect(() => {
     setDeleteAllScores(false);
@@ -39,15 +36,14 @@ export default function myScore() {
       <PopUpAwardsInfo />
       <PopUpConfirmation />
       <h1>Το σκορ μου</h1>
-      {!userQuizData ? (
+      {userQuizData === null ? (
         <LoadingSpinner show={true} message={"Φόρτωση σκορ..."} />
-      ) : userQuizData.length > 0 ? (
-        <CardsScore userQuizData={userQuizData} />
-      ) : (
+      ) : userQuizData.length === 0 ? (
         <>
           <div className={styles.noScore}>
             Ωχ! Δεν βλέπω σκορ… Μάλλον δεν έχεις παίξει ακόμα κάποιο quiz!
           </div>
+
           <Image
             className={styles.noScoreIcon}
             src="/images/quizakos/quizakos12-shadow.png"
@@ -57,6 +53,8 @@ export default function myScore() {
             loading="eager"
           />
         </>
+      ) : (
+        <CardsScore userQuizData={userQuizData} />
       )}
     </motion.div>
   );
