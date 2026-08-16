@@ -11,9 +11,13 @@ import AccountCircleIcon from "@mui/icons-material/AccountCircle";
 import { QuizContext } from "@/context/AppContext";
 import Logo from "@/components/atoms/Icons/Logo/Logo";
 import UserAvatar from "@/components/atoms/UserAvatar/UserAvatar";
+import { useState } from "react";
+import { usePathname } from "next/navigation";
 
 export default function TabBar() {
   const { isLoggedIn, loggedInUserName, isMobile, userAvatar } = QuizContext();
+  const pathname = usePathname();
+  const [menuItemClicked, setMenuItemClicked] = useState(pathname);
 
   const tabBarMenuItems = [
     {
@@ -46,12 +50,21 @@ export default function TabBar() {
 
       <div className={styles.menuOptionsContainer}>
         {tabBarMenuItems.map((item) => (
-          <Link key={item.name} href={item.href} className={styles.menuOption}>
+          <Link
+            key={item.name}
+            href={item.href}
+            className={`${styles.menuOption} ${menuItemClicked === item.href ? styles.selectedOption : ""}`}
+            onClick={() => setMenuItemClicked(item.href)}
+          >
             {item.icon}
             <span className={styles.menuOptionText}>{item.name}</span>
           </Link>
         ))}
-        <Link href={"/login-register"} className={styles.accountContainer}>
+        <Link
+          href={"/login-register"}
+          className={`${styles.accountContainer} ${menuItemClicked === "/login-register" ? styles.selectedOption : ""}`}
+          onClick={() => setMenuItemClicked("/login-register")}
+        >
           {isLoggedIn ? (
             <div className={styles.avatarContainer}>
               <UserAvatar size={45} />
