@@ -62,8 +62,6 @@ export const metadata = {
     apple: "/apple-touch-icon.png",
   },
 
-  themeColor: "#4c347c",
-
   openGraph: {
     title: "Quizakos",
     description:
