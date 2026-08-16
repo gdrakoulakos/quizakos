@@ -16,8 +16,8 @@ import { usePathname } from "next/navigation";
 
 export default function TabBar() {
   const { isLoggedIn, loggedInUserName, isMobile, userAvatar } = QuizContext();
-  const pathname = usePathname();
-  const [menuItemClicked, setMenuItemClicked] = useState(pathname);
+  const currentPageName = usePathname();
+  const [menuPageClicked, setMenuPageClicked] = useState(currentPageName);
 
   const tabBarMenuItems = [
     {
@@ -53,8 +53,8 @@ export default function TabBar() {
           <Link
             key={item.name}
             href={item.href}
-            className={`${styles.menuOption} ${menuItemClicked === item.href ? styles.selectedOption : ""}`}
-            onClick={() => setMenuItemClicked(item.href)}
+            className={`${styles.menuOption} ${menuPageClicked === item.href ? styles.selectedOption : ""}`}
+            onClick={() => setMenuPageClicked(item.href)}
           >
             {item.icon}
             <span className={styles.menuOptionText}>{item.name}</span>
@@ -62,8 +62,8 @@ export default function TabBar() {
         ))}
         <Link
           href={"/login-register"}
-          className={`${styles.accountContainer} ${menuItemClicked === "/login-register" ? styles.selectedOption : ""}`}
-          onClick={() => setMenuItemClicked("/login-register")}
+          className={`${styles.accountContainer} ${menuPageClicked === "/login-register" ? styles.selectedOption : ""}`}
+          onClick={() => setMenuPageClicked("/login-register")}
         >
           {isLoggedIn ? (
             <div className={styles.avatarContainer}>
