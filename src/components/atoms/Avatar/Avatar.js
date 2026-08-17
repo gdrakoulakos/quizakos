@@ -1,8 +1,8 @@
 import { QuizContext } from "@/context/AppContext";
-import styles from "./UserAvatar.module.css";
+import styles from "./Avatar.module.css";
 import Image from "next/image";
 
-export default function UserAvatar({ size }) {
+export default function Avatar({ size }) {
   const { loggedInUserName, userAvatar } = QuizContext();
   const {
     loggedInUserInfo,

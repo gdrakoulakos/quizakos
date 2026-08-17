@@ -9,7 +9,7 @@ import InfoIcon from "@mui/icons-material/Info";
 import AccountCircleIcon from "@mui/icons-material/AccountCircle";
 import { QuizContext } from "@/context/AppContext";
 import Logo from "@/components/atoms/Icons/Logo/Logo";
-import UserAvatar from "@/components/atoms/UserAvatar/UserAvatar";
+import Avatar from "@/components/atoms/Avatar/Avatar";
 import { useState } from "react";
 import { usePathname } from "next/navigation";
 
@@ -61,7 +61,7 @@ export default function TabBar() {
         >
           {isLoggedIn ? (
             <div className={styles.avatarContainer}>
-              <UserAvatar size={45} />
+              <Avatar size={45} />
             </div>
           ) : (
             <>

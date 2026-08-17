@@ -6,7 +6,7 @@ import { QuizContext } from "@/context/AppContext";
 import Award from "@/components/atoms/Award/Award";
 import { useEffect, useState } from "react";
 import PopUpAvatarSelection from "../PopUpAvatarSelection/PopUpAvatarSelection";
-import UserAvatar from "@/components/atoms/UserAvatar/UserAvatar";
+import Avatar from "@/components/atoms/Avatar/Avatar";
 import PopUpAwardsInfo from "../PopUpAwardsInfo/PopUpAwardsInfo";
 
 export default function UserProfile({}) {
@@ -142,7 +142,7 @@ export default function UserProfile({}) {
             className={styles.userIconContainer}
             onClick={() => setShowPopUpAvatarSelection(true)}
           >
-            <UserAvatar size={70} />
+            <Avatar size={70} />
           </div>
           <div className={styles.userProfileDetails}>
             <p className={styles.userFullName}>{userFullName}</p>
