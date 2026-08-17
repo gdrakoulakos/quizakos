@@ -65,7 +65,7 @@
   display: flex;
   flex-direction: column;
   align-items: center;
-  gap: 20px;
+  position: relative;
 }
 
 .userIcon {
@@ -79,6 +79,17 @@
     #e38b3f 72%,
     #e5c15c 100%
   );
+}
+
+.changeIcon {
+  color: #ffb22e;
+  position: absolute;
+  bottom: -5;
+  right: -5;
+  z-index: 0;
+  background-color: #4c347c;
+  border-radius: 50px;
+  cursor: pointer;
 }
 
 .achievementsTitle {

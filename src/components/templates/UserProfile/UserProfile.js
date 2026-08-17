@@ -8,6 +8,7 @@ import { useEffect, useState } from "react";
 import PopUpAvatarSelection from "../PopUpAvatarSelection/PopUpAvatarSelection";
 import Avatar from "@/components/atoms/Avatar/Avatar";
 import PopUpAwardsInfo from "../PopUpAwardsInfo/PopUpAwardsInfo";
+import ChangeCircleIcon from "@mui/icons-material/ChangeCircle";
 
 export default function UserProfile({}) {
   const {
@@ -143,6 +144,7 @@ export default function UserProfile({}) {
             onClick={() => setShowPopUpAvatarSelection(true)}
           >
             <Avatar size={70} />
+            <ChangeCircleIcon className={styles.changeIcon} fontSize="small" />
           </div>
           <div className={styles.userProfileDetails}>
             <p className={styles.userFullName}>{userFullName}</p>
