@@ -46,10 +46,10 @@ export default function myScore() {
 
           <Image
             className={styles.noScoreIcon}
-            src="/images/quizakos/quizakos12-shadow.png"
+            src="/images/quizakos/quizakos13-shadow.png"
             alt="Quizakos"
-            width={400}
-            height={400}
+            width={224}
+            height={350}
             loading="eager"
           />
         </>
