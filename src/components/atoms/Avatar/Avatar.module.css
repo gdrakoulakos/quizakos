@@ -51,6 +51,11 @@
   }
 }
 
+.selected {
+  box-shadow: 0 0 4px 4px #ff7d1e !important;
+  transform: scale(1.11);
+}
+
 .defaultAvatar {
   box-shadow: 0 0 2px 2px #fff;
 

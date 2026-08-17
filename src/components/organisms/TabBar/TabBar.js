@@ -61,7 +61,7 @@ export default function TabBar() {
         >
           {isLoggedIn ? (
             <div className={styles.avatarContainer}>
-              <Avatar size={45} />
+              <Avatar size={45} src={userAvatar} />
             </div>
           ) : (
             <>

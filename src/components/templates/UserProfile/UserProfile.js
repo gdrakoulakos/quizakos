@@ -143,7 +143,7 @@ export default function UserProfile({}) {
             className={styles.userIconContainer}
             onClick={() => setShowPopUpAvatarSelection(true)}
           >
-            <Avatar size={70} />
+            <Avatar size={70} src={userAvatar} />
             <ChangeCircleIcon className={styles.changeIcon} fontSize="small" />
           </div>
           <div className={styles.userProfileDetails}>

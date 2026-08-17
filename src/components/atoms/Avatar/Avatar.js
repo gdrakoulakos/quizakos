@@ -2,28 +2,30 @@ import { QuizContext } from "@/context/AppContext";
 import styles from "./Avatar.module.css";
 import Image from "next/image";
 
-export default function Avatar({ size }) {
-  const { loggedInUserName, userAvatar } = QuizContext();
+export default function Avatar({ size, src, onClick, avatarSelected }) {
+  const { loggedInUserName } = QuizContext();
   const {
     loggedInUserInfo,
     userIcon,
     defaultAvatar,
     classicAvatar,
     specialAvatar,
+    selected,
   } = styles;
 
   return (
     <>
-      {userAvatar && size ? (
+      {src && size ? (
         <Image
           className={`${userIcon} ${
-            userAvatar?.includes("/special/") ? specialAvatar : classicAvatar
-          } `}
-          src={userAvatar}
+            src?.includes("/special/") ? specialAvatar : classicAvatar
+          } ${avatarSelected === src ? selected : ""} `}
+          src={src}
           alt="Avatar"
           width={size}
           height={size}
           loading="eager"
+          onClick={onClick}
         />
       ) : (
         <div className={defaultAvatar} style={{ width: size, height: size }}>

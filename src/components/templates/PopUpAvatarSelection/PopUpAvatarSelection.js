@@ -6,6 +6,7 @@ import { updateUserAvatar } from "@/services/authService";
 import { QuizContext } from "@/context/AppContext";
 import LockRoundedIcon from "@mui/icons-material/LockRounded";
 import PopUpInfoMessage from "../PopUpInfoMessage/PopUpInfoMessage";
+import Avatar from "@/components/atoms/Avatar/Avatar";
 
 export default function PopUpAvatarSelection({
   setShowPopUpAvatarSelection,
@@ -28,9 +29,6 @@ export default function PopUpAvatarSelection({
     specialAvatarsHeader,
     avatarsContainer,
     avatarIcon,
-    classicAvatar,
-    specialAvatar,
-    selected,
     buttonContainer,
   } = styles;
 
@@ -110,16 +108,11 @@ export default function PopUpAvatarSelection({
         <div className={avatarsContainer}>
           {displayedAvatars &&
             displayedAvatars.map((avatar) => (
-              <Image
+              <Avatar
                 key={avatar}
-                className={`${avatarIcon} ${
-                  avatar.includes("/special/") ? specialAvatar : classicAvatar
-                } ${avatarSelected === avatar ? selected : ""}`}
+                size={80}
                 src={avatar}
-                alt="Coming Soon"
-                width={80}
-                height={80}
-                loading="eager"
+                avatarSelected={avatarSelected}
                 onClick={() => setAvatarSelected(avatar)}
               />
             ))}

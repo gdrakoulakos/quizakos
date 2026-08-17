@@ -54,6 +54,10 @@
   max-width: 220px;
   text-overflow: ellipsis;
   overflow: hidden;
+  display: -webkit-box;
+  -webkit-box-orient: vertical;
+  line-clamp: 3;
+  word-break: break-word;
 }
 
 .userEmail {
@@ -66,19 +70,6 @@
   flex-direction: column;
   align-items: center;
   position: relative;
-}
-
-.userIcon {
-  box-shadow: 0 0 2px 2px #fff;
-  border-radius: 50%;
-  background: linear-gradient(
-    120deg,
-    #6656a5 0%,
-    #8b4f8f 25%,
-    #c75b3e 48%,
-    #e38b3f 72%,
-    #e5c15c 100%
-  );
 }
 
 .changeIcon {

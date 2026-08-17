@@ -89,28 +89,6 @@
   align-items: center;
 }
 
-.accountButton {
-  border-radius: 20px;
-  display: flex;
-  text-align: center;
-  align-items: center;
-  justify-content: center;
-  background: linear-gradient(135deg, #ffb077, #ff7d1e);
-  box-shadow: 0 0 2px 1px #ffad72;
-  color: white;
-  cursor: pointer;
-  text-decoration: none;
-  border: none;
-  font-weight: bold;
-  min-width: 120px;
-  height: 40px;
-  font-size: 16px;
-}
-
-.accountButton:hover {
-  background: linear-gradient(135deg, #e19c6b, #d16518);
-}
-
 @media (min-width: 600px) {
   .menuSection {
     top: 0;

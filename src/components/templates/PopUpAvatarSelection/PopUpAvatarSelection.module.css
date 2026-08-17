@@ -123,54 +123,6 @@
   box-shadow: 0 0 4px 4px white;
 }
 
-.classicAvatar {
-  box-shadow: 0 0 2px 2px #fff;
-  background: linear-gradient(
-    120deg,
-    #6656a5 0%,
-    #8b4f8f 25%,
-    #c75b3e 48%,
-    #e38b3f 72%,
-    #e5c15c 100%
-  );
-}
-
-.specialAvatar {
-  box-shadow: 0 0 4px 4px #ffc80099;
-  background: conic-gradient(
-      from var(--angle) at 50% 80px,
-      rgba(255, 0, 0, 0.34),
-      rgba(255, 165, 0, 0.34),
-      rgba(255, 255, 0, 0.94),
-      rgba(0, 255, 0, 0.34),
-      rgba(171, 45, 213, 0.94),
-      rgba(0, 255, 255, 0.34),
-      rgba(0, 0, 255, 0.94),
-      rgba(76, 52, 124, 0.34),
-      rgba(171, 45, 213, 0.94),
-      rgba(255, 0, 0, 0.34)
-    )
-    border-box;
-  animation: rotateBorder 8s linear infinite;
-}
-
-@property --angle {
-  syntax: "<angle>";
-  initial-value: 0deg;
-  inherits: false;
-}
-
-@keyframes rotateBorder {
-  to {
-    --angle: 360deg;
-  }
-}
-
-.selected {
-  box-shadow: 0 0 4px 4px #ff7d1e !important;
-  transform: scale(1.11);
-}
-
 .buttonContainer {
   width: 100%;
   display: flex;
