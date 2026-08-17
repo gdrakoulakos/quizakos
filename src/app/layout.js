@@ -16,6 +16,8 @@ export default function RootLayout({ children }) {
   return (
     <html lang="el">
       <head>
+        <link rel="apple-touch-startup-image" href="/splash/ios-splash.png" />
+
         <script
           type="application/ld+json"
           dangerouslySetInnerHTML={{
@@ -29,6 +31,7 @@ export default function RootLayout({ children }) {
         style={{ boxSizing: "border-box" }}
       >
         <div className="background" />
+
         <Providers>
           <LoadingSpinner />
 
@@ -43,6 +46,12 @@ export default function RootLayout({ children }) {
 
 export const metadata = {
   metadataBase: new URL("https://www.quizakos.gr"),
+  manifest: "/manifest.webmanifest",
+  appleWebApp: {
+    capable: true,
+    statusBarStyle: "default",
+    title: "Quizakos",
+  },
 
   title: {
     default: "Quizakos",
