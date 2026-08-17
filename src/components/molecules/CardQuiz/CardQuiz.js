@@ -26,7 +26,7 @@ export default function CardQuiz({
   const allLessonsResults = isLoggedIn
     ? loggedInUserQuizProgress
     : userProgressData;
-  const lessonsResults = allLessonsResults.find(
+  const lessonsResults = allLessonsResults?.find(
     (lesson) => lesson.lesson_id === id,
   );
 
