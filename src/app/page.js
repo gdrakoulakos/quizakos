@@ -52,7 +52,7 @@ export default function Home() {
 
     if (!message) return;
 
-    window.history.replaceState({}, "", "/");
+    window.history.replaceState(null, "", window.location.pathname);
 
     const showTimer = setTimeout(() => {
       setAnnouncement({
