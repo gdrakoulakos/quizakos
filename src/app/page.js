@@ -52,13 +52,13 @@ export default function Home() {
 
     if (!message) return;
 
+    window.history.replaceState({}, "", window.location.pathname);
+
     const showTimer = setTimeout(() => {
       setAnnouncement({
         display: true,
         message,
       });
-
-      window.history.replaceState({}, "", "/");
     }, 1500);
 
     const hideTimer = setTimeout(() => {
@@ -66,7 +66,7 @@ export default function Home() {
         display: false,
         message: "",
       });
-    }, 10000);
+    }, 11500);
 
     return () => {
       clearTimeout(showTimer);
