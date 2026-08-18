@@ -7,7 +7,6 @@ import CardQuizzesSection from "@/components/templates/CardQuizzesSection/CardQu
 import LoadingSpinner from "@/components/organisms/LoadingSpinner/LoadingSpinner";
 import Anouncements from "@/components/organisms/Anouncements/Anouncements";
 import PopUpAwardsInfo from "@/components/templates/PopUpAwardsInfo/PopUpAwardsInfo";
-import { useRouter } from "next/navigation";
 
 export default function Home() {
   const {
@@ -18,8 +17,6 @@ export default function Home() {
     setShowPopUpResults,
     setSelectedQuiz,
   } = QuizContext();
-
-  const router = useRouter();
 
   const [announcement, setAnnouncement] = useState({
     display: false,
@@ -55,7 +52,7 @@ export default function Home() {
 
     if (!message) return;
 
-    router.replace("/");
+    window.history.replaceState({}, "", "/");
 
     const showTimer = setTimeout(() => {
       setAnnouncement({
@@ -75,7 +72,7 @@ export default function Home() {
       clearTimeout(showTimer);
       clearTimeout(hideTimer);
     };
-  }, [router]);
+  }, []);
 
   return (
     <div className={styles.homePageSection}>
