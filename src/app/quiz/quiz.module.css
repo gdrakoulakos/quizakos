@@ -9,3 +9,9 @@
   justify-content: center;
   gap: 10px;
 }
+
+.quizNew {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}

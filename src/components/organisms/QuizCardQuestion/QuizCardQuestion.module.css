@@ -1,13 +1,12 @@
 .quizCard {
   display: flex;
   flex-direction: column;
-  align-items: baseline;
   gap: 10px;
   background: #ffffffe8;
   padding: 10px 15px;
   border-radius: 20px;
   box-shadow: 0 0 5px 2px #d5d5d5;
-  max-width: 340px;
+  width: clamp(310px, 85vw, 700px);
   box-sizing: border-box;
   align-items: center;
   position: relative;
