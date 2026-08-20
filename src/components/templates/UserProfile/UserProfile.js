@@ -90,7 +90,7 @@ export default function UserProfile({}) {
       setLoadingSpinner({
         show: true,
         isFullScreen: true,
-        message: "Φόρτωση...",
+        message: "Αποσύνδεση...",
       });
       await signOut();
     } catch (error) {

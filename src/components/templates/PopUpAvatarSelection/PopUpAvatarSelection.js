@@ -43,7 +43,11 @@ export default function PopUpAvatarSelection({
 
   const handleAvatarSave = async () => {
     if (!avatarSelected) return;
-    setLoadingSpinner({ show: true, isFullScreen: true });
+    setLoadingSpinner({
+      show: true,
+      isFullScreen: true,
+      message: "Αλλαγή avatar σε εξέλιξη...",
+    });
 
     try {
       await updateUserAvatar(avatarSelected);

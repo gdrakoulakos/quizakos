@@ -14,7 +14,11 @@ export default function ForgotPasswordForm({
 
   const handleResetPassword = async () => {
     try {
-      setLoadingSpinner({ show: true, isFullScreen: true });
+      setLoadingSpinner({
+        show: true,
+        isFullScreen: true,
+        message: "Έναρξη διαδικασίας αλλαγής κωδικού...",
+      });
       await resetPassword(email);
       setValidationMessage(
         "Σχεδόν έτοιμο! 🎉 Αν το email είναι καταχωρημένο, θα σου στείλουμε ένα link για να αλλάξεις τον κωδικό σου. Έλεγξε τα εισερχόμενά σου!",

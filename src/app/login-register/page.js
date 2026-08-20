@@ -50,7 +50,7 @@ export default function LoginPage() {
       setLoadingSpinner({
         show: true,
         isFullScreen: true,
-        message: "Φόρτωση...",
+        message: "Σύνδεση με τον Google λογαριασμό σου...",
       });
       await signInWithGoogle();
     } catch (error) {

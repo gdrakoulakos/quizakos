@@ -20,7 +20,11 @@ export default function SignInForm({
   const { setLoadingSpinner } = QuizContext();
   const handleSignInWithPassword = async (email, password) => {
     try {
-      setLoadingSpinner({ show: true, isFullScreen: true, message: "Φόρτωση" });
+      setLoadingSpinner({
+        show: true,
+        isFullScreen: true,
+        message: "Σύνδεση...",
+      });
       await signInWithPassword(email, password);
     } catch (error) {
       console.error(error.message);
