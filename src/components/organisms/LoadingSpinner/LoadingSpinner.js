@@ -11,18 +11,22 @@ export default function LoadingSpinner({ show, message }) {
   }
 
   return (
-    <div className={styles.loadingSpinnerWrapper}>
+    <>
       {loadingSpinner.isFullScreen ? (
-        <div className={styles.fullScreenLoadingSpinnerContainer}>
-          <div className={styles.loader} />
-          <p className={styles.loaderMessage}>{loadingSpinner.message}</p>
+        <div className={styles.fullScreenLoadingSpinnerWrapper}>
+          <div className={styles.fullScreenLoadingSpinnerContainer}>
+            <div className={styles.loader} />
+            <p className={styles.loaderMessage}>{loadingSpinner.message}</p>
+          </div>
         </div>
       ) : (
-        <div className={styles.loadingSpinnerContainer}>
-          <div className={styles.loader} />
-          <p className={styles.loaderMessage}>{message}</p>
+        <div className={styles.loadingSpinnerWrapper}>
+          <div className={styles.loadingSpinnerContainer}>
+            <div className={styles.loader} />
+            <p className={styles.loaderMessage}>{message}</p>
+          </div>
         </div>
       )}
-    </div>
+    </>
   );
 }

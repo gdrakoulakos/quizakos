@@ -11,7 +11,6 @@ import ButtonOk from "@/components/atoms/ButtonOk/ButtonOk";
 import { QuizContext } from "@/context/AppContext";
 import PopUpInfoMessage from "@/components/templates/PopUpInfoMessage/PopUpInfoMessage";
 import { validateSignUp } from "@/utils/validation";
-import LoadingSpinner from "@/components/organisms/LoadingSpinner/LoadingSpinner";
 import {
   signInWithGoogle,
   signInWithPassword,
