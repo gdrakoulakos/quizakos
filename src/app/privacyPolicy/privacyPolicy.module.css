@@ -1,0 +1,26 @@
+.privacyPolicySection {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: 0 20px;
+}
+
+.privacyPolicySection p,
+.privacyPolicySection li {
+  color: #f0f8ff;
+}
+
+.privacyPolicyContainer {
+  background: #654e92f3;
+  padding: 0 10px;
+  border-radius: 10px;
+}
+
+.privacyPolicySection h2,
+.privacyPolicySection h3 {
+  color: #ffa100;
+}
+
+.privacyPolicySection a {
+  color: #ffa100;
+}

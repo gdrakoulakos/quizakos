@@ -38,9 +38,6 @@ export default function info() {
           ))}
         </div>
       </div>
-      <p className={styles.copyRights}>
-        {new Date().getFullYear()} George Drakoulakos <br /> All Rights Reserved
-      </p>
     </motion.div>
   );
 }

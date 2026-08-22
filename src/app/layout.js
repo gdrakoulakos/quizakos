@@ -3,6 +3,7 @@ import "./globals.css";
 import TabBar from "@/components/organisms/TabBar/TabBar";
 import { Providers } from "./providers";
 import LoadingSpinner from "@/components/organisms/LoadingSpinner/LoadingSpinner";
+import Footer from "@/components/organisms/Footer/Footer";
 
 export default function RootLayout({ children }) {
   const structuredData = {
@@ -38,6 +39,7 @@ export default function RootLayout({ children }) {
           <TabBar />
 
           {children}
+          <Footer />
         </Providers>
       </body>
     </html>
