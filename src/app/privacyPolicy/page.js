@@ -13,7 +13,7 @@ export default function info() {
       <h1>Πολιτική Απορρήτου</h1>
       <article className={styles.privacyPolicyContainer}>
         <p>
-          <u>Τελευταία ενημέρωση: 22 Αυγούστου 2026</u>
+          <u>Τελευταία ενημέρωση: 23 Αυγούστου 2026</u>
         </p>
 
         <p>
