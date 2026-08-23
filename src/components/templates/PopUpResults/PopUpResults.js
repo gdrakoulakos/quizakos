@@ -109,9 +109,9 @@ export default function PopUpResults({ correctAnswers, lessonAndGrade }) {
         (lesson) => lesson?.golden_ribbon === true,
       );
 
-      const hasTwoGoldenRibbons = goldenRibbonLessons?.length === 2;
+      const hasAlreadyOneGoldenRibbon = goldenRibbonLessons?.length === 1;
 
-      if (hasTwoGoldenRibbons) {
+      if (hasAlreadyOneGoldenRibbon) {
         setHasSpecialAvatarsUnlocked(true);
       }
     }
@@ -272,7 +272,7 @@ export default function PopUpResults({ correctAnswers, lessonAndGrade }) {
           <div className={styles.loginPrompt}>
             <button
               className={styles.loginButton}
-              onClick={() => router.push("/login-register")}
+              onClick={() => (window.location.href = "/login-register")}
             >
               Σύνδεση
             </button>
