@@ -35,6 +35,8 @@ export default function PopUpResults({ correctAnswers, lessonAndGrade }) {
   const [isGoldenRibbonAwared, setIsGoldenRibbonAwared] = useState(false);
   const [isUserDataFetched, setIsUserDataFetched] = useState(false);
   const [quizProgressData, setQuizProgressData] = useState(null);
+  const [hasSpecialAvatarsUnlocked, setHasSpecialAvatarsUnlocked] =
+    useState(false);
   const totalAnswersLength = clickedAnswersResults.totalAnswers;
   const correctAnswersLength = clickedAnswersResults.correctAnswers;
   const scorePercentage = (correctAnswersLength / totalAnswersLength) * 100;
@@ -102,6 +104,16 @@ export default function PopUpResults({ correctAnswers, lessonAndGrade }) {
       setTimeout(() => {
         launchConfetti();
       }, 1000);
+
+      const goldenRibbonLessons = loggedInUserQuizProgress?.filter(
+        (lesson) => lesson?.golden_ribbon === true,
+      );
+
+      const hasTwoGoldenRibbons = goldenRibbonLessons?.length === 2;
+
+      if (hasTwoGoldenRibbons) {
+        setHasSpecialAvatarsUnlocked(true);
+      }
     }
   }, [scorePercentage, savedCurrentQuizProgress]);
 
@@ -194,6 +206,18 @@ export default function PopUpResults({ correctAnswers, lessonAndGrade }) {
             alt="Bravo icon"
           />
         )}
+        <motion.div
+          initial={{ opacity: 0 }}
+          animate={{ opacity: 1 }}
+          transition={{ duration: 0.6, delay: 0.8 }}
+          className={styles.specialAvatarsUnlocked}
+          onClick={() => router.push("/login-register")}
+        >
+          <p>Τα special avatars ξεκλειδώθηκαν!</p>
+          <p className={styles.specialAvatarGuide}>
+            Κάνε κλικ στην εικόνα του προφίλ σου.
+          </p>
+        </motion.div>
 
         <div className={styles.congratulationsMessage}>
           {isGoldenRibbonAwared
@@ -213,8 +237,8 @@ export default function PopUpResults({ correctAnswers, lessonAndGrade }) {
           <div className={styles.awards}>
             {medal && (
               <div className={styles.awardEarned}>
-                <div className={styles.awardCounter}>+ 1</div>
-                <Award awardData={medal} />
+                <div className={styles.awardCounter}>+1</div>
+                <Award awardData={medal} width={40} />
               </div>
             )}
             {correctAnswersLength > 0 && (
@@ -224,17 +248,17 @@ export default function PopUpResults({ correctAnswers, lessonAndGrade }) {
               >
                 <div className={styles.awardEarned}>
                   <div className={styles.congratulationsMessage}>
-                    + {correctAnswersLength * 10}
+                    +{correctAnswersLength * 10}
                   </div>
-                  <Award awardData={{ img: "star-6-tinypng" }} />
+                  <Award awardData={{ img: "star-6-tinypng" }} width={25} />
                 </div>
               </div>
             )}
             {scorePercentage === 100 && (
               <div className={styles.bonusStarsContainer}>
-                <div className={styles.bonusStarsCounter}>+ {BONUS_STARS}</div>
+                <div className={styles.bonusStarsCounter}>+{BONUS_STARS}</div>
                 <div className={styles.bonusTextContainer}>
-                  <Award awardData={{ img: "star-6-tinypng" }} />
+                  <Award awardData={{ img: "star-6-tinypng" }} width={25} />
                   <div className={styles.bonusStarsText}>Bonus</div>
                 </div>
               </div>
