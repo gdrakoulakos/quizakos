@@ -6,6 +6,7 @@ import GoogleIcon from "@/components/atoms/Icons/GoogleIcon";
 import { validateSignUp } from "@/utils/validation";
 import { useState } from "react";
 import { signUp } from "@/services/authService";
+import { QuizContext } from "@/context/AppContext";
 
 export default function SignUpForm({
   isForgotPasswordClicked,
@@ -15,6 +16,7 @@ export default function SignUpForm({
   validationMessage,
   setValidationMessage,
 }) {
+  const { setLoadingSpinner } = QuizContext();
   const [name, setName] = useState("");
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
@@ -24,34 +26,48 @@ export default function SignUpForm({
   const [confirmationPassword, setConfirmationPassword] = useState("");
 
   const handleSignUp = async () => {
-    const validationErrors = validateSignUp({
-      nickname: name,
-      email,
-      password,
+    setLoadingSpinner({
+      show: true,
+      isFullScreen: true,
+      message: "Εγγραφή σε εξέλιξη...",
     });
+    try {
+      const validationErrors = validateSignUp({
+        nickname: name,
+        email,
+        password,
+      });
 
-    if (password !== confirmationPassword) {
-      validationErrors.confirmationPassword =
-        "Ο κωδικός επιβεβαίωσης δεν ταιριάζει";
-    }
+      if (password !== confirmationPassword) {
+        validationErrors.confirmationPassword =
+          "Ο κωδικός επιβεβαίωσης δεν ταιριάζει";
+      }
 
-    const firstError = Object.values(validationErrors)[0];
+      const firstError = Object.values(validationErrors)[0];
 
-    if (firstError) {
-      setValidationMessage(firstError);
+      if (firstError) {
+        setValidationMessage(firstError);
+        setShowPopUpInfoMessage(true);
+        return;
+      }
+
+      const { error } = await signUp(email, password, name);
+
+      if (error) {
+        console.error("Signup error:", error.message);
+        setValidationMessage(error.message);
+        setShowPopUpInfoMessage(true);
+        return;
+      }
+
+      window.location.href = "/?signupSuccess=true";
+    } catch (error) {
+      console.error("Unexpected signup error:", error);
+      setValidationMessage("Παρουσιάστηκε ένα απρόσμενο σφάλμα.");
       setShowPopUpInfoMessage(true);
-      return;
+    } finally {
+      setLoadingSpinner({ show: false });
     }
-
-    const { error } = await signUp(email, password, name);
-
-    if (error) {
-      console.error("Signup error:", error.message);
-      setValidationMessage(error.message);
-      setShowPopUpInfoMessage(true);
-      return;
-    }
-    window.location.href = "/?signupSuccess=true";
   };
 
   return (
