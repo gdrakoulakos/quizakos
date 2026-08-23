@@ -110,6 +110,7 @@ export default function PopUpResults({ correctAnswers, lessonAndGrade }) {
       );
 
       const hasTwoGoldenRibbons = goldenRibbonLessons?.length === 2;
+      console.log("hasTwoGoldenRibbons", hasTwoGoldenRibbons);
 
       if (hasTwoGoldenRibbons) {
         setHasSpecialAvatarsUnlocked(true);
@@ -206,18 +207,21 @@ export default function PopUpResults({ correctAnswers, lessonAndGrade }) {
             alt="Bravo icon"
           />
         )}
-        <motion.div
-          initial={{ opacity: 0 }}
-          animate={{ opacity: 1 }}
-          transition={{ duration: 0.6, delay: 0.8 }}
-          className={styles.specialAvatarsUnlocked}
-          onClick={() => router.push("/login-register")}
-        >
-          <p>Τα special avatars ξεκλειδώθηκαν!</p>
-          <p className={styles.specialAvatarGuide}>
-            Κάνε κλικ στην εικόνα του προφίλ σου.
-          </p>
-        </motion.div>
+
+        {hasSpecialAvatarsUnlocked && (
+          <motion.div
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            transition={{ duration: 0.6, delay: 0.8 }}
+            className={styles.specialAvatarsUnlocked}
+            onClick={() => router.push("/login-register")}
+          >
+            <p>Τα special avatars ξεκλειδώθηκαν!</p>
+            <p className={styles.specialAvatarGuide}>
+              Κάνε κλικ στην εικόνα του προφίλ σου.
+            </p>
+          </motion.div>
+        )}
 
         <div className={styles.congratulationsMessage}>
           {isGoldenRibbonAwared
