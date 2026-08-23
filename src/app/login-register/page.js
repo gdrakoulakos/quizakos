@@ -2,7 +2,6 @@
 
 import { useEffect, useState } from "react";
 import { supabase } from "@/lib/supabase";
-import { useRouter } from "next/navigation";
 import styles from "./login-register.module.css";
 import VisibilityIcon from "@mui/icons-material/Visibility";
 import VisibilityOffIcon from "@mui/icons-material/VisibilityOff";
@@ -33,7 +32,6 @@ export default function LoginPage() {
   const [confirmationPassword, setConfirmationPassword] = useState("");
   const [isSignUpClicked, setIsSignUpClicked] = useState(false);
   const [isForgotPasswordClicked, setIsForgotPasswordClicked] = useState(false);
-  const router = useRouter();
   const {
     isLoggedIn,
     loggedInUserData,

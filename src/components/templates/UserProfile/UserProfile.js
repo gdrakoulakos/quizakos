@@ -9,6 +9,7 @@ import PopUpAvatarSelection from "../PopUpAvatarSelection/PopUpAvatarSelection";
 import Avatar from "@/components/atoms/Avatar/Avatar";
 import PopUpAwardsInfo from "../PopUpAwardsInfo/PopUpAwardsInfo";
 import ChangeCircleIcon from "@mui/icons-material/ChangeCircle";
+import { useRouter } from "next/navigation";
 
 export default function UserProfile({}) {
   const {
@@ -21,6 +22,11 @@ export default function UserProfile({}) {
     setLoadingSpinner,
     showPopUpAwardsInfo,
   } = QuizContext();
+  const router = useRouter();
+
+  const isGoogleProvider =
+    loggedInUserData?.identities[0]?.provider === "google";
+
   const [userFullName, setUserFullName] = useState(null);
   const [userEmail, setUserEmail] = useState(null);
 
@@ -151,6 +157,12 @@ export default function UserProfile({}) {
             <p className={styles.userEmail}>{userEmail}</p>
           </div>
         </div>
+        <ButtonOk
+          onClick={handleSignOut}
+          buttonText="Αποσύνδεση"
+          fontSize="small"
+        />
+
         <hr className={styles.seperator} />
 
         <h2 className={styles.achievementsTitle}>Τα επιτεύγματά μου</h2>
@@ -189,7 +201,13 @@ export default function UserProfile({}) {
 
         <hr className={styles.seperator} />
 
-        <ButtonOk onClick={handleSignOut} buttonText="Αποσύνδεση" />
+        {!isGoogleProvider && (
+          <ButtonOk
+            onClick={() => router.push("/reset-password")}
+            buttonText="Αλλαγή Κωδικού"
+            fontSize="small"
+          />
+        )}
 
         <div className={styles.deleteAccountContainer}>
           <p>

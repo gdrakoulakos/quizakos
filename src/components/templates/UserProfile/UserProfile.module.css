@@ -52,10 +52,11 @@
   color: white;
   font-size: 20px;
   max-width: 220px;
-  text-overflow: ellipsis;
   overflow: hidden;
+  text-overflow: ellipsis;
   display: -webkit-box;
   -webkit-box-orient: vertical;
+  -webkit-line-clamp: 3;
   line-clamp: 3;
   word-break: break-word;
 }
@@ -156,7 +157,7 @@
 .seperator {
   max-width: 400px;
   width: 100%;
-  margin: 20px 0;
+  margin: 15px 0;
 }
 
 .deleteAccountContainer {

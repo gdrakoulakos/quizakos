@@ -3,7 +3,8 @@
 import { useState } from "react";
 import { supabase } from "@/lib/supabase";
 import styles from "./reset-password.module.css";
-import EyeIcon from "@/components/atoms/Icons/EyeIcon";
+import VisibilityIcon from "@mui/icons-material/Visibility";
+import VisibilityOffIcon from "@mui/icons-material/VisibilityOff";
 import ButtonOk from "@/components/atoms/ButtonOk/ButtonOk";
 import PopUpInfoMessage from "@/components/templates/PopUpInfoMessage/PopUpInfoMessage";
 import { QuizContext } from "@/context/AppContext";
@@ -15,6 +16,7 @@ export default function ResetPasswordPage() {
     setValidationMessage,
     showPopUpInfoMessage,
     setShowPopUpInfoMessage,
+    setLoadingSpinner,
   } = QuizContext();
   const [password, setPassword] = useState("");
   const [confirmationPassword, setConfirmationPassword] = useState("");
@@ -23,27 +25,40 @@ export default function ResetPasswordPage() {
     useState(false);
 
   const updatePassword = async () => {
-    const validationErrors = validateSignUp({ password });
-    const firstError = Object.values(validationErrors)[1];
+    setLoadingSpinner({
+      show: true,
+      isFullScreen: true,
+      message: "Αλλαγή κωδικού σε εξέλιξη...",
+    });
+    try {
+      const validationErrors = validateSignUp({ password });
+      const firstError = Object.values(validationErrors)[1];
 
-    if (firstError) {
-      setValidationMessage(firstError);
+      if (firstError) {
+        setValidationMessage(firstError);
+        setShowPopUpInfoMessage(true);
+        return;
+      }
+      if (password !== confirmationPassword) {
+        setValidationMessage("Οι κωδικοί δεν ταιριάζουν.");
+        setShowPopUpInfoMessage(true);
+        return;
+      }
+      const { error } = await supabase.auth.updateUser({ password });
+      if (error) {
+        setValidationMessage(error.message);
+        setShowPopUpInfoMessage(true);
+        return;
+      }
+      setValidationMessage("Ο κωδικός σου άλλαξε με επιτυχία! 🎉");
       setShowPopUpInfoMessage(true);
-      return;
-    }
-    if (password !== confirmationPassword) {
-      setValidationMessage("Οι κωδικοί δεν ταιριάζουν.");
+    } catch (error) {
+      console.error("Unexpected signup error:", error);
+      setValidationMessage("Παρουσιάστηκε ένα απρόσμενο σφάλμα.");
       setShowPopUpInfoMessage(true);
-      return;
+    } finally {
+      setLoadingSpinner({ show: false });
     }
-    const { error } = await supabase.auth.updateUser({ password });
-    if (error) {
-      setValidationMessage(error.message);
-      setShowPopUpInfoMessage(true);
-      return;
-    }
-    setValidationMessage("Ο κωδικός σου άλλαξε με επιτυχία! 🎉");
-    setShowPopUpInfoMessage(true);
   };
 
   return (
@@ -59,8 +74,11 @@ export default function ResetPasswordPage() {
       <h1>Νέος κωδικός</h1>
 
       <label className={styles.label}>
-        <span className={styles.icon}>
-          <EyeIcon onClick={() => setShowPassword((prev) => !prev)} />{" "}
+        <span
+          className={styles.icon}
+          onClick={() => setShowPassword((prev) => !prev)}
+        >
+          {showPassword ? <VisibilityIcon /> : <VisibilityOffIcon />}
         </span>
         <input
           type={showPassword ? "text" : "password"}
@@ -70,10 +88,15 @@ export default function ResetPasswordPage() {
         />
       </label>
       <label className={styles.label}>
-        <span className={styles.icon}>
-          <EyeIcon
-            onClick={() => setShowConfirmationPassword((prev) => !prev)}
-          />{" "}
+        <span
+          className={styles.icon}
+          onClick={() => setShowConfirmationPassword((prev) => !prev)}
+        >
+          {showConfirmationPassword ? (
+            <VisibilityIcon />
+          ) : (
+            <VisibilityOffIcon />
+          )}
         </span>
         <input
           type={showConfirmationPassword ? "text" : "password"}
