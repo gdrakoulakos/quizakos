@@ -203,7 +203,7 @@ export default function UserProfile({}) {
 
         {!isGoogleProvider && (
           <ButtonOk
-            onClick={() => router.push("/reset-password")}
+            onClick={() => router.push("/resetPassword")}
             buttonText="Αλλαγή Κωδικού"
             fontSize="small"
           />

@@ -2,7 +2,7 @@
 
 import { useState } from "react";
 import { supabase } from "@/lib/supabase";
-import styles from "./reset-password.module.css";
+import styles from "./resetPassword.module.css";
 import VisibilityIcon from "@mui/icons-material/Visibility";
 import VisibilityOffIcon from "@mui/icons-material/VisibilityOff";
 import ButtonOk from "@/components/atoms/ButtonOk/ButtonOk";
@@ -10,7 +10,7 @@ import PopUpInfoMessage from "@/components/templates/PopUpInfoMessage/PopUpInfoM
 import { QuizContext } from "@/context/AppContext";
 import { validateSignUp } from "@/utils/validation";
 
-export default function ResetPasswordPage() {
+export default function ResetPassword() {
   const {
     validationMessage,
     setValidationMessage,
