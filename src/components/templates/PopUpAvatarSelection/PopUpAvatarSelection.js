@@ -82,7 +82,10 @@ export default function PopUpAvatarSelection({
   return (
     <div className={popupWrapper}>
       {showPopUpInfoMessage && (
-        <PopUpInfoMessage message="Για να ξεκλειδώσεις τα special avatars πρέπει πρώτα να έχεις κερδίσει τουλάχιστον δύο Χρυσές Ροζέτες." />
+        <PopUpInfoMessage
+          message="Για να ξεκλειδώσεις τα special avatars πρέπει πρώτα να έχεις κερδίσει τουλάχιστον δύο Χρυσές Ροζέτες."
+          linkableText="Δες εδώ πώς μπορείς να τις κερδίσεις."
+        />
       )}
       <div className={popupContent}>
         <button

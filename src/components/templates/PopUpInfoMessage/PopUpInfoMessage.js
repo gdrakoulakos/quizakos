@@ -4,13 +4,19 @@ import { QuizContext } from "@/context/AppContext";
 import { CopyToClipboard } from "react-copy-to-clipboard";
 import ContentCopyIcon from "@mui/icons-material/ContentCopy";
 import { useState } from "react";
+import PopUpAwardsInfo from "@/components/templates/PopUpAwardsInfo/PopUpAwardsInfo";
 
 export default function PopUpInfoMessage({
   message,
   action,
   redirectToHome = false,
+  linkableText,
 }) {
-  const { setShowPopUpInfoMessage, displayedQuestionId } = QuizContext();
+  const {
+    setShowPopUpInfoMessage,
+    displayedQuestionId,
+    setShowPopUpAwardsInfo,
+  } = QuizContext();
   const [isIdCopied, setIsIdCopied] = useState(false);
 
   const handleClick = () => {
@@ -22,6 +28,7 @@ export default function PopUpInfoMessage({
 
   return (
     <div className={styles.popupWrapper}>
+      <PopUpAwardsInfo />
       <div className={styles.popupContent}>
         <p className={styles.message}>{message}</p>
         {action === "report-question" && (
@@ -38,6 +45,15 @@ export default function PopUpInfoMessage({
         )}
         {isIdCopied && (
           <span className={styles.copiedText}>Το ID αντιγράφηκε!</span>
+        )}
+
+        {linkableText && (
+          <p
+            className={styles.clickableText}
+            onClick={() => setShowPopUpAwardsInfo(true)}
+          >
+            {linkableText}
+          </p>
         )}
         <div className={styles.buttonContainer}>
           <ButtonOk onClick={handleClick} buttonText="ΟΚ" />

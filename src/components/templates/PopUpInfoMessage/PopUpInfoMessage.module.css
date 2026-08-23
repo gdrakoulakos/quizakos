@@ -65,6 +65,19 @@
   text-align: center;
 }
 
+.clickableText {
+  font-size: 15px;
+  display: flex;
+  justify-content: center;
+  color: #ffb077;
+  text-decoration: underline;
+}
+
+.clickableText:hover {
+  cursor: pointer;
+  color: #c4885e;
+}
+
 .buttonContainer {
   width: 100%;
   display: flex;
