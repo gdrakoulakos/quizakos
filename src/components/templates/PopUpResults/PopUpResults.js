@@ -54,10 +54,11 @@ export default function PopUpResults({ correctAnswers, lessonAndGrade }) {
     "Καταπληκτικό! Κέρδισες τη Χρυσή Ροζέτα! Συγχαρητήρια!";
   const router = useRouter();
   const launchConfetti = useLaunchConfetti;
+  const BONUS_STARS = 50;
 
   useEffect(() => {
     const starsEarned =
-      correctAnswersLength * 10 + (scorePercentage === 100 ? 50 : 0);
+      correctAnswersLength * 10 + (scorePercentage === 100 ? BONUS_STARS : 0);
 
     const newStars =
       Number(savedCurrentQuizProgress?.stars) + starsEarned || starsEarned;
@@ -223,9 +224,18 @@ export default function PopUpResults({ correctAnswers, lessonAndGrade }) {
               >
                 <div className={styles.awardEarned}>
                   <div className={styles.congratulationsMessage}>
-                    {`+ ${correctAnswersLength * 10 + (scorePercentage === 100 ? 50 : 0)} `}
+                    + {correctAnswersLength * 10}
                   </div>
                   <Award awardData={{ img: "star-6-tinypng" }} />
+                </div>
+              </div>
+            )}
+            {scorePercentage === 100 && (
+              <div className={styles.bonusStarsContainer}>
+                <div className={styles.bonusStarsCounter}>+ {BONUS_STARS}</div>
+                <div className={styles.bonusTextContainer}>
+                  <Award awardData={{ img: "star-6-tinypng" }} />
+                  <div className={styles.bonusStarsText}>Bonus</div>
                 </div>
               </div>
             )}
