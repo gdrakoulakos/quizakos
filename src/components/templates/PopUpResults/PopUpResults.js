@@ -110,7 +110,6 @@ export default function PopUpResults({ correctAnswers, lessonAndGrade }) {
       );
 
       const hasTwoGoldenRibbons = goldenRibbonLessons?.length === 2;
-      console.log("hasTwoGoldenRibbons", hasTwoGoldenRibbons);
 
       if (hasTwoGoldenRibbons) {
         setHasSpecialAvatarsUnlocked(true);
