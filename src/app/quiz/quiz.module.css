@@ -7,7 +7,8 @@
   flex-direction: column;
   justify-content: center;
   gap: 10px;
-  margin-top: 100px;
+  margin-top: 40px;
+  height: 70vh;
 }
 
 .quizNew {
