@@ -103,9 +103,6 @@ export default function CardScore({ lessonData }) {
           <div className={styles.gainedAwardContainer}>
             {gainedAwards.map((award) => (
               <div key={award.img} className={styles.awardContainer}>
-                {award.count > 1 && (
-                  <div className={styles.awardCounter}>{award.count}</div>
-                )}
                 <Award awardData={award} />
               </div>
             ))}
