@@ -1,14 +1,21 @@
-.scoreCards {
+.scoreCardsContainer {
   display: flex;
   flex-direction: column;
+  gap: 20px;
+}
+
+.scoreCards {
+  display: flex;
   align-items: center;
+  justify-content: center;
   width: 100%;
-  gap: 25px;
+  gap: 35px;
+  flex-wrap: wrap;
 }
 
 .deleteAllButton {
-  height: 40px;
-  min-width: 200px;
+  align-self: center;
+  padding: 10px 20px;
   border-radius: 20px;
   background: linear-gradient(135deg, #d84048, #f68c40);
   box-shadow: 0 0 2px 1px #a63137;

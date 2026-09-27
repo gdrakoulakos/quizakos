@@ -2,18 +2,10 @@ import CardScore from "@/components/molecules/CardScore/CardScore";
 import styles from "./CardsScore.module.css";
 import { QuizContext } from "@/context/AppContext";
 import { AnimatePresence } from "motion/react";
-import { useEffect, useState } from "react";
-import { supabase } from "@/lib/supabase";
 
 export default function CardsScore({ userQuizData }) {
-  const {
-    userProgressData,
-    setShowPopUpConfirmation,
-    setPopUpMessage,
-    setDeleteAllScores,
-    isLoggedIn,
-    loggedInUserQuizProgress,
-  } = QuizContext();
+  const { setShowPopUpConfirmation, setPopUpMessage, setDeleteAllScores } =
+    QuizContext();
 
   const sortedUserProgressData = userQuizData.sort(
     (a, b) => a.lesson_id - b.lesson_id,
@@ -28,13 +20,14 @@ export default function CardsScore({ userQuizData }) {
   };
 
   return (
-    <div className={styles.scoreCards}>
-      <AnimatePresence>
-        {sortedUserProgressData.map((lessonData) => (
-          <CardScore lessonData={lessonData} key={lessonData.lesson_id} />
-        ))}
-      </AnimatePresence>
-
+    <div className={styles.scoreCardsContainer}>
+      <div className={styles.scoreCards}>
+        <AnimatePresence>
+          {sortedUserProgressData.map((lessonData) => (
+            <CardScore lessonData={lessonData} key={lessonData.lesson_id} />
+          ))}
+        </AnimatePresence>
+      </div>
       {sortedUserProgressData.length > 1 && (
         <button
           className={styles.deleteAllButton}
