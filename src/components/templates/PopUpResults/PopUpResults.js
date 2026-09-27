@@ -239,15 +239,23 @@ export default function PopUpResults({ correctAnswers, lessonAndGrade }) {
         >
           <div className={styles.awards}>
             {medal && (
-              <div className={styles.awardEarned}>
+              <motion.div
+                className={styles.awardEarned}
+                initial={{ opacity: 0 }}
+                animate={{ opacity: 1 }}
+                transition={{ duration: 0.6, delay: 1 }}
+              >
                 <div className={styles.awardCounter}>+1</div>
                 <Award awardData={medal} width={40} />
-              </div>
+              </motion.div>
             )}
             {correctAnswersLength > 0 && (
-              <div
+              <motion.div
                 className={styles.starsEarnedWrapper}
                 onClick={() => setShowPopUpAwardsInfo(true)}
+                initial={{ opacity: 0 }}
+                animate={{ opacity: 1 }}
+                transition={{ duration: 0.6, delay: 1.5 }}
               >
                 <div className={styles.awardEarned}>
                   <div className={styles.congratulationsMessage}>
@@ -255,16 +263,21 @@ export default function PopUpResults({ correctAnswers, lessonAndGrade }) {
                   </div>
                   <Award awardData={{ img: "star-6-tinypng" }} width={25} />
                 </div>
-              </div>
+              </motion.div>
             )}
             {scorePercentage === 100 && (
-              <div className={styles.bonusStarsContainer}>
+              <motion.div
+                className={styles.bonusStarsContainer}
+                initial={{ opacity: 0 }}
+                animate={{ opacity: 1 }}
+                transition={{ duration: 0.6, delay: 2 }}
+              >
                 <div className={styles.bonusStarsCounter}>+{BONUS_STARS}</div>
                 <div className={styles.bonusTextContainer}>
                   <Award awardData={{ img: "star-6-tinypng" }} width={25} />
                   <div className={styles.bonusStarsText}>Bonus</div>
                 </div>
-              </div>
+              </motion.div>
             )}
           </div>
         </motion.div>
