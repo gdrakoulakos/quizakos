@@ -12,15 +12,12 @@
 
 .privacyPolicyContainer {
   background: #654e92f3;
-  padding: 0 10px;
+  padding: 0 20px;
   border-radius: 10px;
 }
 
 .privacyPolicySection h2,
-.privacyPolicySection h3 {
-  color: #ffa100;
-}
-
+.privacyPolicySection h3,
 .privacyPolicySection a {
   color: #ffa100;
 }

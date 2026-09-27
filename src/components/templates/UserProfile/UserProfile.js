@@ -8,7 +8,7 @@ import { useEffect, useState } from "react";
 import PopUpAvatarSelection from "../PopUpAvatarSelection/PopUpAvatarSelection";
 import Avatar from "@/components/atoms/Avatar/Avatar";
 import PopUpAwardsInfo from "../PopUpAwardsInfo/PopUpAwardsInfo";
-import ManageAccountsSharpIcon from "@mui/icons-material/ManageAccountsSharp";
+import EditIcon from "@mui/icons-material/Edit";
 import { useRouter } from "next/navigation";
 
 export default function UserProfile({}) {
@@ -150,10 +150,7 @@ export default function UserProfile({}) {
             onClick={() => setShowPopUpAvatarSelection(true)}
           >
             <Avatar size={70} src={userAvatar} />
-            <ManageAccountsSharpIcon
-              className={styles.changeIcon}
-              fontSize="small"
-            />
+            <EditIcon className={styles.changeIcon} fontSize="xsmall" />
           </div>
           <div className={styles.userProfileDetails}>
             <p className={styles.userFullName}>{userFullName}</p>

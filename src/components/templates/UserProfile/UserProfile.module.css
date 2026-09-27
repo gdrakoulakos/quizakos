@@ -78,13 +78,13 @@
   color: #ffb22e;
   position: absolute;
   bottom: -2;
-  right: -10;
+  right: -8;
   z-index: 0;
   background-color: #4c347c;
-  border-radius: 10px;
+  border-radius: 50%;
   cursor: pointer;
-  padding: 1px;
-  border: solid #6f6289 1px;
+  padding: 3px;
+  box-shadow: 0 0 2px 1px #ffb22e;
 }
 
 .achievementsTitle {
